@@ -103,9 +103,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularTwoVersion.html" />
     <Content Include="App\app.js" />
     <Content Include="Global.asax" />
+    <Content Include="Images\loading.gif" />
     <Content Include="index.html" />
+    <Content Include="Scripts\ag-grid.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angular-animate.js" />
@@ -117,6 +120,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\ui-grid.css" />
     <Content Include="Scripts\ui-grid.js" />
+    <Content Include="Scripts\virtualPagingServerSide.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
