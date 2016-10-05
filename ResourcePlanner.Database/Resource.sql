@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[Resource]
+(
+	[ResourceId] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+	[ResourceKey] INT NOT NULL UNIQUE, 
+	[ResourceCode] VARCHAR(50) NOT NULL, 
+	[FirstName] VARCHAR(50) NOT NULL, 
+	[LastName] VARCHAR(50) NOT NULL, 
+	[PositionCd] INT NULL, 
+	[EmailAddress] VARCHAR(200) NULL, 
+	[OrgUnitCd] INT NULL, 
+	[RegionCd] INT NULL, 
+	[MarketCd] INT NULL, 
+	[CityCd] INT NULL, 
+	[CostCenter] VARCHAR(50) NULL, 
+	[PracticeCd] INT NULL, 
+	[ManagerId] INT NULL, 
+	[HireDate] DATE NULL, 
+	[Status] VARCHAR(10) NULL, 
+	[Type] VARCHAR(10) NULL, 
+    CONSTRAINT [FK_Resource_OrgUnit] FOREIGN KEY ([OrgUnitCd]) REFERENCES [dbo].[ReferenceCodeSet]([ReferenceId]),
+	CONSTRAINT [FK_Resource_Region] FOREIGN KEY ([RegionCd]) REFERENCES [dbo].[ReferenceCodeSet]([ReferenceId]),
+	CONSTRAINT [FK_Resource_Market] FOREIGN KEY ([MarketCd]) REFERENCES [dbo].[ReferenceCodeSet]([ReferenceId]),
+	CONSTRAINT [FK_Resource_City] FOREIGN KEY ([CityCd]) REFERENCES [dbo].[ReferenceCodeSet]([ReferenceId]),
+	CONSTRAINT [FK_Resource_Practice] FOREIGN KEY ([PracticeCd]) REFERENCES [dbo].[ReferenceCodeSet]([ReferenceId]),
+	CONSTRAINT [FK_Resource_Manager] FOREIGN KEY ([ManagerId]) REFERENCES [dbo].[Resource]([ResourceId])
+)

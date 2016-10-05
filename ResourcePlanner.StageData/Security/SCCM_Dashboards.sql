@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [SCCM_Dashboards]
+    AUTHORIZATION [dbo];
+

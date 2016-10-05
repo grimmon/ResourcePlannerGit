@@ -1,0 +1,27 @@
+﻿CREATE TABLE [Fact].[Timesheet] (
+    [Timesheet_Key]         INT             NOT NULL,
+    [Date_Key]              INT             NOT NULL,
+    [Date_Key_Created_On]   INT             NOT NULL,
+    [Date_Key_Approved_On]  INT             NOT NULL,
+    [Customer_Key]          INT             NOT NULL,
+    [Employee_Key]          INT             NOT NULL,
+    [Employee_History_Key]  INT             NOT NULL,
+    [Vendor_Key]            INT             NOT NULL,
+    [Project_Key]           INT             NOT NULL,
+    [Project_Resource_Key]  INT             NOT NULL,
+    [Task_Key]              INT             NOT NULL,
+    [Status_Key_Submission] INT             NOT NULL,
+    [Status_Key_Processing] INT             NOT NULL,
+    [SAP_Counter]           VARCHAR (20)    NOT NULL,
+    [Document_Number]       VARCHAR (20)    NOT NULL,
+    [Posting_Row]           VARCHAR (10)    NOT NULL,
+    [Entry_Sheet]           VARCHAR (20)    NOT NULL,
+    [Line_Number]           VARCHAR (30)    NOT NULL,
+    [Cost_Element_Code]     VARCHAR (20)    NOT NULL,
+    [Number_of_Hours]       DECIMAL (10, 2) NOT NULL,
+    [Utilization_Target]    DECIMAL (5, 2)  NOT NULL,
+    [Comments]              VARCHAR (100)   NOT NULL,
+    [Insert_Date]           DATETIME        NOT NULL,
+    [Update_Date]           DATETIME        NULL
+);
+

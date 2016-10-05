@@ -1,0 +1,5 @@
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.csprojResolveAssemblyReference.cache

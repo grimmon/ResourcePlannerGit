@@ -1,0 +1,6 @@
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\bin\Mock\ResourcePlanner.Database.dacpac
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Mock\Model.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Mock\refactor.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Mock\postdeploy.sql
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Mock\predeploy.sql
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Mock\ResourcePlanner.Database.dll

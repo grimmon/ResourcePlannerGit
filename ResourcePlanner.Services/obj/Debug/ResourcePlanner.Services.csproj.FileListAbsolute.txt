@@ -1,0 +1,58 @@
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ApplicationInsights.config
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.Web.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Newtonsoft.Json.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Net.Http.Formatting.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Web.Http.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Web.Http.WebHost.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.Web.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\Newtonsoft.Json.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Net.Http.Formatting.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Web.Http.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\System.Web.Http.WebHost.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll.config
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ResourcePlanner.Services.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\bin\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.csprojResolveAssemblyReference.cache
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ApplicationInsights.config
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll.config
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ResourcePlanner.Services.pdb
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.Web.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Newtonsoft.Json.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ResourcePlanner.Core.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Net.Http.Formatting.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Web.Http.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Web.Http.WebHost.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\ResourcePlanner.Core.pdb
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.Web.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\Newtonsoft.Json.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Net.Http.Formatting.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Web.Http.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\bin\System.Web.Http.WebHost.xml
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.csprojResolveAssemblyReference.cache
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.pdb

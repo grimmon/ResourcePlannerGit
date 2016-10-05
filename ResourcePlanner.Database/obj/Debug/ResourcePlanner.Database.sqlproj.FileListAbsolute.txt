@@ -1,0 +1,7 @@
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\bin\Debug\ResourcePlanner.Database.dacpac
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\Model.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\refactor.xml
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\postdeploy.sql
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\predeploy.sql
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.pdb

@@ -1,0 +1,10 @@
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.pdb
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
+C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb

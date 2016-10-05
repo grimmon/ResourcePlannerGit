@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title></title>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-animate.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.js"></script>
+
+    <script src="Scripts/ui-grid.js"></script>
+    <link rel="stylesheet" href="Scripts/ui-grid.css" />
+    <link rel="stylesheet" href="Scripts/main.css" />
+    <script src="App/app.js"></script>
+
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+
+    <script>
+        var app = angular.module('app', ['ngTouch', 'ui.grid']);
+
+        app.controller('MainCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+
+            $scope.getFirstData = function() {
+                return $http.get('http://localhost:1620/api/resource')
+                .then(function (response) {
+                    var result = [response.data.Resources.length];
+
+                    for (var i = 0; i < response.data.Resources.length; i++) {
+                        var row = {};
+                        var currentObject = response.data.Resources[i];
+
+                        row.FirstName = currentObject.FirstName;
+                        row.LastName = currentObject.LastName;
+                        row.City = currentObject.City;
+                        row.Position = currentObject.Position;
+
+                        for (var j = 0; j < response.data.TimePeriods.length; j++) {
+                            row[response.data.TimePeriods[j]] = '';
+                        }
+
+                        for (var j = 0; j < currentObject.Assignments.length; j++) {
+                            var timePeriod = currentObject.Assignments[j].TimePeriod;
+
+                            row[timePeriod] = currentObject.Assignments[j].ActualHours;
+                        }
+
+                        result[i] = row;
+                    }
+
+                    $scope.myData = result;
+                });
+            };
+
+            $scope.getDropDownData = function () {
+                return $http.get('http://localhost:1620/api/dropdown')
+                .then(function (response) {
+                    
+                    var cities = [];
+                    var orgUnits = [];
+                    var regions = [];
+                    var markets = [];
+                    var practices = [];
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (response.data[i].Category == 'OrgUnit') {
+                            orgUnits[orgUnits.length] = response.data[i];
+                        }
+                        if (response.data[i].Category == 'City') {
+                            cities[cities.length] = response.data[i];
+                        }
+                        if (response.data[i].Category == 'Region') {
+                            regions[regions.length] = response.data[i];
+                        }
+                        if (response.data[i].Category == 'Market') {
+                            markets[markets.length] = response.data[i];
+                        }
+                        if (response.data[i].Category == 'Practice') {
+                            practices[practices.length] = response.data[i];
+                        }
+                    }
+
+                    $scope.Cities = cities;
+                    $scope.OrgUnits = orgUnits;
+                    $scope.Regions = regions;
+                    $scope.Markets = markets;
+                    $scope.Practices = practices;
+                });
+            }
+
+
+            $scope.getDropDownData();
+            $scope.getFirstData();
+        }]);
+    </script>
+
+</head>
+<body>
+    <div ng-controller="MainCtrl">
+        <div>
+            <label>Cities</label>
+            <select id="citiesdropdown" ng-model="cities" ng-options="x.Name for x in Cities"></select>
+        </div>
+        
+        <div>
+            <label>Org Units</label>
+            <select id="orgUnitsdropdown" ng-model="orgUnits" ng-options="x.Name for x in OrgUnits"></select>
+        </div>
+
+        <div>
+            <label>Regions</label>
+            <select id="regionsdropdown" ng-model="regions" ng-options="x.Name for x in Regions"></select>
+        </div>
+
+        <div>
+            <label>Markets</label>
+            <select id="marketsdropdown" ng-model="markets" ng-options="x.Name for x in Markets"></select>
+        </div>
+
+        <div>
+            <label>Practices</label>
+            <select id="practicesdropdown" ng-model="practices" ng-options="x.Name for x in Practices"></select>
+        </div>
+        
+        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+    </div>
+
+</body>
+</html>
