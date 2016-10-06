@@ -112,30 +112,33 @@ function createColumns(resourcePage) {
 }
 
 function createRows(resourcePage) {
-    var flattenedRows = [resourcePage.Resources.length];
+    var rows = [resourcePage.Resources.length];
 
     for (var i = 0; i < resourcePage.Resources.length; i++) {
-        var row = {};
-        var currentObject = resourcePage.Resources[i];
-
-        row.FirstName = currentObject.FirstName;
-        row.LastName = currentObject.LastName;
-        row.City = currentObject.City;
-        row.Position = currentObject.Position;
-        row.Id = currentObject.Id;
-
-        for (var j = 0; j < resourcePage.TimePeriods.length; j++) {
-            row[resourcePage.TimePeriods[j]] = '';
-        }
-
-        for (var j = 0; j < currentObject.Assignments.length; j++) {
-            var timePeriod = currentObject.Assignments[j].TimePeriod;
-
-            row[timePeriod] = currentObject.Assignments[j].ActualHours;
-        }
-
-        flattenedRows[i] = row;
+        rows[i] = createRow(resourcePage.Resources[i], resourcePage.TimePeriods);
     }
 
-    return flattenedRows;
+    return rows;
+}
+
+function createRow(resource, timePeriods) {
+    var row = {};
+
+    row.FirstName = resource.FirstName;
+    row.LastName = resource.LastName;
+    row.City = resource.City;
+    row.Position = resource.Position;
+    row.Id = resource.Id;
+
+    for (var j = 0; j < timePeriods.length; j++) {
+        row[timePeriods[j]] = '';
+    }
+
+    for (var j = 0; j < resource.Assignments.length; j++) {
+        var timePeriod = resource.Assignments[j].TimePeriod;
+
+        row[timePeriod] = resource.Assignments[j].ActualHours;
+    }
+
+    return row;
 }
