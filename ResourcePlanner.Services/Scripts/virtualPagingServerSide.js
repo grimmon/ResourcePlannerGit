@@ -68,6 +68,16 @@ function buildQuery(params) {
     var pageSize = 'pageSize=' + (params.endRow - params.startRow);
     var pageNum = 'pageNum=' + params.startRow / (params.endRow - params.startRow);
     var sortOrder = 'sort=' + params.sortModel.colId;
+    var agg = "agg=";
+    var sortDirection = "sortDirection=";
+    var city = "city=";
+    var market = "market="; 
+    var region = "regiion="; 
+    var orgUnit = "orgUnit="; 
+    var practice = "practice="; 
+    var position = "position="; 
+    var StartDateParam = "startDate=";
+    var EndDateParam = "enddate";
 
     filters += pageSize + '&' + pageNum;
 
@@ -104,7 +114,18 @@ function createColumns(resourcePage) {
     for (var j = 0; j < resourcePage.TimePeriods.length; j++) {
         var timePeriod = resourcePage.TimePeriods[j];
         newColumns[j + 4] = {
-            headerName: timePeriod, field: timePeriod, width: 150, suppressMenu: true
+            headerName: timePeriod, field: timePeriod, width: 150, suppressMenu: true, 
+            cellRenderer: function (params) {
+                if (params.data !== undefined) {
+                    var floatValue = parseFloat(params.value);
+                    
+                    if (!isNaN(floatValue) && floatValue != null) {
+                        return floatValue.toFixed(2);
+                    } else {
+                        return '';
+            }
+                }
+            }
         }
     }
 
