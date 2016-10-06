@@ -32,8 +32,7 @@ namespace ResourcePlanner.Services.Controllers
                 ResourceId = ResourceIdParam.Value;
             }
 #if Mock
-            var access = new MockDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
-                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var access = new MockDataAccess();
 #else
             var access = new ResourceDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));

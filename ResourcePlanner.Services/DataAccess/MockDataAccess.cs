@@ -12,47 +12,52 @@ namespace ResourcePlanner.Services.DataAccess
 {
     public class MockDataAccess
     {
-        private readonly string _connectionString;
-        private readonly int _timeout;
+        private static List<Resource> _resources;
+        private static List<string> _timePeriods;
 
-        public MockDataAccess(string connectionString, int timeout)
+        static MockDataAccess()
         {
-            _connectionString = connectionString;
-            _timeout = timeout;
+            Init();
         }
-
-
-        public ResourcePage GetResourcePage(ResourceQuery pageParams)
+        
+        public static void Init()
         {
+            _timePeriods = new List<string>();
+            _resources = new List<Resource>();
 
             var rand = new Random();
-            var resourcePage = new ResourcePage()
+
+            var timePeriodCount = rand.Next(3, 10); //cant be greater than 20.
+            var resourceCount = rand.Next(150, 400);
+
+            while (_timePeriods.Count < timePeriodCount)
             {
-                Resources = new List<Resource>(),
-                TimePeriods = new List<string>()
-            };
+                var timePeriod = LoremIpsumGenerator.LoremIpsum(1, 1, rand);
 
+                if (!_timePeriods.Contains(timePeriod))
+                {
+                    _timePeriods.Add(timePeriod);
+                }
+            }
 
-            int resourceCount = rand.Next(50, 100);
-
-            for(int i = 0; i < resourceCount; i++)
+            for (int i = 0; i < resourceCount; i++)
             {
                 var resource = new Resource()
                 {
-                    FirstName = LoremIpsumGenerator.LoremIpsum(1,1,rand),
+                    Id = i,
+                    FirstName = LoremIpsumGenerator.LoremIpsum(1, 1, rand),
                     LastName = LoremIpsumGenerator.LoremIpsum(1, 1, rand),
                     City = LoremIpsumGenerator.LoremIpsum(1, 2, rand),
-                    Position =  LoremIpsumGenerator.LoremIpsum(2, 4, rand),
+                    Position = LoremIpsumGenerator.LoremIpsum(2, 4, rand),
                     Assignments = new List<Assignment>()
                 };
-                int assignCount = rand.Next(5, 10);
+
+                int assignCount = rand.Next(_timePeriods.Count);
+                
                 for (int j = 0; j < assignCount; j++)
                 {
-                    var timeperiod = LoremIpsumGenerator.LoremIpsum(1, 1, rand);
-                    if (!resourcePage.TimePeriods.Contains(timeperiod))
-                    {
-                        resourcePage.TimePeriods.Add(timeperiod);
-                    }
+                    var timeperiod = _timePeriods[rand.Next(_timePeriods.Count)];
+                    
                     var assignment = new Assignment();
 
                     assignment.TimePeriod = timeperiod;
@@ -62,8 +67,24 @@ namespace ResourcePlanner.Services.DataAccess
                     resource.Assignments.Add(assignment);
                 }
 
-                resourcePage.Resources.Add(resource);
+                _resources.Add(resource);
             }
+        }
+
+        public ResourcePage GetResourcePage(ResourceQuery pageParams)
+        {
+            var pagedResources = _resources
+                .Skip(pageParams.PageSize * pageParams.PageNum)
+                .Take(pageParams.PageSize)
+                .ToList();
+
+            var resourcePage = new ResourcePage()
+            {
+                Resources = pagedResources,
+                TotalResourceCount = _resources.Count,
+                TimePeriods = _timePeriods
+            };
+
             return resourcePage;
         }
 

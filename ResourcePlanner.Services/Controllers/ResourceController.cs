@@ -20,6 +20,7 @@ namespace ResourcePlanner.Services.Controllers
         {
             DateTime StartDate;
             DateTime EndDate;
+
             if (StartDateParam == null || EndDateParam == null)
             {
                 StartDate = DateTime.Now.AddMonths(-1);
@@ -46,12 +47,9 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.Practice = practice != null ? Array.ConvertAll(practice.Split(','), s => int.Parse(s)) : new int[1];
             pageParams.StartDate = StartDate;
             pageParams.EndDate = EndDate;
-
-            
             
 #if Mock
-            var access = new MockDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
-                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var access = new MockDataAccess();
 #else
             var access = new ResourceDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
