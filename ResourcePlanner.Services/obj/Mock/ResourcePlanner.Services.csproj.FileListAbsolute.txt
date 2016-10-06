@@ -52,3 +52,5 @@ C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePl
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\bin\System.Web.Http.WebHost.xml
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\obj\Mock\ResourcePlanner.Services.csprojResolveAssemblyReference.cache
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\obj\Mock\ResourcePlanner.Services.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\bin\ResourcePlanner.Services.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\obj\Mock\ResourcePlanner.Services.pdb

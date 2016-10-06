@@ -56,8 +56,8 @@ function setRowData() {
 
                 var filters = '?';
 
-                var startRowParam = 'pageSize=' + params.startRow;
-                var endRowParam = 'pageNum=' + params.endRow;
+                var startRowParam = 'pageSize=' + (params.endRow - params.startRow);
+                var endRowParam = 'pageNum=' + params.startRow / (params.endRow - params.startRow);
                 var sortOrder = 'sort=' + params.sortModel.colId;
 
                 filters += startRowParam + '&' + endRowParam;
@@ -85,7 +85,6 @@ function setRowData() {
                         if (dataAfterSortingAndFiltering.length <= params.endRow) {
                             lastRow = dataAfterSortingAndFiltering.length;
                         }
-                        
 
                         var newColumns = [ {
                             headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true,
