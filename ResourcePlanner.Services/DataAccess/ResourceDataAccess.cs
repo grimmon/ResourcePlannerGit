@@ -7,6 +7,7 @@ using ResourcePlanner.Core.Utilities;
 using ResourcePlanner.Services.Mapper;
 using System.Data;
 using System.Data.SqlClient;
+using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.DataAccess
 {
@@ -25,12 +26,55 @@ namespace ResourcePlanner.Services.DataAccess
         public ResourcePage GetResourcePage(ResourceQuery pageParams)
         {
 
-            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
-                _connectionString,
-                @"rpdb.ResourcePageSelect",
-                CommandType.StoredProcedure,
-                _timeout,
-                CreateResourcePageParamArray(pageParams));
+
+            ResourcePage returnValue = new ResourcePage();
+            switch (pageParams.Aggregation)
+            {
+
+
+                case TimeAggregation.Daily:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                        _connectionString,
+                        @"rpdb.ResourcePageDailySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Weekly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                        _connectionString,
+                        @"rpdb.ResourcePageWeeklySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Monthly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                        _connectionString,
+                        @"rpdb.ResourcePageMonthlySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Quarterly:
+            
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                        _connectionString,
+                        @"rpdb.ResourcePageQuarterlySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+                default:
+                    break;
+            }
+
             return returnValue;
         }
 
@@ -47,12 +91,11 @@ namespace ResourcePlanner.Services.DataAccess
 
         private SqlParameter[] CreateResourcePageParamArray(ResourceQuery pageParams)
         {
-            var AggParam       = AdoUtility.CreateSqlParameter("AggParam", 20, SqlDbType.VarChar, pageParams.Aggregation.ToString());
-            var CityParam      = AdoUtility.CreateSqlParameter("CityParam",  SqlDbType.Int, pageParams.City[0]);
-            var OrgUnitParam   = AdoUtility.CreateSqlParameter("OrgUnitParam", SqlDbType.Int, pageParams.OrgUnit[0]);
-            var RegionParam    = AdoUtility.CreateSqlParameter("RegionParam", SqlDbType.Int, pageParams.Region[0]);
-            var MarketParam    = AdoUtility.CreateSqlParameter("MarketParam", SqlDbType.Int, pageParams.Market[0]);
-            var PracticeParam  = AdoUtility.CreateSqlParameter("PracticeParam", SqlDbType.Int, pageParams.Practice[0]);
+            var CityParam      = AdoUtility.CreateSqlTableValuedParameter("CityParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.City);
+            var OrgUnitParam   = AdoUtility.CreateSqlTableValuedParameter("OrgUnitParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.OrgUnit);
+            var RegionParam    = AdoUtility.CreateSqlTableValuedParameter("RegionParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Region);
+            var MarketParam    = AdoUtility.CreateSqlTableValuedParameter("MarketParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Market);
+            var PracticeParam  = AdoUtility.CreateSqlTableValuedParameter("PracticeParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Practice);
             var PositionParam  = AdoUtility.CreateSqlParameter("PositionParam", 50, SqlDbType.VarChar, pageParams.Position[0]);
             var StartDateParam = AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, pageParams.StartDate);
             var EndDateParam   = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate);
@@ -60,8 +103,9 @@ namespace ResourcePlanner.Services.DataAccess
             var SortDirectionParam = AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString());
 
 
-            return new SqlParameter[] { AggParam, SortOrderParam, CityParam, OrgUnitParam, RegionParam, MarketParam,
-                PracticeParam, PositionParam, StartDateParam, EndDateParam };
+            return new SqlParameter[] { SortOrderParam, SortDirectionParam,
+                CityParam, OrgUnitParam, RegionParam, MarketParam, PracticeParam,
+                PositionParam, StartDateParam, EndDateParam };
         }
 
         private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, DateTime StartDate, DateTime EndDate)

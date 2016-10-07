@@ -12,6 +12,39 @@ namespace ResourcePlanner.Core.Utilities
 {
     public class AdoUtility
     {
+        public const string VarCharTableDbTypeName = "rpdb.typeVarCharTable";
+        public const string IntTableDbTypeName = "rpdb.typeIntTable";
+
+        public static DataTable CreateIntDataTable()
+        {
+            var table = new DataTable();
+
+            var col = new DataColumn
+            {
+                ColumnName = "Int",
+                DataType = typeof(int),
+            };
+
+            table.Columns.Add(col);
+
+            return table;
+        }
+
+        public static DataTable CreateVarCharDataTable()
+        {
+            var table = new DataTable();
+
+            var col = new DataColumn
+            {
+                ColumnName = "VarChar",
+                DataType = typeof(string),
+                MaxLength = 100,
+            };
+
+            table.Columns.Add(col);
+
+            return table;
+        }
 
         public static SqlParameter CreateSqlParameter(string parameterName, SqlDbType sqlDbType, object value)
         {
@@ -30,6 +63,47 @@ namespace ResourcePlanner.Core.Utilities
                 Size = size,
                 SqlDbType = sqlDbType,
                 Value = value ?? DBNull.Value,
+            };
+        }
+        public static SqlParameter CreateSqlTableValuedParameter<T>(string parameterName, string typeName, SqlDbType sqlDbType, IEnumerable<T> values)
+        {
+            var param = CreateSqlTableValuedParameter(parameterName, typeName, sqlDbType);
+            var dataTable = (DataTable)param.Value;
+            var column = dataTable.Columns[0];
+            foreach (var value in values)
+            {
+                var row = dataTable.NewRow();
+                row[column.ColumnName] = value;
+                dataTable.Rows.Add(row);
+            }
+            return param;
+        }
+
+        public static SqlParameter CreateSqlTableValuedParameter(string parameterName, string typeName, SqlDbType sqlDbType)
+        {
+            object value;
+
+            // Get empty table.
+            switch (typeName)
+            {
+                case VarCharTableDbTypeName:
+                    value = CreateVarCharDataTable();
+                    break;
+                case IntTableDbTypeName:
+                    value = CreateIntDataTable();
+                    break;
+
+                default:
+                    throw new ArgumentException("Unhandled value of typeName: " + typeName, "typeName");
+            }
+
+            // Return parameter.
+            return new SqlParameter
+            {
+                ParameterName = parameterName,
+                SqlDbType = sqlDbType,
+                TypeName = typeName,
+                Value = value,
             };
         }
         public static void ExecuteQuery(Action<SqlDataReader> resultAction, string connectionString, string sqlStatement, CommandType type, int timeout, params SqlParameter[] parameters)
@@ -135,6 +209,7 @@ namespace ResourcePlanner.Core.Utilities
                 {
                     var queryText = SqlQueryToString(sqlStatement, parameters);
 #endif
+
                     conn.Open();
                     using (var reader = cmd.ExecuteReader())
                     {

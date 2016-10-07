@@ -17,13 +17,12 @@ namespace ResourcePlanner.Services.Mapper
             
 
             int curr = 0;
-            int prev = 0;
 
             while (reader.Read())
             {
                 var assignment = new Assignment();
                 curr = reader.GetInt32("ResourceId");
-                if (curr != prev)
+                if (!resources.ContainsKey(curr))
                 {
                     var newResource = new Resource()
                     {
@@ -33,9 +32,10 @@ namespace ResourcePlanner.Services.Mapper
                         Position = reader.GetNullableString("Position"),
                         Assignments = new List<Assignment>()
                     };
+
                     resources.Add(curr, newResource);
+
                 }
-                prev = curr;
 
                 assignment.TimePeriod = reader.GetString("TimePeriod");
                 assignment.ForecastHours = reader.GetDouble("ForecastHours");
