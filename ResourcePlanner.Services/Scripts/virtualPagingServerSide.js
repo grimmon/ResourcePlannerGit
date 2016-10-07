@@ -3,7 +3,7 @@ var startingColumnDefs = [
         headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true,
         cellRenderer: function (params) {
             if (params.data !== undefined) {
-                return params.node.id;
+                return params.value;
             } else {
                 return '<img src="../images/loading.gif">'
             }
@@ -30,6 +30,21 @@ var gridOptions = {
     maxPagesInCache: 6,
     getRowNodeId: function(item) {
         return item.Id;
+    }
+};
+
+var timemPeriodCellRenderer = function (params) {
+    if (params.data !== undefined) {
+        var floatValue = parseFloat(params.value);
+
+        if (isNaN(floatValue) || floatValue == null) {
+            return '';
+        }
+
+        return floatValue.toFixed(2);
+    }
+    else {
+        return '';
     }
 };
 
@@ -61,25 +76,28 @@ function getRowData(params) {
 }
 
 function buildQuery(params) {
+    var pageSize = (params.endRow - params.startRow);
+    var pageNum = params.startRow / pageSize;
+
     console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 
     var filters = '?';
 
-    var pageSize = 'pageSize=' + (params.endRow - params.startRow);
-    var pageNum = 'pageNum=' + params.startRow / (params.endRow - params.startRow);
-    var sortOrder = 'sort=' + params.sortModel.colId;
-    var agg = "agg=";
-    var sortDirection = "sortDirection=";
-    var city = "city=";
-    var market = "market="; 
-    var region = "regiion="; 
-    var orgUnit = "orgUnit="; 
-    var practice = "practice="; 
-    var position = "position="; 
+    var pageSizeParam = 'pageSize=' + pageSize;
+    var pageNumParam = 'pageNum=' + pageNum;
+    var sortOrderParam = 'sort=' + params.sortModel.colId;
+    var aggParam = "agg=";
+    var sortDirectionParam = "sortDirection=";
+    var cityParam = "city=";
+    var marketParam = "market=";
+    var regionParam = "regiion=";
+    var orgUnitParam = "orgUnit=";
+    var practiceParam = "practice=";
+    var positionParam = "position=";
     var StartDateParam = "startDate=";
     var EndDateParam = "enddate";
 
-    filters += pageSize + '&' + pageNum;
+    filters += pageSizeParam + '&' + pageNumParam;
 
     var query = 'http://localhost:1620/api/resource' + filters;
 
@@ -100,13 +118,18 @@ function createColumns(resourcePage) {
 
     //add initial colummns, defined in startingColumnDefs
     for (var i = 0; i < startingColumnDefs.length; i++) {
-        newColumns[i] = startingColumnDefs[i];
+        var column = startingColumnDefs[i];
+
+        newColumns[i] = column;
     }
 
     //add time periods as columns
-    for (var j = 0; j < resourcePage.TimePeriods.length; j++) {
-        var timePeriod = resourcePage.TimePeriods[j];
-        newColumns[j + startingColumnDefs.length] = createColumn(timePeriod);
+    for (var i = 0; i < resourcePage.TimePeriods.length; i++) {
+        var timePeriod = resourcePage.TimePeriods[i];
+        var column = createColumn(timePeriod);
+
+        var newColumnIndex = i + startingColumnDefs.length
+        newColumns[newColumnIndex] = column;
     }
 
     return newColumns;
@@ -114,21 +137,12 @@ function createColumns(resourcePage) {
 
 function createColumn(timePeriod) {
     return {
-        headerName: timePeriod, field: timePeriod, width: 150, suppressMenu: true,
-        cellRenderer: function (params) {
-            if (params.data !== undefined) {
-                var floatValue = parseFloat(params.value);
-
-                if (isNaN(floatValue) || floatValue == null) {
-                    return '';
-                }
-
-                return floatValue.toFixed(2);
-            }
-            else {
-                return '';
-            }
-        }
+        headerName: timePeriod,
+        suppressMenu: true,
+        children: [
+            {headerName: "Actual Hours"  , width: 120, field: timePeriod + "ActualHours"  , cellRenderer: timemPeriodCellRenderer},
+            {headerName: "Forecast Hours", width: 140, field: timePeriod + "ForecastHours", cellRenderer: timemPeriodCellRenderer}
+        ]
     };
 }
 
@@ -136,7 +150,10 @@ function createRows(resourcePage) {
     var rows = [resourcePage.Resources.length];
 
     for (var i = 0; i < resourcePage.Resources.length; i++) {
-        rows[i] = createRow(resourcePage.Resources[i], resourcePage.TimePeriods);
+        var resource = resourcePage.Resources[i];
+        var row = createRow(resource, resourcePage.TimePeriods);
+
+        rows[i] = row;
     }
 
     return rows;
@@ -151,19 +168,27 @@ function createRow(resource, timePeriods) {
 }
 
 function populateRow(row, resource, timePeriods) {
-    row.FirstName = resource.FirstName;
-    row.LastName = resource.LastName;
-    row.City = resource.City;
-    row.Position = resource.Position;
-    row.Id = resource.Id;
 
-    for (var j = 0; j < timePeriods.length; j++) {
-        row[timePeriods[j]] = '';
+    row.FirstName = resource.FirstName;
+    row.LastName  = resource.LastName;
+    row.City      = resource.City;
+    row.Position  = resource.Position;
+    row.Id        = resource.Id;
+
+    for (var i = 0; i < timePeriods.length; i++) {
+        var timePeriod = timePeriods[i];
+
+        row[timePeriod] = '';
     }
 
-    for (var j = 0; j < resource.Assignments.length; j++) {
-        var timePeriod = resource.Assignments[j].TimePeriod;
+    for (var i = 0; i < resource.Assignments.length; i++) {
+        var assignment = resource.Assignments[i];
+        var timePeriod = assignment.TimePeriod;
 
-        row[timePeriod] = resource.Assignments[j].ActualHours;
+        var actualHoursIndex = timePeriod + "ActualHours";
+        var forecastHoursIndex = timePeriod + "ForecastHours";
+
+        row[actualHoursIndex] = assignment.ActualHours;
+        row[forecastHoursIndex] = assignment.ForecastHours;
     }
 }

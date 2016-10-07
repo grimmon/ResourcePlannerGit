@@ -56,7 +56,10 @@ namespace ResourcePlanner.Services.DataAccess
                 
                 for (int j = 0; j < assignCount; j++)
                 {
-                    var timeperiod = _timePeriods[rand.Next(_timePeriods.Count)];
+                    var usedtimePeriods = resource.Assignments.Select(m => m.TimePeriod);
+                    var availableTimePeriods = _timePeriods.Except(usedtimePeriods).ToList();
+
+                    var timeperiod = availableTimePeriods[rand.Next(availableTimePeriods.Count)];
                     
                     var assignment = new Assignment();
 

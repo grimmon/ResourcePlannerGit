@@ -4,3 +4,9 @@ C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Mock\refactor.xml
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Mock\postdeploy.sql
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Mock\predeploy.sql
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Mock\ResourcePlanner.StageData.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\bin\Mock\ResourcePlanner.StageData.dacpac
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\obj\Mock\Model.xml
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\obj\Mock\refactor.xml
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\obj\Mock\postdeploy.sql
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\obj\Mock\predeploy.sql
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.StageData\obj\Mock\ResourcePlanner.StageData.dll
