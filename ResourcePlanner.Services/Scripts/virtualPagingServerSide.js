@@ -96,43 +96,40 @@ function updateGrid(params, resourcePage) {
 }
 
 function createColumns(resourcePage) {
-    var newColumns = [{
-        headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true,
-        cellRenderer: function (params) {
-            if (params.data !== undefined) {
-                return params.value;
-            } else {
-                return '<img src="../images/loading.gif">'
-            }
-        },
-    },
-        { headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
-        { headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
-        { headerName: "City", field: "City", width: 150, suppressMenu: true },
-    ]
+    var newColumns = [startingColumnDefs.length];
 
+    //add initial colummns, defined in startingColumnDefs
+    for (var i = 0; i < startingColumnDefs.length; i++) {
+        newColumns[i] = startingColumnDefs[i];
+    }
+
+    //add time periods as columns
     for (var j = 0; j < resourcePage.TimePeriods.length; j++) {
         var timePeriod = resourcePage.TimePeriods[j];
-        newColumns[j + 4] = {
-            headerName: timePeriod, field: timePeriod, width: 150, suppressMenu: true, 
-            cellRenderer: function (params) {
-                if (params.data !== undefined) {
-                    var floatValue = parseFloat(params.value);
-
-                    if (isNaN(floatValue) || floatValue == null) {
-                        return '';
-                    }
-
-                    return floatValue.toFixed(2);
-                }
-                else {
-                    return '';
-                }
-            }
-        }
+        newColumns[j + startingColumnDefs.length] = createColumn(timePeriod);
     }
 
     return newColumns;
+}
+
+function createColumn(timePeriod) {
+    return {
+        headerName: timePeriod, field: timePeriod, width: 150, suppressMenu: true,
+        cellRenderer: function (params) {
+            if (params.data !== undefined) {
+                var floatValue = parseFloat(params.value);
+
+                if (isNaN(floatValue) || floatValue == null) {
+                    return '';
+                }
+
+                return floatValue.toFixed(2);
+            }
+            else {
+                return '';
+            }
+        }
+    };
 }
 
 function createRows(resourcePage) {
@@ -148,6 +145,12 @@ function createRows(resourcePage) {
 function createRow(resource, timePeriods) {
     var row = {};
 
+    populateRow(row, resource, timePeriods);
+
+    return row;
+}
+
+function populateRow(row, resource, timePeriods) {
     row.FirstName = resource.FirstName;
     row.LastName = resource.LastName;
     row.City = resource.City;
@@ -163,6 +166,4 @@ function createRow(resource, timePeriods) {
 
         row[timePeriod] = resource.Assignments[j].ActualHours;
     }
-
-    return row;
 }

@@ -3,7 +3,3 @@ C:\Repos\ResourcePlanner\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.p
 C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
 C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
 C:\Repos\ResourcePlanner\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
-C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.dll
-C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.pdb
-C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
-C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
