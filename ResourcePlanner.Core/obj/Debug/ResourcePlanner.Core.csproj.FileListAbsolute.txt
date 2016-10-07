@@ -8,3 +8,8 @@ C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\bin\Debug\Reso
 C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
 C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
 C:\Users\gxrim\Source\Repos\Resource Planner\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb

@@ -16,10 +16,19 @@ namespace ResourcePlanner.Services.Controllers
     public class ResourceController : ApiController
     {
         [HttpGet]
+<<<<<<< HEAD
         public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Asc, string city = null, string market = null, string region = null, string orgUnit = null, string practice = null, string position = null, DateTime? StartDate = null, DateTime? EndDate = null)
         {
 
             if (StartDate == null )
+=======
+        public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Desc, string city = null, string market = null, string region = null, string orgUnit = null, string practice = null, string position = null, DateTime? StartDateParam = null, DateTime? EndDateParam = null)
+        {
+            DateTime StartDate;
+            DateTime EndDate;
+
+            if (StartDateParam == null || EndDateParam == null)
+>>>>>>> d83850529295532a6dfbb1c66f8190b1fd2bcf4e
             {
                 StartDate = DateTime.Now.AddMonths(-1);
             }
@@ -44,12 +53,9 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.Practice = practice != null ? Array.ConvertAll(practice.Split(','), s => int.Parse(s)) : new int[0];
             pageParams.StartDate = StartDate;
             pageParams.EndDate = EndDate;
-
-            
             
 #if Mock
-            var access = new MockDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
-                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var access = new MockDataAccess();
 #else
             var access = new ResourceDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
