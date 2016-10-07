@@ -118,12 +118,15 @@ function createColumns(resourcePage) {
             cellRenderer: function (params) {
                 if (params.data !== undefined) {
                     var floatValue = parseFloat(params.value);
-                    
-                    if (!isNaN(floatValue) && floatValue != null) {
-                        return floatValue.toFixed(2);
-                    } else {
+
+                    if (isNaN(floatValue) || floatValue == null) {
                         return '';
-            }
+                    }
+
+                    return floatValue.toFixed(2);
+                }
+                else {
+                    return '';
                 }
             }
         }
