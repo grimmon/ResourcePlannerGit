@@ -9,9 +9,9 @@ var startingColumnDefs = [
             }
         },
     },
-    {headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: {newRowsAction: 'keep'}},
-    {headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
-    {headerName: "City", field: "City", width: 150, suppressMenu: true},
+    {headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
+    {headerName: "Position" , field: "Position", width: 150, filter: 'set'   , filterParams: { newRowsAction: 'keep' } },
+    {headerName: "City"     , field: "City"    , width: 150, suppressMenu: true},
 ];
 
 var gridOptions = {
@@ -83,19 +83,19 @@ function buildQuery(params) {
 
     var filters = '?';
 
-    var pageSizeParam = 'pageSize=' + pageSize;
-    var pageNumParam = 'pageNum=' + pageNum;
-    var sortOrderParam = 'sort=' + params.sortModel.colId;
-    var aggParam = "agg=";
+    var pageSizeParam      = 'pageSize=' + pageSize;
+    var pageNumParam       = 'pageNum='  + pageNum;
+    var sortOrderParam     = 'sort='     + params.sortModel.colId;
+    var aggParam           = "agg=";
     var sortDirectionParam = "sortDirection=";
-    var cityParam = "city=";
-    var marketParam = "market=";
-    var regionParam = "regiion=";
-    var orgUnitParam = "orgUnit=";
-    var practiceParam = "practice=";
-    var positionParam = "position=";
-    var StartDateParam = "startDate=";
-    var EndDateParam = "enddate";
+    var cityParam          = "city=";
+    var marketParam        = "market=";
+    var regionParam        = "regiion=";
+    var orgUnitParam       = "orgUnit=";
+    var practiceParam      = "practice=";
+    var positionParam      = "position=";
+    var StartDateParam     = "startDate=";
+    var EndDateParam       = "enddate=";
 
     filters += pageSizeParam + '&' + pageNumParam;
 
@@ -128,7 +128,7 @@ function createColumns(resourcePage) {
         var timePeriod = resourcePage.TimePeriods[i];
         var column = createColumn(timePeriod);
 
-        var newColumnIndex = i + startingColumnDefs.length
+        var newColumnIndex = i + startingColumnDefs.length;
         newColumns[newColumnIndex] = column;
     }
 
