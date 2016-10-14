@@ -28,7 +28,7 @@ namespace ResourcePlanner.Services.DataAccess
             var rand = new Random();
 
             var timePeriodCount = rand.Next(3, 10); //cant be greater than 20.
-            var resourceCount = rand.Next(150, 400);
+            var resourceCount = rand.Next(0, 400);
 
             while (_timePeriods.Count < timePeriodCount)
             {
@@ -51,22 +51,15 @@ namespace ResourcePlanner.Services.DataAccess
                     Position = LoremIpsumGenerator.LoremIpsum(2, 4, rand),
                     Assignments = new List<Assignment>()
                 };
-
-                int assignCount = rand.Next(_timePeriods.Count);
                 
-                for (int j = 0; j < assignCount; j++)
+                for (int j = 0; j < _timePeriods.Count; j++)
                 {
-                    var usedtimePeriods = resource.Assignments.Select(m => m.TimePeriod);
-                    var availableTimePeriods = _timePeriods.Except(usedtimePeriods).ToList();
-
-                    var timeperiod = availableTimePeriods[rand.Next(availableTimePeriods.Count)];
-                    
                     var assignment = new Assignment();
+                    assignment.TimePeriod = _timePeriods[j];
 
-                    assignment.TimePeriod = timeperiod;
-                    assignment.ForecastHours = rand.NextDouble() * 40;
-                    assignment.ActualHours = rand.NextDouble() * 40;
-
+                    assignment.ForecastHours = rand.Next() % 2 == 0 ? 0 : rand.NextDouble() * 40;
+                    assignment.ActualHours   = rand.Next() % 2 == 0 ? 0 : rand.NextDouble() * 40;
+                    
                     resource.Assignments.Add(assignment);
                 }
 
