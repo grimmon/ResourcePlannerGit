@@ -85,3 +85,32 @@ C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePl
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\bin\System.Net.Http.Formatting.xml
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\bin\System.Web.Http.xml
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlanner.Services\bin\System.Web.Http.WebHost.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ApplicationInsights.config
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll.config
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ResourcePlanner.Services.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ResourcePlanner.Services.pdb
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.Web.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Newtonsoft.Json.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ResourcePlanner.Core.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Net.Http.Formatting.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Web.Http.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Web.Http.WebHost.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\ResourcePlanner.Core.pdb
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.DependencyCollector.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.Web.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.AI.WindowsServer.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Microsoft.ApplicationInsights.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\Newtonsoft.Json.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Net.Http.Formatting.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Web.Http.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\bin\System.Web.Http.WebHost.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.csprojResolveAssemblyReference.cache
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\obj\Debug\ResourcePlanner.Services.pdb

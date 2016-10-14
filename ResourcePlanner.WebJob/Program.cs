@@ -26,16 +26,21 @@ namespace ResourcePlanner.WebJob
         {
 
             string srcConnString = ConfigurationManager.ConnectionStrings["InsightLEDB"].ConnectionString;
+            string stafConnString = ConfigurationManager.ConnectionStrings["StafDB"].ConnectionString;
             //string srcConnString = ConfigurationManager.ConnectionStrings["LocalDB"].ConnectionString;
             string destConnString = ConfigurationManager.ConnectionStrings["ResourcePlanner"].ConnectionString;
             int timeout = Int32.Parse(ConfigurationManager.AppSettings["timeout"]);
 
             FillStageTables(srcConnString, destConnString, timeout);
+            FillStafStageTables(stafConnString, destConnString, timeout);
             AddReferenceSets(destConnString, timeout);
             UpsertDB(destConnString, timeout);
+            UpsertStafDB(destConnString, timeout);
 
             
         }
+
+        
 
         public static void FillStageTables(string srcConnString, string destConnString, int timeout = 30)
         {
@@ -45,6 +50,13 @@ namespace ResourcePlanner.WebJob
             FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["srcProject"], "stg.Project", timeout);
             FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["srcForeCastTimesheet"], "stg.ForeCastTimesheet", timeout, "where Date_Key > 20160101");
             FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["srcActualTimesheet"], "stg.ActualTimesheet", timeout, "where Date_Key > 20160101");
+        }
+
+        public static void FillStafStageTables(string srcConnString, string destConnString, int timeout = 30)
+        {
+            FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafResource"], "stg.StafResources", timeout);
+            FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafProject"], "stg.StafProjects", timeout);
+            FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafHours"], "stg.StafHours", timeout, "where [Week] > '2016-01-01'");
         }
 
 
@@ -116,7 +128,13 @@ namespace ResourcePlanner.WebJob
             RunSproc(connString, timeout, "rpdb.ActualAssignmentTransform", "Assignments (Actual)");
             
         }
+        private static void UpsertStafDB(string destConnString, int timeout)
+        {
+            RunSproc(destConnString, timeout, "rpdb.StafResourceTransform", "Staf Resources");
+            RunSproc(destConnString, timeout, "rpdb.StafProjectTransform", "Staf Projects");
+            RunSproc(destConnString, timeout, "rpdb.StafAssignmentTransform", "Staf Assignments");
 
+        }
 
         public static void RunSproc(string connString, int timeout, string sprocName, string objectName)
         {
