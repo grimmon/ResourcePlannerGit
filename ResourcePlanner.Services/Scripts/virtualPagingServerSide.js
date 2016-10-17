@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    for (var i = 0; i < grids.length; i++) {
+    for (var i = 0; i < 1; i++) {
         var gridDiv = document.querySelector(grids[i].name);
         new agGrid.Grid(gridDiv, grids[i].options);
 
@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         grids[i].options.api.setDatasource(dataSource);
+    }
+
+    for (var i = 1; i < 2; i++) {
+        var gridDiv = document.querySelector(grids[i].name);
+        new agGrid.Grid(gridDiv, grids[i].options);
+
+        grids[i].options.context = grids[i].name;
     }
 });
 
@@ -346,13 +353,22 @@ function addAssignment(row, assignment, timePeriod) {
 }
 
 function rowSelectedFunc(event) {
+    updateSelectedUser(event.node.data);
+
     if (event.node.isSelected()) {
-        var grid = getGrid('#myGrid2');
+        for (var i = 1; i < 2; i++) {
+            //grids[i].options.context = grids[i].name;
 
-        var params = {};
-        params.Id = event.node.data.Id;
+            var dataSource = {
+                rowCount: null, // behave as infinite scroll
+                getRows: getData
+            };
 
-        var query = grid.queryBuilder(params);
-        callServer(params, query, grid.options, grid.createRow, grid.getInitialColumns, grid.createColumn, grid.getRowData, grid.getColumnData);
+            grids[i].options.api.setDatasource(dataSource);
+        }
     }
+}
+
+function updateSelectedUser(data) {
+    $("#selectedUser").text("first Name: "  + data.FirstName + ", Last Name: " + data.LastName);
 }
