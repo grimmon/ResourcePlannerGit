@@ -10,10 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
             getRows: getData
         };
 
-        if (!grids[i]) {
-
-        }
-
         grids[i].options.api.setDatasource(dataSource);
     }
 });
