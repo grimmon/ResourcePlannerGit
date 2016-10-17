@@ -8,28 +8,28 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.Controllers
 {
     public class ResourceDetailController : ApiController
     {
         [HttpGet]
-        public async Task<IHttpActionResult> Get(int? ResourceIdParam = null, DateTime? StartDateParam = null, DateTime? EndDateParam = null)
+        public async Task<IHttpActionResult> Get(int? ResourceId = null, TimeAggregation Aggregation = TimeAggregation.Weekly, DateTime? StartDate = null, DateTime? EndDate = null)
         {
-            DateTime StartDate;
-            DateTime EndDate;
-            int ResourceId;
-            if (StartDateParam == null || (EndDateParam == null || ResourceIdParam == null))
+            if (StartDate == null)
             {
                 StartDate = DateTime.Now.AddMonths(-1);
-                EndDate = DateTime.Now.AddMonths(1);
-                ResourceId = 38042;
-            }
-            else
+                            }
+            if (EndDate == null)
             {
-                StartDate = StartDateParam.Value;
-                EndDate = EndDateParam.Value;
-                ResourceId = ResourceIdParam.Value;
+
+                EndDate = DateTime.Now.AddMonths(1);
+         
+            }
+            if(ResourceId == null)
+            {
+                ResourceId = 18119;
             }
 #if Mock
             var access = new MockDataAccess();
@@ -41,7 +41,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                detailPage = access.GetResourceDetail(ResourceId, StartDate, EndDate);
+                detailPage = access.GetResourceDetail(ResourceId.Value, StartDate.Value, EndDate.Value);
             }
             catch (Exception ex)
             {

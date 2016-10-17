@@ -80,12 +80,54 @@ namespace ResourcePlanner.Services.DataAccess
 
         public DetailPage GetResourceDetail(int ResourceId, DateTime StartDate, DateTime EndDate)
         {
-            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                _connectionString,
-                @"rpdb.ResourceDetailSelect",
-                CommandType.StoredProcedure,
-                _timeout,
-                CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
+            var returnValue = new DetailPage();
+            switch (pageParams.Aggregation)
+            {
+
+
+                case TimeAggregation.Daily:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
+                        _connectionString,
+                        @"rpdb.ResourceDetailDailySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
+                    break;
+
+                case TimeAggregation.Weekly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
+                        _connectionString,
+                        @"rpdb.ResourceDetailWeeklySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
+                    break;
+
+                case TimeAggregation.Monthly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
+                         _connectionString,
+                         @"rpdb.ResourceDetailMonthlySelect",
+                         CommandType.StoredProcedure,
+                         _timeout,
+                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
+                    break;
+
+                case TimeAggregation.Quarterly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
+                         _connectionString,
+                         @"rpdb.ResourceDetailQuarterlySelect",
+                         CommandType.StoredProcedure,
+                         _timeout,
+                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
+                    break;
+                default:
+                    break;
+            }
+
             return returnValue;
         }
 
