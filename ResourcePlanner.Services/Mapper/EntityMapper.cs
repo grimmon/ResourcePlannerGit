@@ -14,12 +14,17 @@ namespace ResourcePlanner.Services.Mapper
         {
 
             var resources = new Dictionary<int, Resource>();
-            
 
+            var first = true;
+            var totalRowCount = 0;
             int curr = 0;
 
             while (reader.Read())
             {
+                if (first)
+                {
+                    totalRowCount = reader.GetInt32("TotalRowCount");
+                }
                 var assignment = new Assignment();
                 curr = reader.GetInt32("ResourceId");
                 if (!resources.ContainsKey(curr))
@@ -50,7 +55,7 @@ namespace ResourcePlanner.Services.Mapper
             var resourcePage = new ResourcePage()
             {
                 Resources = resources.Values.ToList(),
-                TotalRowCount = resources.Values.Count
+                TotalRowCount = totalRowCount
             };
 
             return resourcePage;
