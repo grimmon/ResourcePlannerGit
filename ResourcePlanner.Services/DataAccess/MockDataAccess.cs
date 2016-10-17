@@ -7,6 +7,7 @@ using ResourcePlanner.Core.Utilities;
 using ResourcePlanner.Services.Mapper;
 using System.Data;
 using System.Data.SqlClient;
+using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.DataAccess
 {
@@ -84,7 +85,7 @@ namespace ResourcePlanner.Services.DataAccess
             return resourcePage;
         }
 
-        public DetailPage GetResourceDetail(int ResourceId, DateTime StartDate, DateTime EndDate)
+        public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
             var rand = new Random();
             var detailPage = new DetailPage()

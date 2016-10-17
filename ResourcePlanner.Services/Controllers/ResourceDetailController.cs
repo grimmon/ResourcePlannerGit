@@ -41,7 +41,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                detailPage = access.GetResourceDetail(ResourceId.Value, StartDate.Value, EndDate.Value);
+                detailPage = access.GetResourceDetail(ResourceId.Value, Aggregation, StartDate.Value, EndDate.Value);
             }
             catch (Exception ex)
             {

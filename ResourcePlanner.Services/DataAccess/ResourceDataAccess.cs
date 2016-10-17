@@ -74,14 +74,22 @@ namespace ResourcePlanner.Services.DataAccess
                 default:
                     break;
             }
+            returnValue.PageNum = pageParams.PageNum;
+            returnValue.PageSize = pageParams.PageSize;
+            returnValue.TimeScale = pageParams.Aggregation;
 
+            returnValue.TimePeriods = returnValue.Resources.Count > 0  
+                ? returnValue.Resources[0].Assignments.Select(a => a.TimePeriod).ToList()
+                : new List<string>();
+            
             return returnValue;
+            
         }
 
-        public DetailPage GetResourceDetail(int ResourceId, DateTime StartDate, DateTime EndDate)
+        public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
             var returnValue = new DetailPage();
-            switch (pageParams.Aggregation)
+            switch (Aggregation)
             {
 
 
@@ -127,27 +135,41 @@ namespace ResourcePlanner.Services.DataAccess
                 default:
                     break;
             }
-
             return returnValue;
         }
 
         private SqlParameter[] CreateResourcePageParamArray(ResourceQuery pageParams)
         {
-            var CityParam      = AdoUtility.CreateSqlTableValuedParameter("CityParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.City);
-            var OrgUnitParam   = AdoUtility.CreateSqlTableValuedParameter("OrgUnitParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.OrgUnit);
-            var RegionParam    = AdoUtility.CreateSqlTableValuedParameter("RegionParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Region);
-            var MarketParam    = AdoUtility.CreateSqlTableValuedParameter("MarketParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Market);
-            var PracticeParam  = AdoUtility.CreateSqlTableValuedParameter("PracticeParam", AdoUtility.IntTableDbTypeName, SqlDbType.Structured, pageParams.Practice);
-            var PositionParam  = AdoUtility.CreateSqlParameter("PositionParam", 50, SqlDbType.VarChar, pageParams.Position[0]);
-            var StartDateParam = AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, pageParams.StartDate);
-            var EndDateParam   = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate);
-            var SortOrderParam = AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString());
-            var SortDirectionParam = AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString());
+            var parameterList = new List<SqlParameter>();
 
+            parameterList.Add(AdoUtility.CreateSqlParameter("PositionParam", 50, SqlDbType.VarChar, pageParams.Position));
+            parameterList.Add(AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, pageParams.StartDate));
+            parameterList.Add(AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate));
+            parameterList.Add(AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString()));
+            parameterList.Add(AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString()));
 
-            return new SqlParameter[] { SortOrderParam, SortDirectionParam,
-                CityParam, OrgUnitParam, RegionParam, MarketParam, PracticeParam,
-                PositionParam, StartDateParam, EndDateParam };
+            if (pageParams.City.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("CityParam", SqlDbType.Int, pageParams.City.Value));
+            }
+            if (pageParams.OrgUnit.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("OrgUnitParam", SqlDbType.Int, pageParams.OrgUnit.Value));
+            }
+            if (pageParams.Region.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("RegionParam", SqlDbType.Int, pageParams.Region.Value));
+            }
+            if (pageParams.Market.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("MarketParam", SqlDbType.Int, pageParams.Market.Value));
+            }
+            if (pageParams.Practice.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("PracticeParam", SqlDbType.Int, pageParams.Practice.Value));
+            }
+
+            return parameterList.ToArray();
         }
 
         private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, DateTime StartDate, DateTime EndDate)

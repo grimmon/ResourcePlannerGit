@@ -16,3 +16,9 @@ C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePl
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\postdeploy.sql
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\predeploy.sql
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\ResourcePlanner.Database.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\bin\Mock\ResourcePlanner.Database.dacpac
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\Model.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\refactor.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\postdeploy.sql
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\predeploy.sql
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Mock\ResourcePlanner.Database.dll

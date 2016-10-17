@@ -5,3 +5,10 @@ C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Debug\postdeploy.sql
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Debug\predeploy.sql
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Debug\ResourcePlanner.StageData.dll
 C:\Repos\ResourcePlanner\ResourcePlanner.StageData\obj\Debug\ResourcePlanner.StageData.pdb
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\bin\Debug\ResourcePlanner.StageData.dacpac
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\Model.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\refactor.xml
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\postdeploy.sql
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\predeploy.sql
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\ResourcePlanner.StageData.dll
+C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.StageData\obj\Debug\ResourcePlanner.StageData.pdb

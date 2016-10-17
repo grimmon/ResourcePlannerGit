@@ -18,7 +18,7 @@ namespace ResourcePlanner.Services.Controllers
         [HttpGet]
 
 
-        public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Desc, string city = null, string market = null, string region = null, string orgUnit = null, string practice = null, string position = null, DateTime? StartDate = null, DateTime? EndDate = null)
+        public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Desc, int? city = null, int? market = null, int? region = null, int? orgUnit = null, int? practice = null, string position = null, DateTime? StartDate = null, DateTime? EndDate = null)
         {
 
             if (StartDate == null)
@@ -38,14 +38,14 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SortDirection = sortDirection;
             pageParams.PageSize = pageSize;
             pageParams.PageNum = pageNum;
-            pageParams.City = city != null ? Array.ConvertAll(city.Split(','), s => int.Parse(s)) : new int[0];
-            pageParams.OrgUnit = orgUnit != null ? Array.ConvertAll(orgUnit.Split(','), s => int.Parse(s)) : new int[0];
-            pageParams.Market = market != null ? Array.ConvertAll(market.Split(','), s => int.Parse(s)) : new int[0];
-            pageParams.Region = region != null ? Array.ConvertAll(region.Split(','), s => int.Parse(s)) : new int[0];
-            pageParams.Position = position != null ? position.Split(',') : new string[1];
-            pageParams.Practice = practice != null ? Array.ConvertAll(practice.Split(','), s => int.Parse(s)) : new int[0];
-            pageParams.StartDate = StartDate;
-            pageParams.EndDate = EndDate;
+            pageParams.City = city;
+            pageParams.OrgUnit = orgUnit;
+            pageParams.Market = market;
+            pageParams.Region = region;
+            pageParams.Position = position;
+            pageParams.Practice = practice;
+            pageParams.StartDate = StartDate.Value;
+            pageParams.EndDate = EndDate.Value;
             
 #if Mock
             var access = new MockDataAccess();

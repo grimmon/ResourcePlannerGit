@@ -8,7 +8,7 @@ namespace ResourcePlanner.Services.Models
 {
     public class ResourcePage
     {
-        public string TimeScale { get; set; }
+        public TimeAggregation TimeScale { get; set; }
         public List<string> TimePeriods { get; set; }
         public List<Resource> Resources{ get; set; }
         public int PageSize { get; set; }
@@ -80,14 +80,14 @@ namespace ResourcePlanner.Services.Models
         public SortDirection SortDirection { get; set; }
         public int PageSize { get; set; }
         public int PageNum { get; set; }
-        public int[] City { get; set; }
-        public int[] OrgUnit { get; set; }
-        public int[] Region { get; set; }
-        public int[] Market { get; set; }
-        public int[] Practice { get; set; }
-        public string[] Position { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public int? City { get; set; }
+        public int? OrgUnit { get; set; }
+        public int? Region { get; set; }
+        public int? Market { get; set; }
+        public int? Practice { get; set; }
+        public string Position { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
 
