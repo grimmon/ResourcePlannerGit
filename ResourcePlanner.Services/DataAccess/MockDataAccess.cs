@@ -77,7 +77,7 @@ namespace ResourcePlanner.Services.DataAccess
             var resourcePage = new ResourcePage()
             {
                 Resources = pagedResources,
-                TotalResourceCount = _resources.Count,
+                TotalRowCount = _resources.Count,
                 TimePeriods = _timePeriods
             };
 
@@ -87,10 +87,14 @@ namespace ResourcePlanner.Services.DataAccess
         public DetailPage GetResourceDetail(int ResourceId, DateTime StartDate, DateTime EndDate)
         {
             var rand = new Random();
+
+            int numProjects = rand.Next(5, 10);
+
             var detailPage = new DetailPage()
             {
                 Projects = new List<Project>(),
-                TimePeriods = new List<string>()
+                TimePeriods = new List<string>(),
+                TotalRowCount = numProjects
             };
             var resourceInfo = new ResourceInfo();
 
@@ -104,7 +108,7 @@ namespace ResourcePlanner.Services.DataAccess
             resourceInfo.ManagerFirstName = LoremIpsumGenerator.LoremIpsum(1, 1, rand);
             resourceInfo.ManagerLastName = LoremIpsumGenerator.LoremIpsum(1, 1, rand);
 
-            int numProjects = rand.Next(5, 10);
+            
             for (int i = 0; i < numProjects; i++)
             {
                 var project = new Project()
