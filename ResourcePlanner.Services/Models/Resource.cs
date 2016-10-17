@@ -13,7 +13,7 @@ namespace ResourcePlanner.Services.Models
         public List<Resource> Resources{ get; set; }
         public int PageSize { get; set; }
         public int PageNum { get; set; }
-        public int TotalResourceCount { get; set; }
+        public int TotalRowCount { get; set; }
     }
 
     public class DetailPage
@@ -24,6 +24,7 @@ namespace ResourcePlanner.Services.Models
         public List<Project> Projects { get; set; }
         public int PageSize { get; set; }
         public int PageNum { get; set; }
+        public int TotalRowCount { get; set; }
     }
     public class Resource
     {

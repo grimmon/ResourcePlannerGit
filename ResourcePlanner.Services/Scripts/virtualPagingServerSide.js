@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function getData(params) {
     var grid = getGrid(params.context);
 
-    var query = buildQuery(params);
-    callServer(params, query, grid.options, grid.createRow, grid.createColumn);
+    var query = grid.queryBuilder(params);
+    callServer(params, query, grid.options, grid.createRow, grid.getInitialColumns, grid.createColumn, grid.getRowData, grid.getColumnData);
 }
 
 function getGrid(gridName) {
@@ -29,25 +29,30 @@ function getGrid(gridName) {
     }
 }
 
-function callServer(params, query, options, populateRow, createColumns) {
+function callServer(params, query, options, populateRow, getInitialColumns, createColumns, getRowData, getColumnData) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', query);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4 && httpRequest.status == 200) {
             httpResponse = JSON.parse(httpRequest.responseText);
-            updateGrid(params, httpResponse, options, populateRow, createColumns);
+
+            var rowData = getRowData(httpResponse);
+            var columnData = getColumnData(httpResponse);
+
+            updateGrid(params, httpResponse, rowData, columnData, options, populateRow, getInitialColumns, createColumns);
         }
     };
 }
 
-function updateGrid(params, resourcePage, options, populateRow, createColumns) {
-    var columns = createColumns(resourcePage);
-    var rows = createRows(resourcePage.Resources, resourcePage.TimePeriods, populateRow);
+function updateGrid(params, data, rowData, columnData, options, populateRow, getInitialColumns, createColumns) {
+    var initialColumns = getInitialColumns();
+    var columns = createColumns(initialColumns, data);
+    var rows = createRows(rowData, columnData, populateRow);
 
     options.api.setColumnDefs(columns);
 
-    params.successCallback(rows, resourcePage.TotalResourceCount);
+    params.successCallback(rows, data.TotalRowCount);
 }
 
 function createRows(rowData, columnData, rowParser) {
@@ -86,7 +91,92 @@ var timePeriodCellRenderer = function (params) {
     }
 };
 
-var startingColumnDefs = [
+function getResourceRowData(data) {
+    return data.Resources;
+}
+
+function getResourceColumnData(data) {
+    return data.TimePeriods;
+}
+
+function getResourceDetailRowData(data) {
+    return data.Projects;
+}
+
+function getResourceDetailColumnData(data) {
+    return data.TimePeriods;
+}
+
+function getInitialResourceColumns() {
+    return startingResourceColumnDefs;
+}
+
+function getInitialResourceDetailColumns() {
+    return startingResourceDetailColumnDefs;
+}
+
+var grids = [
+    {
+        getRowData: getResourceRowData,
+        getColumnData: getResourceColumnData,
+        getInitialColumns: getInitialResourceColumns,
+        name: '#myGrid',
+        createRow: createResourceRow,
+        createColumn: createResourceColumns,
+        options: {
+            context: 0,
+            debug: true,
+            enableServerSideSorting: true,
+            enableServerSideFilter: true,
+            enableColResize: true,
+            rowSelection: 'single',
+            rowDeselection: true,
+            columnDefs: startingResourceColumnDefs,
+            rowModelType: 'virtual',
+            paginationPageSize: 30,
+            paginationOverflowSize: 2,
+            maxConcurrentDatasourceRequests: 2,
+            paginationInitialRowCount: 1,
+            maxPagesInCache: 6,
+            onRowSelected: rowSelectedFunc,
+            getRowNodeId: function (item) {
+                return item.Id;
+            }
+        },
+        queryBuilder: buildResourceQuery
+    },
+    {
+        getRowData: getResourceDetailRowData,
+        getColumnData: getResourceDetailColumnData,
+        getInitialColumns: getInitialResourceDetailColumns,
+        name: '#myGrid2',
+        createRow: createProjectRow,
+        createColumn: createResourceColumns,
+        options: {
+            context: 1,
+            debug: true,
+            enableServerSideSorting: true,
+            enableServerSideFilter: true,
+            enableColResize: true,
+            rowSelection: 'single',
+            rowDeselection: true,
+            columnDefs: startingResourceDetailColumnDefs,
+            rowModelType: 'virtual',
+            paginationPageSize: 30,
+            paginationOverflowSize: 2,
+            maxConcurrentDatasourceRequests: 2,
+            paginationInitialRowCount: 1,
+            maxPagesInCache: 6,
+            getRowNodeId: function (item) {
+                return item.Id;
+            }
+        },
+        hide: true,
+        queryBuilder: buildResourceDetailQuery
+    }
+];
+
+var startingResourceColumnDefs = [
     {
         headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true,
         cellRenderer: function (params) {
@@ -102,82 +192,45 @@ var startingColumnDefs = [
     { headerName: "City", field: "City", width: 150, suppressMenu: true },
 ];
 
-function createResourceColumns(resourcePage) {
-    var newColumns = [startingColumnDefs.length + resourcePage.TimePeriods.length];
+var startingResourceDetailColumnDefs = [
+    {
+        headerName: "Project Name", field: "ProjectName", width: 150, suppressMenu: true,
+        cellRenderer: function (params) {
+            if (params.data !== undefined) {
+                return params.value;
+            } else {
+                return '<img src="../images/loading.gif">'
+            }
+        },
+    },
+    //{ headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
+    //{ headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
+    //{ headerName: "City", field: "City", width: 150, suppressMenu: true },
+];
+
+function createResourceColumns(startingColumns, columns) {
+    var newColumns = [startingColumns.length + columns.TimePeriods.length];
 
     //add initial colummns, defined in startingColumnDefs
-    for (var i = 0; i < startingColumnDefs.length; i++) {
-        var column = startingColumnDefs[i];
+    for (var i = 0; i < startingColumns.length; i++) {
+        var column = startingColumns[i];
 
         newColumns[i] = column;
     }
 
     //add time periods as columns
-    for (i = 0; i < resourcePage.TimePeriods.length; i++) {
-        var timePeriod = resourcePage.TimePeriods[i];
+    for (i = 0; i < columns.TimePeriods.length; i++) {
+        var timePeriod = columns.TimePeriods[i];
         column = createColumn(timePeriod);
 
-        var newColumnIndex = i + startingColumnDefs.length;
+        var newColumnIndex = i + startingColumns.length;
         newColumns[newColumnIndex] = column;
     }
 
     return newColumns;
 }
 
-var grids = [
-    {
-        name: '#myGrid',
-        createRow: createResourceRow,
-        createColumn: createResourceColumns,
-        options: {
-            debug: true,
-            enableServerSideSorting: true,
-            enableServerSideFilter: true,
-            enableColResize: true,
-            rowSelection: 'single',
-            rowDeselection: true,
-            columnDefs: startingColumnDefs,
-            rowModelType: 'virtual',
-            paginationPageSize: 30,
-            paginationOverflowSize: 2,
-            maxConcurrentDatasourceRequests: 2,
-            paginationInitialRowCount: 1,
-            maxPagesInCache: 6,
-            onRowSelected: rowSelectedFunc,
-            getRowNodeId: function (item) {
-                return item.Id;
-            }
-        },
-        queryBuilder: buildQuery
-    },
-    {
-        name: '#myGrid2',
-        createRow: createResourceRow,
-        createColumn: createResourceColumns,
-        options: {
-            debug: true,
-            enableServerSideSorting: true,
-            enableServerSideFilter: true,
-            enableColResize: true,
-            rowSelection: 'single',
-            rowDeselection: true,
-            columnDefs: startingColumnDefs,
-            rowModelType: 'virtual',
-            paginationPageSize: 30,
-            paginationOverflowSize: 2,
-            maxConcurrentDatasourceRequests: 2,
-            paginationInitialRowCount: 1,
-            maxPagesInCache: 6,
-            getRowNodeId: function (item) {
-                return item.Id;
-            }
-        },
-        hide: true,
-        queryBuilder: buildQuery
-    }
-];
-
-function buildQuery(params) {
+function buildResourceQuery(params) {
     var pageSize = (params.endRow - params.startRow);
     var pageNum = params.startRow / pageSize;
 
@@ -206,43 +259,100 @@ function buildQuery(params) {
     return query;
 }
 
+function buildResourceDetailQuery(params) {
+    var pageSize = (params.endRow - params.startRow);
+    var pageNum = params.startRow / pageSize;
+
+    console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+
+    var filters = '?';
+
+    if (params.Id !== null) {
+        filters += "ResourceId=" + params.Id;
+    }
+
+    var query = 'http://localhost:1620/api/resourcedetail' + filters;
+
+    return query;
+}
+
 function createColumn(timePeriod) {
     return {
         headerName: timePeriod,
         suppressMenu: true,
         children: [
-            { headerName: "Actual Hours", width: 120, field: timePeriod + "ActualHours", cellRenderer: timePeriodCellRenderer },
+            { headerName: "Actual Hours"  , width: 120, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer },
             { headerName: "Forecast Hours", width: 140, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer }
         ]
     };
 }
 
 function createResourceRow(row, resource, timePeriods) {
+    addResourceDetails(row, resource            );
+    addTimePeriods    (row, timePeriods         );
+    addAssignments    (row, resource.Assignments);
+}
 
-    row.FirstName = resource.FirstName;
-    row.LastName = resource.LastName;
-    row.City = resource.City;
-    row.Position = resource.Position;
-    row.Id = resource.Id;
+function createProjectRow(row, project, timePeriods) {
+    addProjectDetails(row, project            );
+    addTimePeriods   (row, timePeriods        );
+    addAssignments   (row, project.Assignments);
+}
 
+function addTimePeriods(row, timePeriods) {
     for (var i = 0; i < timePeriods.length; i++) {
         var timePeriod = timePeriods[i];
 
         row[timePeriod] = '';
     }
+}
 
-    for (i = 0; i < resource.Assignments.length; i++) {
-        var assignment = resource.Assignments[i];
+function addResourceDetails(row, resource) {
+    row.FirstName = resource.FirstName;
+    row.LastName  = resource.LastName;
+    row.City      = resource.City;
+    row.Position  = resource.Position;
+    row.Id        = resource.Id;
+}
+
+function addProjectDetails(row, project) {
+    row.ProjectName               = project.ProjectName;
+    row.FirstName                 = project.FirstName;
+    row.LastName                  = project.LastName;
+    row.WBSElement                = project.WBSElement; 
+    row.Customer                  = project.Customer; 
+    row.Description               = project.Description;
+    row.OpportunityOwnerFirstName = project.OpportunityOwnerFirstName;
+    row.OpportunityOwnerLastName  = project.OpportunityOwnerLastName 
+    row.ProjectManagerFirstName   = project.ProjectManagerFirstName;
+    row.ProjectManagerLastName    = project.ProjectManagerLastName;
+}
+
+function addAssignments(row, assignments) {
+    for (i = 0; i < assignments.length; i++) {
+        var assignment = assignments[i];
         timePeriod = assignment.TimePeriod;
 
-        var actualHoursIndex = timePeriod + "ActualHours";
-        var forecastHoursIndex = timePeriod + "ForecastHours";
-
-        row[actualHoursIndex] = assignment.ActualHours;
-        row[forecastHoursIndex] = assignment.ForecastHours;
+        addAssignment(row, assignment, timePeriod);
     }
 }
 
+function addAssignment(row, assignment, timePeriod) {
+    var actualHoursIndex   = timePeriod + "ActualHours";
+    var forecastHoursIndex = timePeriod + "ForecastHours";
+
+    row[actualHoursIndex  ] = assignment.ActualHours;
+    row[forecastHoursIndex] = assignment.ForecastHours;
+}
+
 function rowSelectedFunc(event) {
-    $("#myGrid2").hide();
+    if (event.node.isSelected()) {
+        var grid = getGrid('#myGrid2');
+
+        var params = {};
+        params.Id = event.node.data.Id;
+
+        var query = grid.queryBuilder(params);
+        callServer(params, query, grid.options, grid.createRow, grid.getInitialColumns, grid.createColumn, grid.getRowData, grid.getColumnData);
+    }
 }

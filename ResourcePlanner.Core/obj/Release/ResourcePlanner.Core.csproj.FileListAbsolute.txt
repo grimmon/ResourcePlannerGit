@@ -2,3 +2,7 @@ C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\bin\Release
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.pdb
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
