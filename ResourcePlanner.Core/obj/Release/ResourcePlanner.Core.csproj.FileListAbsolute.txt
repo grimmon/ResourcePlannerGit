@@ -6,3 +6,4 @@ C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePl
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\bin\Release\ResourcePlanner.Core.pdb
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.dll
 C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Release\ResourcePlanner.Core.csprojResolveAssemblyReference.cache

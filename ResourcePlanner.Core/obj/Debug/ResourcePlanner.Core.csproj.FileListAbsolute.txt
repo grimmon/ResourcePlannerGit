@@ -2,3 +2,8 @@ C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\bin\Debug\R
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.pdb
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\bin\Debug\ResourcePlanner.Core.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.csprojResolveAssemblyReference.cache
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Core\obj\Debug\ResourcePlanner.Core.pdb
