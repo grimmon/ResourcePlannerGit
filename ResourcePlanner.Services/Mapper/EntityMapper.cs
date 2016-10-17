@@ -26,6 +26,7 @@ namespace ResourcePlanner.Services.Mapper
                 {
                     var newResource = new Resource()
                     {
+                        Id = curr,
                         FirstName = reader.GetNullableString("FirstName"),
                         LastName = reader.GetNullableString("LastName"),
                         City = reader.GetNullableString("City"),
@@ -48,7 +49,8 @@ namespace ResourcePlanner.Services.Mapper
 
             var resourcePage = new ResourcePage()
             {
-                Resources = resources.Values.ToList()
+                Resources = resources.Values.ToList(),
+                TotalRowCount = resources.Values.Count
             };
 
             return resourcePage;
