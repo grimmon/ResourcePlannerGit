@@ -147,6 +147,8 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString()));
             parameterList.Add(AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString()));
+            parameterList.Add(AdoUtility.CreateSqlParameter("PageNum", SqlDbType.Int, pageParams.PageNum));
+            parameterList.Add(AdoUtility.CreateSqlParameter("PageSize", SqlDbType.Int, pageParams.PageSize));
 
             if (pageParams.City.HasValue)
             {
