@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.WebJob\obj\Debug\Package\PackageTmp" />
-  <setAcl path="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.WebJob\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.WebJob\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-  <setAcl path="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.WebJob\obj\Debug\Package\PackageTmp\App_Data" setAclResourceType="Directory" setAclAccess="Write" />
-</sitemanifest>

@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="ResourcePlanner.Database.dll" />
-			<Metadata Name="FileName" Value="C:\REPOS\RESOURCEPLANNERGIT2\RESOURCEPLANNERGIT\RESOURCEPLANNER.DATABASE\OBJ\DEBUG\RESOURCEPLANNER.DATABASE.DLL" />
+			<Metadata Name="FileName" Value="C:\USERS\GUILLERMO MORINI\DESKTOP\GMORINI\WORK\RESOURCEPLANNER\GITHUB\RESOURCEPLANNERGIT\RESOURCEPLANNER.DATABASE\OBJ\DEBUG\RESOURCEPLANNER.DATABASE.DLL" />
 			<Metadata Name="AssemblyName" Value="ResourcePlanner.Database" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>

@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
-    for (var i = 0; i < 1; i++) {
-        var gridDiv = document.querySelector(grids[i].name);
-        new agGrid.Grid(gridDiv, grids[i].options);
+    var resourceGrid = grids[0];
+    var gridDiv = document.querySelector(resourceGrid.name);
+    new agGrid.Grid(gridDiv, resourceGrid.options);
 
-        grids[i].options.context = grids[i].name;
+    resourceGrid.options.context = resourceGrid.name;
 
-        var dataSource =  {
-            rowCount: null, // behave as infinite scroll
-            getRows: getData
-        };
+    var dataSource =  {
+        rowCount: null, // behave as infinite scroll
+        getRows: getData
+    };
 
-        grids[i].options.api.setDatasource(dataSource);
-    }
+    resourceGrid.options.api.setDatasource(dataSource);
 
-    for (var i = 1; i < 2; i++) {
-        var gridDiv = document.querySelector(grids[i].name);
-        new agGrid.Grid(gridDiv, grids[i].options);
+    var resourceDetailGrid = grids[1];
+    resourceDetailGrid.options.context = resourceGrid.name;
 
-        grids[i].options.context = grids[i].name;
-    }
+    var gridDiv = document.querySelector(resourceDetailGrid.name);
+    new agGrid.Grid(gridDiv, resourceDetailGrid.options);
+
+    resourceDetailGrid.options.context = resourceDetailGrid.name;
 });
 
 function getData(params) {
@@ -356,16 +356,13 @@ function rowSelectedFunc(event) {
     updateSelectedUser(event.node.data);
 
     if (event.node.isSelected()) {
-        for (var i = 1; i < 2; i++) {
-            //grids[i].options.context = grids[i].name;
+        var dataSource = {
+            rowCount: null, // behave as infinite scroll
+            getRows: getData
+        };
 
-            var dataSource = {
-                rowCount: null, // behave as infinite scroll
-                getRows: getData
-            };
-
-            grids[i].options.api.setDatasource(dataSource);
-        }
+        
+        grids[1].options.api.setDatasource(dataSource);
     }
 }
 

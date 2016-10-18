@@ -12,3 +12,10 @@ C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Deb
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\predeploy.sql
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.dll
 C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.pdb
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\bin\Debug\ResourcePlanner.Database.dacpac
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\Model.xml
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\refactor.xml
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\postdeploy.sql
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\predeploy.sql
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.dll
+C:\Users\Guillermo Morini\Desktop\GMorini\Work\ResourcePlanner\GitHub\ResourcePlannerGit\ResourcePlanner.Database\obj\Debug\ResourcePlanner.Database.pdb
