@@ -261,7 +261,7 @@ function buildResourceQuery(params) {
 
     filters += pageSizeParam + '&' + pageNumParam;
 
-    var query = 'http://localhost:1620/api/resource' + filters;
+    var query = 'api/resource' + filters;
 
     return query;
 }
@@ -278,7 +278,7 @@ function buildResourceDetailQuery(params) {
         filters += "ResourceId=" + params.Id;
     }
 
-    var query = 'http://localhost:1620/api/resourcedetail' + filters;
+    var query = 'api/resourcedetail' + filters;
 
     return query;
 }
