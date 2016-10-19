@@ -27,20 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
-        modal.style.display = "none";
-        var selectedRows = grids[0].options.api.getSelectedNodes();
-        selectedRows[0].setSelected(false);
+        dismissModal();
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
-            modal.style.display = "none";
-            var selectedRows = grids[0].options.api.getSelectedNodes();
-            selectedRows[0].setSelected(false);
+            dismissModal();
         }
     }
 });
+
+function dismissModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+    var selectedRows = grids[0].options.api.getSelectedNodes();
+    selectedRows[0].setSelected(false);
+}
 
 var selectedResource = {};
 
