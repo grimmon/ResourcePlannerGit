@@ -28,12 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         modal.style.display = "none";
+        var selectedRows = grids[0].options.api.getSelectedNodes();
+        selectedRows[0].setSelected(false);
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            var selectedRows = grids[0].options.api.getSelectedNodes();
+            selectedRows[0].setSelected(false);
         }
     }
 });
@@ -78,11 +82,6 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
             }
             else {
                 $("#selectedUser").text("Error: " + httpRequest.statusText + ", " + httpRequest.responseText);
-                //var errorModal = document.getElementById('errorModal');
-                ////var gridModal = document.getElementById('myModal');
-
-                //gridModal.style.display = "none";
-                ////errorModal.style.display = "block";
             }
             
         }
