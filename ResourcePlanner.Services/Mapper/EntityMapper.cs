@@ -115,7 +115,7 @@ namespace ResourcePlanner.Services.Mapper
         public static DetailPage MapToResourceDetail(SqlDataReader reader)
         {
             var resourceInfo = new ResourceInfo();
-            var projects = new Dictionary<int, Project>();
+            var projects = new Dictionary<string, Project>();
 
             reader.Read();
 
@@ -130,19 +130,18 @@ namespace ResourcePlanner.Services.Mapper
             resourceInfo.ManagerLastName   = reader.GetNullableString("ManagerLastName");
 
             reader.NextResult();
-            int curr = 0;
-            int prev = 0;
+            string curr = "";
 
             while (reader.Read())
             {
                 var assignment = new Assignment();
-                curr = reader.GetInt32("ProjectId");
-                if (curr != prev)
+                curr = reader.GetNullableString("WBSElement");
+                if (!projects.ContainsKey(curr))
                 {
                     var newResource = new Project()
                     {
                         ProjectName                = reader.GetNullableString("ProjectName"),
-                        WBSElement                 = reader.GetNullableString("WBSElement"),
+                        WBSElement                 = curr,
                         Customer                   = reader.GetNullableString("Customer"),
                         Description                = reader.GetNullableString("Description"),
                         OpportunityOwnerFirstName  = reader.GetNullableString("OpportunityOwnerFirstName"),
@@ -153,7 +152,6 @@ namespace ResourcePlanner.Services.Mapper
                     };
                     projects.Add(curr, newResource);
                 }
-                prev = curr;
 
                 assignment.TimePeriod = reader.GetString("TimePeriod");
                 assignment.ForecastHours = reader.GetDouble("ForecastHours");
