@@ -18,7 +18,7 @@ namespace ResourcePlanner.Services.Models
 
     public class DetailPage
     {
-        public string TimeScale { get; set; }
+        public TimeAggregation TimeScale { get; set; }
         public List<string> TimePeriods { get; set; }
         public ResourceInfo ResourceInfo { get; set; }
         public List<Project> Projects { get; set; }
