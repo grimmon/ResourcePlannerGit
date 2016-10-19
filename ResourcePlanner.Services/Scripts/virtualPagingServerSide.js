@@ -19,7 +19,26 @@ document.addEventListener('DOMContentLoaded', function () {
     new agGrid.Grid(gridDiv, resourceDetailGrid.options);
 
     resourceDetailGrid.options.context = resourceDetailGrid.name;
+
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });
+
+var selectedResource = {};
 
 function getData(params) {
     var grid = getGrid(params.context);
@@ -41,13 +60,31 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
     httpRequest.open('GET', query);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-            httpResponse = JSON.parse(httpRequest.responseText);
+        if (httpRequest.readyState == 4) {
+            if (httpRequest.status == 200) {
+                httpResponse = JSON.parse(httpRequest.responseText);
 
-            var rowData = getRowData(httpResponse);
-            var columnData = getColumnData(httpResponse);
+                var rowData = getRowData(httpResponse);
+                var columnData = getColumnData(httpResponse);
 
-            updateGrid(params, httpResponse, rowData, columnData, options, populateRow, getInitialColumns, createColumns);
+                if (httpResponse.ResourceInfo != null) {
+                    updateSelectedUser(httpResponse.ResourceInfo);
+                }
+
+                var gridModal = document.getElementById('myGrid2');
+                gridModal.style.display = "block";
+
+                updateGrid(params, httpResponse, rowData, columnData, options, populateRow, getInitialColumns, createColumns);
+            }
+            else {
+                $("#selectedUser").text("Error: " + httpRequest.statusText + ", " + httpRequest.responseText);
+                //var errorModal = document.getElementById('errorModal');
+                ////var gridModal = document.getElementById('myModal');
+
+                //gridModal.style.display = "none";
+                ////errorModal.style.display = "block";
+            }
+            
         }
     };
 }
@@ -216,7 +253,13 @@ var startingResourceDetailColumnDefs = [
 ];
 
 function createResourceColumns(startingColumns, columns) {
-    var newColumns = [startingColumns.length + columns.TimePeriods.length];
+    var columnCount = startingColumns.length;
+
+    if (columns != null && columns.TimePeriods != null) {
+        columnCount == columns.TimePeriods.length;
+    }
+
+    var newColumns = [columnCount];
 
     //add initial colummns, defined in startingColumnDefs
     for (var i = 0; i < startingColumns.length; i++) {
@@ -225,13 +268,15 @@ function createResourceColumns(startingColumns, columns) {
         newColumns[i] = column;
     }
 
-    //add time periods as columns
-    for (i = 0; i < columns.TimePeriods.length; i++) {
-        var timePeriod = columns.TimePeriods[i];
-        column = createColumn(timePeriod);
+    if (columns != null && columns.TimePeriods != null) {
+        //add time periods as columns
+        for (i = 0; i < columns.TimePeriods.length; i++) {
+            var timePeriod = columns.TimePeriods[i];
+            column = createColumn(timePeriod);
 
-        var newColumnIndex = i + startingColumns.length;
-        newColumns[newColumnIndex] = column;
+            var newColumnIndex = i + startingColumns.length;
+            newColumns[newColumnIndex] = column;
+        }
     }
 
     return newColumns;
@@ -275,7 +320,7 @@ function buildResourceDetailQuery(params) {
     var filters = '?';
 
     if (params.Id !== null) {
-        filters += "ResourceId=" + params.Id;
+        filters += "ResourceId=" + selectedResource.Id;
     }
 
     var query = 'api/resourcedetail' + filters;
@@ -353,14 +398,22 @@ function addAssignment(row, assignment, timePeriod) {
 }
 
 function rowSelectedFunc(event) {
-    updateSelectedUser(event.node.data);
+    $("#selectedUser").text("loading...");
 
     if (event.node.isSelected()) {
+
+        var modal = document.getElementById('myModal');
+        modal.style.display = "block";
+
+        var gridModal = document.getElementById('myGrid2');
+        gridModal.style.display = "none";
+
         var dataSource = {
             rowCount: null, // behave as infinite scroll
             getRows: getData
         };
 
+        selectedResource.Id = event.node.data.Id;
         
         grids[1].options.api.setDatasource(dataSource);
     }
