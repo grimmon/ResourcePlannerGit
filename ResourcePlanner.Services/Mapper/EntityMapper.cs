@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using ResourcePlanner.Core.Extensions;
 using ResourcePlanner.Services.Models;
+using ResourcePlanner.Services.Enums;
 using System.Data.SqlClient;
 
 namespace ResourcePlanner.Services.Mapper
 {
     public static class EntityMapper
     {
-        public static ResourcePage MapToResourcePage(SqlDataReader reader)
+        public static ResourcePage MapToResourcePage(SqlDataReader reader, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)
         {
 
             var resources = new Dictionary<int, Resource>();
@@ -50,15 +51,64 @@ namespace ResourcePlanner.Services.Mapper
                 resources[curr].Assignments.Add(assignment);
 
 
-            }
+            } 
+                
+               
 
             var resourcePage = new ResourcePage()
             {
-                Resources = resources.Values.ToList(),
+                Resources = Sort(resources.Values.ToList(), order, direction),
                 TotalRowCount = totalRowCount
             };
 
             return resourcePage;
+        }
+
+        private static List<Resource> Sort(List<Resource> input, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)
+        {
+            switch (order)
+            {
+                case Enums.Enums.SortOrder.FirstName:
+                    if(direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.FirstName).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.FirstName).ToList();
+                    }
+                    break;
+                case Enums.Enums.SortOrder.City:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.City).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.City).ToList();
+                    }
+                    break;
+                case Enums.Enums.SortOrder.Position:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.Position).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.Position).ToList();
+                    }
+                    break;
+                default:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.LastName).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.LastName).ToList();
+                    }
+                    break;
+            }
         }
 
 

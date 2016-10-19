@@ -34,7 +34,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                 case TimeAggregation.Daily:
 
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader, pageParams.Sort, pageParams.SortDirection),
                         _connectionString,
                         @"rpdb.ResourcePageDailySelect",
                         CommandType.StoredProcedure,
@@ -44,7 +44,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                 case TimeAggregation.Weekly:
 
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader, pageParams.Sort, pageParams.SortDirection),
                         _connectionString,
                         @"rpdb.ResourcePageWeeklySelect",
                         CommandType.StoredProcedure,
@@ -54,7 +54,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                 case TimeAggregation.Monthly:
 
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader, pageParams.Sort, pageParams.SortDirection),
                         _connectionString,
                         @"rpdb.ResourcePageMonthlySelect",
                         CommandType.StoredProcedure,
@@ -64,7 +64,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                 case TimeAggregation.Quarterly:
             
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader),
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourcePage(reader, pageParams.Sort, pageParams.SortDirection),
                         _connectionString,
                         @"rpdb.ResourcePageQuarterlySelect",
                         CommandType.StoredProcedure,
