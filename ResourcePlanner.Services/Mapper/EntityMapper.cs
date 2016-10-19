@@ -162,10 +162,13 @@ namespace ResourcePlanner.Services.Mapper
 
             }
 
+            var resultProjects = projects.Values.ToList();
+
             var detailPage = new DetailPage()
             {
                 ResourceInfo = resourceInfo,
-                Projects = projects.Values.ToList()
+                Projects = resultProjects,
+                TotalRowCount = resultProjects.Count
             };
 
             return detailPage;
