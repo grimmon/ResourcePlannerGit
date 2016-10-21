@@ -1,42 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var resourceGrid = grids[0];
-    var gridDiv = document.querySelector(resourceGrid.name);
-    new agGrid.Grid(gridDiv, resourceGrid.options);
+    initializeResourceGrid();
+    initializeResourceDetailGrid();
 
-    resourceGrid.options.context = resourceGrid.name;
-
-    var dataSource =  {
-        rowCount: null, // behave as infinite scroll
-        getRows: getData
-    };
-
-    resourceGrid.options.api.setDatasource(dataSource);
-
-    var resourceDetailGrid = grids[1];
-    resourceDetailGrid.options.context = resourceGrid.name;
-
-    var gridDiv = document.querySelector(resourceDetailGrid.name);
-    new agGrid.Grid(gridDiv, resourceDetailGrid.options);
-
-    resourceDetailGrid.options.context = resourceDetailGrid.name;
-
-    var modal = document.getElementById('myModal');
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         dismissModal();
     }
 
-    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('myModal');
+
     window.onclick = function (event) {
         if (event.target == modal) {
             dismissModal();
         }
     }
 });
+
+function initializeResourceGrid() {
+    var resourceGrid = grids[0];
+    var gridDiv = document.querySelector(resourceGrid.name);
+    new agGrid.Grid(gridDiv, resourceGrid.options);
+
+    resourceGrid.options.context = resourceGrid.name;
+
+    var dataSource = {
+        rowCount: null, // behave as infinite scroll
+        getRows: getData
+    };
+
+    resourceGrid.options.api.setDatasource(dataSource);
+}
+
+function initializeResourceDetailGrid() {
+    var resourceDetailGrid = grids[1];
+    resourceDetailGrid.options.context = resourceDetailGrid.name;
+
+    var gridDiv = document.querySelector(resourceDetailGrid.name);
+    new agGrid.Grid(gridDiv, resourceDetailGrid.options);
+
+    resourceDetailGrid.options.context = resourceDetailGrid.name;
+}
 
 function dismissModal() {
     var modal = document.getElementById('myModal');
@@ -76,10 +80,10 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
 
                 if (httpResponse.ResourceInfo != null) {
                     updateSelectedUser(httpResponse.ResourceInfo);
-                }
 
-                var gridModal = document.getElementById('myGrid2');
-                gridModal.style.display = "block";
+                    var gridModal = document.getElementById('myGrid2');
+                    gridModal.style.display = "block";
+                }
 
                 updateGrid(params, httpResponse, rowData, columnData, options, populateRow, getInitialColumns, createColumns);
             }
@@ -232,8 +236,9 @@ var startingResourceColumnDefs = [
                 return '<img src="../images/loading.gif">'
             }
         },
+        pinned: 'left'
     },
-    { headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
+    { headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' }, pinned: 'left' },
     { headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
     { headerName: "City", field: "City", width: 150, suppressMenu: true },
 ];
@@ -241,6 +246,7 @@ var startingResourceColumnDefs = [
 var startingResourceDetailColumnDefs = [
     {
         headerName: "Project Name", field: "ProjectName", width: 150, suppressMenu: true,
+        pinned: true,
         cellRenderer: function (params) {
             if (params.data !== undefined) {
                 return params.value;
@@ -249,9 +255,6 @@ var startingResourceDetailColumnDefs = [
             }
         },
     },
-    //{ headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
-    //{ headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
-    //{ headerName: "City", field: "City", width: 150, suppressMenu: true },
 ];
 
 function createResourceColumns(startingColumns, columns) {
@@ -294,9 +297,9 @@ function buildResourceQuery(params) {
 
     var pageSizeParam = 'pageSize=' + pageSize;
     var pageNumParam = 'pageNum=' + pageNum;
-    var sortOrderParam = 'sort=' + params.sortModel.colId;
+    
     var aggParam = "agg=";
-    var sortDirectionParam = "sortDirection=";
+    
     var cityParam = "city=";
     var marketParam = "market=";
     var regionParam = "regiion=";
@@ -307,6 +310,11 @@ function buildResourceQuery(params) {
     var EndDateParam = "enddate=";
 
     filters += pageSizeParam + '&' + pageNumParam;
+
+    if (params.sortModel.length > 0) {
+        filters += '&sortOrder=' + params.sortModel[0].colId;
+        filters += "&sortDirection=" + params.sortModel[0].sort;
+    }
 
     var query = 'api/resource' + filters;
 
@@ -366,7 +374,7 @@ function addResourceDetails(row, resource) {
     row.LastName  = resource.LastName;
     row.City      = resource.City;
     row.Position  = resource.Position;
-    row.Id        = resource.Id;
+    row.Id        = resource.ResourceId;
 }
 
 function addProjectDetails(row, project) {
