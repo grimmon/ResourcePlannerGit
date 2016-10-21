@@ -1,7 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+
     <script src="../Scripts/ag-grid.js"></script>
     <script src="../Scripts/virtualPagingServerSide.js"></script>
     <style>
@@ -44,8 +47,83 @@
                 cursor: pointer;
             }
     </style>
+
+    <script>
+        getDropDownData = function () {
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.open('GET', 'api/dropdown');
+            httpRequest.send();
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState == 4) {
+                    if (httpRequest.status == 200) {
+                        httpResponse = JSON.parse(httpRequest.responseText);
+
+                        var citiesDropdown    = document.getElementById("citiesdropdown");
+                        var orgUnitsDropdown  = document.getElementById("orgUnitsDropdown");
+                        var regionsdropdown   = document.getElementById("regionsdropdown");
+                        var marketsdropdown   = document.getElementById("marketsdropdown");
+                        var practicesdropdown = document.getElementById("practicesdropdown");
+
+                        for (var i = 0; i < httpResponse.length; i++) {
+                            var option = document.createElement('option');
+                            option.text  = httpResponse[i].Name;
+                            option.value = httpResponse[i].Id;
+
+                            if (httpResponse[i].Category == 'OrgUnit') {
+                                citiesDropdown.appendChild(option);
+                            }
+                            if (httpResponse[i].Category == 'City') {
+                                citiesDropdown.appendChild(option);
+                            }
+                            if (httpResponse[i].Category == 'Region') {
+                                regionsdropdown.appendChild(option);
+                            }
+                            if (httpResponse[i].Category == 'Market') {
+                                marketsdropdown.appendChild(option);
+                            }
+                            if (httpResponse[i].Category == 'Practice') {
+                                practicesdropdown.appendChild(option);
+                            }
+                        }
+                    }
+                    else {
+                    }
+                }
+            }
+        }
+
+        getDropDownData();
+    </script>
 </head>
 <body>
+    <div>
+        <div>
+            <label>Cities</label>
+            <select id="citiesdropdown"</select>
+        </div>
+
+        <div>
+            <label>Org Units</label>
+            <select id="orgUnitsdropdown"></select>
+        </div>
+
+        <div>
+            <label>Regions</label>
+            <select id="regionsdropdown"></select>
+        </div>
+
+        <div>
+            <label>Markets</label>
+            <select id="marketsdropdown"></select>
+        </div>
+
+        <div>
+            <label>Practices</label>
+            <select id="practicesdropdown"></select>
+        </div>
+
+        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+    </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">×</span>

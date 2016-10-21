@@ -29,6 +29,8 @@ function initializeResourceGrid() {
         getRows: getData
     };
 
+    resourceGrid.options.api.setColumnDefs(startingResourceColumnDefs);
+
     resourceGrid.options.api.setDatasource(dataSource);
 }
 
@@ -95,14 +97,37 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
     };
 }
 
+var currentColumns = [];
+
 function updateGrid(params, data, rowData, columnData, options, populateRow, getInitialColumns, createColumns) {
     var initialColumns = getInitialColumns();
     var columns = createColumns(initialColumns, data);
     var rows = createRows(rowData, columnData, populateRow);
 
-    options.api.setColumnDefs(columns);
+    var columnsChanged = checkForColumnChanges(currentColumns, columns);
+
+    if (columnsChanged) {
+        options.api.setColumnDefs(columns);
+        currentColumns = columns;
+    }
 
     params.successCallback(rows, data.TotalRowCount);
+}
+
+function checkForColumnChanges(oldColumns, newColumns) {
+
+    for (var i = 0; i < newColumns.length; i++) {
+        if (oldColumns.length !== newColumns.length)
+            return true;
+        for (var i = oldColumns.length; i--;) {
+            if (oldColumns[i].field !== newColumns[i].field)
+                return true;
+            if (oldColumns[i].field !== newColumns[i].field)
+                return true;
+        }
+
+        return false;
+    }
 }
 
 function createRows(rowData, columnData, rowParser) {
