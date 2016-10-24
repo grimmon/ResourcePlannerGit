@@ -58,11 +58,41 @@
                     if (httpRequest.status == 200) {
                         httpResponse = JSON.parse(httpRequest.responseText);
 
-                        var citiesDropdown    = document.getElementById("citiesdropdown");
+                        var citiesDropdown    = document.getElementById("citiesDropdown");
                         var orgUnitsDropdown  = document.getElementById("orgUnitsDropdown");
-                        var regionsdropdown   = document.getElementById("regionsdropdown");
-                        var marketsdropdown   = document.getElementById("marketsdropdown");
-                        var practicesdropdown = document.getElementById("practicesdropdown");
+                        var regionsDropdown   = document.getElementById("regionsDropdown");
+                        var marketsDropdown   = document.getElementById("marketsDropdown");
+                        var practicesDropdown = document.getElementById("practicesDropdown");
+
+                        var citiesNoneOption = document.createElement('option');
+                        citiesNoneOption.text = 'None';
+                        citiesNoneOption.value = -1;
+
+                        var orgUnitsNoneOption = document.createElement('option');
+                        orgUnitsNoneOption.text = 'None';
+                        orgUnitsNoneOption.value = -1;
+
+                        var regionsNoneOption = document.createElement('option');
+                        regionsNoneOption.text = 'None';
+                        regionsNoneOption.value = -1;
+
+                        var regionsNoneOption = document.createElement('option');
+                        regionsNoneOption.text = 'None';
+                        regionsNoneOption.value = -1;
+
+                        var marketsNoneOption = document.createElement('option');
+                        marketsNoneOption.text = 'None';
+                        marketsNoneOption.value = -1;
+
+                        var practicesNoneOption = document.createElement('option');
+                        practicesNoneOption.text = 'None';
+                        practicesNoneOption.value = -1;
+
+                        citiesDropdown.appendChild(citiesNoneOption);
+                        orgUnitsDropdown.appendChild(orgUnitsNoneOption);
+                        regionsDropdown.appendChild(regionsNoneOption);
+                        marketsDropdown.appendChild(marketsNoneOption);
+                        practicesDropdown.appendChild(practicesNoneOption);
 
                         for (var i = 0; i < httpResponse.length; i++) {
                             var option = document.createElement('option');
@@ -76,37 +106,13 @@
                                 citiesDropdown.appendChild(option);
                             }
                             if (httpResponse[i].Category == 'Region') {
-                                regionsdropdown.appendChild(option);
+                                regionsDropdown.appendChild(option);
                             }
                             if (httpResponse[i].Category == 'Market') {
-                                marketsdropdown.appendChild(option);
+                                marketsDropdown.appendChild(option);
                             }
                             if (httpResponse[i].Category == 'Practice') {
-                                practicesdropdown.appendChild(option);
-                            }
-                        }
-
-                        for (i = 0; i < citiesDropdown.length; i++) {
-                            if (citiesdropdown.options[i].text === 'NONE') {
-                                citiesdropdown.selectedIndex = i;
-                            }
-                        }
-
-                        for (i = 0; i < regionsdropdown.length; i++) {
-                            if (regionsdropdown.options[i].text === 'NONE') {
-                                regionsdropdown.selectedIndex = i;
-                            }
-                        }
-
-                        for (i = 0; i < marketsdropdown.length; i++) {
-                            if (marketsdropdown.options[i].text === 'NONE') {
-                                marketsdropdown.selectedIndex = i;
-                            }
-                        }
-
-                        for (i = 0; i < practicesdropdown.length; i++) {
-                            if (practicesdropdown.options[i].text === 'NONE') {
-                                practicesdropdown.selectedIndex = i;
+                                practicesDropdown.appendChild(option);
                             }
                         }
                     }
@@ -121,27 +127,27 @@
     <div>
         <div>
             <label>Cities</label>
-            <select id="citiesdropdown"</select>
+            <select id="citiesDropdown"></select>
         </div>
 
         <div>
             <label>Org Units</label>
-            <select id="orgUnitsdropdown"></select>
+            <select id="orgUnitsDropdown"></select>
         </div>
 
         <div>
             <label>Regions</label>
-            <select id="regionsdropdown"></select>
+            <select id="regionsDropdown"></select>
         </div>
 
         <div>
             <label>Markets</label>
-            <select id="marketsdropdown"></select>
+            <select id="marketsDropdown"></select>
         </div>
 
         <div>
             <label>Practices</label>
-            <select id="practicesdropdown"></select>
+            <select id="practicesDropdown"></select>
         </div>
 
         <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>

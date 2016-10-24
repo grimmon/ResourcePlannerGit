@@ -318,31 +318,42 @@ function buildResourceQuery(params) {
     var pageSize = (params.endRow - params.startRow);
     var pageNum = params.startRow / pageSize;
 
-    var city     = document.getElementById('citiesdropdown'   ).value;
-    //var orgUnit  = document.getElementById('orgUnitsdropdown' ).value;
-    var region   = document.getElementById('regionsdropdown'  ).value;
-    var market   = document.getElementById('marketsdropdown'  ).value;
-    var practice = document.getElementById('practicesdropdown').value;
+    var city     = document.getElementById('citiesDropdown'   ).value;
+    var orgUnit  = document.getElementById('orgUnitsDropdown' ).value;
+    var region   = document.getElementById('regionsDropdown'  ).value;
+    var market   = document.getElementById('marketsDropdown'  ).value;
+    var practice = document.getElementById('practicesDropdown').value;
 
     console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 
     var filters = '?';
 
-    var pageSizeParam = 'pageSize=' + pageSize;
-    var pageNumParam = 'pageNum=' + pageNum;
-    
     var aggParam = "agg=";
     
-    var cityParam      = "city=" + city;
-    var marketParam    = "market=" + market;
-    var regionParam    = "region=" + region;
-    var orgUnitParam   = "orgUnit=";
-    var practiceParam  = "practice=" + practice;
-    var positionParam  = "position=";
-    var StartDateParam = "startDate=";
-    var EndDateParam   = "enddate=";
+    if (city != -1) {
+        var cityParam = "&city=" + city;
+    }
 
-    filters += pageSizeParam + '&' + pageNumParam + '&' + cityParam + '&' + marketParam + '&' + regionParam + '&' + practice;
+    if (orgUnit != -1) {
+        var orgUnitParam = "&orgUnit=" + orgUnit;
+    }
+
+    if (region != -1) {
+        filters += "&region=" + region;
+    }
+
+    if (market != -1) {
+        var marketParam = "&market=" + market;
+    }
+
+    if (practice != -1) {
+        var practiceParam = "&practice=" + practice;
+    }
+
+    var pageSizeParam = 'pageSize=' + pageSize;
+    var pageNumParam = 'pageNum=' + pageNum;
+
+    filters += pageSizeParam + '&' + pageNumParam;
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder=' + params.sortModel[0].colId;
