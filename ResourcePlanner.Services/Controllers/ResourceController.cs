@@ -16,7 +16,7 @@ namespace ResourcePlanner.Services.Controllers
     public class ResourceController : ApiController
     {
         [HttpGet]
-        [Authorize]
+        //[Authorize]
 
         public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Asc, int? city = null, int? market = null, int? region = null, int? orgUnit = null, int? practice = null, string position = null, DateTime? StartDate = null, DateTime? EndDate = null)
         {
