@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
     getDropDownData();
 
+    var filterButton = document.getElementById("filterButton");
+
+    filterButton.onclick = function () {
+        var dataSource = {
+            rowCount: null, // behave as infinite scroll
+            getRows: getData
+        };
+
+        grids[0].options.api.setDatasource(dataSource);
+    }
+
     initializeResourceGrid();
     initializeResourceDetailGrid();
 
@@ -328,32 +339,32 @@ function buildResourceQuery(params) {
 
     var filters = '?';
 
+    var pageSizeParam = 'pageSize=' + pageSize;
+    var pageNumParam = '&pageNum=' + pageNum;
+
+    filters += pageSizeParam + pageNumParam;
+
     var aggParam = "agg=";
     
     if (city != -1) {
-        var cityParam = "&city=" + city;
+        filters += "&city=" + city;
     }
 
-    if (orgUnit != -1) {
-        var orgUnitParam = "&orgUnit=" + orgUnit;
+    if (orgUnit != -1 && orgUnit != '') {
+        filters += "&orgUnit=" + orgUnit;
     }
 
-    if (region != -1) {
+    if (region != -1 && region != '') {
         filters += "&region=" + region;
     }
 
-    if (market != -1) {
-        var marketParam = "&market=" + market;
+    if (market != -1 && market != '') {
+        filters += "&market=" + market;
     }
 
-    if (practice != -1) {
-        var practiceParam = "&practice=" + practice;
+    if (practice != -1 && practice != '') {
+        filters += "&practice=" + practice;
     }
-
-    var pageSizeParam = 'pageSize=' + pageSize;
-    var pageNumParam = 'pageNum=' + pageNum;
-
-    filters += pageSizeParam + '&' + pageNumParam;
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder=' + params.sortModel[0].colId;
