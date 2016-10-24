@@ -57,14 +57,14 @@ namespace ResourcePlanner.Services.Mapper
 
             var resourcePage = new ResourcePage()
             {
-                Resources = Sort(resources.Values.ToList(), order, direction),
+                Resources = SortPage(resources.Values.ToList(), order, direction),
                 TotalRowCount = totalRowCount
             };
 
             return resourcePage;
         }
 
-        private static List<Resource> Sort(List<Resource> input, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)
+        private static List<Resource> SortPage(List<Resource> input, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)
         {
             switch (order)
             {

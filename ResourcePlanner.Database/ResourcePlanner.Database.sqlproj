@@ -67,7 +67,4 @@
     <Build Include="Assignments.sql" />
     <Build Include="ReferenceCodeSet.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="ResourcePlanner.Database.refactorlog" />
-  </ItemGroup>
 </Project>
