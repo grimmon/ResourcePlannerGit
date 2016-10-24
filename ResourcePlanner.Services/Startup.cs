@@ -8,6 +8,8 @@ using Owin;
 using Microsoft.Owin.Security.ActiveDirectory;
 using System.Configuration;
 
+
+[assembly: OwinStartup(typeof(ResourcePlanner.Services.Startup))]
 namespace ResourcePlanner.Services
 {
     public class Startup
