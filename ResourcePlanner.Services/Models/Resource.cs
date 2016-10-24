@@ -28,7 +28,7 @@ namespace ResourcePlanner.Services.Models
     }
     public class Resource
     {
-        public int Id { get; set; }
+        public int ResourceId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Position { get; set; }
@@ -38,14 +38,21 @@ namespace ResourcePlanner.Services.Models
 
     public class ResourceInfo
     {
+        public int ResourceId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Practice { get; set; }
+        public int PracticeId { get; set; }
         public string Position { get; set; }
+        public int PositionId { get; set; }
         public string OrgUnit { get; set; }
+        public int OrgUnitId { get; set; }
         public string Region { get; set; }
+        public int RegionId { get; set; }
         public string Market { get; set; }
+        public int MarketId { get; set; }
         public string City { get; set; }
+        public int CityId { get; set; }
         public string ManagerFirstName { get; set; }
         public string ManagerLastName { get; set; }
     }

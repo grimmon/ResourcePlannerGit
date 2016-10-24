@@ -1,42 +1,61 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var resourceGrid = grids[0];
-    var gridDiv = document.querySelector(resourceGrid.name);
-    new agGrid.Grid(gridDiv, resourceGrid.options);
+    getDropDownData();
 
-    resourceGrid.options.context = resourceGrid.name;
+    var filterButton = document.getElementById("filterButton");
 
-    var dataSource =  {
-        rowCount: null, // behave as infinite scroll
-        getRows: getData
-    };
+    filterButton.onclick = function () {
+        var dataSource = {
+            rowCount: null, // behave as infinite scroll
+            getRows: getData
+        };
 
-    resourceGrid.options.api.setDatasource(dataSource);
+        grids[0].options.api.setDatasource(dataSource);
+    }
 
-    var resourceDetailGrid = grids[1];
-    resourceDetailGrid.options.context = resourceGrid.name;
+    initializeResourceGrid();
+    initializeResourceDetailGrid();
 
-    var gridDiv = document.querySelector(resourceDetailGrid.name);
-    new agGrid.Grid(gridDiv, resourceDetailGrid.options);
-
-    resourceDetailGrid.options.context = resourceDetailGrid.name;
-
-    var modal = document.getElementById('myModal');
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         dismissModal();
     }
 
-    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('myModal');
+
     window.onclick = function (event) {
         if (event.target == modal) {
             dismissModal();
         }
     }
 });
+
+function initializeResourceGrid() {
+    var resourceGrid = grids[0];
+    var gridDiv = document.querySelector(resourceGrid.name);
+    new agGrid.Grid(gridDiv, resourceGrid.options);
+
+    resourceGrid.options.context = resourceGrid.name;
+
+    var dataSource = {
+        rowCount: null, // behave as infinite scroll
+        getRows: getData
+    };
+
+    resourceGrid.options.api.setColumnDefs(startingResourceColumnDefs);
+
+    resourceGrid.options.api.setDatasource(dataSource);
+}
+
+function initializeResourceDetailGrid() {
+    var resourceDetailGrid = grids[1];
+    resourceDetailGrid.options.context = resourceDetailGrid.name;
+
+    var gridDiv = document.querySelector(resourceDetailGrid.name);
+    new agGrid.Grid(gridDiv, resourceDetailGrid.options);
+
+    resourceDetailGrid.options.context = resourceDetailGrid.name;
+}
 
 function dismissModal() {
     var modal = document.getElementById('myModal');
@@ -76,10 +95,10 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
 
                 if (httpResponse.ResourceInfo != null) {
                     updateSelectedUser(httpResponse.ResourceInfo);
-                }
 
-                var gridModal = document.getElementById('myGrid2');
-                gridModal.style.display = "block";
+                    var gridModal = document.getElementById('myGrid2');
+                    gridModal.style.display = "block";
+                }
 
                 updateGrid(params, httpResponse, rowData, columnData, options, populateRow, getInitialColumns, createColumns);
             }
@@ -91,14 +110,37 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
     };
 }
 
+var currentColumns = [];
+
 function updateGrid(params, data, rowData, columnData, options, populateRow, getInitialColumns, createColumns) {
     var initialColumns = getInitialColumns();
     var columns = createColumns(initialColumns, data);
     var rows = createRows(rowData, columnData, populateRow);
 
-    options.api.setColumnDefs(columns);
+    var columnsChanged = checkForColumnChanges(currentColumns, columns);
+
+    if (columnsChanged) {
+        options.api.setColumnDefs(columns);
+        currentColumns = columns;
+    }
 
     params.successCallback(rows, data.TotalRowCount);
+}
+
+function checkForColumnChanges(oldColumns, newColumns) {
+
+    for (var i = 0; i < newColumns.length; i++) {
+        if (oldColumns.length !== newColumns.length)
+            return true;
+        for (var i = oldColumns.length; i--;) {
+            if (oldColumns[i].field !== newColumns[i].field)
+                return true;
+            if (oldColumns[i].field !== newColumns[i].field)
+                return true;
+        }
+
+        return false;
+    }
 }
 
 function createRows(rowData, columnData, rowParser) {
@@ -232,8 +274,9 @@ var startingResourceColumnDefs = [
                 return '<img src="../images/loading.gif">'
             }
         },
+        pinned: 'left'
     },
-    { headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
+    { headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' }, pinned: 'left' },
     { headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
     { headerName: "City", field: "City", width: 150, suppressMenu: true },
 ];
@@ -241,6 +284,7 @@ var startingResourceColumnDefs = [
 var startingResourceDetailColumnDefs = [
     {
         headerName: "Project Name", field: "ProjectName", width: 150, suppressMenu: true,
+        pinned: true,
         cellRenderer: function (params) {
             if (params.data !== undefined) {
                 return params.value;
@@ -249,9 +293,6 @@ var startingResourceDetailColumnDefs = [
             }
         },
     },
-    //{ headerName: "Last Name", field: "LastName", width: 150, filter: 'number', filterParams: { newRowsAction: 'keep' } },
-    //{ headerName: "Position", field: "Position", width: 150, filter: 'set', filterParams: { newRowsAction: 'keep' } },
-    //{ headerName: "City", field: "City", width: 150, suppressMenu: true },
 ];
 
 function createResourceColumns(startingColumns, columns) {
@@ -288,25 +329,47 @@ function buildResourceQuery(params) {
     var pageSize = (params.endRow - params.startRow);
     var pageNum = params.startRow / pageSize;
 
+    var city     = document.getElementById('citiesDropdown'   ).value;
+    var orgUnit  = document.getElementById('orgUnitsDropdown' ).value;
+    var region   = document.getElementById('regionsDropdown'  ).value;
+    var market   = document.getElementById('marketsDropdown'  ).value;
+    var practice = document.getElementById('practicesDropdown').value;
+
     console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 
     var filters = '?';
 
     var pageSizeParam = 'pageSize=' + pageSize;
-    var pageNumParam = 'pageNum=' + pageNum;
-    var sortOrderParam = 'sort=' + params.sortModel.colId;
-    var aggParam = "agg=";
-    var sortDirectionParam = "sortDirection=";
-    var cityParam = "city=";
-    var marketParam = "market=";
-    var regionParam = "regiion=";
-    var orgUnitParam = "orgUnit=";
-    var practiceParam = "practice=";
-    var positionParam = "position=";
-    var StartDateParam = "startDate=";
-    var EndDateParam = "enddate=";
+    var pageNumParam = '&pageNum=' + pageNum;
 
-    filters += pageSizeParam + '&' + pageNumParam;
+    filters += pageSizeParam + pageNumParam;
+
+    var aggParam = "agg=";
+    
+    if (city != -1) {
+        filters += "&city=" + city;
+    }
+
+    if (orgUnit != -1 && orgUnit != '') {
+        filters += "&orgUnit=" + orgUnit;
+    }
+
+    if (region != -1 && region != '') {
+        filters += "&region=" + region;
+    }
+
+    if (market != -1 && market != '') {
+        filters += "&market=" + market;
+    }
+
+    if (practice != -1 && practice != '') {
+        filters += "&practice=" + practice;
+    }
+
+    if (params.sortModel.length > 0) {
+        filters += '&sortOrder=' + params.sortModel[0].colId;
+        filters += "&sortDirection=" + params.sortModel[0].sort;
+    }
 
     var query = 'api/resource' + filters;
 
@@ -366,7 +429,7 @@ function addResourceDetails(row, resource) {
     row.LastName  = resource.LastName;
     row.City      = resource.City;
     row.Position  = resource.Position;
-    row.Id        = resource.Id;
+    row.Id        = resource.ResourceId;
 }
 
 function addProjectDetails(row, project) {

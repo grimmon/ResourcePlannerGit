@@ -19,8 +19,7 @@ namespace ResourcePlanner.Services.Controllers
         {
            
 #if Mock
-            var access = new MockDropdownDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
-                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var access = new MockDropdownDataAccess();
 #else
             var access = new DropdownDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));

@@ -32,7 +32,7 @@ namespace ResourcePlanner.Services.Mapper
                 {
                     var newResource = new Resource()
                     {
-                        Id = curr,
+                        ResourceId = curr,
                         FirstName = reader.GetNullableString("FirstName"),
                         LastName = reader.GetNullableString("LastName"),
                         City = reader.GetNullableString("City"),
