@@ -4,11 +4,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="Scripts/angular.js"></script>
-
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
+    <script src="App/app.js"></script>
     <script src="../Scripts/ag-grid.js"></script>
     <script src="../Scripts/virtualPagingServerSide.js"></script>
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal-angular.min.js"></script> 
+
     <style>
         /* The Modal (background) */
         .modal {
@@ -51,19 +51,20 @@
     </style>
 
     <script>
-        getDropDownData = function () {
+        getDropDownData = function (token) {
             var httpRequest = new XMLHttpRequest();
             httpRequest.open('GET', 'api/dropdown');
+            httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
             httpRequest.send();
             httpRequest.onreadystatechange = function () {
                 if (httpRequest.readyState == 4) {
                     if (httpRequest.status == 200) {
                         httpResponse = JSON.parse(httpRequest.responseText);
 
-                        var citiesDropdown    = document.getElementById("citiesDropdown");
-                        var orgUnitsDropdown  = document.getElementById("orgUnitsDropdown");
-                        var regionsDropdown   = document.getElementById("regionsDropdown");
-                        var marketsDropdown   = document.getElementById("marketsDropdown");
+                        var citiesDropdown = document.getElementById("citiesDropdown");
+                        var orgUnitsDropdown = document.getElementById("orgUnitsDropdown");
+                        var regionsDropdown = document.getElementById("regionsDropdown");
+                        var marketsDropdown = document.getElementById("marketsDropdown");
                         var practicesDropdown = document.getElementById("practicesDropdown");
 
                         var citiesNoneOption = document.createElement('option');
@@ -98,7 +99,7 @@
 
                         for (var i = 0; i < httpResponse.length; i++) {
                             var option = document.createElement('option');
-                            option.text  = httpResponse[i].Name;
+                            option.text = httpResponse[i].Name;
                             option.value = httpResponse[i].Id;
 
                             if (httpResponse[i].Category == 'OrgUnit') {
@@ -157,7 +158,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">×</span>
-            
+
             <p id="selectedUser"></p>
             <div style="height: 100%; box-sizing: border-box;">
                 <div id="myGrid2" style="height: 600px;" class="ag-fresh"></div>

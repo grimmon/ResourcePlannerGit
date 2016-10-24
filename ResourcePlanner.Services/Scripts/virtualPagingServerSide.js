@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    getDropDownData();
+
+    var authContext = new AuthenticationContext(config);
+
+    authContext.acquireToken(authContext.config.clientId, function (error, token) {
+        if (error || !token) {
+            alert('ADAL Error: ' + error);
+            return;
+        }
+        getDropDownData(token);
+    });
 
     var filterButton = document.getElementById("filterButton");
 
@@ -70,7 +79,7 @@ function getData(params) {
     var grid = getGrid(params.context);
 
     var query = grid.queryBuilder(params);
-    callServer(params, query, grid.options, grid.createRow, grid.getInitialColumns, grid.createColumn, grid.getRowData, grid.getColumnData);
+    callServerAuth(params, query, grid.options, grid.createRow, grid.getInitialColumns, grid.createColumn, grid.getRowData, grid.getColumnData);
 }
 
 function getGrid(gridName) {
@@ -81,9 +90,23 @@ function getGrid(gridName) {
     }
 }
 
-function callServer(params, query, options, populateRow, getInitialColumns, createColumns, getRowData, getColumnData) {
+function callServerAuth(params, query, options, populateRow, getInitialColumns, createColumns, getRowData, getColumnData) {
+    var authContext = new AuthenticationContext(config);
+
+    authContext.acquireToken(authContext.config.clientId, function (error, token) {
+        if (error || !token) {
+            alert('ADAL Error: ' + error);
+            return;
+        }
+        callServer(params, query, options, populateRow, getInitialColumns, createColumns, getRowData, getColumnData, token);
+    });
+
+}
+
+function callServer(params, query, options, populateRow, getInitialColumns, createColumns, getRowData, getColumnData, token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', query);
+    httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4) {
