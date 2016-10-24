@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    getDropDownData();
+
     initializeResourceGrid();
     initializeResourceDetailGrid();
 
@@ -316,6 +318,12 @@ function buildResourceQuery(params) {
     var pageSize = (params.endRow - params.startRow);
     var pageNum = params.startRow / pageSize;
 
+    var city     = document.getElementById('citiesdropdown'   ).value;
+    //var orgUnit  = document.getElementById('orgUnitsdropdown' ).value;
+    var region   = document.getElementById('regionsdropdown'  ).value;
+    var market   = document.getElementById('marketsdropdown'  ).value;
+    var practice = document.getElementById('practicesdropdown').value;
+
     console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 
     var filters = '?';
@@ -325,16 +333,16 @@ function buildResourceQuery(params) {
     
     var aggParam = "agg=";
     
-    var cityParam = "city=";
-    var marketParam = "market=";
-    var regionParam = "regiion=";
-    var orgUnitParam = "orgUnit=";
-    var practiceParam = "practice=";
-    var positionParam = "position=";
+    var cityParam      = "city=" + city;
+    var marketParam    = "market=" + market;
+    var regionParam    = "region=" + region;
+    var orgUnitParam   = "orgUnit=";
+    var practiceParam  = "practice=" + practice;
+    var positionParam  = "position=";
     var StartDateParam = "startDate=";
-    var EndDateParam = "enddate=";
+    var EndDateParam   = "enddate=";
 
-    filters += pageSizeParam + '&' + pageNumParam;
+    filters += pageSizeParam + '&' + pageNumParam + '&' + cityParam + '&' + marketParam + '&' + regionParam + '&' + practice;
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder=' + params.sortModel[0].colId;

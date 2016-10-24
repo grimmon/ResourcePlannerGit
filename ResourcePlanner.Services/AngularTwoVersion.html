@@ -85,14 +85,36 @@
                                 practicesdropdown.appendChild(option);
                             }
                         }
+
+                        for (i = 0; i < citiesDropdown.length; i++) {
+                            if (citiesdropdown.options[i].text === 'NONE') {
+                                citiesdropdown.selectedIndex = i;
+                            }
+                        }
+
+                        for (i = 0; i < regionsdropdown.length; i++) {
+                            if (regionsdropdown.options[i].text === 'NONE') {
+                                regionsdropdown.selectedIndex = i;
+                            }
+                        }
+
+                        for (i = 0; i < marketsdropdown.length; i++) {
+                            if (marketsdropdown.options[i].text === 'NONE') {
+                                marketsdropdown.selectedIndex = i;
+                            }
+                        }
+
+                        for (i = 0; i < practicesdropdown.length; i++) {
+                            if (practicesdropdown.options[i].text === 'NONE') {
+                                practicesdropdown.selectedIndex = i;
+                            }
+                        }
                     }
                     else {
                     }
                 }
             }
         }
-
-        getDropDownData();
     </script>
 </head>
 <body>
