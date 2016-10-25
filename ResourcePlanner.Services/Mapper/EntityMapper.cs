@@ -116,6 +116,7 @@ namespace ResourcePlanner.Services.Mapper
         {
             var resourceInfo = new ResourceInfo();
             var projects = new Dictionary<string, Project>();
+            var timePeriods = new List<string>();
 
             reader.Read();
 
@@ -130,8 +131,16 @@ namespace ResourcePlanner.Services.Mapper
             resourceInfo.ManagerLastName   = reader.GetNullableString("ManagerLastName");
 
             reader.NextResult();
-            string curr = "";
+          
+            while (reader.Read())
+            {
+                timePeriods.Add(reader.GetString("TimePeriod"));
+            }
 
+            reader.NextResult();
+
+
+            string curr = "";
             while (reader.Read())
             {
                 var assignment = new Assignment();
@@ -168,7 +177,8 @@ namespace ResourcePlanner.Services.Mapper
             {
                 ResourceInfo = resourceInfo,
                 Projects = resultProjects,
-                TotalRowCount = resultProjects.Count
+                TotalRowCount = resultProjects.Count,
+                TimePeriods = timePeriods
             };
 
             return detailPage;

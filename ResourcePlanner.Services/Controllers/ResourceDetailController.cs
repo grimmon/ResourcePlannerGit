@@ -15,7 +15,9 @@ namespace ResourcePlanner.Services.Controllers
     public class ResourceDetailController : ApiController
     {
         [HttpGet]
-        //[Authorize]
+#if !Mock
+        [Authorize]
+#endif
         public async Task<IHttpActionResult> Get(int? ResourceId = null, TimeAggregation Aggregation = TimeAggregation.Weekly, DateTime? StartDate = null, DateTime? EndDate = null)
         {
             if (StartDate == null)
