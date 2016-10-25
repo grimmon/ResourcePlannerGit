@@ -4,12 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var filterButton = document.getElementById("filterButton");
 
     filterButton.onclick = function () {
+        count++;
         var dataSource = {
             rowCount: null, // behave as infinite scroll
             getRows: getData
         };
 
         grids[0].options.api.setDatasource(dataSource);
+
+        grids[0].options.api.refreshHeader();
     }
 
     initializeResourceGrid();
@@ -29,6 +32,84 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+var count = 10;
+var columnHeaders = {};
+var selectedResource = {};
+var currentColumns = [];
+
+function getDropDownData() {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('GET', 'api/dropdown');
+    httpRequest.send();
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState == 4) {
+            if (httpRequest.status == 200) {
+                httpResponse = JSON.parse(httpRequest.responseText);
+
+                var citiesDropdown = document.getElementById("citiesDropdown");
+                var orgUnitsDropdown = document.getElementById("orgUnitsDropdown");
+                var regionsDropdown = document.getElementById("regionsDropdown");
+                var marketsDropdown = document.getElementById("marketsDropdown");
+                var practicesDropdown = document.getElementById("practicesDropdown");
+
+                var citiesNoneOption = document.createElement('option');
+                citiesNoneOption.text = 'None';
+                citiesNoneOption.value = -1;
+
+                var orgUnitsNoneOption = document.createElement('option');
+                orgUnitsNoneOption.text = 'None';
+                orgUnitsNoneOption.value = -1;
+
+                var regionsNoneOption = document.createElement('option');
+                regionsNoneOption.text = 'None';
+                regionsNoneOption.value = -1;
+
+                var regionsNoneOption = document.createElement('option');
+                regionsNoneOption.text = 'None';
+                regionsNoneOption.value = -1;
+
+                var marketsNoneOption = document.createElement('option');
+                marketsNoneOption.text = 'None';
+                marketsNoneOption.value = -1;
+
+                var practicesNoneOption = document.createElement('option');
+                practicesNoneOption.text = 'None';
+                practicesNoneOption.value = -1;
+
+                citiesDropdown.appendChild(citiesNoneOption);
+                orgUnitsDropdown.appendChild(orgUnitsNoneOption);
+                regionsDropdown.appendChild(regionsNoneOption);
+                marketsDropdown.appendChild(marketsNoneOption);
+                practicesDropdown.appendChild(practicesNoneOption);
+
+                for (var i = 0; i < httpResponse.length; i++) {
+                    var option = document.createElement('option');
+                    option.text = httpResponse[i].Name;
+                    option.value = httpResponse[i].Id;
+
+                    if (httpResponse[i].Category == 'OrgUnit') {
+                        citiesDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'City') {
+                        citiesDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'Region') {
+                        regionsDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'Market') {
+                        marketsDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'Practice') {
+                        practicesDropdown.appendChild(option);
+                    }
+                }
+            }
+            else {
+            }
+        }
+    }
+}
 
 function initializeResourceGrid() {
     var resourceGrid = grids[0];
@@ -63,8 +144,6 @@ function dismissModal() {
     var selectedRows = grids[0].options.api.getSelectedNodes();
     selectedRows[0].setSelected(false);
 }
-
-var selectedResource = {};
 
 function getData(params) {
     var grid = getGrid(params.context);
@@ -109,8 +188,6 @@ function callServer(params, query, options, populateRow, getInitialColumns, crea
         }
     };
 }
-
-var currentColumns = [];
 
 function updateGrid(params, data, rowData, columnData, options, populateRow, getInitialColumns, createColumns) {
     var initialColumns = getInitialColumns();
@@ -325,6 +402,23 @@ function createResourceColumns(startingColumns, columns) {
     return newColumns;
 }
 
+function createColumn(timePeriod) {
+    return {
+        period: timePeriod,
+        //headerValueGetter: getHeader,
+        headerName: timePeriod,
+        suppressMenu: true,
+        children: [
+            { headerName: "Actual Hours", width: 120, field: timePeriod + "ActualHours", cellRenderer: timePeriodCellRenderer },
+            { headerName: "Forecast Hours", width: 140, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer }
+        ]
+    };
+}
+
+function getHeader(params) {
+    return "wahoo" + count;//columnHeaders[params.colDef.field];
+}
+
 function buildResourceQuery(params) {
     var pageSize = (params.endRow - params.startRow);
     var pageNum = params.startRow / pageSize;
@@ -391,17 +485,6 @@ function buildResourceDetailQuery(params) {
     var query = 'api/resourcedetail' + filters;
 
     return query;
-}
-
-function createColumn(timePeriod) {
-    return {
-        headerName: timePeriod,
-        suppressMenu: true,
-        children: [
-            { headerName: "Actual Hours"  , width: 120, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer },
-            { headerName: "Forecast Hours", width: 140, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer }
-        ]
-    };
 }
 
 function createResourceRow(row, resource, timePeriods) {
