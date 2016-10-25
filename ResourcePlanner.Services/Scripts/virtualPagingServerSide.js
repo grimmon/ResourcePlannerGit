@@ -47,9 +47,10 @@ var columnHeaders = {};
 var selectedResource = {};
 var currentColumns = [];
 
-function getDropDownData() {
+getDropDownData = function (token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', 'api/dropdown');
+    httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4) {
@@ -432,8 +433,8 @@ function createColumn(timePeriod) {
         headerName: timePeriod,
         suppressMenu: true,
         children: [
-            { headerName: "Actual Hours", width: 120, field: timePeriod + "ActualHours", cellRenderer: timePeriodCellRenderer },
-            { headerName: "Forecast Hours", width: 140, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer }
+            { headerName: "Actual", width: 67, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer },
+            { headerName: "Frcst" , width: 67, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer }
         ]
     };
 }
