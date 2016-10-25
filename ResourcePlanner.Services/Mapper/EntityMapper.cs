@@ -200,5 +200,28 @@ namespace ResourcePlanner.Services.Mapper
             }
             return dropdownValues;
         }
+
+        public static EmailRequestInfo MapToResourceManagerInfo(SqlDataReader reader, int UserId)
+        {
+            var returnVal = new EmailRequestInfo();
+
+            reader.Read();
+            returnVal.ResourceName = reader.GetString("ResourceFirstName") + " " + reader.GetString("ResourceLastName");
+            returnVal.ResourceEmail = reader.GetString("ResourceEmailAddress");
+            returnVal.ResourceManagerFirstName = reader.GetString("ResourceManagerFirstName");
+            returnVal.ResourceManagerLastName = reader.GetString("ResourceManagerLastName");
+            returnVal.ResourceManagerEmail = reader.GetString("ResourceManagerEmailAddress");
+
+            if (UserId != 0)
+            {
+                reader.NextResult();
+                reader.Read();
+                returnVal.UserName = reader.GetString("FirstName") + " " + reader.GetString("LastName");
+                returnVal.UserEmail = reader.GetString("EmailAddress");
+
+            }
+            return returnVal;
+
+        }
     }
 }

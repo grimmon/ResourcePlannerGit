@@ -31,9 +31,9 @@ namespace ResourcePlanner.WebJob
             string destConnString = ConfigurationManager.ConnectionStrings["ResourcePlanner"].ConnectionString;
             int timeout = Int32.Parse(ConfigurationManager.AppSettings["timeout"]);
 
-            //FillStageTables(srcConnString, destConnString, timeout);
-            //FillStafStageTables(stafConnString, destConnString, timeout);
-            //AddReferenceSets(destConnString, timeout);
+            FillStageTables(srcConnString, destConnString, timeout);
+            FillStafStageTables(stafConnString, destConnString, timeout);
+            AddReferenceSets(destConnString, timeout);
             UpsertDB(destConnString, timeout);
             UpsertStafDB(destConnString, timeout);
 
@@ -109,15 +109,17 @@ namespace ResourcePlanner.WebJob
 
             RunSproc(connString, timeout, "rpdb.AddRegions", "Reference Code Set (Regions)");
 
+            RunSproc(connString, timeout, "rpdb.AddCostCenters", "Cost Centers");
+
         }
 
 
         public static void UpsertDB(string connString, int timeout)
         {
             
-            //RunSproc(connString, timeout, "rpdb.ResourceTransform", "Resource");
+            RunSproc(connString, timeout, "rpdb.ResourceTransform", "Resource");
            
-            //RunSproc(connString, timeout, "rpdb.ProjectTransform", "Project");
+            RunSproc(connString, timeout, "rpdb.ProjectTransform", "Project");
 
             RunSproc(connString, timeout, "rpdb.BillableAssignmentTransform", "Assignments (Billable Forecast)");
            
@@ -130,8 +132,8 @@ namespace ResourcePlanner.WebJob
         }
         private static void UpsertStafDB(string destConnString, int timeout)
         {
-            //RunSproc(destConnString, timeout, "rpdb.StafResourceTransform", "Staf Resources");
-            //RunSproc(destConnString, timeout, "rpdb.StafProjectTransform", "Staf Projects");
+            RunSproc(destConnString, timeout, "rpdb.StafResourceTransform", "Staf Resources");
+            RunSproc(destConnString, timeout, "rpdb.StafProjectTransform", "Staf Projects");
             RunSproc(destConnString, timeout, "rpdb.StafAssignmentTransform", "Staf Assignments");
 
         }

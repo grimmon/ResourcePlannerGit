@@ -96,7 +96,22 @@ namespace ResourcePlanner.Services.Models
         public string Position { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
     }
 
+    public class EmailRequestInfo
+    {
+        public string UserName { get; set; }
+        public string UserEmail { get; set; }
+        public string ResourceName { get; set; }
+        public string ResourceEmail { get; set; }
+        public string ResourceManagerFirstName { get; set; }
+        public string ResourceManagerLastName { get; set; }
+        public string ResourceManagerEmail { get; set; }
+        public double Hours { get; set;}
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+    }
 
 }
