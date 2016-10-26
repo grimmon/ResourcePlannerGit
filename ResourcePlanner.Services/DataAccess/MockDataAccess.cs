@@ -13,7 +13,7 @@ namespace ResourcePlanner.Services.DataAccess
 {
     public class MockDataAccess
     {
-        private static List<string> _timePeriods = new List<string>();
+        private static List<DateTime> _timePeriods = new List<DateTime>();
         private static List<Resource> _resources = new List<Resource>();
         private static List<Project> _projects = new List<Project>();
 
@@ -36,9 +36,9 @@ namespace ResourcePlanner.Services.DataAccess
         
         public static void Init()
         {
-            var timePeriodCount = _rand.Next(3,  10); //cant be greater than 20.
+            var timePeriodCount = 100;// _rand.Next(3,  10);
             var resourceCount   = _rand.Next(0, 400);
-            var projectCount    = _rand.Next(0,  12);
+            var projectCount    = _rand.Next(3,  12);
             
             InitDropdownLists();
             InitTimePeriods(timePeriodCount);
@@ -62,14 +62,13 @@ namespace ResourcePlanner.Services.DataAccess
 
         public static void InitTimePeriods(int timePeriodCount)
         {
+            var timePeriod = new DateTime(2016, 10, 1);
+
             while (_timePeriods.Count < timePeriodCount)
             {
-                var timePeriod = LoremIpsumGenerator.LoremIpsum(1, 1, _rand);
+                _timePeriods.Add(timePeriod);
 
-                if (!_timePeriods.Contains(timePeriod))
-                {
-                    _timePeriods.Add(timePeriod);
-                }
+                timePeriod = timePeriod.AddDays(1);
             }
         }
         
@@ -107,7 +106,7 @@ namespace ResourcePlanner.Services.DataAccess
                 resource.Assignments = new List<Assignment>();
                 var randomProjects = GetRandomProjects();
                 var assignedProjects = new List<Project>();
-
+                
                 foreach (var project in randomProjects)
                 {
                     var newProject = new Project()
@@ -116,39 +115,69 @@ namespace ResourcePlanner.Services.DataAccess
                     };
 
                     CopyProject(project, newProject);
-
-                    var assignmentCount = _rand.Next(_timePeriods.Count);
-
-                    for (var i = 0; i < assignmentCount; i++)
-                    {
-                        PopulateAssignments(resource, newProject);
-                    }
-
+                    
+                    PopulateAssignments(newProject);
+                
                     if (newProject.Assignments.Count > 0)
                     {
                         assignedProjects.Add(newProject);
                     }
                 }
+                
+                foreach (var timePeriod in _timePeriods)
+                {
+                    var timePeriodAssignments = new List<Assignment>();
 
+                    foreach (var assignedProject in assignedProjects)
+                    {
+                        var timePeriodAssignment = assignedProject.Assignments.Where(assignment =>
+                        {
+                            var period = DateTime.Parse(assignment.TimePeriod);
+
+                            return period == timePeriod;
+                        }).ToList();
+
+                        if (timePeriodAssignment.Count > 0)
+                        {
+                            timePeriodAssignments.AddRange(timePeriodAssignment);
+                        }
+                    }
+                    
+                    var totalActualHours     = timePeriodAssignments.Sum(assignment => assignment.ActualHours  );
+                    var totalForecastedHours = timePeriodAssignments.Sum(assignment => assignment.ForecastHours);
+
+                    if (totalActualHours > 0 || totalForecastedHours > 0)
+                    {
+                        var resourceAssignment = new Assignment();
+
+                        resourceAssignment.ActualHours   = totalActualHours;
+                        resourceAssignment.ForecastHours = totalForecastedHours;
+                        resourceAssignment.TimePeriod    = timePeriod.ToString();
+
+                        resource.Assignments.Add(resourceAssignment);
+                    }
+                }
+                
                 _projectsByResource[resource.ResourceId] = assignedProjects;
             }
         }
 
-        public static void PopulateAssignments(Resource resource, Project project)
+        public static void PopulateAssignments(Project project)
         {
             for (int j = 0; j < _timePeriods.Count; j++)
             {
-                var assignment = new Assignment();
-                assignment.TimePeriod = _timePeriods[j];
-                assignment.ProjectName = project.ProjectName;
+                if (_rand.Next() % 2 == 0)
+                {
+                    var assignment = new Assignment();
+                    assignment.TimePeriod = _timePeriods[j].ToString();
+                    assignment.ProjectName = project.ProjectName;
 
-                assignment.ForecastHours = _rand.Next() % 2 == 0 ? 0 : _rand.NextDouble() * 40;
-                assignment.ActualHours   = _rand.Next() % 2 == 0 ? 0 : _rand.NextDouble() * 40;
+                    assignment.ForecastHours = _rand.Next() % 2 == 0 ? 0 : _rand.NextDouble() * 40;
+                    assignment.ActualHours   = _rand.Next() % 2 == 0 ? 0 : _rand.NextDouble() * 40;
 
-                resource.Assignments.Add(assignment);
-                project.Assignments.Add(assignment);
+                    project.Assignments.Add(assignment);
+                }
             }
-
         }
 
         public static List<Project> GetRandomProjects()
@@ -201,7 +230,10 @@ namespace ResourcePlanner.Services.DataAccess
 
         public ResourcePage GetResourcePage(ResourceQuery pageParams)
         {
-            var result = new ResourcePage();
+            var result = new ResourcePage()
+            {
+                Resources = new List<Resource>()
+            };
             
             var filteredResourceInfos = FilterResourceInfo(pageParams);
 
@@ -210,25 +242,64 @@ namespace ResourcePlanner.Services.DataAccess
                 .Take(pageParams.PageSize)
                 .Select(resourceInfo => resourceInfo.ResourceId)
                 .ToList();
-
-            var resources = _resources
-                .Where(resource => resourceIds.Contains(resource.ResourceId))
-                .ToList();
             
-            result.Resources = resources;
+            foreach (var resource in _resources.Where(resource => resourceIds.Contains(resource.ResourceId)))
+            {
+                var copiedResource = new Resource();
+
+                CopyResource(resource, copiedResource);
+
+                copiedResource.Assignments = resource.Assignments.Where(assignment =>
+                {
+                    var assignmentTime = DateTime.Parse(assignment.TimePeriod);
+
+                    return assignmentTime >= pageParams.StartDate && assignmentTime < pageParams.EndDate;
+                }).ToList();
+
+                result.Resources.Add(copiedResource);
+            }
+
             result.TotalRowCount = filteredResourceInfos.Count;
-            result.TimePeriods = _timePeriods;
+            result.TimePeriods = _timePeriods
+                .Where(timePeriod => timePeriod >= pageParams.StartDate && timePeriod < pageParams.EndDate)
+                .Select(timePeriod => timePeriod.ToString()).ToList();
 
             return result;
         }
 
         public DetailPage GetResourceDetail(int resourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
-            var result = new DetailPage();
+            var result = new DetailPage()
+            {
+                Projects = new List<Project>()
+            };
 
-            result.Projects = _projectsByResource[resourceId];
+            var resourceProjects = _projectsByResource[resourceId];
+
+            foreach (var project in resourceProjects)
+            {
+                var copiedProject = new Project()
+                {
+                    Assignments = new List<Assignment>()
+                };
+
+                CopyProject(project, copiedProject);
+
+                copiedProject.Assignments = project.Assignments.Where(assignment =>
+                {
+                    var assignmentTime = DateTime.Parse(assignment.TimePeriod);
+
+                    return assignmentTime >= StartDate && assignmentTime < EndDate;
+                }).ToList();
+
+                result.Projects.Add(copiedProject);
+            }
+
+            result.TimePeriods = _timePeriods
+                .Where(timePeriod => timePeriod >= StartDate && timePeriod < EndDate)
+                .Select(timePeriod => timePeriod.ToString()).ToList();
+
             result.ResourceInfo = _resourceInfos[resourceId];
-            result.TimePeriods = _timePeriods;
             result.TotalRowCount = result.Projects.Count;
 
             return result;
@@ -308,6 +379,15 @@ namespace ResourcePlanner.Services.DataAccess
             target.OpportunityOwnerLastName  = source.OpportunityOwnerLastName; 
             target.ProjectManagerFirstName   = source.ProjectManagerFirstName;  
             target.ProjectManagerLastName    = source.ProjectManagerLastName;
+        }
+
+        public static void CopyResource(Resource source, Resource target)
+        {
+            target.City       = source.City;
+            target.FirstName  = source.FirstName;
+            target.LastName   = source.LastName;
+            target.Position   = source.Position;
+            target.ResourceId = source.ResourceId;
         }
     }
 }

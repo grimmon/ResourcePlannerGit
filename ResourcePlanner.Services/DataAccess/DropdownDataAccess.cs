@@ -31,10 +31,10 @@ namespace ResourcePlanner.Services.DataAccess
                 CommandType.StoredProcedure,
                 _timeout,
                 new SqlParameter[0]);
-            returnValue.Add(new DropdownValue() { Category = "agg", Name = "Weekly" });
-            returnValue.Add(new DropdownValue() { Category = "agg", Name = "Monthly" });
-            returnValue.Add(new DropdownValue() { Category = "agg", Name = "Quarterly" });
-            returnValue.Add(new DropdownValue() { Category = "agg", Name = "Daily" });
+            returnValue.Add(new DropdownValue() { Id = 1, Category = "agg", Name = "Weekly" });
+            returnValue.Add(new DropdownValue() { Id = 2, Category = "agg", Name = "Monthly" });
+            returnValue.Add(new DropdownValue() { Id = 3, Category = "agg", Name = "Quarterly" });
+            returnValue.Add(new DropdownValue() { Id = 0, Category = "agg", Name = "Daily" });
             return returnValue;
         }
     }

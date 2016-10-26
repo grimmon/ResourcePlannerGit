@@ -11,13 +11,13 @@ namespace ResourcePlanner.Services.Enums
         public enum TimeAggregation
         {
             [Description("Daily")]
-            Daily,
+            Daily = 0,
             [Description("Weekly")]
-            Weekly,
+            Weekly = 1,
             [Description("Monthly")]
-            Monthly,
+            Monthly = 2,
             [Description("Daily")]
-            Quarterly
+            Quarterly = 3
         }
         public enum SortOrder
         {

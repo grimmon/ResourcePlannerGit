@@ -61,6 +61,15 @@ function buildResourceDetailQuery(params) {
         filters += "ResourceId=" + selectedResource.Id;
     }
 
+    var aggregation = document.getElementById('aggregationsDropdown').value;
+    var startDate   = document.getElementById('startDateInput'      ).value;
+    var endDate     = document.getElementById('endDateInput'        ).value;
+
+    filters += "&startDate=" + startDate;
+    filters += "&endDate=" + endDate;
+
+    if (aggregation != -1 && aggregation != '') { filters += "&agg=" + aggregation; }
+
     var query = 'api/resourcedetail' + filters;
 
     return query;
@@ -86,12 +95,12 @@ function updateResourceDetailGrid(params, data, rowData, columnData, options) {
 }
 
 function createProjectRow(row, project, timePeriods) {
-    addProjectDetails(row, project            );
-    addTimePeriods   (row, timePeriods        );
-    addAssignments   (row, project.Assignments);
+    addProjectData(row, project            );
+    addTimePeriods(row, timePeriods        );
+    addAssignments(row, project.Assignments);
 }
 
-function addProjectDetails(row, project) {
+function addProjectData(row, project) {
     row.ProjectName               = project.ProjectName;
     row.FirstName                 = project.FirstName;
     row.LastName                  = project.LastName;

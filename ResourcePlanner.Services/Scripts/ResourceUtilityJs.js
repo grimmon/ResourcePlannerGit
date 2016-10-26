@@ -1,5 +1,4 @@
-﻿var count = 10;
-var columnHeaders = {};
+﻿var columnHeaders = {};
 var selectedResource = {};
 var currentColumns = [];
 
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var filterButton = document.getElementById("filterButton");
 
     filterButton.onclick = function () {
-        count++;
         refreshResourceGrid();
     }
 
@@ -125,8 +123,8 @@ function createColumn(timePeriod) {
         //headerName: timePeriod,
         suppressMenu: true,
         children: [
-            { width: 120, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressMenu: true, headerValueGetter: getHeader },
-            { width:  67, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer, suppressMenu: true, headerName: "Frcst" }
+            { width: 67, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerValueGetter: getHeader },
+            { width: 67, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerName: "Frcst" }
         ]
     };
 }
@@ -153,7 +151,7 @@ function createRow(rowData, columns, rowParser) {
 }
 
 function getHeader(params) {
-    return "wahoo" + count;//columnHeaders[params.colDef.field];
+    return "Actual";
 }
 
 var timePeriodCellRenderer = function (params) {

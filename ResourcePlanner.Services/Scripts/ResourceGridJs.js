@@ -22,11 +22,16 @@
 };
 
 var startingResourceColumnDefs = [
-    { headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
-    { headerName: "Last Name" , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
-    { headerName: "Position"  , field: "Position" , width: 150, suppressMenu: true },
-    { headerName: "City"      , field: "City"     , width: 150, suppressMenu: true },
+    { headerName: "First Name"                       , field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
+    { headerName: "Last Name"                        , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
+    { headerName: "<button><</button>"               , field: ""         , width:  30, suppressMenu: true, pinned: 'left', suppressSorting: true },
+    { headerName: "Position"                         , field: "Position" , width: 150, suppressMenu: true },
+    { headerName: "City"                             , field: "City"     , width: 150, suppressMenu: true },
+    { headerName: "<button onClick='hi()'>></button>", field: ""         , width:  30, suppressMenu: true, pinned: 'right', suppressSorting: true },
 ];
+
+function hi() {
+}
 
 function initializeResourceGrid() {
     var gridDiv = document.querySelector(resourceGrid.name);
@@ -63,17 +68,24 @@ function buildResourceQuery(params) {
 
     filters += pageSizeParam + pageNumParam;
 
-    var city     = document.getElementById('citiesDropdown'   ).value;
-    var orgUnit  = document.getElementById('orgUnitsDropdown' ).value;
-    var region   = document.getElementById('regionsDropdown'  ).value;
-    var market   = document.getElementById('marketsDropdown'  ).value;
-    var practice = document.getElementById('practicesDropdown').value;
-    
-    if (city     != -1 && city     != '') { filters += "&city="     + city;     }
-    if (orgUnit  != -1 && orgUnit  != '') { filters += "&orgUnit="  + orgUnit;  }
-    if (region   != -1 && region   != '') { filters += "&region="   + region;   }
-    if (market   != -1 && market   != '') { filters += "&market="   + market;   }
-    if (practice != -1 && practice != '') { filters += "&practice=" + practice; }
+    var city        = document.getElementById('citiesDropdown'      ).value;
+    var orgUnit     = document.getElementById('orgUnitsDropdown'    ).value;
+    var region      = document.getElementById('regionsDropdown'     ).value;
+    var market      = document.getElementById('marketsDropdown'     ).value;
+    var practice    = document.getElementById('practicesDropdown'   ).value;
+    var aggregation = document.getElementById('aggregationsDropdown').value;
+    var startDate   = document.getElementById('startDateInput'      ).value;
+    var endDate     = document.getElementById('endDateInput'        ).value;
+
+    filters += "&startDate=" + startDate;
+    filters += "&endDate="   + endDate;
+
+    if (city        != -1 && city        != '') { filters += "&city="     + city;        }
+    if (orgUnit     != -1 && orgUnit     != '') { filters += "&orgUnit="  + orgUnit;     }
+    if (region      != -1 && region      != '') { filters += "&region="   + region;      }
+    if (market      != -1 && market      != '') { filters += "&market="   + market;      }
+    if (practice    != -1 && practice    != '') { filters += "&practice=" + practice;    }
+    if (aggregation != -1 && aggregation != '') { filters += "&agg="      + aggregation; }
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder='     + params.sortModel[0].colId;
@@ -95,7 +107,7 @@ function onCallResourceSuccess(params, query, httpResponse) {
         resourceGrid.options.api.setColumnDefs(columns);
 
         var detailColumns = createResourceColumns(startingResourceDetailColumnDefs, httpResponse);
-        resourceDetailGrid.options.api.setColumnDefs(columns);
+        resourceDetailGrid.options.api.setColumnDefs(detailColumns);
 
         currentColumns = columns;
     }
@@ -105,12 +117,12 @@ function onCallResourceSuccess(params, query, httpResponse) {
 }
 
 function createResourceRow(row, resource, timePeriods) {
-    addResourceDetails(row, resource            );
-    addTimePeriods    (row, timePeriods         );
-    addAssignments    (row, resource.Assignments);
+    addResourceData(row, resource            );
+    addTimePeriods (row, timePeriods         );
+    addAssignments (row, resource.Assignments);
 }
 
-function addResourceDetails(row, resource) {
+function addResourceData(row, resource) {
     row.FirstName = resource.FirstName;
     row.LastName  = resource.LastName;
     row.City      = resource.City;

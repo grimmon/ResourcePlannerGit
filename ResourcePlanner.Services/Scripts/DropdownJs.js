@@ -8,11 +8,12 @@
             if (httpRequest.status == 200) {
                 httpResponse = JSON.parse(httpRequest.responseText);
 
-                var citiesDropdown    = document.getElementById("citiesDropdown"   );
-                var orgUnitsDropdown  = document.getElementById("orgUnitsDropdown" );
-                var regionsDropdown   = document.getElementById("regionsDropdown"  );
-                var marketsDropdown   = document.getElementById("marketsDropdown"  );
-                var practicesDropdown = document.getElementById("practicesDropdown");
+                var citiesDropdown       = document.getElementById("citiesDropdown"      );
+                var orgUnitsDropdown     = document.getElementById("orgUnitsDropdown"    );
+                var regionsDropdown      = document.getElementById("regionsDropdown"     );
+                var marketsDropdown      = document.getElementById("marketsDropdown"     );
+                var practicesDropdown    = document.getElementById("practicesDropdown"   );
+                var aggregationsDropdown = document.getElementById("aggregationsDropdown");
 
                 var citiesNoneOption = document.createElement('option');
                 citiesNoneOption.text = 'None';
@@ -63,6 +64,9 @@
                     }
                     if (httpResponse[i].Category == 'Practice') {
                         practicesDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'agg') {
+                        aggregationsDropdown.appendChild(option);
                     }
                 }
             }
