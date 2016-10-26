@@ -40,7 +40,7 @@ function refreshResourceDetailGrid(event) {
             rowCount: null, // behave as infinite scroll
             getRows: function getResourceDetailData(params) {
                 var query = buildResourceDetailQuery(params);
-                callResourceServerAuth(params, query, onCallResourceDetailSuccess, onCallResourceDetailFailure);
+                callResourceServerAuth(params, query, onCallResourceDetailSuccess, showError);
             }
         };
 
@@ -83,11 +83,6 @@ function updateResourceDetailGrid(params, data, rowData, columnData, options) {
 
     params.successCallback(rows, data.TotalRowCount);
     resourceDetailGrid.options.api.hideOverlay();
-}
-
-function onCallResourceDetailFailure(httpRequest) {
-    resourceDetailGrid.options.api.hideOverlay();
-    $("#selectedUser").text("Error: " + httpRequest.statusText + ", " + httpRequest.responseText);
 }
 
 function createProjectRow(row, project, timePeriods) {

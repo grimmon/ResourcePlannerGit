@@ -42,7 +42,7 @@ function refreshResourceGrid() {
         rowCount: null, // behave as infinite scroll
         getRows: function getResourceData(params) {
             var query = buildResourceQuery(params);
-            callResourceServerAuth(params, query, onCallResourceSuccess, onCallResourceFailure);
+            callResourceServerAuth(params, query, onCallResourceSuccess, showError);
         }
     };
 
@@ -102,11 +102,6 @@ function onCallResourceSuccess(params, query, httpResponse) {
 
     params.successCallback(rows, httpResponse.TotalRowCount);
     resourceGrid.options.api.hideOverlay();
-}
-
-function onCallResourceFailure(httpRequest) {
-    resourceGrid.options.api.hideOverlay();
-    $("#selectedUser").text("Error: " + httpRequest.statusText + ", " + httpRequest.responseText);
 }
 
 function createResourceRow(row, resource, timePeriods) {
