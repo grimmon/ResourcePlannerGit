@@ -4,6 +4,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="Scripts/angular.js"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="App/app.js"></script>
     <script src="../Scripts/ag-grid.js"></script>
     <script src="../Scripts/DropdownJs.js"></script>
@@ -13,32 +15,44 @@
     <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
 </head>
 <body>
-    <div>
-        <div>
-            <label>Cities</label>
-            <select id="citiesDropdown"></select>
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Filters</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div>
+                            <label>Cities</label>
+                            <select id="citiesDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Org Units</label>
+                            <select id="orgUnitsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Regions</label>
+                            <select id="regionsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Markets</label>
+                            <select id="marketsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Practices</label>
+                            <select id="practicesDropdown"></select>
+                        </div>
+                        <button id="filterButton">Apply</button>
+                        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <label>Org Units</label>
-            <select id="orgUnitsDropdown"></select>
-        </div>
-        <div>
-            <label>Regions</label>
-            <select id="regionsDropdown"></select>
-        </div>
-        <div>
-            <label>Markets</label>
-            <select id="marketsDropdown"></select>
-        </div>
-        <div>
-            <label>Practices</label>
-            <select id="practicesDropdown"></select>
-        </div>
-        <button id="filterButton">Apply</button>
-        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
     </div>
-    
-    <div style="height: 100%; padding-top: 50px;  box-sizing: border-box;">
+    <div style="height: 100%; box-sizing: border-box;">
         <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
     
