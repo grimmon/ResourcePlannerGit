@@ -31,6 +31,10 @@ namespace ResourcePlanner.Services.DataAccess
                 CommandType.StoredProcedure,
                 _timeout,
                 new SqlParameter[0]);
+            returnValue.Add(new DropdownValue() { Category = "Aggregation", Name = "Weekly" });
+            returnValue.Add(new DropdownValue() { Category = "Aggregation", Name = "Monthly" });
+            returnValue.Add(new DropdownValue() { Category = "Aggregation", Name = "Quarterly" });
+            returnValue.Add(new DropdownValue() { Category = "Aggregation", Name = "Daily" });
             return returnValue;
         }
     }

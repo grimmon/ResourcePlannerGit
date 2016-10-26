@@ -143,7 +143,7 @@ namespace ResourcePlanner.Core.Utilities
                 }
                 catch (Exception ex)
                 {
-                    okthrow GenerateSqlError(sqlStatement, parameters, ex);
+                    throw GenerateSqlError(sqlStatement, parameters, ex);
                 }
                 finally
                 {

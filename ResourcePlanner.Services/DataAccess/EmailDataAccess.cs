@@ -26,7 +26,8 @@ namespace ResourcePlanner.Services.DataAccess
                @"rpdb.ResourceManagerByResourceIdSelect",
                CommandType.StoredProcedure,
                _timeout,
-               new SqlParameter[] { new SqlParameter("ResourceId", SqlDbType.Int, ResourceId) });
+               new SqlParameter[] { AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, ResourceId),
+                                    AdoUtility.CreateSqlParameter("UserId", SqlDbType.Int, userId) });
             return returnValue;
         }
     }

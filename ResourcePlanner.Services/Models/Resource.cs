@@ -109,6 +109,7 @@ namespace ResourcePlanner.Services.Models
         public string ResourceManagerLastName { get; set; }
         public string ResourceManagerEmail { get; set; }
         public double Hours { get; set;}
+        public string Project { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
