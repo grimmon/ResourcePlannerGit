@@ -10,13 +10,12 @@ namespace ResourcePlanner.Services.DataAccess
     {
         static List<DropdownValue> _dropdownValues = new List<DropdownValue>();
 
-        public MockDropdownDataAccess()
+        static MockDropdownDataAccess()
         {
             _dropdownValues.Add(new DropdownValue{Id =6674, Name="Practice"                  , Category = "OrgUnit"  });
             _dropdownValues.Add(new DropdownValue{Id =6675, Name="NONE"                      , Category = "OrgUnit"  });
             _dropdownValues.Add(new DropdownValue{Id =6676, Name="ICS"                       , Category = "OrgUnit"  });
             _dropdownValues.Add(new DropdownValue{Id =6677, Name="ITS"                       , Category = "OrgUnit"  });
-            _dropdownValues.Add(new DropdownValue{Id =6678, Name="NONE"                      , Category = "Region"   });
             _dropdownValues.Add(new DropdownValue{Id =6679, Name="East"                      , Category = "Region"   });
             _dropdownValues.Add(new DropdownValue{Id =6680, Name="Central"                   , Category = "Region"   });
             _dropdownValues.Add(new DropdownValue{Id =6681, Name="West"                      , Category = "Region"   });
@@ -24,7 +23,6 @@ namespace ResourcePlanner.Services.DataAccess
             _dropdownValues.Add(new DropdownValue{Id =6683, Name="Texas"                     , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6684, Name="Pacwest"                   , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6685, Name="Southeast"                 , Category = "Market"   });
-            _dropdownValues.Add(new DropdownValue{Id =6686, Name="NONE"                      , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6687, Name="Mid Atlantic"              , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6688, Name="TOLA"                      , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6689, Name="New England"               , Category = "Market"   });
@@ -35,7 +33,6 @@ namespace ResourcePlanner.Services.DataAccess
             _dropdownValues.Add(new DropdownValue{Id =6694, Name="Southwest"                 , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6695, Name="NY Metro"                  , Category = "Market"   });
             _dropdownValues.Add(new DropdownValue{Id =6696, Name="Chicago"                   , Category = "City"     });
-            _dropdownValues.Add(new DropdownValue{Id =6697, Name="NONE"                      , Category = "City"     });
             _dropdownValues.Add(new DropdownValue{Id =6698, Name="Dallas"                    , Category = "City"     });
             _dropdownValues.Add(new DropdownValue{Id =6699, Name="Columbus"                  , Category = "City"     });
             _dropdownValues.Add(new DropdownValue{Id =6700, Name="Other"                     , Category = "City"     });
@@ -52,7 +49,6 @@ namespace ResourcePlanner.Services.DataAccess
             _dropdownValues.Add(new DropdownValue{Id =6711, Name="Boston"                    , Category = "City"     });
             _dropdownValues.Add(new DropdownValue{Id =6712, Name="St.Louis"                  , Category = "City"     });
             _dropdownValues.Add(new DropdownValue{Id =6713, Name="Data Center"               , Category = "Practice" });
-            _dropdownValues.Add(new DropdownValue{Id =6714, Name="NONE"                      , Category = "Practice" });
             _dropdownValues.Add(new DropdownValue{Id =6715, Name="PMO"                       , Category = "Practice" });
             _dropdownValues.Add(new DropdownValue{Id =6716, Name="Office Productivity"       , Category = "Practice" });
             _dropdownValues.Add(new DropdownValue{Id =6717, Name="Collaboration"             , Category = "Practice" });
