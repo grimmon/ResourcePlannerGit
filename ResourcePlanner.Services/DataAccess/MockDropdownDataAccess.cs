@@ -58,6 +58,10 @@ namespace ResourcePlanner.Services.DataAccess
             _dropdownValues.Add(new DropdownValue{Id =6721, Name="Networking"                , Category = "Practice" });
             _dropdownValues.Add(new DropdownValue{Id =6722, Name="VTSP"                      , Category = "Practice" });
             _dropdownValues.Add(new DropdownValue{Id =6723, Name="Command Center"            , Category = "Practice" });
+            _dropdownValues.Add(new DropdownValue() { Category = "agg", Name = "Weekly" });
+            _dropdownValues.Add(new DropdownValue() { Category = "agg", Name = "Monthly" });
+            _dropdownValues.Add(new DropdownValue() { Category = "agg", Name = "Quarterly" });
+            _dropdownValues.Add(new DropdownValue() { Category = "agg", Name = "Daily" });
         }
 
         public List<DropdownValue> GetDropdownValues()

@@ -93,8 +93,8 @@ namespace ResourcePlanner.Services.Controllers
                             + " has requested to assign a resource to a project via the <b>Insight Resource Planner</b>. Please review this request: </p>"
                             + "<p></p><p><b>   Resource</b>: " + info.ResourceName + " (" + info.ResourceEmail + ") </p>"
                             + "<p><b>   Project</b>: " + info.Project + "</p>"
-                            + "<p><b>   StartDate</b>: " + info.StartDate.ToString("MMMM dd yyyy") + "</p>"
-                            + "<p><b>   EndDate </b>: " + info.EndDate.ToString("MMMM dd yyyy") + "</p>"
+                            + "<p><b>   Start Date</b>: " + info.StartDate.ToString("MMMM dd yyyy") + "</p>"
+                            + "<p><b>   End Date</b>: " + info.EndDate.ToString("MMMM dd yyyy") + "</p>"
                             + "<p><b>   Hours</b>: " + info.Hours + "</p>"
                             +"<p></p><p>Please be in correspondence with the requestor " + info.UserName + " via email at " 
                             + info.UserEmail + ".</p> <p> Thanks and have a great day! </p>";
