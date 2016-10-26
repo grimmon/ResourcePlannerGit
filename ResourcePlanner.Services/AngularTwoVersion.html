@@ -1,12 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="Scripts/angular.js"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
     <script src="App/app.js"></script>
     <script src="../Scripts/ag-grid.js"></script>
+    <script src="../Scripts/DropdownJs.js"></script>
+    <script src="../Scripts/ResourceUtilityJs.js"></script>
+    <script src="../Scripts/ResourceGridJs.js"></script>
+    <script src="../Scripts/ResourceDetailGridJs.js"></script>
     <script src="../Scripts/virtualPagingServerSide.js"></script>
 
     <style>
@@ -56,22 +59,18 @@
             <label>Cities</label>
             <select id="citiesDropdown"></select>
         </div>
-
         <div>
             <label>Org Units</label>
             <select id="orgUnitsDropdown"></select>
         </div>
-
         <div>
             <label>Regions</label>
             <select id="regionsDropdown"></select>
         </div>
-
         <div>
             <label>Markets</label>
             <select id="marketsDropdown"></select>
         </div>
-
         <div>
             <label>Practices</label>
             <select id="practicesDropdown"></select>
@@ -79,15 +78,15 @@
         <button id="filterButton">Apply</button>
         <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
     </div>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">×</span>
+    
+    <div style="height: 100%; padding-top: 50px;  box-sizing: border-box;">
+        <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
+    </div>
+    
+    <p id="selectedUser"></p>
 
-            <p id="selectedUser"></p>
-            <div style="height: 100%; box-sizing: border-box;">
-                <div id="myGrid2" style="height: 600px;" class="ag-fresh"></div>
-            </div>
-        </div>
+    <div style="height: 100%; box-sizing: border-box;">
+        <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
     </div>
 
     <div id="errorModal" class="modal">
@@ -95,10 +94,6 @@
         <div class="modal-content">
             <span class="close">×</span>
         </div>
-    </div>
-
-    <div style="height: 100%; padding-top: 50px;  box-sizing: border-box;">
-        <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
 </body>
 </html>

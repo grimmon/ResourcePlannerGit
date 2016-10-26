@@ -163,6 +163,10 @@
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\DropdownJs.js" />
+    <Content Include="Scripts\ResourceDetailGridJs.js" />
+    <Content Include="Scripts\ResourceGridJs.js" />
+    <Content Include="Scripts\ResourceUtilityJs.js" />
     <Content Include="Scripts\ui-grid.css" />
     <Content Include="Scripts\ui-grid.js" />
     <Content Include="Scripts\virtualPagingServerSide.js" />
