@@ -21,6 +21,8 @@ namespace ResourcePlanner.Services.Enums
         }
         public enum SortOrder
         {
+            [Description("None")]
+            None,
             [Description("FirstName")]
             FirstName,
             [Description("LastName")]

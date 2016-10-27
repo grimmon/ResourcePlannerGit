@@ -123,6 +123,7 @@ namespace ResourcePlanner.Services.DataAccess
                     assignedProjects.Add(copiedProject);
 
                     assignments.AddRange(projectAssignments);
+                    copiedProject.Assignments.AddRange(projectAssignments);
                 }
                 
                 foreach (var timePeriod in _timePeriods)
@@ -235,15 +236,24 @@ namespace ResourcePlanner.Services.DataAccess
             
             var filteredResourceInfos = FilterResourceInfo(pageParams);
 
+            var sortedResourceInfos = SortAssignments(pageParams.Sort, pageParams.SortDirection, filteredResourceInfos);
+
             //Page the results.
-            var resourceIds = filteredResourceInfos
+            var pagedResourceInfos = sortedResourceInfos
                 .Skip(pageParams.PageSize * pageParams.PageNum)
                 .Take(pageParams.PageSize)
-                .Select(resourceInfo => resourceInfo.ResourceId)
                 .ToList();
             
+            var resources = new List<Resource>();
+
+            foreach (var resourceInfo in pagedResourceInfos)
+            {
+                var foundResource = _resources.Single(resource => resource.ResourceId == resourceInfo.ResourceId);
+                resources.Add(foundResource);
+            }
+            
             //Filter out assignments outside of the date range.
-            foreach (var resource in _resources.Where(resource => resourceIds.Contains(resource.ResourceId)))
+            foreach (var resource in resources)
             {
                 var copiedResource = new Resource();
 
@@ -261,89 +271,9 @@ namespace ResourcePlanner.Services.DataAccess
             }
 
             //aggregate assignments by time period
-            if (pageParams.Aggregation == TimeAggregation.Weekly)
+            foreach (var resource in result.Resources)
             {
-                foreach (var resource in result.Resources)
-                {
-                    var weekAssignments = new List<Assignment>();
-
-                    var firstTimePeriod = resource.Assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
-                    var lastTimePeriod  = resource.Assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
-
-                    var startOfWeek = firstTimePeriod.AddDays(-1 * (int) firstTimePeriod.DayOfWeek);
-                    var endOfWeek = startOfWeek.AddDays(7);
-
-                    while (startOfWeek < lastTimePeriod)
-                    {
-                        var assignmentsWithinWeek = resource.Assignments.Where(assignment =>
-                        {
-                            var assignmentTimePeriod = DateTime.Parse(assignment.TimePeriod);
-
-                            return assignmentTimePeriod >= startOfWeek && assignmentTimePeriod < endOfWeek;
-                        }).ToList();
-
-                        var weekAssignment = new Assignment();
-
-                        weekAssignment.TimePeriod = startOfWeek.ToString();
-                        weekAssignment.ActualHours = assignmentsWithinWeek.Sum(assignment => assignment.ActualHours);
-                        weekAssignment.ForecastHours = assignmentsWithinWeek.Sum(assignment => assignment.ForecastHours);
-
-                        weekAssignments.Add(weekAssignment);
-
-                        startOfWeek = startOfWeek.AddDays(7);
-                        endOfWeek = endOfWeek.AddDays(7);
-                    }
-                }
-            }
-            else if (pageParams.Aggregation == TimeAggregation.Monthly)
-            {
-                foreach (var resource in result.Resources)
-                {
-                    var monthAssignments = new List<Assignment>();
-
-                    var firstTimePeriod = resource.Assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
-                    var lastTimePeriod  = resource.Assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
-
-                    var startOfMonth = new DateTime(firstTimePeriod.Year, firstTimePeriod.Month, 1);
-                    var endOfMonth = startOfMonth.AddMonths(1);
-
-                    while (startOfMonth < lastTimePeriod)
-                    {
-                        var assignmentsWithinMonth = GetAssignmentsWithinDateRange(resource.Assignments, startOfMonth, endOfMonth);
-                        var monthAssignment = AggregateAssignments(assignmentsWithinMonth);
-                        monthAssignment.TimePeriod = startOfMonth.ToString();
-                        monthAssignments.Add(monthAssignment);
-                        
-                        startOfMonth = startOfMonth.AddMonths(1);
-                        endOfMonth = endOfMonth.AddMonths(1);
-                    }
-                }
-            }
-            else if (pageParams.Aggregation == TimeAggregation.Quarterly)
-            {
-                foreach (var resource in result.Resources)
-                {
-                    var quarterAssignments = new List<Assignment>();
-
-                    var firstTimePeriod = resource.Assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
-                    var lastTimePeriod  = resource.Assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
-
-                    var start = new DateTime(2016, 1, 1);
-                    
-                    var startOfQuarter = new DateTime(firstTimePeriod.Year, (firstTimePeriod.Month - 1) / 3 * 3 + 1, 1);
-                    var endOfQuarter = startOfQuarter.AddMonths(3);
-
-                    while (startOfQuarter < lastTimePeriod)
-                    {
-                        var assignmentsWithinQuarter = GetAssignmentsWithinDateRange(resource.Assignments, startOfQuarter, endOfQuarter);
-                        var quarterAssignment = AggregateAssignments(assignmentsWithinQuarter);
-                        quarterAssignment.TimePeriod = startOfQuarter.ToString();
-                        quarterAssignments.Add(quarterAssignment);
-                        
-                        startOfQuarter = startOfQuarter.AddMonths(3);
-                        endOfQuarter = endOfQuarter.AddMonths(3);
-                    }
-                }
+                resource.Assignments = AggregatetAssignmentsByTimeAggregation(pageParams.Aggregation, resource.Assignments);
             }
             
             result.TotalRowCount = filteredResourceInfos.Count;
@@ -352,6 +282,128 @@ namespace ResourcePlanner.Services.DataAccess
             result.TimePeriods = _timePeriods
                 .Where(timePeriod => timePeriod >= pageParams.StartDate && timePeriod < pageParams.EndDate)
                 .Select(timePeriod => timePeriod.ToString()).ToList();
+
+            return result;
+        }
+        
+        public static List<ResourceInfo> SortAssignments (Enums.Enums.SortOrder sort, SortDirection direction, List<ResourceInfo> resources)
+        {
+            var result = new List<ResourceInfo>();
+            
+            if (sort == Enums.Enums.SortOrder.City)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.City).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.City).ToList();
+                }
+            }
+            else if (sort == Enums.Enums.SortOrder.FirstName)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.FirstName).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.FirstName).ToList();
+                }
+            }
+            else if (sort == Enums.Enums.SortOrder.LastName)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.LastName).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.LastName).ToList();
+                }
+            }
+            else if (sort == Enums.Enums.SortOrder.Position)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.Position).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.Position).ToList();
+                }
+            }
+
+            return result;
+        }
+
+        public static List<Assignment> AggregatetAssignmentsByTimeAggregation(TimeAggregation aggregation, List<Assignment> assignments)
+        {
+            var result = new List<Assignment>();
+            if (aggregation == TimeAggregation.Daily)
+            {
+                return assignments;
+            }
+            else if (aggregation == TimeAggregation.Weekly)
+            {
+                var firstTimePeriod = assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
+                var lastTimePeriod  = assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
+
+                var startOfWeek = firstTimePeriod.AddDays(-1 * (int)firstTimePeriod.DayOfWeek);
+                var endOfWeek = startOfWeek.AddDays(7);
+
+                while (startOfWeek < lastTimePeriod)
+                {
+                    var assignmentsWithinWeek = GetAssignmentsWithinDateRange(assignments, startOfWeek, endOfWeek);
+                    var weekAssignment = AggregateAssignments(assignmentsWithinWeek); 
+                    weekAssignment.TimePeriod = startOfWeek.ToString();
+                    result.Add(weekAssignment);
+
+                    startOfWeek = startOfWeek.AddDays(7);
+                    endOfWeek = endOfWeek.AddDays(7);
+                }
+            }
+            else if (aggregation == TimeAggregation.Monthly)
+            {
+                var firstTimePeriod = assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
+                var lastTimePeriod = assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
+
+                var startOfMonth = new DateTime(firstTimePeriod.Year, firstTimePeriod.Month, 1);
+                var endOfMonth = startOfMonth.AddMonths(1);
+
+                while (startOfMonth < lastTimePeriod)
+                {
+                    var assignmentsWithinMonth = GetAssignmentsWithinDateRange(assignments, startOfMonth, endOfMonth);
+                    var monthAssignment = AggregateAssignments(assignmentsWithinMonth);
+                    monthAssignment.TimePeriod = startOfMonth.ToString();
+                    result.Add(monthAssignment);
+
+                    startOfMonth = startOfMonth.AddMonths(1);
+                    endOfMonth = endOfMonth.AddMonths(1);
+                }
+            }
+            else if (aggregation == TimeAggregation.Quarterly)
+            {
+                var firstTimePeriod = assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
+                var lastTimePeriod = assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
+
+                var start = new DateTime(2016, 1, 1);
+
+                var startOfQuarter = new DateTime(firstTimePeriod.Year, (firstTimePeriod.Month - 1) / 3 * 3 + 1, 1);
+                var endOfQuarter = startOfQuarter.AddMonths(3);
+
+                while (startOfQuarter < lastTimePeriod)
+                {
+                    var assignmentsWithinQuarter = GetAssignmentsWithinDateRange(assignments, startOfQuarter, endOfQuarter);
+                    var quarterAssignment = AggregateAssignments(assignmentsWithinQuarter);
+                    quarterAssignment.TimePeriod = startOfQuarter.ToString();
+                    result.Add(quarterAssignment);
+
+                    startOfQuarter = startOfQuarter.AddMonths(3);
+                    endOfQuarter = endOfQuarter.AddMonths(3);
+                }
+            }
 
             return result;
         }
