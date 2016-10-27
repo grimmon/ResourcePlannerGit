@@ -41,6 +41,8 @@ namespace ResourcePlanner.Services.Models
         public int ResourceId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string SubPractice { get; set; }
+        public int SubPracticeId { get; set; }
         public string Practice { get; set; }
         public int PracticeId { get; set; }
         public string Position { get; set; }
@@ -93,6 +95,7 @@ namespace ResourcePlanner.Services.Models
         public int? Region { get; set; }
         public int? Market { get; set; }
         public int? Practice { get; set; }
+        public int? SubPractice { get; set; }
         public string Position { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -113,6 +116,15 @@ namespace ResourcePlanner.Services.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
+    }
+
+    public class AddAssignment
+    {
+        public int ResourceId {get; set;}
+        public int ProjectId {get; set;}                                   
+        public double Hours {get; set;}
+        public DateTime StartDate {get; set;}                  
+        public DateTime EndDate {get; set;}
     }
 
 }

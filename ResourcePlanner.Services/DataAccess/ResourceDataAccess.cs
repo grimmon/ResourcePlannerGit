@@ -171,6 +171,10 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("PracticeParam", SqlDbType.Int, pageParams.Practice.Value));
             }
+            if (pageParams.SubPractice.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.Int, pageParams.SubPractice.Value));
+            }
 
             return parameterList.ToArray();
         }

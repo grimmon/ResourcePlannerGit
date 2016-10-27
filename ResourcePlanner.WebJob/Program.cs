@@ -31,8 +31,8 @@ namespace ResourcePlanner.WebJob
             string destConnString = ConfigurationManager.ConnectionStrings["ResourcePlanner"].ConnectionString;
             int timeout = Int32.Parse(ConfigurationManager.AppSettings["timeout"]);
 
-            FillStageTables(srcConnString, destConnString, timeout);
-            FillStafStageTables(stafConnString, destConnString, timeout);
+            //FillStageTables(srcConnString, destConnString, timeout);
+            //FillStafStageTables(stafConnString, destConnString, timeout);
             AddReferenceSets(destConnString, timeout);
             UpsertDB(destConnString, timeout);
             UpsertStafDB(destConnString, timeout);
@@ -106,6 +106,8 @@ namespace ResourcePlanner.WebJob
             RunSproc(connString, timeout, "rpdb.AddPositions", "Reference Code Set (Positions)");
 
             RunSproc(connString, timeout, "rpdb.AddPractices", "Reference Code Set (Practices)");
+
+            RunSproc(connString, timeout, "rpdb.AddSubPractices", "Reference Code Set (Sub-Practices)");
 
             RunSproc(connString, timeout, "rpdb.AddRegions", "Reference Code Set (Regions)");
 
