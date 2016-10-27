@@ -16,7 +16,7 @@ namespace ResourcePlanner.Services.Enums
             Weekly = 1,
             [Description("Monthly")]
             Monthly = 2,
-            [Description("Daily")]
+            [Description("Quarterly")]
             Quarterly = 3
         }
         public enum SortOrder
