@@ -15,19 +15,6 @@
     <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
 </head>
 <body>
-    <div style="padding-left: 60px; padding-bottom: 20px; padding-top: 20px">
-        <label>Interval</label>
-        <select id="aggregationsDropdown"></select>
-        <label>Start Date</label>
-        <input id="startDateInput" type="date" />
-        <label>End Date</label>
-        <input id="endDateInput" type="date" />
-    </div>
-
-    <div style="padding-left: 60px; padding-bottom: 20px"">
-        <button id="filterButton">Apply</button>
-    </div>
-
     <div class="container">
         <div class="panel-group">
             <div class="panel panel-default">
@@ -63,6 +50,29 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div style="position: relative; width:700px; height: 150px; padding-left: 60px; padding-bottom: 20px; padding-top: 20px; border-style: dotted">
+        
+        <button id="pageLeftButton" style="height: 60px; position: absolute; left: 0"><</button>
+        <div style="position: absolute; left:30px; width: 300px; height: 60px; border-style: dotted">
+            <label style="margin: 0 auto; top:0px; border-style:dotted">Start Date</label>
+            <input style="margin: 0 auto; bottom: 0px" id="startDateInput" type="date" />
+        </div>
+        <div style="position: absolute; right: 2px; width: 300px; height: 60px; border-style: dotted">
+            <label style="">End Date</label>
+            <input id="endDateInput" type="date" />
+        </div>
+        <button id="pageRightButton" style="height: 60px; position: absolute; right: 0">></button>
+
+        <div style="position: absolute; bottom: 2px">
+            <label>Interval</label>
+            <select id="aggregationsDropdown"></select>
+        </div>
+    </div>
+
+    <div style="padding-left: 60px; padding-bottom: 20px" ">
+        <button id="filterButton">Apply</button>
     </div>
 
     <div style="height: 100%; box-sizing: border-box; padding-left: 60px">

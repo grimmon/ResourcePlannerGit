@@ -15,6 +15,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     var filterButton = document.getElementById("filterButton");
+    var pageLeftButton = document.getElementById("pageLeftButton");
+    var pageRightButton = document.getElementById("pageRightButton");
+
+    pageLeftButton.onclick = function () {
+        var startDateInput = document.getElementById("startDateInput");
+        var endDateInput = document.getElementById("endDateInput");
+        
+        var startDate = new Date(startDateInput.value);
+        var newStartDate = new Date();
+
+        newStartDate.setDate(startDate.getDate() + 1);
+
+        var day = ("0" + newStartDate.getDate()).slice(-2);
+        var month = ("0" + newStartDate.getMonth()).slice(-2);
+
+        var newStartDateString = newStartDate.getFullYear() + "-" + month + "-" + day;
+
+        startDateInput.value = newStartDateString;
+        endDateInput.value = newStartDateString;
+    }
+
+    pageRightButton.onclick = function () {
+
+    }
 
     filterButton.onclick = function () {
         refreshResourceGrid();
@@ -151,7 +175,7 @@ function createRow(rowData, columns, rowParser) {
 }
 
 function getHeader(params) {
-    return "Actual";
+    return params.colDef.field;
 }
 
 var timePeriodCellRenderer = function (params) {
