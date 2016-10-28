@@ -37,6 +37,8 @@ namespace ResourcePlanner.Services.Mapper
                         LastName = reader.GetNullableString("LastName"),
                         City = reader.GetNullableString("City"),
                         Position = reader.GetNullableString("Position"),
+                        Practice = reader.GetNullableString("Practice"),
+                        SubPractice = reader.GetNullableString("SubPractice"),
                         Assignments = new List<Assignment>()
                     };
 
@@ -123,6 +125,7 @@ namespace ResourcePlanner.Services.Mapper
             resourceInfo.FirstName         = reader.GetNullableString("FirstName");
             resourceInfo.LastName          = reader.GetNullableString("LastName");
             resourceInfo.Practice          = reader.GetNullableString("Practice");
+            resourceInfo.SubPractice       = reader.GetNullableString("SubPractice");
             resourceInfo.OrgUnit           = reader.GetNullableString("OrgUnit");
             resourceInfo.Market            = reader.GetNullableString("Market");
             resourceInfo.City              = reader.GetNullableString("City");
