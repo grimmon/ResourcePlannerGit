@@ -33,6 +33,8 @@ namespace ResourcePlanner.Services.Models
         public string LastName { get; set; }
         public string Position { get; set; }
         public string City { get; set; }
+        public string Practice { get; set; }
+        public string SubPractice { get; set; }
         public List<Assignment> Assignments { get; set; }
     }
 
