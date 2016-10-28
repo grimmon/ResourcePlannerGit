@@ -19,7 +19,23 @@ namespace ResourcePlanner.Services.Controllers
         [Authorize]
 
 
-        public async Task<IHttpActionResult> Get(int pageSize, int pageNum, TimeAggregation agg= TimeAggregation.Weekly, SortOrder sortOrder = SortOrder.LastName, SortDirection sortDirection = SortDirection.Asc, int? city = null, int? market = null, int? region = null, int? orgUnit = null, int? practice = null, int? subpractice = null, string position = null, DateTime? StartDate = null, DateTime? EndDate = null)
+        public async Task<IHttpActionResult> Get(
+            int pageSize, 
+            int pageNum, 
+            TimeAggregation agg= TimeAggregation.Weekly, 
+            SortOrder sortOrder = SortOrder.LastName, 
+            SortDirection sortDirection = SortDirection.Asc, 
+            int? city = null, 
+            int? market = null, 
+            int? region = null, 
+            int? orgUnit = null, 
+            int? practice = null, 
+            int? subpractice = null, 
+            string searchterm1 = "", 
+            string searchterm2 = "", 
+            string searchterm3 = "", 
+            DateTime? StartDate = null, 
+            DateTime? EndDate = null)
         {
 
             if (StartDate == null)
@@ -43,7 +59,9 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.OrgUnit = orgUnit;
             pageParams.Market = market;
             pageParams.Region = region;
-            pageParams.Position = position;
+            pageParams.SearchTerm1 = searchterm1;
+            pageParams.SearchTerm2 = searchterm2;
+            pageParams.SearchTerm3 = searchterm3;
             pageParams.Practice = practice;
             pageParams.SubPractice = subpractice;
             pageParams.StartDate = StartDate.Value;

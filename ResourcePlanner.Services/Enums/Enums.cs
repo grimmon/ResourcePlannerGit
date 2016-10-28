@@ -31,6 +31,10 @@ namespace ResourcePlanner.Services.Enums
             City,
             [Description("Position")]
             Position,
+            [Description("Practice")]
+            Practice,
+            [Description("SubPractice")]
+            SubPractice,
         }
 
         public enum SortDirection

@@ -143,7 +143,6 @@ namespace ResourcePlanner.Services.DataAccess
         {
             var parameterList = new List<SqlParameter>();
 
-            parameterList.Add(AdoUtility.CreateSqlParameter("PositionParam", 50, SqlDbType.VarChar, pageParams.Position));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, pageParams.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString()));
@@ -175,6 +174,8 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.Int, pageParams.SubPractice.Value));
             }
+
+            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTermsParam", "rpdb.typeVarCharTable" , SqlDbType.Structured, pageParams.SearchTerms));
 
             return parameterList.ToArray();
         }
