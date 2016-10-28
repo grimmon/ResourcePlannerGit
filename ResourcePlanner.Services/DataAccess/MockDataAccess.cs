@@ -233,7 +233,10 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 Resources = new List<Resource>()
             };
-            
+
+            var startDate = pageParams.StartDate.Date;
+            var endDate = pageParams.EndDate.Date;
+
             var filteredResourceInfos = FilterResourceInfo(pageParams);
 
             var sortedResourceInfos = SortAssignments(pageParams.Sort, pageParams.SortDirection, filteredResourceInfos);
@@ -264,7 +267,7 @@ namespace ResourcePlanner.Services.DataAccess
                     var assignmentTime = DateTime.Parse(assignment.TimePeriod);
 
                     //Start Date inclusive, End date Exclusive
-                    return assignmentTime >= pageParams.StartDate && assignmentTime < pageParams.EndDate;
+                    return assignmentTime >= startDate && assignmentTime < endDate;
                 }).ToList();
 
                 result.Resources.Add(copiedResource);
@@ -277,11 +280,15 @@ namespace ResourcePlanner.Services.DataAccess
             }
             
             result.TotalRowCount = filteredResourceInfos.Count;
-            
+
             //Filter out time periods based on start and end date.
-            result.TimePeriods = _timePeriods
-                .Where(timePeriod => timePeriod >= pageParams.StartDate && timePeriod < pageParams.EndDate)
-                .Select(timePeriod => timePeriod.ToString()).ToList();
+
+            var timePeriods = _timePeriods
+                .Where(timePeriod => timePeriod >= startDate && timePeriod < endDate).ToList();
+
+            timePeriods = AggregateTimePeriods(pageParams.Aggregation, startDate, endDate, timePeriods);
+
+            result.TimePeriods = timePeriods.Select(timePeriod => timePeriod.ToString()).ToList();
 
             return result;
         }
@@ -338,6 +345,48 @@ namespace ResourcePlanner.Services.DataAccess
             return result;
         }
 
+        public static List<DateTime> AggregateTimePeriods(TimeAggregation aggregation, DateTime startDate, DateTime endDate, List<DateTime> dateTimes)
+        {
+             var result = new List<DateTime>();
+
+            if (aggregation == TimeAggregation.Daily)
+            {
+                return dateTimes;
+            }
+            else if (aggregation == TimeAggregation.Weekly)
+            {
+                var startOfWeek = startDate.AddDays(-1 * (int)startDate.DayOfWeek);
+
+                while (startOfWeek < endDate)
+                {
+                    result.Add(startOfWeek);
+                    startOfWeek = startOfWeek.AddDays(7);
+                }
+            }
+            else if (aggregation == TimeAggregation.Monthly)
+            {
+                var startOfMonth = new DateTime(startDate.Year, startDate.Month, 1);
+
+                while (startOfMonth < endDate)
+                {
+                    result.Add(startOfMonth);
+                    startOfMonth = startOfMonth.AddMonths(1);
+                }
+            }
+            else if (aggregation == TimeAggregation.Quarterly)
+            {   
+                var startOfQuarter = new DateTime(startDate.Year, (startDate.Month - 1) / 3 * 3 + 1, 1);
+
+                while (startOfQuarter < endDate)
+                {
+                    result.Add(startOfQuarter);
+                    startOfQuarter = startOfQuarter.AddMonths(3);
+                }
+            }
+
+            return result;
+        }
+
         public static List<Assignment> AggregatetAssignmentsByTimeAggregation(TimeAggregation aggregation, List<Assignment> assignments)
         {
             var result = new List<Assignment>();
@@ -387,9 +436,7 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 var firstTimePeriod = assignments.Min(assignment => DateTime.Parse(assignment.TimePeriod));
                 var lastTimePeriod = assignments.Max(assignment => DateTime.Parse(assignment.TimePeriod));
-
-                var start = new DateTime(2016, 1, 1);
-
+                
                 var startOfQuarter = new DateTime(firstTimePeriod.Year, (firstTimePeriod.Month - 1) / 3 * 3 + 1, 1);
                 var endOfQuarter = startOfQuarter.AddMonths(3);
 
