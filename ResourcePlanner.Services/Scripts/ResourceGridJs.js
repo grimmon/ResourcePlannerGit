@@ -22,12 +22,10 @@
 };
 
 var startingResourceColumnDefs = [
-    { headerName: "First Name"                       , field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
-    { headerName: "Last Name"                        , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
-    //{ headerName: "<button><</button>"               , field: ""         , width:  30, suppressMenu: true, pinned: 'left', suppressSorting: true },
-    { headerName: "Position"                         , field: "Position" , width: 150, suppressMenu: true },
-    { headerName: "City"                             , field: "City"     , width: 150, suppressMenu: true },
-    //{ headerName: "<button onClick='hi()'>></button>", field: ""         , width:  30, suppressMenu: true, pinned: 'right', suppressSorting: true },
+    { headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
+    { headerName: "Last Name" , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
+    { headerName: "Position"  , field: "Position" , width: 150, suppressMenu: true },
+    { headerName: "City"      , field: "City"     , width: 150, suppressMenu: true },
 ];
 
 function hi() {
@@ -131,5 +129,8 @@ function addResourceData(row, resource) {
 }
 
 function rowSelectedFunc(event) {
-    refreshResourceDetailGrid(event);
+    if (event.node.isSelected()) {
+        selectedResource.Id = event.node.data.Id;
+        refreshResourceDetailGrid(event);
+    }
 }

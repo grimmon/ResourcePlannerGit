@@ -16,7 +16,7 @@ namespace ResourcePlanner.Services.Controllers
     {
         [HttpGet]
         [Authorize]
-        public async Task<IHttpActionResult> Get(int? ResourceId = null, TimeAggregation Aggregation = TimeAggregation.Weekly, DateTime? StartDate = null, DateTime? EndDate = null)
+        public async Task<IHttpActionResult> Get(int? ResourceId = null, TimeAggregation agg = TimeAggregation.Weekly, DateTime? StartDate = null, DateTime? EndDate = null)
         {
             if (StartDate == null)
             {
@@ -42,7 +42,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                detailPage = access.GetResourceDetail(ResourceId.Value, Aggregation, StartDate.Value, EndDate.Value);
+                detailPage = access.GetResourceDetail(ResourceId.Value, agg, StartDate.Value, EndDate.Value);
             }
             catch (Exception ex)
             {

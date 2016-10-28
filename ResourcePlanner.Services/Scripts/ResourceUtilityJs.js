@@ -2,6 +2,189 @@
 var selectedResource = {};
 var currentColumns = [];
 
+function formatDate(date) {
+    var endMonth = (date.getMonth() + 1);
+    var endDay = date.getDate();
+
+    if (endMonth < 10)
+        endMonth = "0" + endMonth;
+
+    if (endDay < 10)
+        endDay = "0" + endDay;
+
+    return date.getFullYear() + '-' + endMonth + '-' + endDay;
+}
+
+function pageUp() {
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+    var aggregation = aggregationDropdown.value;
+
+    var endDateInput = document.getElementById("endDateInput");
+    var endDateInputValue = endDateInput.value;
+    var oldEndDate = new Date(endDateInputValue);
+    
+    var startDateInput = document.getElementById("startDateInput");
+    var startDateInputValue = startDateInput.value;
+    var oldStartDate = new Date(startDateInputValue);
+
+    if (aggregation == '0') {
+        var oldEndDateOffset = oldEndDate.getDate() + 2;
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+
+        var oldStartDateOffset = oldStartDate.getDate() + 2;
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+    }
+    else if (aggregation == '1') {
+        var oldEndDateOffset = oldEndDate.getDate() + 8;
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+
+        var oldStartDateOffset = oldStartDate.getDate() + 8;
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+    }
+    else if (aggregation == '2') {
+        var oldEndDateOffset = oldEndDate.getDate() + 1;
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+
+        var oldStartDateOffset = oldStartDate.getDate() + 1;
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+    }
+    else if (aggregation == '3') {
+
+    }
+}
+
+function pageDown() {
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+    var aggregation = aggregationDropdown.value;
+
+    var endDateInput = document.getElementById("endDateInput");
+    var endDateInputValue = endDateInput.value;
+    var oldEndDate = new Date(endDateInputValue);
+
+    var startDateInput = document.getElementById("startDateInput");
+    var startDateInputValue = startDateInput.value;
+    var oldStartDate = new Date(startDateInputValue);
+
+    if (aggregation == '0') {
+        var oldEndDateOffset = oldEndDate.getDate();
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+
+        var oldStartDateOffset = oldStartDate.getDate();
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+    }
+    else if (aggregation == '1') {
+        var oldEndDateOffset = oldEndDate.getDate() - 6;
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+
+        var oldStartDateOffset = oldStartDate.getDate() - 6;
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+    }
+    else if (aggregation == '2') {
+
+    }
+    else if (aggregation == '3') {
+
+    }
+}
+
+function onAggregationChanged() {
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+    var aggregation = aggregationDropdown.value;
+
+    var endDateInput = document.getElementById("endDateInput");
+
+    var startDateInput = document.getElementById("startDateInput");
+    var startDateInputValue = startDateInput.value;
+    var oldStartDate = new Date(startDateInputValue);
+
+    if (aggregation == '1') {
+        var oldStartDateOffset = oldStartDate.getDate() - oldStartDate.getDay();
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+        newStartDate = formatDate(newStartDate);
+
+        startDateInput.value = newStartDate;
+
+        var oldEndDateOffset = oldStartDate.getDate() - 6;
+
+        var newEndDate = new Date(oldEndDate);
+        newEndDate.setDate(oldEndDateOffset);
+        newEndDate = formatDate(newEndDate);
+
+        endDateInput.value = newEndDate;
+    }
+    else if (aggregation == '2') {
+        var oldStartDateOffset = oldStartDate.getDate() + 1;
+
+        var newStartDate = new Date(oldStartDate);
+        newStartDate.setDate(oldStartDateOffset);
+
+        var firstOfMonth = new Date(newStartDate.getFullYear(), newStartDate.getMonth(), 1);
+        var lastOfMonth = new Date(newStartDate.getFullYear(), newStartDate.getMonth() + 1, 1);
+
+        newStartDate = formatDate(firstOfMonth);
+
+        var newEndDate = formatDate(lastOfMonth);
+
+        startDateInput.value = newStartDate;
+        endDateInput.value = newEndDate;
+    }
+    else if (aggregation == '3') {
+
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
     var authContext = new AuthenticationContext(config);
@@ -14,34 +197,38 @@ document.addEventListener('DOMContentLoaded', function () {
         getDropDownData(token);
     });
 
-    var filterButton = document.getElementById("filterButton");
-    var pageLeftButton = document.getElementById("pageLeftButton");
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+    aggregationDropdown.onchange = onAggregationChanged;
+
+
+
+    var filterButton    = document.getElementById("filterButton");
+    var pageLeftButton  = document.getElementById("pageLeftButton");
     var pageRightButton = document.getElementById("pageRightButton");
+    var startDateInput  = document.getElementById("startDateInput");
+    var endDateInput    = document.getElementById("endDateInput");
 
-    pageLeftButton.onclick = function () {
-        var startDateInput = document.getElementById("startDateInput");
-        var endDateInput = document.getElementById("endDateInput");
-        
-        var startDate = new Date(startDateInput.value);
-        var newStartDate = new Date();
+    var now = new Date();
 
-        newStartDate.setDate(startDate.getDate() + 1);
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
 
-        var day = ("0" + newStartDate.getDate()).slice(-2);
-        var month = ("0" + newStartDate.getMonth()).slice(-2);
+    var startDate = formatDate(now);
 
-        var newStartDateString = newStartDate.getFullYear() + "-" + month + "-" + day;
+    var endDate = new Date();
+    endDate.setDate(now.getDate() + 7);
+    endDate = formatDate(endDate);
 
-        startDateInput.value = newStartDateString;
-        endDateInput.value = newStartDateString;
-    }
+    startDateInput.value = startDate;
+    endDateInput.value = endDate;
 
-    pageRightButton.onclick = function () {
-
-    }
+    pageLeftButton.onclick = pageDown;
+    pageRightButton.onclick = pageUp;
 
     filterButton.onclick = function () {
         refreshResourceGrid();
+        refreshResourceDetailGrid();
     }
 
     var modal = document.getElementById("errorModal");

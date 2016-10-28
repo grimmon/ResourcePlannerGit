@@ -34,8 +34,6 @@ function refreshResourceDetailGrid(event) {
     if (event.node.isSelected()) {
         resourceDetailGrid.options.api.showLoadingOverlay();
 
-        selectedResource.Id = event.node.data.Id;
-
         var dataSource = {
             rowCount: null, // behave as infinite scroll
             getRows: function getResourceDetailData(params) {
