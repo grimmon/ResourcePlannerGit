@@ -174,10 +174,18 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.Int, pageParams.SubPractice.Value));
             }
-
-            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm1Param", "rpdb.typeVarCharTable" , SqlDbType.Structured, pageParams.SearchTerm1));
-            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm2Param", "rpdb.typeVarCharTable", SqlDbType.Structured, pageParams.SearchTerm2));
-            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm3Param", "rpdb.typeVarCharTable", SqlDbType.Structured, pageParams.SearchTerm3));
+            if (pageParams.SearchTerm1 != "")
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm1Param", 50, SqlDbType.VarChar, pageParams.SearchTerm1));
+            }
+            if (pageParams.SearchTerm2 != "")
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm2Param", 50, SqlDbType.VarChar, pageParams.SearchTerm2));
+            }
+            if (pageParams.SearchTerm3 != "")
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3Param", 50, SqlDbType.VarChar, pageParams.SearchTerm3));
+            }
             return parameterList.ToArray();
         }
 
