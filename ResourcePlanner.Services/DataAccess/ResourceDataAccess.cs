@@ -175,8 +175,9 @@ namespace ResourcePlanner.Services.DataAccess
                 parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.Int, pageParams.SubPractice.Value));
             }
 
-            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTermsParam", "rpdb.typeVarCharTable" , SqlDbType.Structured, pageParams.SearchTerms));
-
+            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm1Param", "rpdb.typeVarCharTable" , SqlDbType.Structured, pageParams.SearchTerm1));
+            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm2Param", "rpdb.typeVarCharTable", SqlDbType.Structured, pageParams.SearchTerm2));
+            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("SearchTerm3Param", "rpdb.typeVarCharTable", SqlDbType.Structured, pageParams.SearchTerm3));
             return parameterList.ToArray();
         }
 
