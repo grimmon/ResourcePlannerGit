@@ -148,7 +148,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularTwoVersion.html" />
     <Content Include="App\app.js" />
     <Content Include="Global.asax" />
     <Content Include="Images\loading.gif" />

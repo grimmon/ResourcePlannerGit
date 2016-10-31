@@ -1,133 +1,89 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<html>
 <head>
-    <title></title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="Scripts/angular.js"></script>
-    <script src="Scripts/angular-animate.js"></script>
-    <script src="Scripts/angular-route.js"></script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.js"></script>
-
-    <script src="Scripts/ui-grid.js"></script>
-    <link rel="stylesheet" href="Scripts/ui-grid.css" />
-    <link rel="stylesheet" href="Scripts/main.css" />
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="App/app.js"></script>
-
-    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
-    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
-    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
-
-
-    <script>
-
-        var app = angular.module('app', ['ngTouch', 'ui.grid']);
-
-        app.controller('MainCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
-
-            $scope.getFirstData = function() {
-                return $http.get('http://localhost:1620/api/resource')
-                .then(function (response) {
-                    var result = [response.data.Resources.length];
-
-                    for (var i = 0; i < response.data.Resources.length; i++) {
-                        var row = {};
-                        var currentObject = response.data.Resources[i];
-
-                        row.FirstName = currentObject.FirstName;
-                        row.LastName = currentObject.LastName;
-                        row.City = currentObject.City;
-                        row.Position = currentObject.Position;
-
-                        for (var j = 0; j < response.data.TimePeriods.length; j++) {
-                            row[response.data.TimePeriods[j]] = '';
-                        }
-
-                        for (var j = 0; j < currentObject.Assignments.length; j++) {
-                            var timePeriod = currentObject.Assignments[j].TimePeriod;
-
-                            row[timePeriod] = currentObject.Assignments[j].ActualHours;
-                        }
-
-                        result[i] = row;
-                    }
-
-                    $scope.myData = result;
-                });
-            };
-
-            $scope.getDropDownData = function () {
-                return $http.get('http://localhost:1620/api/dropdown')
-                .then(function (response) {
-                    
-                    var cities = [];
-                    var orgUnits = [];
-                    var regions = [];
-                    var markets = [];
-                    var practices = [];
-
-                    for (var i = 0; i < response.data.length; i++) {
-                        if (response.data[i].Category == 'OrgUnit') {
-                            orgUnits[orgUnits.length] = response.data[i];
-                        }
-                        if (response.data[i].Category == 'City') {
-                            cities[cities.length] = response.data[i];
-                        }
-                        if (response.data[i].Category == 'Region') {
-                            regions[regions.length] = response.data[i];
-                        }
-                        if (response.data[i].Category == 'Market') {
-                            markets[markets.length] = response.data[i];
-                        }
-                        if (response.data[i].Category == 'Practice') {
-                            practices[practices.length] = response.data[i];
-                        }
-                    }
-
-                    $scope.Cities = cities;
-                    $scope.OrgUnits = orgUnits;
-                    $scope.Regions = regions;
-                    $scope.Markets = markets;
-                    $scope.Practices = practices;
-                });
-            }
-
-
-            $scope.getDropDownData();
-            $scope.getFirstData();
-        }]);
-    </script>
-
+    <script src="../Scripts/ag-grid.js"></script>
+    <script src="../Scripts/DropdownJs.js"></script>
+    <script src="../Scripts/ResourceUtilityJs.js"></script>
+    <script src="../Scripts/ResourceGridJs.js"></script>
+    <script src="../Scripts/ResourceDetailGridJs.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
 </head>
 <body>
-    <div ng-controller="MainCtrl">
-        <div>
-            <label>Cities</label>
-            <select id="citiesdropdown" ng-model="cities" ng-options="x.Name for x in Cities"></select>
-        </div>
-        
-        <div>
-            <label>Org Units</label>
-            <select id="orgUnitsdropdown" ng-model="orgUnits" ng-options="x.Name for x in OrgUnits"></select>
-        </div>
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Filters</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div>
+                            <label>Cities</label>
+                            <select id="citiesDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Org Units</label>
+                            <select id="orgUnitsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Regions</label>
+                            <select id="regionsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Markets</label>
+                            <select id="marketsDropdown"></select>
+                        </div>
+                        <div>
+                            <label>Practices</label>
+                            <select id="practicesDropdown"></select>
+                        </div>
 
-        <div>
-            <label>Regions</label>
-            <select id="regionsdropdown" ng-model="regions" ng-options="x.Name for x in Regions"></select>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <div style="position: relative; width:700px; height: 150px; padding-left: 60px; padding-bottom: 20px; padding-top: 20px; border-style: dotted">
 
-        <div>
-            <label>Markets</label>
-            <select id="marketsdropdown" ng-model="markets" ng-options="x.Name for x in Markets"></select>
+        <button id="pageLeftButton" style="height: 60px; position: absolute; left: 0"><</button>
+        <div style="position: absolute; left:30px; width: 300px; height: 60px; border-style: dotted">
+            <label style="margin: 0 auto; top:0px; border-style:dotted">Start Date</label>
+            <input style="margin: 0 auto; bottom: 0px" id="startDateInput" type="date" />
         </div>
-
-        <div>
-            <label>Practices</label>
-            <select id="practicesdropdown" ng-model="practices" ng-options="x.Name for x in Practices"></select>
+        <div style="position: absolute; right: 2px; width: 300px; height: 60px; border-style: dotted">
+            <label style="">End Date</label>
+            <input id="endDateInput" type="date" />
         </div>
-        
-        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+        <button id="pageRightButton" style="height: 60px; position: absolute; right: 0">></button>
+        <div style="position: absolute; bottom: 2px">
+            <label>Interval</label>
+            <select id="aggregationsDropdown"></select>
+        </div>
+    </div>
+    <div style="padding-left: 60px; padding-bottom: 20px" ">
+        <button id="filterButton">Apply</button>
+    </div>
+    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
+        <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
 
+    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
+        <p id="selectedUser"></p>
+        <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
+    </div>
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <p id="errorMessage">Error</p>
+        </div>
+    </div>
 </body>
 </html>
