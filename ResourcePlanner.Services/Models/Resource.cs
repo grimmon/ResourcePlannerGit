@@ -129,6 +129,7 @@ namespace ResourcePlanner.Services.Models
         public double Hours {get; set;}
         public DateTime StartDate {get; set;}                  
         public DateTime EndDate {get; set;}
+        public int DaysOfWeek { get; set; }
     }
 
 }

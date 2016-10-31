@@ -13,19 +13,30 @@ namespace ResourcePlanner.Services.Controllers
 {
     public class AddAssignmentController : ApiController
     {
-        public async Task<IHttpActionResult> Post(int ResourceId, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate)
+        public async Task<IHttpActionResult> Post(int ResourceId, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate, Enums.Enums.DayOfWeek[] daysOfWeek)
         {
 
 
             var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+
+            int days = 0;
+
+            if (daysOfWeek.Length > 0)
+            {
+                days = getDaysAsInt(daysOfWeek);
+            }
+
+
+
             var asgn = new AddAssignment()
             {
                 ResourceId = ResourceId,
                 ProjectId = ProjectId,
                 Hours = Hours,
                 StartDate = StartDate,
-                EndDate = EndDate
+                EndDate = EndDate,
+                DaysOfWeek = days
             };
 
             try
@@ -39,5 +50,39 @@ namespace ResourcePlanner.Services.Controllers
 
             return Ok();
         }
+
+        private int getDaysAsInt(Enums.Enums.DayOfWeek[] days)
+        {
+            int result = 0;
+            if (days.Contains(Enums.Enums.DayOfWeek.Sunday))
+            {
+                result += 1;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Monday))
+            {
+                result += 2;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Tuesday))
+            {
+                result += 4;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Wednesday))
+            {
+                result += 8;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Thursday))
+            {
+                result += 16;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Friday))
+            {
+                result += 32;
+            }
+            if (days.Contains(Enums.Enums.DayOfWeek.Saturday))
+            {
+                result += 64;
+            }
+            return result;
+        } 
     }
 }
