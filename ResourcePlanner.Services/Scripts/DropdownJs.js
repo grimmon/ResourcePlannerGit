@@ -13,6 +13,7 @@
                 var regionsDropdown      = document.getElementById("regionsDropdown"     );
                 var marketsDropdown      = document.getElementById("marketsDropdown"     );
                 var practicesDropdown    = document.getElementById("practicesDropdown"   );
+                var subpracticesDropdown = document.getElementById("subpracticesDropdown");
                 var aggregationsDropdown = document.getElementById("aggregationsDropdown");
 
                 var citiesNoneOption = document.createElement('option');
@@ -27,10 +28,6 @@
                 regionsNoneOption.text = 'None';
                 regionsNoneOption.value = -1;
 
-                var regionsNoneOption = document.createElement('option');
-                regionsNoneOption.text = 'None';
-                regionsNoneOption.value = -1;
-
                 var marketsNoneOption = document.createElement('option');
                 marketsNoneOption.text = 'None';
                 marketsNoneOption.value = -1;
@@ -39,11 +36,16 @@
                 practicesNoneOption.text = 'None';
                 practicesNoneOption.value = -1;
 
+                var subPracticeNoneOption = document.createElement('option');
+                subPracticeNoneOption.text = 'None';
+                subPracticeNoneOption.value = -1;
+
                 citiesDropdown.appendChild(citiesNoneOption);
                 orgUnitsDropdown.appendChild(orgUnitsNoneOption);
                 regionsDropdown.appendChild(regionsNoneOption);
                 marketsDropdown.appendChild(marketsNoneOption);
                 practicesDropdown.appendChild(practicesNoneOption);
+                subpracticesDropdown.appendChild(subPracticeNoneOption);
 
                 for (var i = 0; i < httpResponse.length; i++) {
                     var option = document.createElement('option');
@@ -64,6 +66,9 @@
                     }
                     if (httpResponse[i].Category == 'Practice') {
                         practicesDropdown.appendChild(option);
+                    }
+                    if (httpResponse[i].Category == 'SubPractice') {
+                        subpracticesDropdown.appendChild(option);
                     }
                     if (httpResponse[i].Category == 'agg') {
                         aggregationsDropdown.appendChild(option);

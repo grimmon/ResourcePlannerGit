@@ -2,6 +2,7 @@
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="Scripts/angular.js"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +13,11 @@
     <script src="../Scripts/ResourceUtilityJs.js"></script>
     <script src="../Scripts/ResourceGridJs.js"></script>
     <script src="../Scripts/ResourceDetailGridJs.js"></script>
+    <script src="../Scripts/tag-it.js"></script>
     <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="../Scripts/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="../Scripts/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="container">
@@ -25,6 +30,24 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
+                        <div>
+                            <label>Search</label>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $("#myTags").tagit({
+                                        fieldName: "searchbar",
+                                        caseSensitive: false,
+                                        readOnly: false,
+                                        tagLimit: 3,
+                                        onTagLimitExceeded: function (event, ui) {
+                                            this.readOnly = true;
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <ul id="myTags"></ul>
+</div>
                         <div>
                             <label>Cities</label>
                             <select id="citiesDropdown"></select>
@@ -44,6 +67,10 @@
                         <div>
                             <label>Practices</label>
                             <select id="practicesDropdown"></select>
+                        </div>
+                        <div>
+                            <label>SubPractices</label>
+                            <select id="subpracticesDropdown"></select>
                         </div>
 
                     </div>
@@ -75,14 +102,30 @@
         <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
 
-    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
-        <p id="selectedUser"></p>
-        <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
-    </div>
+
     <div id="errorModal" class="modal">
         <div class="modal-content">
             <span class="close">×</span>
             <p id="errorMessage">Error</p>
+        </div>
+    </div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Resource Detail
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
+                        <p id="selectedUser"></p>
+                        <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
