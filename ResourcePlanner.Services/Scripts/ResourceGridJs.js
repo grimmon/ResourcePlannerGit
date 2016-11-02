@@ -83,8 +83,7 @@ function buildResourceQuery(params) {
     var practice    = document.getElementById('practicesDropdown'   ).value;
     var subPractice = document.getElementById('subpracticesDropdown').value;
     var aggregation = document.getElementById('aggregationsDropdown').value;
-    var startDate   = document.getElementById('startDateInput'      ).value;
-    var endDate     = document.getElementById('endDateInput'        ).value;
+    
     var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
     var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
