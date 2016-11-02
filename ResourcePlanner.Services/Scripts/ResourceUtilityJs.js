@@ -73,14 +73,14 @@ function pageUp() {
     dateTimeUtility.updateCurrentDate(1);
 
     refreshResourceGrid();
-    refreshResourceDetailGrid();
+    refresh();
 }
 
 function pageDown() {
     dateTimeUtility.updateCurrentDate(-1);
 
     refreshResourceGrid();
-    refreshResourceDetailGrid();
+    refresh();
 }
 
 function addTimePeriods(row, timePeriods) {

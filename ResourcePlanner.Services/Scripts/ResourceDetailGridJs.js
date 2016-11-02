@@ -32,6 +32,13 @@ function initializeResourceDetailGrid() {
 
 function refreshResourceDetailGrid(event) {
     if (event != undefined && event.node.isSelected()) {
+        refresh();
+        updateSelectedUser(event.node.data);
+    }
+}
+
+function refresh() {
+    if (selectedResource != undefined && selectedResource.Id != undefined) {
         resourceDetailGrid.options.api.showLoadingOverlay();
 
         var dataSource = {
@@ -50,7 +57,6 @@ function refreshResourceDetailGrid(event) {
 
         $("#selectedUser").text("loading...");
         resourceDetailGrid.options.api.setDatasource(dataSource);
-        updateSelectedUser(event.node.data);
     }
 }
 
