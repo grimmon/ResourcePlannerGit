@@ -201,19 +201,32 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 var searchTerm = pageParams.SearchTerm1.ToLower();
 
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => 
+                resourceInfo.FirstName.Contains(searchTerm) || 
+                resourceInfo.LastName.Contains(searchTerm) ||
+                resourceInfo.Position.Contains(searchTerm)
+                ).ToList();
             }
             if (!string.IsNullOrWhiteSpace(pageParams.SearchTerm2))
             {
                 var searchTerm = pageParams.SearchTerm2.ToLower();
 
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => 
+                resourceInfo.FirstName.Contains(searchTerm) || 
+                resourceInfo.LastName.Contains(searchTerm) ||
+                resourceInfo.Position.Contains(searchTerm)
+                ).ToList();
             }
             if (!string.IsNullOrWhiteSpace(pageParams.SearchTerm3))
             {
                 var searchTerm = pageParams.SearchTerm3.ToLower();
 
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => 
+                resourceInfo.FirstName.Contains(searchTerm) || 
+                resourceInfo.LastName.Contains(searchTerm) ||
+                resourceInfo.Position.Contains(searchTerm)
+
+                ).ToList();
             }
 
             if (pageParams.City.HasValue)
@@ -295,7 +308,7 @@ namespace ResourcePlanner.Services.DataAccess
             //aggregate assignments by time period
             foreach (var resource in result.Resources)
             {
-                resource.Assignments = AggregatetAssignmentsByTimeAggregation(pageParams.Aggregation, resource.Assignments);
+                resource.Assignments = AggregateAssignmentsByTimeAggregation(pageParams.Aggregation, resource.Assignments);
             }
             
             result.TotalRowCount = filteredResourceInfos.Count;
@@ -345,7 +358,7 @@ namespace ResourcePlanner.Services.DataAccess
 
             foreach (var project in result.Projects)
             {
-                project.Assignments = AggregatetAssignmentsByTimeAggregation(aggregation, project.Assignments);
+                project.Assignments = AggregateAssignmentsByTimeAggregation(aggregation, project.Assignments);
             }
 
             var timePeriods = _timePeriods
@@ -445,7 +458,7 @@ namespace ResourcePlanner.Services.DataAccess
             return result;
         }
 
-        public static List<Assignment> AggregatetAssignmentsByTimeAggregation(TimeAggregation aggregation, List<Assignment> assignments)
+        public static List<Assignment> AggregateAssignmentsByTimeAggregation(TimeAggregation aggregation, List<Assignment> assignments)
         {
             var result = new List<Assignment>();
 
