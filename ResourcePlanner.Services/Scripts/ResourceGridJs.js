@@ -22,12 +22,12 @@
 };
 
 var startingResourceColumnDefs = [
-    { headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
-    { headerName: "Last Name" , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
-    { headerName: "Position"  , field: "Position" , width: 150, suppressMenu: true },
-    { headerName: "City", field: "City", width: 150, suppressMenu: true },
-    { headerName: "Practice", field: "Practice", width: 150, suppressMenu: true },
-    { headerName: "Sub-Practice", field: "SubPractice", width: 150, suppressMenu: true },
+    { headerName: "First Name"  , field: "FirstName"  , width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
+    { headerName: "Last Name"   , field: "LastName"   , width: 150, suppressMenu: true, pinned: 'left' },
+    { headerName: "Position"    , field: "Position"   , width: 150, suppressMenu: true, pinned: 'left' },
+    { headerName: "City"        , field: "City"       , width: 150, suppressMenu: true, pinned: 'left' },
+    { headerName: "Practice"    , field: "Practice"   , width: 150, suppressMenu: true, pinned: 'left' },
+    { headerName: "Sub-Practice", field: "SubPractice", width: 150, suppressMenu: true, pinned: 'left' },
 ];
 
 function initializeResourceGrid() {

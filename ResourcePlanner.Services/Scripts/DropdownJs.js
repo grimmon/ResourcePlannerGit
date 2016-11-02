@@ -1,4 +1,4 @@
-﻿getDropDownData = function (token) {
+﻿getDropDownData = function (token, successCallback) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', 'api/dropdown');
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -76,6 +76,8 @@
                 }
 
                 dateTimeUtility.currentAggregation = aggregationsDropdown.childNodes[0].value;
+
+                successCallback();
             }
             else {
             }

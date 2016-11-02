@@ -11,15 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('ADAL Error: ' + error);
             return;
         }
-        getDropDownData(token);
+        getDropDownData(token, onDropDownSuccess);
     });
-
-    var filterButton = document.getElementById("filterButton");
-    var pageLeftButton  = document.getElementById("pageLeftButton");
-    var pageRightButton = document.getElementById("pageRightButton");
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-
-    dateTimeUtility.currentAggregation = aggregationDropdown.value;
 
     var now = new Date();
 
@@ -44,17 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     dateTimeUtility.pageSize = TimePeriods.length;
 
-    pageLeftButton.onclick = pageDown;
-    pageRightButton.onclick = pageUp;
-
-    filterButton.onclick = function () {
-        var aggregation = document.getElementById('aggregationsDropdown').value;
-
-        dateTimeUtility.currentAggregation = aggregation;
-
-        refreshResourceGrid();
-        refreshResourceDetailGrid();
-    }
 
     var modal = document.getElementById("errorModal");
     var span = document.getElementsByClassName("close")[0];
@@ -69,9 +51,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    
+});
+
+function onDropDownSuccess() {
+    var filterButton = document.getElementById("filterButton");
+    var pageLeftButton = document.getElementById("pageLeftButton");
+    var pageRightButton = document.getElementById("pageRightButton");
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+
+    dateTimeUtility.currentAggregation = aggregationDropdown.value;
+
+    pageLeftButton.onclick = pageDown;
+    pageRightButton.onclick = pageUp;
+
+    filterButton.onclick = function () {
+        var aggregation = document.getElementById('aggregationsDropdown').value;
+
+        dateTimeUtility.currentAggregation = aggregation;
+
+        refreshResourceGrid();
+        refreshResourceDetailGrid();
+    }
+
     initializeResourceGrid();
     initializeResourceDetailGrid();
-});
+}
 
 function pageUp() {
     dateTimeUtility.updateCurrentDate(1);
