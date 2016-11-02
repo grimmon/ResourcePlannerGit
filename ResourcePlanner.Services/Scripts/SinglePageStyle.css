@@ -1,0 +1,32 @@
+﻿#accordion {
+    position: fixed;
+    bottom: 0;
+    width: 100%;    
+}
+
+.panel-default > .panel-heading{
+    background: #808080;
+}
+
+.panel-heading {
+    padding: 0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.panel-group .panel {
+    border-radius: 0;
+}
+
+.panel-title a {
+    color: #FFFFFF;
+    text-align: center;
+    width: 100%;
+    display: block;
+    outline: none;
+}
+
+.panel-title a:hover, .panel-title a:focus, .panel-title a:active {
+    text-decoration: none;
+    outline: none;
+} 
