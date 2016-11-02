@@ -192,10 +192,29 @@ namespace ResourcePlanner.Services.DataAccess
 
             return projects;
         }
-        
+
         public List<ResourceInfo> FilterResourceInfo(ResourceQuery pageParams)
         {
             var resourceInfos = new List<ResourceInfo>(_resourceInfos.Values);
+
+            if (!string.IsNullOrWhiteSpace(pageParams.SearchTerm1))
+            {
+                var searchTerm = pageParams.SearchTerm1.ToLower();
+
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(pageParams.SearchTerm2))
+            {
+                var searchTerm = pageParams.SearchTerm2.ToLower();
+
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(pageParams.SearchTerm3))
+            {
+                var searchTerm = pageParams.SearchTerm3.ToLower();
+
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.FirstName.Contains(searchTerm) || resourceInfo.LastName.Contains(searchTerm)).ToList();
+            }
 
             if (pageParams.City.HasValue)
             {
