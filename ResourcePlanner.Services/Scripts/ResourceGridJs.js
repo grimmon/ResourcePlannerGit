@@ -33,6 +33,10 @@ function initializeResourceGrid() {
     new agGrid.Grid(gridDiv, resourceGrid.options);
 
     refreshResourceGrid();
+
+    var startingResourceColumns = createResourceColumns(startingResourceColumnDefs, startingColumns);
+
+    resourceGrid.options.api.setColumnDefs(startingResourceColumns);
 }
 
 function refreshResourceGrid() {
@@ -55,10 +59,6 @@ function refreshResourceGrid() {
     TimePeriods[2] = "";
 
     startingColumns["TimePeriods"] = TimePeriods;
-
-    var startingResourceColumns = createResourceColumns(startingResourceColumnDefs, startingColumns);
-
-    resourceGrid.options.api.setColumnDefs(startingResourceColumns);
 
     resourceGrid.options.api.refreshHeader();
 }

@@ -31,7 +31,7 @@ function initializeResourceDetailGrid() {
 }
 
 function refreshResourceDetailGrid(event) {
-    if (event.node.isSelected()) {
+    if (event != undefined && event.node.isSelected()) {
         resourceDetailGrid.options.api.showLoadingOverlay();
 
         var dataSource = {
