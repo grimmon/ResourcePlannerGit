@@ -1,189 +1,6 @@
-﻿var columnHeaders = {};
-var selectedResource = {};
-var currentColumns = [];
-
-function formatDate(date) {
-    var endMonth = (date.getMonth() + 1);
-    var endDay = date.getDate();
-
-    if (endMonth < 10)
-        endMonth = "0" + endMonth;
-
-    if (endDay < 10)
-        endDay = "0" + endDay;
-
-    return date.getFullYear() + '-' + endMonth + '-' + endDay;
-}
-
-function pageUp() {
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-    var aggregation = aggregationDropdown.value;
-
-    var endDateInput = document.getElementById("endDateInput");
-    var endDateInputValue = endDateInput.value;
-    var oldEndDate = new Date(endDateInputValue);
-    
-    var startDateInput = document.getElementById("startDateInput");
-    var startDateInputValue = startDateInput.value;
-    var oldStartDate = new Date(startDateInputValue);
-
-    if (aggregation == '0') {
-        var oldEndDateOffset = oldEndDate.getDate() + 2;
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-
-        var oldStartDateOffset = oldStartDate.getDate() + 2;
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-    }
-    else if (aggregation == '1') {
-        var oldEndDateOffset = oldEndDate.getDate() + 8;
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-
-        var oldStartDateOffset = oldStartDate.getDate() + 8;
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-    }
-    else if (aggregation == '2') {
-        var oldEndDateOffset = oldEndDate.getDate() + 1;
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-
-        var oldStartDateOffset = oldStartDate.getDate() + 1;
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-    }
-    else if (aggregation == '3') {
-
-    }
-}
-
-function pageDown() {
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-    var aggregation = aggregationDropdown.value;
-
-    var endDateInput = document.getElementById("endDateInput");
-    var endDateInputValue = endDateInput.value;
-    var oldEndDate = new Date(endDateInputValue);
-
-    var startDateInput = document.getElementById("startDateInput");
-    var startDateInputValue = startDateInput.value;
-    var oldStartDate = new Date(startDateInputValue);
-
-    if (aggregation == '0') {
-        var oldEndDateOffset = oldEndDate.getDate();
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-
-        var oldStartDateOffset = oldStartDate.getDate();
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-    }
-    else if (aggregation == '1') {
-        var oldEndDateOffset = oldEndDate.getDate() - 6;
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-
-        var oldStartDateOffset = oldStartDate.getDate() - 6;
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-    }
-    else if (aggregation == '2') {
-
-    }
-    else if (aggregation == '3') {
-
-    }
-}
-
-function onAggregationChanged() {
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-    var aggregation = aggregationDropdown.value;
-
-    var endDateInput = document.getElementById("endDateInput");
-
-    var startDateInput = document.getElementById("startDateInput");
-    var startDateInputValue = startDateInput.value;
-    var oldStartDate = new Date(startDateInputValue);
-
-    if (aggregation == '1') {
-        var oldStartDateOffset = oldStartDate.getDate() - oldStartDate.getDay();
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-        newStartDate = formatDate(newStartDate);
-
-        startDateInput.value = newStartDate;
-
-        var oldEndDateOffset = oldStartDate.getDate() - 6;
-
-        var newEndDate = new Date(oldEndDate);
-        newEndDate.setDate(oldEndDateOffset);
-        newEndDate = formatDate(newEndDate);
-
-        endDateInput.value = newEndDate;
-    }
-    else if (aggregation == '2') {
-        var oldStartDateOffset = oldStartDate.getDate() + 1;
-
-        var newStartDate = new Date(oldStartDate);
-        newStartDate.setDate(oldStartDateOffset);
-
-        var firstOfMonth = new Date(newStartDate.getFullYear(), newStartDate.getMonth(), 1);
-        var lastOfMonth = new Date(newStartDate.getFullYear(), newStartDate.getMonth() + 1, 1);
-
-        newStartDate = formatDate(firstOfMonth);
-
-        var newEndDate = formatDate(lastOfMonth);
-
-        startDateInput.value = newStartDate;
-        endDateInput.value = newEndDate;
-    }
-    else if (aggregation == '3') {
-
-    }
-}
+﻿var selectedResource = {};
+var startingColumns = {};
+var headers = [];
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -197,16 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         getDropDownData(token);
     });
 
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-    aggregationDropdown.onchange = onAggregationChanged;
-
-
-
-    var filterButton    = document.getElementById("filterButton");
+    var filterButton = document.getElementById("filterButton");
     var pageLeftButton  = document.getElementById("pageLeftButton");
     var pageRightButton = document.getElementById("pageRightButton");
-    var startDateInput  = document.getElementById("startDateInput");
-    var endDateInput    = document.getElementById("endDateInput");
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+
+    dateTimeUtility.currentAggregation = aggregationDropdown.value;
 
     var now = new Date();
 
@@ -214,19 +27,16 @@ document.addEventListener('DOMContentLoaded', function () {
     now.setMinutes(0);
     now.setSeconds(0);
 
-    var startDate = formatDate(now);
-
-    var endDate = new Date();
-    endDate.setDate(now.getDate() + 7);
-    endDate = formatDate(endDate);
-
-    startDateInput.value = startDate;
-    endDateInput.value = endDate;
+    dateTimeUtility.currentDate = now;
 
     pageLeftButton.onclick = pageDown;
     pageRightButton.onclick = pageUp;
 
     filterButton.onclick = function () {
+        var aggregation = document.getElementById('aggregationsDropdown').value;
+
+        dateTimeUtility.currentAggregation = aggregation;
+
         refreshResourceGrid();
         refreshResourceDetailGrid();
     }
@@ -248,6 +58,20 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeResourceDetailGrid();
 });
 
+function pageUp() {
+    dateTimeUtility.updateCurrentDate(1);
+
+    refreshResourceGrid();
+    //refreshResourceDetailGrid();
+}
+
+function pageDown() {
+    dateTimeUtility.updateCurrentDate(-1);
+
+    refreshResourceGrid();
+    //refreshResourceDetailGrid();
+}
+
 function addTimePeriods(row, timePeriods) {
     for (var i = 0; i < timePeriods.length; i++) {
         var timePeriod = timePeriods[i];
@@ -261,13 +85,13 @@ function addAssignments(row, assignments) {
         var assignment = assignments[i];
         timePeriod = assignment.TimePeriod;
 
-        addAssignment(row, assignment, timePeriod);
+        addAssignment(row, assignment, i);
     }
 }
 
 function addAssignment(row, assignment, timePeriod) {
-    var actualHoursIndex   = timePeriod + "ActualHours";
-    var forecastHoursIndex = timePeriod + "ForecastHours";
+    var actualHoursIndex   = timePeriod + "-ActualHours";
+    var forecastHoursIndex = timePeriod + "-ForecastHours";
 
     row[actualHoursIndex  ] = assignment.ActualHours;
     row[forecastHoursIndex] = assignment.ForecastHours;
@@ -286,7 +110,7 @@ function createResourceColumns(startingColumns, columns) {
     var columnCount = startingColumns.length;
 
     if (columns != null && columns.TimePeriods != null) {
-        columnCount == columns.TimePeriods.length;
+        columnCount = columns.TimePeriods.length;
     }
 
     var newColumns = [columnCount];
@@ -302,7 +126,9 @@ function createResourceColumns(startingColumns, columns) {
         //add time periods as columns
         for (i = 0; i < columns.TimePeriods.length; i++) {
             var timePeriod = columns.TimePeriods[i];
-            column = createColumn(timePeriod);
+            headers[i] = timePeriod;
+
+            column = createColumn(i);
 
             var newColumnIndex = i + startingColumns.length;
             newColumns[newColumnIndex] = column;
@@ -312,32 +138,26 @@ function createResourceColumns(startingColumns, columns) {
     return newColumns;
 }
 
-function checkForColumnChanges(oldColumns, newColumns) {
-
-    for (var i = 0; i < newColumns.length; i++) {
-        if (oldColumns.length !== newColumns.length)
-            return true;
-        for (var i = oldColumns.length; i--;) {
-            if (oldColumns[i].field !== newColumns[i].field)
-                return true;
-            if (oldColumns[i].field !== newColumns[i].field)
-                return true;
-        }
-
-        return false;
-    }
-}
-
-function createColumn(timePeriod) {
+function createColumn(fieldName) {
     return {
-        headerValueGetter: getHeader,
-        //headerName: timePeriod,
+        headerValueGetter: getGroupName,
         suppressMenu: true,
         children: [
-            { width: 67, field: timePeriod + "ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerValueGetter: getHeader },
-            { width: 67, field: timePeriod + "ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerName: "Frcst" }
+            { width: 67, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerValueGetter: getHeader },
+            { width: 67, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerName: "Frcst" }
         ]
     };
+}
+
+function getHeader(params) {
+    var splitName = params.colDef.field.split("-");
+    var header = headers[splitName[0]];
+
+    return header;
+}
+
+function getGroupName(params) {
+    return "hi";
 }
 
 function createRows(rowData, columnData, rowParser) {
@@ -359,10 +179,6 @@ function createRow(rowData, columns, rowParser) {
     rowParser(row, rowData, columns);
 
     return row;
-}
-
-function getHeader(params) {
-    return params.colDef.field;
 }
 
 var timePeriodCellRenderer = function (params) {

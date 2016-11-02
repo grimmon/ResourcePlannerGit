@@ -28,9 +28,6 @@ var startingResourceColumnDefs = [
     { headerName: "City"      , field: "City"     , width: 150, suppressMenu: true },
 ];
 
-function hi() {
-}
-
 function initializeResourceGrid() {
     var gridDiv = document.querySelector(resourceGrid.name);
     new agGrid.Grid(gridDiv, resourceGrid.options);
@@ -50,6 +47,19 @@ function refreshResourceGrid() {
     };
 
     resourceGrid.options.api.setDatasource(dataSource);
+
+    var TimePeriods = [];
+
+    TimePeriods[0] = "";
+    TimePeriods[1] = "";
+    TimePeriods[2] = "";
+
+    startingColumns["TimePeriods"] = TimePeriods;
+
+    var startingResourceColumns = createResourceColumns(startingResourceColumnDefs, startingColumns);
+
+    resourceGrid.options.api.setColumnDefs(startingResourceColumns);
+
     resourceGrid.options.api.refreshHeader();
 }
 
@@ -72,11 +82,15 @@ function buildResourceQuery(params) {
     var market      = document.getElementById('marketsDropdown'     ).value;
     var practice    = document.getElementById('practicesDropdown'   ).value;
     var aggregation = document.getElementById('aggregationsDropdown').value;
-    var startDate   = document.getElementById('startDateInput'      ).value;
-    var endDate     = document.getElementById('endDateInput'        ).value;
 
-    filters += "&startDate=" + startDate;
-    filters += "&endDate="   + endDate;
+    var startDate = dateTimeUtility.getStartDate();
+    var endDate = dateTimeUtility.getEndDate();
+
+    var formattedStartDate = dateTimeUtility.formatDate(startDate);
+    var formattedEndDate = dateTimeUtility.formatDate(endDate);
+
+    filters += "&startDate=" + formattedStartDate;
+    filters += "&endDate=" + formattedEndDate;
 
     if (city        != -1 && city        != '') { filters += "&city="     + city;        }
     if (orgUnit     != -1 && orgUnit     != '') { filters += "&orgUnit="  + orgUnit;     }
@@ -96,22 +110,17 @@ function buildResourceQuery(params) {
 }
 
 function onCallResourceSuccess(params, query, httpResponse) {
-    var columns = createResourceColumns(startingResourceColumnDefs, httpResponse);
+    //var columns = createResourceColumns(startingResourceColumnDefs, httpResponse);
     var rows = createRows(httpResponse.Resources, httpResponse.TimePeriods, createResourceRow);
 
-    var columnsChanged = checkForColumnChanges(currentColumns, columns);
-
-    if (columnsChanged) {
-        resourceGrid.options.api.setColumnDefs(columns);
-
-        var detailColumns = createResourceColumns(startingResourceDetailColumnDefs, httpResponse);
-        resourceDetailGrid.options.api.setColumnDefs(detailColumns);
-
-        currentColumns = columns;
+    for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
+        var timePeriod = httpResponse.TimePeriods[i];
+        headers[i] = timePeriod;
     }
 
     params.successCallback(rows, httpResponse.TotalRowCount);
     resourceGrid.options.api.hideOverlay();
+    resourceGrid.options.api.refreshHeader();
 }
 
 function createResourceRow(row, resource, timePeriods) {

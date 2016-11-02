@@ -398,39 +398,29 @@ namespace ResourcePlanner.Services.DataAccess
         {
              var result = new List<DateTime>();
 
-            if (aggregation == TimeAggregation.Daily)
-            {
-                return dateTimes;
-            }
-            else if (aggregation == TimeAggregation.Weekly)
-            {
-                var startOfWeek = startDate.AddDays(-1 * (int)startDate.DayOfWeek);
+            DateTime start = startDate;
+            Func<DateTime, DateTime> getNextPeriod = date => date.AddDays(1);
 
-                while (startOfWeek < endDate)
-                {
-                    result.Add(startOfWeek);
-                    startOfWeek = startOfWeek.AddDays(7);
-                }
+            if (aggregation == TimeAggregation.Weekly)
+            {
+                start = startDate.AddDays(-1 * (int)startDate.DayOfWeek);
+                getNextPeriod = date => date.AddDays(7);
             }
             else if (aggregation == TimeAggregation.Monthly)
             {
-                var startOfMonth = new DateTime(startDate.Year, startDate.Month, 1);
-
-                while (startOfMonth < endDate)
-                {
-                    result.Add(startOfMonth);
-                    startOfMonth = startOfMonth.AddMonths(1);
-                }
+                start = new DateTime(startDate.Year, startDate.Month, 1);
+                getNextPeriod = date => date.AddMonths(1);
             }
             else if (aggregation == TimeAggregation.Quarterly)
-            {   
-                var startOfQuarter = new DateTime(startDate.Year, (startDate.Month - 1) / 3 * 3 + 1, 1);
+            {
+                start = new DateTime(startDate.Year, (startDate.Month - 1) / 3 * 3 + 1, 1);
+                getNextPeriod = date => date.AddMonths(3);
+            }
 
-                while (startOfQuarter < endDate)
-                {
-                    result.Add(startOfQuarter);
-                    startOfQuarter = startOfQuarter.AddMonths(3);
-                }
+            while (start < endDate)
+            {
+                result.Add(start);
+                start = getNextPeriod(start);
             }
 
             return result;

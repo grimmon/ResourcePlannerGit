@@ -69,6 +69,8 @@
                         aggregationsDropdown.appendChild(option);
                     }
                 }
+
+                dateTimeUtility.currentAggregation = aggregationsDropdown.childNodes[0].value;
             }
             else {
             }

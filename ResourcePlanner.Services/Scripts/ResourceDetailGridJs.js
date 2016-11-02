@@ -42,6 +42,12 @@ function refreshResourceDetailGrid(event) {
             }
         };
 
+        var startingResourceColumns = createResourceColumns(startingResourceDetailColumnDefs, startingColumns);
+
+        resourceDetailGrid.options.api.setColumnDefs(startingResourceColumns);
+
+        resourceDetailGrid.options.api.refreshHeader();
+
         $("#selectedUser").text("loading...");
         resourceDetailGrid.options.api.setDatasource(dataSource);
         updateSelectedUser(event.node.data);
@@ -60,11 +66,15 @@ function buildResourceDetailQuery(params) {
     }
 
     var aggregation = document.getElementById('aggregationsDropdown').value;
-    var startDate   = document.getElementById('startDateInput'      ).value;
-    var endDate     = document.getElementById('endDateInput'        ).value;
+    
+    var startDate = dateTimeUtility.getStartDate();
+    var endDate = dateTimeUtility.getEndDate();
 
-    filters += "&startDate=" + startDate;
-    filters += "&endDate=" + endDate;
+    var formattedStartDate = dateTimeUtility.formatDate(startDate);
+    var formattedEndDate = dateTimeUtility.formatDate(endDate);
+
+    filters += "&startDate=" + formattedStartDate;
+    filters += "&endDate=" + formattedEndDate;
 
     if (aggregation != -1 && aggregation != '') { filters += "&agg=" + aggregation; }
 
@@ -81,15 +91,14 @@ function updateResourceDetailGrid(params, data, rowData, columnData, options) {
     var columns = createResourceColumns(startingResourceDetailColumnDefs, data);
     var rows = createRows(rowData, columnData, createProjectRow);
 
-    var columnsChanged = checkForColumnChanges(currentColumns, columns);
-
-    if (columnsChanged) {
-        options.api.setColumnDefs(columns);
-        currentColumns = columns;
+    for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
+        var timePeriod = httpResponse.TimePeriods[i];
+        headers[i] = timePeriod;
     }
 
     params.successCallback(rows, data.TotalRowCount);
     resourceDetailGrid.options.api.hideOverlay();
+    resourceDetailGrid.options.api.refreshHeader();
 }
 
 function createProjectRow(row, project, timePeriods) {
