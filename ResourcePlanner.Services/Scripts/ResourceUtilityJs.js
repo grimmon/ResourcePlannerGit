@@ -29,6 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     dateTimeUtility.currentDate = now;
 
+    var TimePeriods = [];
+
+    TimePeriods[0] = "";
+    TimePeriods[1] = "";
+    TimePeriods[2] = "";
+    TimePeriods[3] = "";
+
+    startingColumns["TimePeriods"] = TimePeriods;
+
+    dateTimeUtility.pageSize = TimePeriods.length;
+
     pageLeftButton.onclick = pageDown;
     pageRightButton.onclick = pageUp;
 

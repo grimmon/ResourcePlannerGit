@@ -51,15 +51,6 @@ function refreshResourceGrid() {
     };
 
     resourceGrid.options.api.setDatasource(dataSource);
-
-    var TimePeriods = [];
-
-    TimePeriods[0] = "";
-    TimePeriods[1] = "";
-    TimePeriods[2] = "";
-
-    startingColumns["TimePeriods"] = TimePeriods;
-
     resourceGrid.options.api.refreshHeader();
 }
 
