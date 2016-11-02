@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function onDropDownSuccess() {
+    var applyButton = document.getElementById("applyButton");
     var filterButton = document.getElementById("filterButton");
     var pageLeftButton = document.getElementById("pageLeftButton");
     var pageRightButton = document.getElementById("pageRightButton");
@@ -65,13 +66,17 @@ function onDropDownSuccess() {
     pageLeftButton.onclick = pageDown;
     pageRightButton.onclick = pageUp;
 
-    filterButton.onclick = function () {
+    applyButton.onclick = function () {
         var aggregation = document.getElementById('aggregationsDropdown').value;
 
         dateTimeUtility.currentAggregation = aggregation;
 
         refreshResourceGrid();
         refreshResourceDetailGrid();
+    }
+
+    filterButton.onclick = function () {
+        $('#collapse1').collapse('toggle');
     }
 
     initializeResourceGrid();

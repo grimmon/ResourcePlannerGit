@@ -46,8 +46,17 @@
 }
 
 .searchButton {
+    float:right;
     padding-top: 10px;
     position: absolute;
     right: 0px;
     padding-right: 100px;
+}
+
+.appLogo {
+    float: left;
+    position: absolute;
+    left: 0px;
+    padding-top : 15px;
+    padding-left:100px;
 }

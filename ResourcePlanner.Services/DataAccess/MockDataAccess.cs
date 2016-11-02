@@ -23,6 +23,7 @@ namespace ResourcePlanner.Services.DataAccess
         private static Random _rand = new Random();
 
         private static List<DropdownValue> _practices = new List<DropdownValue>();
+        private static List<DropdownValue> _subpractices = new List<DropdownValue>();
         private static List<DropdownValue> _positions = new List<DropdownValue>();
         private static List<DropdownValue> _orgUnits  = new List<DropdownValue>();
         private static List<DropdownValue> _regions   = new List<DropdownValue>();
@@ -52,12 +53,13 @@ namespace ResourcePlanner.Services.DataAccess
             var dropdownDataAccess = new MockDropdownDataAccess();
             var dropdownValues = dropdownDataAccess.GetDropdownValues();
 
-            _practices.AddRange(dropdownValues.Where(dropdownValue => dropdownValue.Category == "Practice"));
-            _positions.AddRange(dropdownValues.Where(dropdownValue => dropdownValue.Category == "Position"));
-            _orgUnits.AddRange (dropdownValues.Where(dropdownValue => dropdownValue.Category == "OrgUnit" ));
-            _regions.AddRange  (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Region"  ));
-            _markets.AddRange  (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Market"  ));
-            _cities.AddRange   (dropdownValues.Where(dropdownValue => dropdownValue.Category == "City"    ));
+            _practices.AddRange   (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Practice"));
+            _subpractices.AddRange(dropdownValues.Where(dropdownValue => dropdownValue.Category == "SubPractice"));
+            _positions.AddRange   (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Position"));
+            _orgUnits.AddRange    (dropdownValues.Where(dropdownValue => dropdownValue.Category == "OrgUnit" ));
+            _regions.AddRange     (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Region"  ));
+            _markets.AddRange     (dropdownValues.Where(dropdownValue => dropdownValue.Category == "Market"  ));
+            _cities.AddRange      (dropdownValues.Where(dropdownValue => dropdownValue.Category == "City"    ));
         }
 
         public static void InitTimePeriods(int timePeriodCount)
@@ -422,6 +424,28 @@ namespace ResourcePlanner.Services.DataAccess
                     result = resources.OrderByDescending(resource => resource.Position).ToList();
                 }
             }
+            else if (sort == Enums.Enums.SortOrder.Practice)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.Practice).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.Practice).ToList();
+                }
+            }
+            else if (sort == Enums.Enums.SortOrder.SubPractice)
+            {
+                if (direction == SortDirection.Asc)
+                {
+                    result = resources.OrderBy(resource => resource.SubPractice).ToList();
+                }
+                else
+                {
+                    result = resources.OrderByDescending(resource => resource.SubPractice).ToList();
+                }
+            }
 
             return result;
         }
@@ -573,6 +597,7 @@ namespace ResourcePlanner.Services.DataAccess
             var market   = GetRandomDropdown(_markets);
             var orgUnit  = GetRandomDropdown(_orgUnits);
             var practice = GetRandomDropdown(_practices);
+            var subpractice = GetRandomDropdown(_practices);
             var position = GetRandomDropdown(_positions);
             var region   = GetRandomDropdown(_regions);
 
@@ -584,6 +609,8 @@ namespace ResourcePlanner.Services.DataAccess
             resourceInfo.OrgUnitId  = orgUnit.Id;
             resourceInfo.Practice   = practice.Name;
             resourceInfo.PracticeId = practice.Id;
+            resourceInfo.SubPractice = subpractice.Name;
+            resourceInfo.SubPracticeId = subpractice.Id;
             resourceInfo.Position   = position.Name;
             resourceInfo.PositionId = position.Id; 
 
@@ -600,6 +627,8 @@ namespace ResourcePlanner.Services.DataAccess
             resource.LastName   = resourceInfo.LastName;
             resource.City       = resourceInfo.City;
             resource.Position   = resourceInfo.Position;
+            resource.Practice   = resourceInfo.Practice;
+            resource.SubPractice = resourceInfo.SubPractice;
         }
         
         public static void PopulateProject(Project project)
@@ -632,6 +661,8 @@ namespace ResourcePlanner.Services.DataAccess
             target.FirstName  = source.FirstName;
             target.LastName   = source.LastName;
             target.Position   = source.Position;
+            target.Practice  = source.Practice;
+            target.SubPractice = source.SubPractice;
             target.ResourceId = source.ResourceId;
         }
     }

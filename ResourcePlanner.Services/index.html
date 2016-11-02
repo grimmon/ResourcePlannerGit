@@ -23,13 +23,12 @@
 </head>
 <body>
     <div class="header-nav">
+            <div class="appLogo">
+                <img src="../Images/insightLogo.png" alt="Insight" height="50" />
+            </div>
         <div class="searchButton">
-            <a href="#" id="FilterButton" data-target="#collapseFilter">
-                <script>
-                    $('#FilterButton').click(function () {
-                        $('#collapseFilter').collapse('show');
-                    });
-                </script>
+            
+            <a id="filterButton">
                 <div>
                     <img src="../Images/search.svg.png" alt="Search" height="42" width="42">
                     <script>
@@ -40,19 +39,18 @@
             </a>
         </div>
     </div>
-    <div class="container2" style="padding-top: 90px;">
+    <div class="container2" style="padding-top: 80px;">
         <div class="panel-group" id="filterAccordion">
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <!--<div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Filters</a>
                     </h4>
-                </div>
+                </div>-->
                 <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
 
-                        <div>
-                            <label>Search</label>
+                        <div style="width=500px">
                             <script type="text/javascript">
                                 $(document).ready(function () {
                                     $("#myTags").tagit({
@@ -60,7 +58,10 @@
                                         caseSensitive: false,
                                         readOnly: false,
                                         tagLimit: 3,
-                                        onTagLimitExceeded: function (event, ui) {
+                                        placeholderText: "Search",
+                                        afterTagAdded: function (event, ui) { this.placeholderText = null},
+                                        onTagLimitExceeded: function (event, ui)
+                                        {
                                             this.readOnly = true;
                                         }
                                     });
@@ -102,7 +103,7 @@
 
                             </div>
                             <div class="col-sm-3">
-                                <button id="filterButton">Apply</button>
+                                <button id="applyButton">Apply</button>
                             </div>
                         </div>
                     </div>
@@ -110,12 +111,12 @@
             </div>
         </div>
     </div>
-    <div style="padding-left: 60px; padding-bottom: 20px">
-        <button id="pageLeftButton"><</button>
-        <button id="pageRightButton">></button>
+    <div style="padding-left: 20px; padding-right: 20px; margin-bottom=0">
+        <button id="pageLeftButton" ><</button>
+        <button id="pageRightButton" style="right: 0px">></button>
     </div>
 
-    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
+    <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
         <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
 
@@ -137,7 +138,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
+                    <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
                         <p id="selectedUser"></p>
                         <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
                     </div>
