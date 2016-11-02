@@ -25,7 +25,9 @@ var startingResourceColumnDefs = [
     { headerName: "First Name", field: "FirstName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
     { headerName: "Last Name" , field: "LastName" , width: 150, suppressMenu: true, pinned: 'left'},
     { headerName: "Position"  , field: "Position" , width: 150, suppressMenu: true },
-    { headerName: "City"      , field: "City"     , width: 150, suppressMenu: true },
+    { headerName: "City", field: "City", width: 150, suppressMenu: true },
+    { headerName: "Practice", field: "Practice", width: 150, suppressMenu: true },
+    { headerName: "Sub-Practice", field: "SubPractice", width: 150, suppressMenu: true },
 ];
 
 function initializeResourceGrid() {
@@ -133,7 +135,9 @@ function addResourceData(row, resource) {
     row.FirstName = resource.FirstName;
     row.LastName  = resource.LastName;
     row.City      = resource.City;
-    row.Position  = resource.Position;
+    row.Position = resource.Position;
+    row.Practice = resource.Practice;
+    row.SubPractice = resource.SubPractice;
     row.Id        = resource.ResourceId;
 }
 
