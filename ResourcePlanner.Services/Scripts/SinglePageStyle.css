@@ -1,10 +1,14 @@
-﻿#accordion {
+﻿#detailAccordion {
     position: fixed;
     bottom: 0;
     width: 100%;    
 }
 
-.panel-default > .panel-heading{
+#filterAccordion {
+    width: 100%;    
+}
+
+/*.panel-default > .panel-heading{
     background: #808080;
 }
 
@@ -29,4 +33,21 @@
 .panel-title a:hover, .panel-title a:focus, .panel-title a:active {
     text-decoration: none;
     outline: none;
-} 
+}*/ 
+
+.header-nav {
+    height:80px;
+    background:#EFEFEF;
+    border:2px solid #CCC;
+    position: fixed;
+    width: 100%;
+    margin:0px auto;
+    z-index: 1000
+}
+
+.searchButton {
+    padding-top: 10px;
+    position: absolute;
+    right: 0px;
+    padding-right: 100px;
+}

@@ -16,26 +16,41 @@
     <script src="../Scripts/ResourceDetailGridJs.js"></script>
     <script src="../Scripts/tag-it.js"></script>
     <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
+    <link rel="stylesheet" type="text/css" href="../Scripts/SinglePageStyle.css">
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <link href="../Scripts/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="../Scripts/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 </head>
-<body>    
-    <div style="padding-left: 60px; padding-bottom: 20px; padding-top: 100px">
-        <label>Interval</label>
-        <select id="aggregationsDropdown"></select>
-        <button id="filterButton">Apply</button>
+<body>
+    <div class="header-nav">
+        <div class="searchButton">
+            <a href="#" id="FilterButton" data-target="#collapseFilter">
+                <script>
+                    $('#FilterButton').click(function () {
+                        $('#collapseFilter').collapse('show');
+                    });
+                </script>
+                <div>
+                    <img src="../Images/search.svg.png" alt="Search" height="42" width="42">
+                    <script>
+
+                    </script>
+                </div>
+                <div>Filters</div>
+            </a>
+        </div>
     </div>
-    <div class="container">
-        <div class="panel-group">
+    <div class="container2" style="padding-top: 90px;">
+        <div class="panel-group" id="filterAccordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse1">Filters</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Filters</a>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
+
                         <div>
                             <label>Search</label>
                             <script type="text/javascript">
@@ -53,42 +68,53 @@
                             </script>
 
                             <ul id="myTags"></ul>
-</div>
-                        <div>
-                            <label>Cities</label>
-                            <select id="citiesDropdown"></select>
                         </div>
-                        <div>
-                            <label>Org Units</label>
-                            <select id="orgUnitsDropdown"></select>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>Cities</label>
+                                <select id="citiesDropdown"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Org Units</label>
+                                <select id="orgUnitsDropdown"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Regions</label>
+                                <select id="regionsDropdown"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Markets</label>
+                                <select id="marketsDropdown"></select>
+                            </div>
                         </div>
-                        <div>
-                            <label>Regions</label>
-                            <select id="regionsDropdown"></select>
-                        </div>
-                        <div>
-                            <label>Markets</label>
-                            <select id="marketsDropdown"></select>
-                        </div>
-                        <div>
-                            <label>Practices</label>
-                            <select id="practicesDropdown"></select>
-                        </div>
-                        <div>
-                            <label>SubPractices</label>
-                            <select id="subpracticesDropdown"></select>
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>Practices</label>
+                                <select id="practicesDropdown"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Sub-Practices</label>
+                                <select id="subpracticesDropdown"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Interval</label>
+                                <select id="aggregationsDropdown"></select>
 
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="filterButton">Apply</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="padding-left: 60px; padding-bottom: 20px" >
+    <div style="padding-left: 60px; padding-bottom: 20px">
         <button id="pageLeftButton"><</button>
         <button id="pageRightButton">></button>
     </div>
-    
+
     <div style="height: 100%; box-sizing: border-box; padding-left: 60px">
         <div id="myGrid" style="height: 600px;" class="ag-fresh"></div>
     </div>
@@ -100,7 +126,7 @@
             <p id="errorMessage">Error</p>
         </div>
     </div>
-    <div class="panel-group" id="accordion">
+    <div class="panel-group" id="detailAccordion">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
