@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
     TimePeriods[1] = "";
     TimePeriods[2] = "";
     TimePeriods[3] = "";
+    TimePeriods[4] = "";
+    TimePeriods[5] = "";
+    TimePeriods[6] = "";
+    TimePeriods[7] = "";
 
     startingColumns["TimePeriods"] = TimePeriods;
 
