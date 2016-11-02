@@ -81,7 +81,13 @@ function buildResourceQuery(params) {
     var region      = document.getElementById('regionsDropdown'     ).value;
     var market      = document.getElementById('marketsDropdown'     ).value;
     var practice    = document.getElementById('practicesDropdown'   ).value;
+    var subPractice = document.getElementById('subpracticesDropdown').value;
     var aggregation = document.getElementById('aggregationsDropdown').value;
+    var startDate   = document.getElementById('startDateInput'      ).value;
+    var endDate     = document.getElementById('endDateInput'        ).value;
+    var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
+    var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
+    var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
 
     var startDate = dateTimeUtility.getStartDate();
     var endDate = dateTimeUtility.getEndDate();
@@ -92,12 +98,16 @@ function buildResourceQuery(params) {
     filters += "&startDate=" + formattedStartDate;
     filters += "&endDate=" + formattedEndDate;
 
-    if (city        != -1 && city        != '') { filters += "&city="     + city;        }
-    if (orgUnit     != -1 && orgUnit     != '') { filters += "&orgUnit="  + orgUnit;     }
-    if (region      != -1 && region      != '') { filters += "&region="   + region;      }
-    if (market      != -1 && market      != '') { filters += "&market="   + market;      }
-    if (practice    != -1 && practice    != '') { filters += "&practice=" + practice;    }
-    if (aggregation != -1 && aggregation != '') { filters += "&agg="      + aggregation; }
+    if (city        != -1   && city        != '') { filters += "&city="        + city;        }
+    if (orgUnit     != -1   && orgUnit     != '') { filters += "&orgUnit="     + orgUnit;     }
+    if (region      != -1   && region      != '') { filters += "&region="      + region;      }
+    if (market      != -1   && market      != '') { filters += "&market="      + market;      }
+    if (practice    != -1   && practice    != '') { filters += "&practice="    + practice;    }
+    if (subPractice != -1   && subPractice != '') { filters += "&subpractice=" + subPractice; }
+    if (aggregation != -1   && aggregation != '') { filters += "&agg="         + aggregation; }
+    if (searchTerm1 != null && searchTerm1 != '') { filters += "&searchterm1=" + searchTerm1; }
+    if (searchTerm2 != null && searchTerm2 != '') { filters += "&searchterm2=" + searchTerm2; }
+    if (searchTerm3 != null && searchTerm3 != '') { filters += "&searchterm3=" + searchTerm3; }
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder='     + params.sortModel[0].colId;
