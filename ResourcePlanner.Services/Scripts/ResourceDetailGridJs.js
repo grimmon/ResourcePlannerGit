@@ -23,6 +23,10 @@
 
 var startingResourceDetailColumnDefs = [
     { headerName: "Project Name", field: "ProjectName", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "Project Number", field: "ProjectNumber", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "WBS Element", field: "WBSElement", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "Client", field: "Client", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "Description", field: "Description", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer }
 ];
 
 function initializeResourceDetailGrid() {
@@ -61,6 +65,7 @@ function refresh() {
 
 function updateSelectedUser(data) {
     $("#selectedUser").text("Resource Detail: " + data.FirstName + " " + data.LastName);
+    $('#collapseOne').collapse('show');
 }
 
 function buildResourceDetailQuery(params) {
