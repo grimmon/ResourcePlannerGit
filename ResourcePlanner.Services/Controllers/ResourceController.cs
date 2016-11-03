@@ -16,9 +16,7 @@ namespace ResourcePlanner.Services.Controllers
     public class ResourceController : ApiController
     {
         [HttpGet]
-        [Authorize]
-
-
+        //[Authorize]
         public async Task<IHttpActionResult> Get(
             int pageSize, 
             int pageNum, 

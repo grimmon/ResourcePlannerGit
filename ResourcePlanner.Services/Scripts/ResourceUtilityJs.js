@@ -122,13 +122,11 @@ function addAssignment(row, assignment, timePeriod) {
     row[forecastHoursIndex] = assignment.ForecastHours;
 }
 
-function showError(httpRequest) {
-    resourceGrid.options.api.hideOverlay();
-
+function showError(httpRequest, errorName) {
     var modal = document.getElementById('errorModal');
     modal.style.display = "block";
 
-    $("#errorMessage").text("Error: " + httpRequest.statusText + ", " + httpRequest.responseText);
+    $("#errorMessage").text(errorName + " Error: " + httpRequest.responseText);
 }
 
 function createResourceColumns(startingColumns, columns) {
