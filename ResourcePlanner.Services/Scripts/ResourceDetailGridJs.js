@@ -55,13 +55,12 @@ function refresh() {
 
         resourceDetailGrid.options.api.refreshHeader();
 
-        $("#selectedUser").text("loading...");
         resourceDetailGrid.options.api.setDatasource(dataSource);
     }
 }
 
 function updateSelectedUser(data) {
-    $("#selectedUser").text("first Name: " + data.FirstName + ", Last Name: " + data.LastName);
+    $("#selectedUser").text("Resource Detail: " + data.FirstName + " " + data.LastName);
 }
 
 function buildResourceDetailQuery(params) {

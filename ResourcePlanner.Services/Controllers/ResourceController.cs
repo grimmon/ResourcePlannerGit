@@ -17,8 +17,6 @@ namespace ResourcePlanner.Services.Controllers
     {
         [HttpGet]
         [Authorize]
-
-
         public async Task<IHttpActionResult> Get(
             int pageSize, 
             int pageNum, 

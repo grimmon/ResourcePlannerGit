@@ -9,8 +9,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="App/app.js"></script>
     <script src="../Scripts/ag-grid.js"></script>
-    <script src="../Scripts/DropdownJs.js"></script>
     <script src="../Scripts/DateTimeUtility.js"></script>
+    <script src="../Scripts/DropdownJs.js"></script>
     <script src="../Scripts/ResourceUtilityJs.js"></script>
     <script src="../Scripts/ResourceGridJs.js"></script>
     <script src="../Scripts/ResourceDetailGridJs.js"></script>
@@ -131,7 +131,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <a id="selectedUser" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                         Resource Detail
                     </a>
                 </h4>
@@ -139,7 +139,6 @@
             <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
-                        <p id="selectedUser"></p>
                         <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
                     </div>
                 </div>

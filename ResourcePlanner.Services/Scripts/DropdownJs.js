@@ -80,6 +80,7 @@
                 successCallback();
             }
             else {
+                showError(httpRequest, "Dropdown");
             }
         }
     }
