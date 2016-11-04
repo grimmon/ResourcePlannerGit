@@ -36,35 +36,41 @@
 }*/ 
 
 .header-nav {
-    height:80px;
-    background:#EFEFEF;
-    border:2px solid #CCC;
+    height:100px;
+    background:#FFFFFF;
     position: fixed;
     width: 100%;
     margin:0px auto;
     z-index: 1000
 }
 
-.searchButton {
+.header-buttoncontainer {
     float:right;
-    padding-top: 10px;
+    padding-top: 0px;
     position: absolute;
     right: 0px;
-    padding-right: 150px;
+    padding-right: 5px;
+    width: 380px;
+    background-color: #A6A6A6
 }
 
-.userButton {
+.headerbuttonbox  {
     float:right;
-    padding-top: 10px;
-    position: absolute;
-    right: 0px;
-    padding-right: 50px;
+    width: 90px;
+    height: 100px;
+    margin-left: 5px;
+    background-color: #FFF
+}
+.headerbutton {
+    margin-top: 25px;
+    margin-left: 20px;
 }
 
 .appLogo {
     float: left;
+
     position: absolute;
     left: 0px;
-    padding-top : 15px;
-    padding-left:100px;
+    padding-top : 25px;
+    padding-left: 25px;
 }

@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceDetailController.cs" />
     <Compile Include="DataAccess\AssignmentDataAccess.cs" />
+    <Compile Include="DataAccess\AuthDataAccess.cs" />
     <Compile Include="DataAccess\DropdownDataAccess.cs" />
     <Compile Include="DataAccess\EmailDataAccess.cs" />
     <Compile Include="DataAccess\MockDataAccess.cs" />

@@ -226,5 +226,19 @@ namespace ResourcePlanner.Services.Mapper
             return returnVal;
 
         }
+
+        public static bool CheckAuth(SqlDataReader reader)
+        {
+
+            reader.Read();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

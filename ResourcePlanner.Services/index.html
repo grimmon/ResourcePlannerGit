@@ -23,26 +23,50 @@
 </head>
 <body>
     <div class="header-nav">
-            <div class="appLogo">
-                <img src="../Images/insightLogo.png" alt="Insight" height="50" />
-            </div>
-        <div class="searchButton">
-            
-            <a id="filterButton">
-                <div>
-                    <img src="../Images/search.svg.png" alt="Search" height="42" width="42">
+        <div class="appLogo">
+            <img src="../Images/insightLogo.png" alt="Insight" height="60" />
+        </div>
+        <div class="header-buttoncontainer">
+            <div class="headerbuttonbox">
+                <div class="headerbutton">
+                    <div>
+                        <img src="/Images/usericon.svg.png" alt="User" height="50" />
+                    </div>
                 </div>
-                <div>Filters</div>
-            </a>
-        </div>
-        <div class="userButton">
-            <div>
-                <img src="/Images/usericon.svg.png" alt="usericon" height="42" />
+
             </div>
-            <div>User</div>
+            <div class="headerbuttonbox">
+                <div class="headerbutton">
+                    <div>
+                        <img src="/Images/alerts.png" alt="Alerts" height="50" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="headerbuttonbox">
+                <div class="headerbutton">
+                    <div>
+                        <img src="/Images/add.png" alt="Add" height="50" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="headerbuttonbox" style="margin-left: 0px;">
+                <div class="headerbutton">
+                    <a id="filterButton">
+                        <div>
+                            <img src="../Images/search.svg.png" alt="Search" height="50" width="50">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
         </div>
+
     </div>
-    <div class="container2" style="padding-top: 80px;">
+
+
+    <div class="container2" style="padding-top: 100px;">
         <div class="panel-group" id="filterAccordion">
             <div class="panel panel-default">
                 <!--<div class="panel-heading">
@@ -51,9 +75,9 @@
                     </h4>
                 </div>-->
                 <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">
+                    <div class="panel-body" style="background: #C8C8C8">
 
-                        <div style="width=500px">
+                        <div style="width: 500px">
                             <script type="text/javascript">
                                 $(document).ready(function () {
                                     $("#myTags").tagit({
@@ -62,9 +86,8 @@
                                         readOnly: false,
                                         tagLimit: 3,
                                         placeholderText: "Search",
-                                        afterTagAdded: function (event, ui) { this.placeholderText = null},
-                                        onTagLimitExceeded: function (event, ui)
-                                        {
+                                        afterTagAdded: function (event, ui) { this.placeholderText = null },
+                                        onTagLimitExceeded: function (event, ui) {
                                             this.readOnly = true;
                                         }
                                     });
@@ -115,7 +138,7 @@
         </div>
     </div>
     <div style="padding-left: 20px; padding-right: 20px; margin-bottom=0">
-        <button id="pageLeftButton" ><</button>
+        <button id="pageLeftButton"><</button>
         <button id="pageRightButton" style="right: 0px">></button>
     </div>
 
@@ -149,4 +172,5 @@
         </div>
     </div>
 </body>
+
 </html>

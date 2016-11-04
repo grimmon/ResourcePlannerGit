@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -16,7 +17,19 @@ namespace ResourcePlanner.Services.Controllers
         public async Task<IHttpActionResult> Post(int ResourceId, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate, Enums.Enums.DayOfWeek[] daysOfWeek)
         {
 
-
+            var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var CurrentUser = User.Identity as ClaimsIdentity;
+            var EmailClaim = CurrentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Upn);
+            if (EmailClaim == null)
+            {
+                return Unauthorized();
+            }
+            if (!authAccess.CheckAuth(EmailClaim.Value,"RM"))
+            {
+                return Unauthorized();
+            }
+             
             var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
