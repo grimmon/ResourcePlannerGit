@@ -22,8 +22,7 @@
 };
 
 var startingResourceColumnDefs = [
-    { headerName: "First Name"  , field: "FirstName"  , width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
-    { headerName: "Last Name"   , field: "LastName"   , width: 150, suppressMenu: true, pinned: 'left' },
+    { headerName: "Resource"    , field: "ResourceName"  , width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
     { headerName: "Position"    , field: "Position"   , width: 150, suppressMenu: true, pinned: 'left' },
     { headerName: "City"        , field: "City"       , width: 150, suppressMenu: true, pinned: 'left' },
     { headerName: "Practice"    , field: "Practice"   , width: 150, suppressMenu: true, pinned: 'left' },
@@ -132,8 +131,7 @@ function createResourceRow(row, resource, timePeriods) {
 }
 
 function addResourceData(row, resource) {
-    row.FirstName = resource.FirstName;
-    row.LastName  = resource.LastName;
+    row.ResourceName = (resource.LastName + ", " || "" ) + resource.FirstName;
     row.City      = resource.City;
     row.Position = resource.Position;
     row.Practice = resource.Practice;

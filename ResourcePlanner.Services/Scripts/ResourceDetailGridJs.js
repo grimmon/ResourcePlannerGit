@@ -26,6 +26,8 @@ var startingResourceDetailColumnDefs = [
     { headerName: "Project Number", field: "ProjectNumber", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
     { headerName: "WBS Element", field: "WBSElement", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
     { headerName: "Client", field: "Client", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "Opportunity Owner", field: "OpportunityOwner", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { headerName: "Project Manager", field: "ProjectManager", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
     { headerName: "Description", field: "Description", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer }
 ];
 
@@ -124,8 +126,6 @@ function addProjectData(row, project) {
     row.WBSElement                = project.WBSElement; 
     row.Customer                  = project.Customer; 
     row.Description               = project.Description;
-    row.OpportunityOwnerFirstName = project.OpportunityOwnerFirstName;
-    row.OpportunityOwnerLastName  = project.OpportunityOwnerLastName 
-    row.ProjectManagerFirstName   = project.ProjectManagerFirstName;
-    row.ProjectManagerLastName    = project.ProjectManagerLastName;
+    row.OpportunityOwner          = (project.OpportunityOwnerLastName + ", " || "" ) + project.OpportunityOwnerFirstName; 
+    row.ProjectManager            = (project.ProjectManagerLastName + ", " || "") + project.ProjectManagerFirstName;
 }
