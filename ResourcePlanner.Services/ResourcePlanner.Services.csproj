@@ -171,6 +171,7 @@
     <Content Include="Scripts\ResourceDetailGridJs.js" />
     <Content Include="Scripts\ResourceGridJs.js" />
     <Content Include="Scripts\ResourceUtilityJs.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\SinglePageStyle.css" />
     <Content Include="Scripts\tag-it.js" />
     <Content Include="Scripts\ui-grid.css" />

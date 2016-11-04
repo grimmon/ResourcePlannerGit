@@ -1,4 +1,42 @@
-﻿#detailAccordion {
+﻿body {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+
+.flexGrid {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 38px;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+}
+
+.flexGrid .header {
+    flex: 0 0 108px;
+    position: relative;
+}
+
+.flexGrid .body {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+#myGrid {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+}
+
+#detailAccordion {
     position: fixed;
     bottom: 0;
     width: 100%;    
@@ -34,6 +72,10 @@
     text-decoration: none;
     outline: none;
 }*/ 
+
+.panel-group {
+    margin-bottom: 0px;
+}
 
 .header-nav {
     height:100px;
