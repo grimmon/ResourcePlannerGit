@@ -168,6 +168,7 @@
     <Content Include="Scripts\DropdownJs.js" />
     <Content Include="Scripts\jquery.tagit.css" />
     <Content Include="Scripts\modalStyle.css" />
+    <Content Include="Scripts\PageControls.js" />
     <Content Include="Scripts\ResourceDetailGridJs.js" />
     <Content Include="Scripts\ResourceGridJs.js" />
     <Content Include="Scripts\ResourceUtilityJs.js" />
@@ -183,6 +184,7 @@
     <Compile Include="Controllers\AddAssignmentController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceDetailController.cs" />
     <Compile Include="DataAccess\AssignmentDataAccess.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="DataAccess\EmailDataAccess.cs" />
     <Compile Include="DataAccess\MockDataAccess.cs" />
     <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
+    <Compile Include="DataAccess\ProjectDataAccess.cs" />
     <Compile Include="DataAccess\ResourceDataAccess.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Global.asax.cs">

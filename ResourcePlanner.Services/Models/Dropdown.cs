@@ -12,4 +12,10 @@ namespace ResourcePlanner.Services.Models
         public string Category { get; set; }
 
     }
+
+    public class IdNameGeneric
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

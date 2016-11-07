@@ -187,6 +187,22 @@ namespace ResourcePlanner.Services.Mapper
             return detailPage;
         }
 
+        public static List<IdNameGeneric> MapToIdNameGeneric(SqlDataReader reader, string sourceId, string sourceName)
+        {
+            var values = new List<IdNameGeneric>();
+            while (reader.Read())
+            {
+                var value = new IdNameGeneric
+                {
+                    Id = reader.GetInt32(sourceId),
+                    Name = reader.GetString(sourceName),
+                };
+
+                values.Add(value);
+            }
+            return values;
+        }
+
         public static List<DropdownValue> MapToDropdown(SqlDataReader reader)
         {
             var dropdownValues = new List<DropdownValue>();
