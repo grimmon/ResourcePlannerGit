@@ -1,19 +1,44 @@
-﻿var selectedResource = {};
-var startingColumns = {};
-var headers = [];
+﻿var dataColumnsCount = 8;
+var selectedResource = {};
+
+var dataHeaders = [
+    "actual",
+    "forecast"
+];
+
+var resourceGroupHeaders = [];
+var resourceDetailGroupHeaders = [];
+
+var resourceHeaders = [
+    "Resource",
+     "Position",
+     "City",
+     "Practice",
+     "Sub-Practice"
+];
+
+var resourceDetailHeaders = [
+    "Project Name",
+    "Project Number",
+    "WBS Element",
+    "Client",
+    "Opportunity Owner",
+    "Project Manager",
+    "Description",
+];
 
 document.addEventListener('DOMContentLoaded', function () {
+    dropDownInit();
+    dateTimeInit();
+});
 
-    var authContext = new AuthenticationContext(config);
+function dropDownInit() {
+    var query = 'api/dropdown';
 
-    authContext.acquireToken(authContext.config.clientId, function (error, token) {
-        if (error || !token) {
-            alert('ADAL Error: ' + error);
-            return;
-        }
-        getDropDownData(token, onDropDownSuccess);
-    });
+    callResourceServerAuth(null, query, dropDownSuccessCallback, showError);
+}
 
+function dateTimeInit() {
     var now = new Date();
 
     now.setHours(0);
@@ -21,25 +46,26 @@ document.addEventListener('DOMContentLoaded', function () {
     now.setSeconds(0);
 
     dateTimeUtility.currentDate = now;
+    dateTimeUtility.pageSize = dataColumnsCount;
+}
 
-    var TimePeriods = [];
+function onDropDownSuccess() {
+    buttonHookups();
 
-    TimePeriods[0] = "";
-    TimePeriods[1] = "";
-    TimePeriods[2] = "";
-    TimePeriods[3] = "";
-    TimePeriods[4] = "";
-    TimePeriods[5] = "";
-    TimePeriods[6] = "";
-    TimePeriods[7] = "";
+    var aggregationDropdown = document.getElementById("aggregationsDropdown");
+    dateTimeUtility.currentAggregation = aggregationDropdown.value;
 
-    startingColumns["TimePeriods"] = TimePeriods;
+    initializeResourceGrid();
+    initializeResourceDetailGrid();
+}
 
-    dateTimeUtility.pageSize = TimePeriods.length;
-
-
-    var modal = document.getElementById("errorModal");
-    var span = document.getElementsByClassName("close")[0];
+function buttonHookups() {
+    var applyButton     = document.getElementById("applyButton");
+    var filterButton    = document.getElementById("filterButton");
+    var pageLeftButton  = document.getElementById("pageLeftButton");
+    var pageRightButton = document.getElementById("pageRightButton");
+    var modal           = document.getElementById("errorModal");
+    var span            = document.getElementsByClassName("close")[0];
 
     span.onclick = function () {
         modal.style.display = "none";
@@ -50,18 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = "none";
         }
     }
-
-    
-});
-
-function onDropDownSuccess() {
-    var applyButton = document.getElementById("applyButton");
-    var filterButton = document.getElementById("filterButton");
-    var pageLeftButton = document.getElementById("pageLeftButton");
-    var pageRightButton = document.getElementById("pageRightButton");
-    var aggregationDropdown = document.getElementById("aggregationsDropdown");
-
-    dateTimeUtility.currentAggregation = aggregationDropdown.value;
 
     pageLeftButton.onclick = pageDown;
     pageRightButton.onclick = pageUp;
@@ -78,23 +92,44 @@ function onDropDownSuccess() {
     filterButton.onclick = function () {
         $('#collapse1').collapse('toggle');
     }
-
-    initializeResourceGrid();
-    initializeResourceDetailGrid();
 }
+
+function headerClassFunc(params) {
+    if (params.colDef.context != undefined) {
+        var columnType = params.colDef.context.type;
+        var index = params.colDef.context.index;
+
+        if (columnType == "resourceColumn") {
+            params.colDef.headerName = resourceHeaders[index];
+        }
+        else if (columnType == "resourceDetailColumn") {
+            params.colDef.headerName = resourceDetailHeaders[index];
+        }
+        else if (columnType == "resourceGroupColumn") {
+            params.colDef.headerName = resourceGroupHeaders[index];
+        }
+        else if (columnType == "resourceDetailGroupColumn") {
+            params.colDef.headerName = resourceDetailGroupHeaders[index];
+        }
+        else if (columnType == "dataColumn") {
+            params.colDef.headerName = dataHeaders[index];
+        }
+    }
+}
+
 
 function pageUp() {
     dateTimeUtility.updateCurrentDate(1);
 
     refreshResourceGrid();
-    refresh();
+    refreshResourceDetailGrid();
 }
 
 function pageDown() {
     dateTimeUtility.updateCurrentDate(-1);
 
     refreshResourceGrid();
-    refresh();
+    refreshResourceDetailGrid();
 }
 
 function addTimePeriods(row, timePeriods) {
@@ -129,58 +164,37 @@ function showError(httpRequest, errorName) {
     $("#errorMessage").text(errorName + " Error: " + httpRequest.responseText);
 }
 
-function createResourceColumns(startingColumns, columns) {
-    var columnCount = startingColumns.length;
+function createColumns(startingColumns, groupType) {
+    var newColumns = [startingColumns.length + dataColumnsCount];
 
-    if (columns != null && columns.TimePeriods != null) {
-        columnCount = columns.TimePeriods.length;
-    }
-
-    var newColumns = [columnCount];
-
-    //add initial colummns, defined in startingColumnDefs
+    //add initial colummns
     for (var i = 0; i < startingColumns.length; i++) {
         var column = startingColumns[i];
 
         newColumns[i] = column;
     }
 
-    if (columns != null && columns.TimePeriods != null) {
-        //add time periods as columns
-        for (i = 0; i < columns.TimePeriods.length; i++) {
-            var timePeriod = columns.TimePeriods[i];
-            headers[i] = timePeriod;
+    for (i = 0; i < dataColumnsCount; i++) {
+        column = createColumn(i, groupType);
 
-            column = createColumn(i);
-
-            var newColumnIndex = i + startingColumns.length;
-            newColumns[newColumnIndex] = column;
-        }
+        var newColumnIndex = i + startingColumns.length;
+        newColumns[newColumnIndex] = column;
     }
 
     return newColumns;
 }
 
-function createColumn(fieldName) {
+
+
+function createColumn(fieldName, groupType) {
     return {
-        headerValueGetter: getGroupName,
         suppressMenu: true,
+        context: { type: groupType, index: fieldName},
         children: [
-            { width: 67, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerValueGetter: getHeader },
-            { width: 67, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true, headerName: "Frcst" }
+            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
         ]
     };
-}
-
-function getHeader(params) {
-    var splitName = params.colDef.field.split("-");
-    var header = headers[splitName[0]];
-
-    return header;
-}
-
-function getGroupName(params) {
-    return "hi";
 }
 
 function createRows(rowData, columnData, rowParser) {

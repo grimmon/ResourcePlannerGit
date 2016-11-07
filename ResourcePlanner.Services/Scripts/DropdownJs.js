@@ -1,87 +1,67 @@
-﻿getDropDownData = function (token, successCallback) {
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', 'api/dropdown');
-    httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
-    httpRequest.send();
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState == 4) {
-            if (httpRequest.status == 200) {
-                httpResponse = JSON.parse(httpRequest.responseText);
+﻿function dropDownSuccessCallback(params, query, httpResponse) {
+    var data = processDropdownData(httpResponse);
 
-                var citiesDropdown       = document.getElementById("citiesDropdown"      );
-                var orgUnitsDropdown     = document.getElementById("orgUnitsDropdown"    );
-                var regionsDropdown      = document.getElementById("regionsDropdown"     );
-                var marketsDropdown      = document.getElementById("marketsDropdown"     );
-                var practicesDropdown    = document.getElementById("practicesDropdown"   );
-                var subpracticesDropdown = document.getElementById("subpracticesDropdown");
-                var aggregationsDropdown = document.getElementById("aggregationsDropdown");
+    attachDropdownValues(data);
+    onDropDownSuccess();
+}
 
-                var citiesNoneOption = document.createElement('option');
-                citiesNoneOption.text = 'None';
-                citiesNoneOption.value = -1;
+function processDropdownData(httpResponse) {
+    var result = [];
 
-                var orgUnitsNoneOption = document.createElement('option');
-                orgUnitsNoneOption.text = 'None';
-                orgUnitsNoneOption.value = -1;
+    for (var i = 0; i < httpResponse.length; i++) {
+        var option = document.createElement('option');
+        option.text  = httpResponse[i].Name;
+        option.value = httpResponse[i].Id;
 
-                var regionsNoneOption = document.createElement('option');
-                regionsNoneOption.text = 'None';
-                regionsNoneOption.value = -1;
+        var category = httpResponse[i].Category;
 
-                var marketsNoneOption = document.createElement('option');
-                marketsNoneOption.text = 'None';
-                marketsNoneOption.value = -1;
+        if (result[category] == undefined) {
+            result[category] = [];
+        }
 
-                var practicesNoneOption = document.createElement('option');
-                practicesNoneOption.text = 'None';
-                practicesNoneOption.value = -1;
+        var categoryoptions = result[category];
+        categoryoptions[categoryoptions.length] = option;
+    }
 
-                var subPracticeNoneOption = document.createElement('option');
-                subPracticeNoneOption.text = 'None';
-                subPracticeNoneOption.value = -1;
+    return result;
+}
 
-                citiesDropdown.appendChild(citiesNoneOption);
-                orgUnitsDropdown.appendChild(orgUnitsNoneOption);
-                regionsDropdown.appendChild(regionsNoneOption);
-                marketsDropdown.appendChild(marketsNoneOption);
-                practicesDropdown.appendChild(practicesNoneOption);
-                subpracticesDropdown.appendChild(subPracticeNoneOption);
+function attachDropdownValues(dropdownValues) {
 
-                for (var i = 0; i < httpResponse.length; i++) {
-                    var option = document.createElement('option');
-                    option.text = httpResponse[i].Name;
-                    option.value = httpResponse[i].Id;
+    addNoneOptionToDropdown("orgUnitsDropdown"    );
+    addNoneOptionToDropdown("citiesDropdown"      );
+    addNoneOptionToDropdown("regionsDropdown"     );
+    addNoneOptionToDropdown("marketsDropdown"     );
+    addNoneOptionToDropdown("practicesDropdown"   );
+    addNoneOptionToDropdown("subpracticesDropdown");
+    
+    addValuesToDropdown("orgUnitsDropdown"    , dropdownValues['OrgUnit'    ]);
+    addValuesToDropdown("citiesDropdown"      , dropdownValues['City'       ]);
+    addValuesToDropdown("regionsDropdown"     , dropdownValues['Region'     ]);
+    addValuesToDropdown("marketsDropdown"     , dropdownValues['Market'     ]);
+    addValuesToDropdown("practicesDropdown"   , dropdownValues['Practice'   ]);
+    addValuesToDropdown("subpracticesDropdown", dropdownValues['SubPractice']);
+    addValuesToDropdown("aggregationsDropdown", dropdownValues['agg'        ]);
+}
 
-                    if (httpResponse[i].Category == 'OrgUnit') {
-                        citiesDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'City') {
-                        citiesDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'Region') {
-                        regionsDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'Market') {
-                        marketsDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'Practice') {
-                        practicesDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'SubPractice') {
-                        subpracticesDropdown.appendChild(option);
-                    }
-                    if (httpResponse[i].Category == 'agg') {
-                        aggregationsDropdown.appendChild(option);
-                    }
-                }
+function addNoneOptionToDropdown(dropdownName) {
+    var dropdown = document.getElementById(dropdownName);
 
-                dateTimeUtility.currentAggregation = aggregationsDropdown.childNodes[0].value;
+    var noneOption = document.createElement('option');
+    noneOption.text = 'None';
+    noneOption.value = -1;
 
-                successCallback();
-            }
-            else {
-                showError(httpRequest, "Dropdown");
-            }
+    dropdown.appendChild(noneOption);
+}
+
+function addValuesToDropdown(dropdownName, values) {
+    var dropdown = document.getElementById(dropdownName);
+
+    if (values != undefined)
+    {
+        for (var i = 0; i < values.length; i++) {
+            var option = values[i];
+            dropdown.appendChild(option);
         }
     }
 }

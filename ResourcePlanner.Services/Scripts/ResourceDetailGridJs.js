@@ -7,14 +7,14 @@
         enableColResize: true,
         rowSelection: 'single',
         rowDeselection: true,
-        columnDefs: startingResourceDetailColumnDefs,
         rowModelType: 'virtual',
         paginationPageSize: 30,
         paginationOverflowSize: 2,
         maxConcurrentDatasourceRequests: 2,
         paginationInitialRowCount: 1,
         maxPagesInCache: 6,
-
+        defaultColGroupDef: { headerClass: headerClassFunc },
+        defaultColDef: { headerClass: headerClassFunc },
         getRowNodeId: function (item) {
             return item.Id;
         }
@@ -22,28 +22,31 @@
 };
 
 var startingResourceDetailColumnDefs = [
-    { headerName: "Project Name", field: "ProjectName", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "Project Number", field: "ProjectNumber", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "WBS Element", field: "WBSElement", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "Client", field: "Client", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "Opportunity Owner", field: "OpportunityOwner", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "Project Manager", field: "ProjectManager", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
-    { headerName: "Description", field: "Description", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer }
+    { context: { type: "resourceDetailColumn", index: 0 }, field: "ProjectName"     , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 1 }, field: "ProjectNumber"   , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 2 }, field: "WBSElement"      , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 3 }, field: "Client"          , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 4 }, field: "OpportunityOwner", width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 5 }, field: "ProjectManager"  , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceDetailColumn", index: 6 }, field: "Description"     , width: 150, suppressMenu: true, pinned: true, cellRenderer: loadingCellRenderer }
 ];
 
 function initializeResourceDetailGrid() {
     var gridDiv = document.querySelector(resourceDetailGrid.name);
     new agGrid.Grid(gridDiv, resourceDetailGrid.options);
+
+    var startingResourceColumns = createColumns(startingResourceDetailColumnDefs, "resourceDetailGroupColumn");
+    resourceDetailGrid.options.api.setColumnDefs(startingResourceColumns);
 }
 
-function refreshResourceDetailGrid(event) {
+function refreshResourceDetailGridEvent(event) {
     if (event != undefined && event.node.isSelected()) {
-        refresh();
+        refreshResourceDetailGrid();
         updateSelectedUser(event.node.data);
     }
 }
 
-function refresh() {
+function refreshResourceDetailGrid() {
     if (selectedResource != undefined && selectedResource.Id != undefined) {
         resourceDetailGrid.options.api.showLoadingOverlay();
 
@@ -54,12 +57,6 @@ function refresh() {
                 callResourceServerAuth(params, query, onCallResourceDetailSuccess, showError);
             }
         };
-
-        var startingResourceColumns = createResourceColumns(startingResourceDetailColumnDefs, startingColumns);
-
-        resourceDetailGrid.options.api.setColumnDefs(startingResourceColumns);
-
-        resourceDetailGrid.options.api.refreshHeader();
 
         resourceDetailGrid.options.api.setDatasource(dataSource);
     }
@@ -100,12 +97,12 @@ function onCallResourceDetailSuccess(params, query, httpResponse) {
 }
 
 function updateResourceDetailGrid(params, data, rowData, columnData, options) {
-    var columns = createResourceColumns(startingResourceDetailColumnDefs, data);
+    var columns = createColumns(startingResourceDetailColumnDefs, data.TimePeriods);
     var rows = createRows(rowData, columnData, createProjectRow);
 
     for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
         var timePeriod = httpResponse.TimePeriods[i];
-        headers[i] = timePeriod;
+        resourceDetailGroupHeaders[i] = timePeriod;
     }
 
     params.successCallback(rows, data.TotalRowCount);
@@ -120,12 +117,12 @@ function createProjectRow(row, project, timePeriods) {
 }
 
 function addProjectData(row, project) {
-    row.ProjectName               = project.ProjectName;
-    row.FirstName                 = project.FirstName;
-    row.LastName                  = project.LastName;
-    row.WBSElement                = project.WBSElement; 
-    row.Customer                  = project.Customer; 
-    row.Description               = project.Description;
-    row.OpportunityOwner          = (project.OpportunityOwnerLastName + ", " || "" ) + project.OpportunityOwnerFirstName; 
-    row.ProjectManager            = (project.ProjectManagerLastName + ", " || "") + project.ProjectManagerFirstName;
+    row.ProjectName      = project.ProjectName;
+    row.FirstName        = project.FirstName;
+    row.LastName         = project.LastName;
+    row.WBSElement       = project.WBSElement; 
+    row.Customer         = project.Customer; 
+    row.Description      = project.Description;
+    row.OpportunityOwner = (project.OpportunityOwnerLastName + ", " || "") + project.OpportunityOwnerFirstName; 
+    row.ProjectManager   = (project.ProjectManagerLastName   + ", " || "") + project.ProjectManagerFirstName;
 }
