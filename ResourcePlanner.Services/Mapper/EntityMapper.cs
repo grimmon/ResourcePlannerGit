@@ -187,7 +187,7 @@ namespace ResourcePlanner.Services.Mapper
             return detailPage;
         }
 
-        public static List<IdNameGeneric> MapToIdNameGeneric(SqlDataReader reader, string sourceId, string sourceName)
+        public static List<IdNameGeneric> MapToIdNameGeneric(SqlDataReader reader, string sourceId, string sourceName, string sourceKey = "")
         {
             var values = new List<IdNameGeneric>();
             while (reader.Read())
@@ -198,7 +198,12 @@ namespace ResourcePlanner.Services.Mapper
                     Name = reader.GetString(sourceName),
                 };
 
-                values.Add(value);
+                if (sourceKey != "")
+                {
+                    value.Name += " (" + reader.GetNullableString(sourceKey) + ")";
+                }
+
+                    values.Add(value);
             }
             return values;
         }

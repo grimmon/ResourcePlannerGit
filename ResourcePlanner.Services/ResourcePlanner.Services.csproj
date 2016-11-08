@@ -150,9 +150,12 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="Global.asax" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\alerts.png" />
     <Content Include="Images\insightLogo.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\search.svg.png" />
+    <Content Include="Images\usericon.svg.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\ag-grid.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -184,6 +187,7 @@
     <Compile Include="Controllers\AddAssignmentController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceDetailController.cs" />
@@ -193,7 +197,6 @@
     <Compile Include="DataAccess\EmailDataAccess.cs" />
     <Compile Include="DataAccess\MockDataAccess.cs" />
     <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
-    <Compile Include="DataAccess\ProjectDataAccess.cs" />
     <Compile Include="DataAccess\ResourceDataAccess.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Global.asax.cs">

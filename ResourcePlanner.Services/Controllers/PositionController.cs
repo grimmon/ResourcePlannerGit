@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace ResourcePlanner.Services.Controllers
 {
-    public class ProjectController : ApiController
+    public class PositionController : ApiController
     {
         [HttpGet]
         //[Authorize]
@@ -30,7 +30,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                values = access.GetProjects(searchTerm);
+                values = access.GetPositions(searchTerm);
             }
             catch (Exception ex)
             {

@@ -33,6 +33,34 @@ namespace ResourcePlanner.Services.DataAccess
                 AssignmentParameters(asgn));
         }
 
+        public List<IdNameGeneric> GetProjects(string searchTerm)
+        {
+
+            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectId", "ProjectName", "WBSCode"),
+                _connectionString,
+                @"rpdb.ProjectSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                 searchTerm == "" ? new SqlParameter[] { }
+                              : new SqlParameter[] { AdoUtility.CreateSqlParameter("SearchTerm", 50, SqlDbType.VarChar, searchTerm) });
+
+            return returnValue;
+        }
+
+        public List<IdNameGeneric> GetPositions(string searchTerm)
+        {
+
+            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ReferenceId", "LabelText"),
+                _connectionString,
+                @"rpdb.PositionSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                 searchTerm == "" ? new SqlParameter[] { }
+                              : new SqlParameter[] { AdoUtility.CreateSqlParameter("SearchTerm", 50, SqlDbType.VarChar, searchTerm) });
+
+            return returnValue;
+        }
+
         private SqlParameter[] AssignmentParameters(AddAssignment asgn)
         {
             var parameterList = new List<SqlParameter>();

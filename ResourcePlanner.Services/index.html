@@ -16,11 +16,14 @@
     <script src="../Scripts/ResourceDetailGridJs.js"></script>
     <script src="../Scripts/tag-it.js"></script>
     <script src="../Scripts/select2.min.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="../Scripts/modalStyle.css">
     <link rel="stylesheet" type="text/css" href="../Scripts/SinglePageStyle.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <link href="../Scripts/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="../Scripts/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <script src="../Scripts/PageControls.js"></script>
 </head>
 <body>
     <div class="flexGrid">
@@ -34,14 +37,6 @@
                         <div class="headerbutton">
                             <div>
                                 <img src="/Images/usericon.svg.png" alt="User" height="50" />
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="headerbuttonbox">
-                        <div class="headerbutton">
-                            <div>
-                                <img src="/Images/alerts.png" alt="Alerts" height="50" />
                             </div>
                         </div>
 
@@ -96,9 +91,16 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Filters</a>
                             </h4>
                         </div>-->
+
                         <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body" style="background: #C8C8C8">
+                                <div>
+                                   
+                                    <select class="project-selector" style="width: 50%"></select>
+                                    <select class="position-selector" multiple="multiple" style="width: 50%"></select>
+                                    <select class="dayofweek-selector" multiple="multiple" style="width: 50%"></select> 
 
+                                </div>
                                 <div style="width: 500px">
                                     <script type="text/javascript">
                                         $(document).ready(function () {
