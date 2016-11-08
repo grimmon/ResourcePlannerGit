@@ -1,4 +1,4 @@
-// ag-grid v6.1.0
+// ag-grid v6.3.0
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -91,13 +91,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var columnGroup_1 = __webpack_require__(14);
 	var column_1 = __webpack_require__(15);
 	var focusedCellController_1 = __webpack_require__(35);
-	var functions_1 = __webpack_require__(80);
+	var functions_1 = __webpack_require__(81);
 	var gridOptionsWrapper_1 = __webpack_require__(3);
 	var balancedColumnTreeBuilder_1 = __webpack_require__(19);
 	var columnKeyCreator_1 = __webpack_require__(20);
 	var columnUtils_1 = __webpack_require__(16);
 	var displayedGroupCreator_1 = __webpack_require__(21);
-	var groupInstanceIdCreator_1 = __webpack_require__(79);
+	var groupInstanceIdCreator_1 = __webpack_require__(80);
 	var context_1 = __webpack_require__(6);
 	var dragAndDropService_1 = __webpack_require__(68);
 	var dragService_1 = __webpack_require__(31);
@@ -109,10 +109,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cssClassApplier_1 = __webpack_require__(72);
 	var headerContainer_1 = __webpack_require__(67);
 	var headerRenderer_1 = __webpack_require__(66);
-	var headerTemplateLoader_1 = __webpack_require__(74);
+	var headerTemplateLoader_1 = __webpack_require__(75);
 	var horizontalDragService_1 = __webpack_require__(71);
-	var moveColumnController_1 = __webpack_require__(76);
-	var renderedHeaderCell_1 = __webpack_require__(73);
+	var moveColumnController_1 = __webpack_require__(77);
+	var renderedHeaderCell_1 = __webpack_require__(74);
 	var renderedHeaderGroupCell_1 = __webpack_require__(70);
 	var standardMenu_1 = __webpack_require__(82);
 	var borderLayout_1 = __webpack_require__(30);
@@ -129,7 +129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var component_1 = __webpack_require__(47);
 	var menuList_1 = __webpack_require__(98);
 	var cellNavigationService_1 = __webpack_require__(65);
-	var columnChangeEvent_1 = __webpack_require__(78);
+	var columnChangeEvent_1 = __webpack_require__(79);
 	var constants_1 = __webpack_require__(8);
 	var csvCreator_1 = __webpack_require__(12);
 	var eventService_1 = __webpack_require__(4);
@@ -163,8 +163,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var checkboxSelectionComponent_1 = __webpack_require__(62);
 	var componentAnnotations_1 = __webpack_require__(92);
 	var agCheckbox_1 = __webpack_require__(91);
-	var bodyDropPivotTarget_1 = __webpack_require__(77);
-	var bodyDropTarget_1 = __webpack_require__(75);
+	var bodyDropPivotTarget_1 = __webpack_require__(78);
+	var bodyDropTarget_1 = __webpack_require__(76);
 	var focusService_1 = __webpack_require__(39);
 	var setLeftFeature_1 = __webpack_require__(63);
 	var renderedCell_1 = __webpack_require__(38);
@@ -175,6 +175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var virtualPage_1 = __webpack_require__(88);
 	var baseFrameworkFactory_1 = __webpack_require__(93);
 	var methodNotImplementedException_1 = __webpack_require__(64);
+	var touchListener_1 = __webpack_require__(73);
 	function populateClientExports(exports) {
 	    // columnController
 	    exports.BalancedColumnTreeBuilder = balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder;
@@ -279,6 +280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    exports.MenuList = menuList_1.MenuList;
 	    exports.Listener = componentAnnotations_1.Listener;
 	    exports.QuerySelector = componentAnnotations_1.QuerySelector;
+	    exports.TouchListener = touchListener_1.TouchListener;
 	    // root
 	    exports.BaseFrameworkFactory = baseFrameworkFactory_1.BaseFrameworkFactory;
 	    exports.CellNavigationService = cellNavigationService_1.CellNavigationService;
@@ -314,7 +316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -329,10 +331,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var valueService_1 = __webpack_require__(29);
 	var masterSlaveService_1 = __webpack_require__(25);
 	var eventService_1 = __webpack_require__(4);
-	var oldToolPanelDragAndDropService_1 = __webpack_require__(81);
 	var gridPanel_1 = __webpack_require__(24);
 	var gridApi_1 = __webpack_require__(11);
-	var headerTemplateLoader_1 = __webpack_require__(74);
+	var headerTemplateLoader_1 = __webpack_require__(75);
 	var balancedColumnTreeBuilder_1 = __webpack_require__(19);
 	var displayedGroupCreator_1 = __webpack_require__(21);
 	var expressionService_1 = __webpack_require__(18);
@@ -397,7 +398,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                filterManager_1.FilterManager, columnController_1.ColumnController, rowRenderer_1.RowRenderer,
 	                headerRenderer_1.HeaderRenderer, expressionService_1.ExpressionService, balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder, csvCreator_1.CsvCreator,
 	                templateService_1.TemplateService, gridPanel_1.GridPanel, popupService_1.PopupService, valueService_1.ValueService, masterSlaveService_1.MasterSlaveService,
-	                logger_1.LoggerFactory, oldToolPanelDragAndDropService_1.OldToolPanelDragAndDropService, columnUtils_1.ColumnUtils, autoWidthCalculator_1.AutoWidthCalculator, gridApi_1.GridApi,
+	                logger_1.LoggerFactory, columnUtils_1.ColumnUtils, autoWidthCalculator_1.AutoWidthCalculator, gridApi_1.GridApi,
 	                paginationController_1.PaginationController, popupService_1.PopupService, gridCore_1.GridCore, standardMenu_1.StandardMenuFactory,
 	                dragAndDropService_1.DragAndDropService, sortController_1.SortController, columnController_1.ColumnApi, focusedCellController_1.FocusedCellController, mouseEventService_1.MouseEventService,
 	                cellNavigationService_1.CellNavigationService, filterStage_1.FilterStage, sortStage_1.SortStage, flattenStage_1.FlattenStage, focusService_1.FocusService,
@@ -457,7 +458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -498,6 +499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var GridOptionsWrapper = (function () {
 	    function GridOptionsWrapper() {
 	        this.propertyEventService = new eventService_1.EventService();
+	        this.domDataKey = '__AG_' + Math.random().toString;
 	    }
 	    GridOptionsWrapper.prototype.agWire = function (gridApi, columnApi) {
 	        this.gridOptions.api = gridApi;
@@ -526,6 +528,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.groupRowRenderer = this.frameworkFactory.gridOptionsGroupRowRenderer(this.gridOptions);
 	        this.groupRowInnerRenderer = this.frameworkFactory.gridOptionsGroupRowInnerRenderer(this.gridOptions);
 	    };
+	    GridOptionsWrapper.prototype.getDomDataKey = function () {
+	        return this.domDataKey;
+	    };
 	    // the cellRenderers come from the instances for this class, not from gridOptions, which allows
 	    // the baseFrameworkFactory to replace with framework specific ones
 	    GridOptionsWrapper.prototype.getFullWidthCellRenderer = function () { return this.fullWidthCellRenderer; };
@@ -548,8 +553,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridOptionsWrapper.prototype.isToolPanelSuppressValues = function () { return isTrue(this.gridOptions.toolPanelSuppressValues); };
 	    GridOptionsWrapper.prototype.isToolPanelSuppressPivots = function () { return isTrue(this.gridOptions.toolPanelSuppressPivots); };
 	    GridOptionsWrapper.prototype.isToolPanelSuppressPivotMode = function () { return isTrue(this.gridOptions.toolPanelSuppressPivotMode); };
+	    GridOptionsWrapper.prototype.isSuppressTouch = function () { return isTrue(this.gridOptions.suppressTouch); };
 	    GridOptionsWrapper.prototype.isEnableCellChangeFlash = function () { return isTrue(this.gridOptions.enableCellChangeFlash); };
-	    GridOptionsWrapper.prototype.isEnableTouch = function () { return isTrue(this.gridOptions.enableTouch); };
 	    GridOptionsWrapper.prototype.isGroupSelectsChildren = function () { return isTrue(this.gridOptions.groupSelectsChildren); };
 	    GridOptionsWrapper.prototype.isGroupIncludeFooter = function () { return isTrue(this.gridOptions.groupIncludeFooter); };
 	    GridOptionsWrapper.prototype.isGroupSuppressBlankHeader = function () { return isTrue(this.gridOptions.groupSuppressBlankHeader); };
@@ -566,6 +571,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridOptionsWrapper.prototype.getFloatingTopRowData = function () { return this.gridOptions.floatingTopRowData; };
 	    GridOptionsWrapper.prototype.getFloatingBottomRowData = function () { return this.gridOptions.floatingBottomRowData; };
 	    GridOptionsWrapper.prototype.isFunctionsPassive = function () { return isTrue(this.gridOptions.functionsPassive); };
+	    GridOptionsWrapper.prototype.isSuppressRowHoverClass = function () { return isTrue(this.gridOptions.suppressRowHoverClass); };
 	    GridOptionsWrapper.prototype.getQuickFilterText = function () { return this.gridOptions.quickFilterText; };
 	    GridOptionsWrapper.prototype.isUnSortIcon = function () { return isTrue(this.gridOptions.unSortIcon); };
 	    GridOptionsWrapper.prototype.isSuppressMenuHide = function () { return isTrue(this.gridOptions.suppressMenuHide); };
@@ -574,6 +580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridOptionsWrapper.prototype.getRowStyleFunc = function () { return this.gridOptions.getRowStyle; };
 	    GridOptionsWrapper.prototype.getRowClassFunc = function () { return this.gridOptions.getRowClass; };
 	    GridOptionsWrapper.prototype.getDoesDataFlowerFunc = function () { return this.gridOptions.doesDataFlower; };
+	    GridOptionsWrapper.prototype.getScrollbarWidth = function () { return this.gridOptions.scrollbarWidth; };
 	    GridOptionsWrapper.prototype.getIsFullWidthCellFunc = function () { return this.gridOptions.isFullWidthCell; };
 	    GridOptionsWrapper.prototype.getFullWidthCellRendererParams = function () { return this.gridOptions.fullWidthCellRendererParams; };
 	    GridOptionsWrapper.prototype.getBusinessKeyForNodeFunc = function () { return this.gridOptions.getBusinessKeyForNode; };
@@ -635,6 +642,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridOptionsWrapper.prototype.isSuppressParentsInRowNodes = function () { return isTrue(this.gridOptions.suppressParentsInRowNodes); };
 	    GridOptionsWrapper.prototype.isEnableStatusBar = function () { return isTrue(this.gridOptions.enableStatusBar); };
 	    GridOptionsWrapper.prototype.isFunctionsReadOnly = function () { return isTrue(this.gridOptions.functionsReadOnly); };
+	    GridOptionsWrapper.prototype.getDefaultColDef = function () { return this.gridOptions.defaultColDef; };
+	    GridOptionsWrapper.prototype.getDefaultColGroupDef = function () { return this.gridOptions.defaultColGroupDef; };
 	    GridOptionsWrapper.prototype.getHeaderCellTemplate = function () { return this.gridOptions.headerCellTemplate; };
 	    GridOptionsWrapper.prototype.getHeaderCellTemplateFunc = function () { return this.gridOptions.getHeaderCellTemplate; };
 	    GridOptionsWrapper.prototype.getNodeChildDetailsFunc = function () { return this.gridOptions.getNodeChildDetails; };
@@ -642,7 +651,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridOptionsWrapper.prototype.getContextMenuItemsFunc = function () { return this.gridOptions.getContextMenuItems; };
 	    GridOptionsWrapper.prototype.getMainMenuItemsFunc = function () { return this.gridOptions.getMainMenuItems; };
 	    GridOptionsWrapper.prototype.getRowNodeIdFunc = function () { return this.gridOptions.getRowNodeId; };
+	    GridOptionsWrapper.prototype.getProcessSecondaryColDefFunc = function () { return this.gridOptions.processSecondaryColDef; };
+	    GridOptionsWrapper.prototype.getProcessSecondaryColGroupDefFunc = function () { return this.gridOptions.processSecondaryColGroupDef; };
 	    GridOptionsWrapper.prototype.getProcessCellForClipboardFunc = function () { return this.gridOptions.processCellForClipboard; };
+	    GridOptionsWrapper.prototype.getProcessCellFromClipboardFunc = function () { return this.gridOptions.processCellFromClipboard; };
 	    GridOptionsWrapper.prototype.getViewportRowModelPageSize = function () { return positiveNumberOrZero(this.gridOptions.viewportRowModelPageSize, DEFAULT_VIEWPORT_ROW_MODEL_PAGE_SIZE); };
 	    GridOptionsWrapper.prototype.getViewportRowModelBufferSize = function () { return positiveNumberOrZero(this.gridOptions.viewportRowModelBufferSize, DEFAULT_VIEWPORT_ROW_MODEL_BUFFER_SIZE); };
 	    // public getCellRenderers(): {[key: string]: {new(): ICellRenderer} | ICellRendererFunc} { return this.gridOptions.cellRenderers; }
@@ -876,7 +888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -981,7 +993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -1043,7 +1055,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -1359,7 +1371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -1381,6 +1393,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Utils = (function () {
 	    function Utils() {
 	    }
+	    // returns true if the event is close to the original event by X pixels either vertically or horizontally.
+	    // we only start dragging after X pixels so this allows us to know if we should start dragging yet.
+	    Utils.areEventsNear = function (e1, e2, pixelCount) {
+	        // by default, we wait 4 pixels before starting the drag
+	        if (pixelCount === 0) {
+	            return false;
+	        }
+	        var diffX = Math.abs(e1.clientX - e2.clientX);
+	        var diffY = Math.abs(e1.clientY - e2.clientY);
+	        return Math.max(diffX, diffY) <= pixelCount;
+	    };
 	    Utils.getNameOfClass = function (TheClass) {
 	        var funcNameRegex = /function (.{1,})\(/;
 	        var funcAsString = TheClass.toString();
@@ -1807,11 +1830,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        eResult.appendChild(this.createIconNoSpan(iconName, gridOptionsWrapper, column, svgFactoryFunc));
 	        return eResult;
 	    };
-	    Utils.createIconNoSpan = function (iconName, gridOptionsWrapper, colDefWrapper, svgFactoryFunc) {
+	    Utils.createIconNoSpan = function (iconName, gridOptionsWrapper, column, svgFactoryFunc) {
 	        var userProvidedIcon;
 	        // check col for icon first
-	        if (colDefWrapper && colDefWrapper.getColDef().icons) {
-	            userProvidedIcon = colDefWrapper.getColDef().icons[iconName];
+	        if (column && column.getColDef().icons) {
+	            userProvidedIcon = column.getColDef().icons[iconName];
 	        }
 	        // it not in col, try grid options
 	        if (!userProvidedIcon && gridOptionsWrapper.getIcons()) {
@@ -2147,7 +2170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -2197,7 +2220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -2352,7 +2375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'editType'];
 	    ComponentUtil.OBJECT_PROPERTIES = [
 	        'rowStyle', 'context', 'groupColumnDef', 'localeText', 'icons', 'datasource', 'viewportDatasource',
-	        'groupRowRendererParams', 'aggFuncs', 'fullWidthCellRendererParams'
+	        'groupRowRendererParams', 'aggFuncs', 'fullWidthCellRendererParams', 'defaultColGroupDef', 'defaultColDef'
 	    ];
 	    ComponentUtil.ARRAY_PROPERTIES = [
 	        'slaveGrids', 'rowData', 'floatingTopRowData', 'floatingBottomRowData', 'columnDefs'
@@ -2361,7 +2384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'rowHeight', 'rowBuffer', 'colWidth', 'headerHeight', 'groupDefaultExpanded',
 	        'minColWidth', 'maxColWidth', 'viewportRowModelPageSize', 'viewportRowModelBufferSize',
 	        'layoutInterval', 'autoSizePadding', 'maxPagesInCache', 'maxConcurrentDatasourceRequests',
-	        'paginationOverflowSize', 'paginationPageSize', 'paginationInitialRowCount'
+	        'paginationOverflowSize', 'paginationPageSize', 'paginationInitialRowCount', 'scrollbarWidth'
 	    ];
 	    ComponentUtil.BOOLEAN_PROPERTIES = [
 	        'toolPanelSuppressRowGroups', 'toolPanelSuppressValues', 'toolPanelSuppressPivots', 'toolPanelSuppressPivotMode',
@@ -2374,19 +2397,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'singleClickEdit', 'suppressLoadingOverlay', 'suppressNoRowsOverlay', 'suppressAutoSize',
 	        'suppressParentsInRowNodes', 'showToolPanel', 'suppressColumnMoveAnimation', 'suppressMovableColumns',
 	        'suppressFieldDotNotation', 'enableRangeSelection', 'suppressEnterprise', 'rowGroupPanelShow',
-	        'pivotPanelShow',
+	        'pivotPanelShow', 'suppressTouch',
 	        'suppressContextMenu', 'suppressMenuFilterPanel', 'suppressMenuMainPanel', 'suppressMenuColumnPanel',
 	        'enableStatusBar', 'rememberGroupStateWhenNewData', 'enableCellChangeFlash', 'suppressDragLeaveHidesColumns',
 	        'suppressMiddleClickScrolls', 'suppressPreventDefaultOnMouseWheel', 'suppressUseColIdForGroups',
 	        'suppressCopyRowsToClipboard', 'pivotMode', 'suppressAggFuncInHeader', 'suppressColumnVirtualisation',
-	        'suppressFocusAfterRefresh', 'functionsPassive', 'functionsReadOnly', 'enableTouch'
+	        'suppressFocusAfterRefresh', 'functionsPassive', 'functionsReadOnly', 'suppressRowHoverClass'
 	    ];
-	    ComponentUtil.FUNCTION_PROPERTIES = ['headerCellRenderer', 'localeTextFunc', 'groupRowInnerRenderer',
-	        'groupRowRenderer', 'isScrollLag', 'isExternalFilterPresent', 'getRowHeight',
+	    ComponentUtil.FUNCTION_PROPERTIES = ['headerCellRenderer', 'localeTextFunc', 'groupRowInnerRenderer', 'groupRowInnerRendererFramework',
+	        'groupRowRenderer', 'groupRowRendererFramework', 'isScrollLag', 'isExternalFilterPresent', 'getRowHeight',
 	        'doesExternalFilterPass', 'getRowClass', 'getRowStyle', 'getHeaderCellTemplate', 'traverseNode',
 	        'getContextMenuItems', 'getMainMenuItems', 'processRowPostCreate', 'processCellForClipboard',
 	        'getNodeChildDetails', 'groupRowAggNodes', 'getRowNodeId', 'isFullWidthCell', 'fullWidthCellRenderer',
-	        'doesDataFlower'];
+	        'fullWidthCellRendererFramework', 'doesDataFlower', 'processSecondaryColDef', 'processSecondaryColGroupDef'];
 	    ComponentUtil.ALL_PROPERTIES = ComponentUtil.ARRAY_PROPERTIES
 	        .concat(ComponentUtil.OBJECT_PROPERTIES)
 	        .concat(ComponentUtil.STRING_PROPERTIES)
@@ -2415,7 +2438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -2499,7 +2522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -2823,7 +2846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	    GridApi.prototype.getFilterApi = function (key) {
-	        console.warn('ag-Grid: getFilterApi is deprecated, use getFilterComponent instead');
+	        console.warn('ag-Grid: getFilterApi is deprecated, use getFilterInstance instead');
 	        return this.getFilterInstance(key);
 	    };
 	    GridApi.prototype.destroyFilter = function (key) {
@@ -3028,6 +3051,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            console.warn("ag-Grid: api.getVirtualPageState is only available when rowModelType='virtual'.");
 	        }
 	    };
+	    GridApi.prototype.checkGridSize = function () {
+	        this.gridPanel.sizeHeaderAndBody();
+	    };
 	    __decorate([
 	        context_1.Autowired('csvCreator'), 
 	        __metadata('design:type', csvCreator_1.CsvCreator)
@@ -3145,7 +3171,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -3165,6 +3191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var constants_1 = __webpack_require__(8);
 	var floatingRowModel_1 = __webpack_require__(26);
 	var utils_1 = __webpack_require__(7);
+	var selectionController_1 = __webpack_require__(28);
 	var LINE_SEPARATOR = '\r\n';
 	var CsvCreator = (function () {
 	    function CsvCreator() {
@@ -3212,6 +3239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var columnSeparator = (params && params.columnSeparator) || ',';
 	        var suppressQuotes = params && params.suppressQuotes;
 	        var columnKeys = params && params.columnKeys;
+	        var onlySelectedAllPages = params && params.onlySelectedAllPages;
 	        var processCellCallback = params && params.processCellCallback;
 	        var processHeaderCallback = params && params.processHeaderCallback;
 	        // when in pivot mode, we always render cols on screen, never 'all columns'
@@ -3243,7 +3271,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            inMemoryRowModel.forEachPivotNode(processRow);
 	        }
 	        else {
-	            inMemoryRowModel.forEachNodeAfterFilterAndSort(processRow);
+	            if (onlySelectedAllPages) {
+	                var selectedNodes = this.selectionController.getSelectedNodes();
+	                selectedNodes.forEach(processRow);
+	            }
+	            else {
+	                inMemoryRowModel.forEachNodeAfterFilterAndSort(processRow);
+	            }
 	        }
 	        this.floatingRowModel.forEachFloatingBottomRow(processRow);
 	        if (includeCustomFooter) {
@@ -3312,7 +3346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	        else {
-	            return this.columnController.getDisplayNameForCol(column, true);
+	            return this.columnController.getDisplayNameForColumn(column, true);
 	        }
 	    };
 	    CsvCreator.prototype.processCell = function (rowNode, column, value, processCellCallback) {
@@ -3380,6 +3414,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        context_1.Autowired('gridOptionsWrapper'), 
 	        __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
 	    ], CsvCreator.prototype, "gridOptionsWrapper", void 0);
+	    __decorate([
+	        context_1.Autowired('selectionController'), 
+	        __metadata('design:type', selectionController_1.SelectionController)
+	    ], CsvCreator.prototype, "selectionController", void 0);
 	    CsvCreator = __decorate([
 	        context_1.Bean('csvCreator'), 
 	        __metadata('design:paramtypes', [])
@@ -3395,7 +3433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -3423,10 +3461,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var columnUtils_1 = __webpack_require__(16);
 	var logger_1 = __webpack_require__(5);
 	var events_1 = __webpack_require__(10);
-	var columnChangeEvent_1 = __webpack_require__(78);
+	var columnChangeEvent_1 = __webpack_require__(79);
 	var originalColumnGroup_1 = __webpack_require__(17);
-	var groupInstanceIdCreator_1 = __webpack_require__(79);
-	var functions_1 = __webpack_require__(80);
+	var groupInstanceIdCreator_1 = __webpack_require__(80);
+	var functions_1 = __webpack_require__(81);
 	var context_1 = __webpack_require__(6);
 	var gridPanel_1 = __webpack_require__(24);
 	var ColumnApi = (function () {
@@ -3435,7 +3473,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ColumnApi.prototype.sizeColumnsToFit = function (gridWidth) { this._columnController.sizeColumnsToFit(gridWidth); };
 	    ColumnApi.prototype.setColumnGroupOpened = function (group, newValue, instanceId) { this._columnController.setColumnGroupOpened(group, newValue, instanceId); };
 	    ColumnApi.prototype.getColumnGroup = function (name, instanceId) { return this._columnController.getColumnGroup(name, instanceId); };
-	    ColumnApi.prototype.getDisplayNameForCol = function (column) { return this._columnController.getDisplayNameForCol(column); };
+	    ColumnApi.prototype.getDisplayNameForColumn = function (column) { return this._columnController.getDisplayNameForColumn(column); };
+	    ColumnApi.prototype.getDisplayNameForColumnGroup = function (columnGroup) { return this._columnController.getDisplayNameForColumnGroup(columnGroup); };
 	    ColumnApi.prototype.getColumn = function (key) { return this._columnController.getPrimaryColumn(key); };
 	    ColumnApi.prototype.setColumnState = function (columnState) { return this._columnController.setColumnState(columnState); };
 	    ColumnApi.prototype.getColumnState = function () { return this._columnController.getColumnState(); };
@@ -3539,6 +3578,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ColumnApi.prototype.setColumnAggFunction = function (column, aggFunc) {
 	        console.error('ag-Grid: setColumnAggFunction is deprecated, use setColumnAggFunc');
 	        this._columnController.setColumnAggFunc(column, aggFunc);
+	    };
+	    ColumnApi.prototype.getDisplayNameForCol = function (column) {
+	        console.error('ag-Grid: getDisplayNameForCol is deprecated, use getDisplayNameForColumn');
+	        return this.getDisplayNameForColumn(column);
 	    };
 	    __decorate([
 	        context_1.Autowired('columnController'), 
@@ -4386,9 +4429,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return null;
 	    };
-	    ColumnController.prototype.getDisplayNameForCol = function (column, includeAggFunc) {
+	    ColumnController.prototype.getDisplayNameForColumn = function (column, includeAggFunc) {
 	        if (includeAggFunc === void 0) { includeAggFunc = false; }
-	        var headerName = this.getHeaderName(column);
+	        var headerName = this.getHeaderName(column.getColDef(), column, null);
 	        if (includeAggFunc) {
 	            return this.wrapHeaderNameWithAggFunc(column, headerName);
 	        }
@@ -4396,12 +4439,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return headerName;
 	        }
 	    };
-	    ColumnController.prototype.getHeaderName = function (column) {
-	        var colDef = column.getColDef();
+	    ColumnController.prototype.getDisplayNameForColumnGroup = function (columnGroup) {
+	        var colGroupDef = columnGroup.getOriginalColumnGroup().getColGroupDef();
+	        if (colGroupDef) {
+	            return this.getHeaderName(colGroupDef, null, columnGroup);
+	        }
+	        else {
+	            return null;
+	        }
+	    };
+	    ColumnController.prototype.getHeaderName = function (colDef, column, columnGroup) {
 	        var headerValueGetter = colDef.headerValueGetter;
 	        if (headerValueGetter) {
 	            var params = {
 	                colDef: colDef,
+	                column: column,
+	                columnGroup: columnGroup,
 	                api: this.gridOptionsWrapper.getApi(),
 	                context: this.gridOptionsWrapper.getContext()
 	            };
@@ -4422,6 +4475,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return colDef.headerName;
 	        }
 	    };
+	    /*
+	        private getHeaderGroupName(columnGroup: ColumnGroup): string {
+	            var colGroupDef = columnGroup.getOriginalColumnGroup().getColGroupDef();
+	            var headerValueGetter = colGroupDef.headerValueGetter;
+
+	            if (headerValueGetter) {
+	                var params = {
+	                    columnGroup: columnGroup,
+	                    colDef: colGroupDef,
+	                    api: this.gridOptionsWrapper.getApi(),
+	                    context: this.gridOptionsWrapper.getContext()
+	                };
+
+	                if (typeof headerValueGetter === 'function') {
+	                    // valueGetter is a function, so just call it
+	                    return headerValueGetter(params);
+	                } else if (typeof headerValueGetter === 'string') {
+	                    // valueGetter is an expression, so execute the expression
+	                    return this.expressionService.evaluate(headerValueGetter, params);
+	                } else {
+	                    console.warn('ag-grid: headerValueGetter must be a function or a string');
+	                    return '';
+	                }
+	            } else {
+	                return colGroupDef.headerName;
+	            }
+	        }
+	    */
 	    ColumnController.prototype.wrapHeaderNameWithAggFunc = function (column, headerName) {
 	        if (this.gridOptionsWrapper.isSuppressAggFuncInHeader()) {
 	            return headerName;
@@ -4467,7 +4548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var allColumnGroups = this.getAllDisplayedColumnGroups();
 	        var checkInstanceId = typeof instanceId === 'number';
 	        var result = null;
-	        this.columnUtils.deptFirstAllColumnTreeSearch(allColumnGroups, function (child) {
+	        this.columnUtils.depthFirstAllColumnTreeSearch(allColumnGroups, function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
 	                var columnGroup = child;
 	                var matched;
@@ -4550,7 +4631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // used by updateModel
 	    ColumnController.prototype.getColumnGroupState = function () {
 	        var groupState = {};
-	        this.columnUtils.deptFirstDisplayedColumnTreeSearch(this.getAllDisplayedColumnGroups(), function (child) {
+	        this.columnUtils.depthFirstDisplayedColumnTreeSearch(this.getAllDisplayedColumnGroups(), function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
 	                var columnGroup = child;
 	                var key = columnGroup.getGroupId();
@@ -4564,7 +4645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    // used by updateModel
 	    ColumnController.prototype.setColumnGroupState = function (groupState) {
-	        this.columnUtils.deptFirstDisplayedColumnTreeSearch(this.getAllDisplayedColumnGroups(), function (child) {
+	        this.columnUtils.depthFirstDisplayedColumnTreeSearch(this.getAllDisplayedColumnGroups(), function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
 	                var columnGroup = child;
 	                var key = columnGroup.getGroupId();
@@ -4625,6 +4706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	        }
 	        if (newColsPresent) {
+	            this.processSecondaryColumnDefinitions(colDefs);
 	            var balancedTreeResult = this.balancedColumnTreeBuilder.createBalancedColumnGroups(colDefs, false);
 	            this.secondaryBalancedTree = balancedTreeResult.balancedTree;
 	            this.secondaryHeaderRowCount = balancedTreeResult.treeDept + 1;
@@ -4639,6 +4721,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        this.copyDownGridColumns();
 	        this.updateDisplayedColumns();
+	    };
+	    ColumnController.prototype.processSecondaryColumnDefinitions = function (colDefs) {
+	        var columnCallback = this.gridOptionsWrapper.getProcessSecondaryColDefFunc();
+	        var groupCallback = this.gridOptionsWrapper.getProcessSecondaryColGroupDefFunc();
+	        if (!columnCallback && !groupCallback) {
+	            return;
+	        }
+	        searchForColDefs(colDefs);
+	        function searchForColDefs(colDefs2) {
+	            colDefs2.forEach(function (abstractColDef) {
+	                var isGroup = utils_1.Utils.exists(abstractColDef.children);
+	                if (isGroup) {
+	                    var colGroupDef = abstractColDef;
+	                    if (groupCallback) {
+	                        groupCallback(colGroupDef);
+	                    }
+	                    searchForColDefs(colGroupDef.children);
+	                }
+	                else {
+	                    var colDef = abstractColDef;
+	                    if (columnCallback) {
+	                        columnCallback(colDef);
+	                    }
+	                }
+	            });
+	        }
 	    };
 	    // called from: setColumnState, setColumnDefs, setAlternativeColumnDefs
 	    ColumnController.prototype.copyDownGridColumns = function () {
@@ -4729,7 +4837,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    ColumnController.prototype.addToDisplayedColumns = function (displayedColumnTree, displayedColumns) {
 	        displayedColumns.length = 0;
-	        this.columnUtils.deptFirstDisplayedColumnTreeSearch(displayedColumnTree, function (child) {
+	        this.columnUtils.depthFirstDisplayedColumnTreeSearch(displayedColumnTree, function (child) {
 	            if (child instanceof column_1.Column) {
 	                displayedColumns.push(child);
 	            }
@@ -4921,7 +5029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    ColumnController.prototype.updateGroups = function () {
 	        var allGroups = this.getAllDisplayedColumnGroups();
-	        this.columnUtils.deptFirstAllColumnTreeSearch(allGroups, function (child) {
+	        this.columnUtils.depthFirstAllColumnTreeSearch(allGroups, function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
 	                var group = child;
 	                group.calculateDisplayedColumns();
@@ -5053,7 +5161,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -5069,18 +5177,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.instanceId = instanceId;
 	        this.originalColumnGroup = originalColumnGroup;
 	    }
+	    ColumnGroup.prototype.getParent = function () {
+	        return this.parent;
+	    };
+	    ColumnGroup.prototype.setParent = function (parent) {
+	        this.parent = parent;
+	    };
 	    ColumnGroup.prototype.getUniqueId = function () {
 	        return this.groupId + '_' + this.instanceId;
-	    };
-	    // returns header name if it exists, otherwise null. if will not exist if
-	    // this group is a padding group, as they don't have colGroupDef's
-	    ColumnGroup.prototype.getHeaderName = function () {
-	        if (this.originalColumnGroup.getColGroupDef()) {
-	            return this.originalColumnGroup.getColGroupDef().headerName;
-	        }
-	        else {
-	            return null;
-	        }
 	    };
 	    ColumnGroup.prototype.checkLeft = function () {
 	        // first get all children to setLeft, as it impacts our decision below
@@ -5183,6 +5287,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ColumnGroup.prototype.getColGroupDef = function () {
 	        return this.originalColumnGroup.getColGroupDef();
 	    };
+	    ColumnGroup.prototype.isPadding = function () {
+	        return this.originalColumnGroup.isPadding();
+	    };
 	    ColumnGroup.prototype.isExpandable = function () {
 	        return this.originalColumnGroup.isExpandable();
 	    };
@@ -5267,7 +5374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -5306,6 +5413,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.colId = colId;
 	        this.primary = primary;
 	    }
+	    Column.prototype.setParent = function (parent) {
+	        this.parent = parent;
+	    };
+	    Column.prototype.getParent = function () {
+	        return this.parent;
+	    };
 	    // this is done after constructor as it uses gridOptionsWrapper
 	    Column.prototype.initialise = function () {
 	        this.floatingCellRenderer = this.frameworkFactory.colDefFloatingCellRenderer(this.colDef);
@@ -5666,7 +5779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -5768,38 +5881,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            }
 	        }*/
-	    ColumnUtils.prototype.deptFirstOriginalTreeSearch = function (tree, callback) {
+	    ColumnUtils.prototype.depthFirstOriginalTreeSearch = function (tree, callback) {
 	        var _this = this;
 	        if (!tree) {
 	            return;
 	        }
 	        tree.forEach(function (child) {
 	            if (child instanceof originalColumnGroup_1.OriginalColumnGroup) {
-	                _this.deptFirstOriginalTreeSearch(child.getChildren(), callback);
+	                _this.depthFirstOriginalTreeSearch(child.getChildren(), callback);
 	            }
 	            callback(child);
 	        });
 	    };
-	    ColumnUtils.prototype.deptFirstAllColumnTreeSearch = function (tree, callback) {
+	    ColumnUtils.prototype.depthFirstAllColumnTreeSearch = function (tree, callback) {
 	        var _this = this;
 	        if (!tree) {
 	            return;
 	        }
 	        tree.forEach(function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
-	                _this.deptFirstAllColumnTreeSearch(child.getChildren(), callback);
+	                _this.depthFirstAllColumnTreeSearch(child.getChildren(), callback);
 	            }
 	            callback(child);
 	        });
 	    };
-	    ColumnUtils.prototype.deptFirstDisplayedColumnTreeSearch = function (tree, callback) {
+	    ColumnUtils.prototype.depthFirstDisplayedColumnTreeSearch = function (tree, callback) {
 	        var _this = this;
 	        if (!tree) {
 	            return;
 	        }
 	        tree.forEach(function (child) {
 	            if (child instanceof columnGroup_1.ColumnGroup) {
-	                _this.deptFirstDisplayedColumnTreeSearch(child.getDisplayedChildren(), callback);
+	                _this.depthFirstDisplayedColumnTreeSearch(child.getDisplayedChildren(), callback);
 	            }
 	            callback(child);
 	        });
@@ -5823,19 +5936,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
 	var columnGroup_1 = __webpack_require__(14);
 	var column_1 = __webpack_require__(15);
 	var OriginalColumnGroup = (function () {
-	    function OriginalColumnGroup(colGroupDef, groupId) {
+	    function OriginalColumnGroup(colGroupDef, groupId, padding) {
 	        this.expandable = false;
 	        this.colGroupDef = colGroupDef;
 	        this.groupId = groupId;
 	        this.expanded = colGroupDef && !!colGroupDef.openByDefault;
+	        this.padding = padding;
 	    }
+	    OriginalColumnGroup.prototype.isPadding = function () {
+	        return this.padding;
+	    };
 	    OriginalColumnGroup.prototype.setExpanded = function (expanded) {
 	        this.expanded = expanded;
 	    };
@@ -5876,12 +5993,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    };
 	    OriginalColumnGroup.prototype.getColumnGroupShow = function () {
-	        if (this.colGroupDef) {
+	        if (!this.padding) {
 	            return this.colGroupDef.columnGroupShow;
 	        }
 	        else {
-	            // if there is no col def, then this must be a padding
-	            // group, which means we have exactly only child. we then
+	            // if this is padding we have exactly only child. we then
 	            // take the value from the child and push it up, making
 	            // this group 'invisible'.
 	            return this.children[0].getColumnGroupShow();
@@ -5926,7 +6042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -5955,7 +6071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ExpressionService.prototype.evaluate = function (expression, params) {
 	        try {
 	            var javaScriptFunction = this.createExpressionFunction(expression);
-	            var result = javaScriptFunction(params.value, params.context, params.node, params.data, params.colDef, params.rowIndex, params.api, params.getValue);
+	            var result = javaScriptFunction(params.value, params.context, params.node, params.data, params.colDef, params.rowIndex, params.api, params.getValue, params.column, params.columnGroup);
 	            return result;
 	        }
 	        catch (e) {
@@ -5974,7 +6090,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        // if not found in cache, return the function
 	        var functionBody = this.createFunctionBody(expression);
-	        var theFunction = new Function('x, ctx, node, data, colDef, rowIndex, api, getValue', functionBody);
+	        var theFunction = new Function('x, ctx, node, data, colDef, rowIndex, api, getValue, column, columnGroup', functionBody);
 	        // store in cache
 	        this.expressionToFunctionCache[expression] = theFunction;
 	        return theFunction;
@@ -6010,7 +6126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -6036,6 +6152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var context_2 = __webpack_require__(6);
 	var context_3 = __webpack_require__(6);
 	var context_4 = __webpack_require__(6);
+	var utils_1 = __webpack_require__(7);
 	// takes in a list of columns, as specified by the column definitions, and returns column groups
 	var BalancedColumnTreeBuilder = (function () {
 	    function BalancedColumnTreeBuilder() {
@@ -6053,7 +6170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var treeDept = this.findMaxDept(unbalancedTree, 0);
 	        this.logger.log('Number of levels for grouped columns is ' + treeDept);
 	        var balancedTree = this.balanceColumnTree(unbalancedTree, 0, treeDept, columnKeyCreator);
-	        this.columnUtils.deptFirstOriginalTreeSearch(balancedTree, function (child) {
+	        this.columnUtils.depthFirstOriginalTreeSearch(balancedTree, function (child) {
 	            if (child instanceof originalColumnGroup_1.OriginalColumnGroup) {
 	                child.calculateExpandable();
 	            }
@@ -6079,7 +6196,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var newChild = child;
 	                for (var i = columnDept - 1; i >= currentDept; i--) {
 	                    var newColId = columnKeyCreator.getUniqueKey(null, null);
-	                    var paddedGroup = new originalColumnGroup_1.OriginalColumnGroup(null, newColId);
+	                    var colGroupDefMerged = _this.createMergedColGroupDef(null);
+	                    var paddedGroup = new originalColumnGroup_1.OriginalColumnGroup(colGroupDefMerged, newColId, true);
 	                    paddedGroup.setChildren([newChild]);
 	                    newChild = paddedGroup;
 	                }
@@ -6109,24 +6227,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return result;
 	        }
 	        abstractColDefs.forEach(function (abstractColDef) {
-	            _this.checkForDeprecatedItems(abstractColDef);
+	            var newGroupOrColumn;
 	            if (_this.isColumnGroup(abstractColDef)) {
-	                var groupColDef = abstractColDef;
-	                var groupId = columnKeyCreator.getUniqueKey(groupColDef.groupId, null);
-	                var originalGroup = new originalColumnGroup_1.OriginalColumnGroup(groupColDef, groupId);
-	                var children = _this.recursivelyCreateColumns(groupColDef.children, level + 1, columnKeyCreator, primaryColumns);
-	                originalGroup.setChildren(children);
-	                result.push(originalGroup);
+	                newGroupOrColumn = _this.createColumnGroup(columnKeyCreator, primaryColumns, abstractColDef, level);
 	            }
 	            else {
-	                var colDef = abstractColDef;
-	                var colId = columnKeyCreator.getUniqueKey(colDef.colId, colDef.field);
-	                var column = new column_1.Column(colDef, colId, primaryColumns);
-	                _this.context.wireBean(column);
-	                result.push(column);
+	                newGroupOrColumn = _this.createColumn(columnKeyCreator, primaryColumns, abstractColDef);
 	            }
+	            result.push(newGroupOrColumn);
 	        });
 	        return result;
+	    };
+	    BalancedColumnTreeBuilder.prototype.createColumnGroup = function (columnKeyCreator, primaryColumns, colGroupDef, level) {
+	        var colGroupDefMerged = this.createMergedColGroupDef(colGroupDef);
+	        var groupId = columnKeyCreator.getUniqueKey(colGroupDefMerged.groupId, null);
+	        var originalGroup = new originalColumnGroup_1.OriginalColumnGroup(colGroupDefMerged, groupId, false);
+	        var children = this.recursivelyCreateColumns(colGroupDefMerged.children, level + 1, columnKeyCreator, primaryColumns);
+	        originalGroup.setChildren(children);
+	        return originalGroup;
+	    };
+	    BalancedColumnTreeBuilder.prototype.createMergedColGroupDef = function (colGroupDef) {
+	        var colGroupDefMerged = {};
+	        utils_1.Utils.assign(colGroupDefMerged, this.gridOptionsWrapper.getDefaultColGroupDef());
+	        utils_1.Utils.assign(colGroupDefMerged, colGroupDef);
+	        this.checkForDeprecatedItems(colGroupDefMerged);
+	        return colGroupDefMerged;
+	    };
+	    BalancedColumnTreeBuilder.prototype.createColumn = function (columnKeyCreator, primaryColumns, colDef3) {
+	        var colDefMerged = {};
+	        utils_1.Utils.assign(colDefMerged, this.gridOptionsWrapper.getDefaultColDef());
+	        utils_1.Utils.assign(colDefMerged, colDef3);
+	        this.checkForDeprecatedItems(colDefMerged);
+	        var colId = columnKeyCreator.getUniqueKey(colDefMerged.colId, colDefMerged.field);
+	        var column = new column_1.Column(colDefMerged, colId, primaryColumns);
+	        this.context.wireBean(column);
+	        return column;
 	    };
 	    BalancedColumnTreeBuilder.prototype.checkForDeprecatedItems = function (colDef) {
 	        if (colDef) {
@@ -6192,7 +6327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -6244,7 +6379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -6311,7 +6446,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	            previousRealPath = currentRealPath;
 	            previousOriginalPath = currentOriginalPath;
 	        });
+	        this.setupParentsIntoColumns(result, null);
 	        return result;
+	    };
+	    DisplayedGroupCreator.prototype.setupParentsIntoColumns = function (columnsOrGroups, parent) {
+	        var _this = this;
+	        columnsOrGroups.forEach(function (columnsOrGroup) {
+	            columnsOrGroup.setParent(parent);
+	            if (columnsOrGroup instanceof columnGroup_1.ColumnGroup) {
+	                var columnGroup = columnsOrGroup;
+	                _this.setupParentsIntoColumns(columnGroup.getChildren(), columnGroup);
+	            }
+	        });
 	    };
 	    DisplayedGroupCreator.prototype.createFakePath = function (balancedColumnTree) {
 	        var result = [];
@@ -6320,7 +6466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var index = 0;
 	        while (currentChildren && currentChildren[0] && currentChildren[0] instanceof originalColumnGroup_1.OriginalColumnGroup) {
 	            // putting in a deterministic fake id, in case the API in the future needs to reference the col
-	            result.push(new originalColumnGroup_1.OriginalColumnGroup(null, 'FAKE_PATH_' + index));
+	            result.push(new originalColumnGroup_1.OriginalColumnGroup(null, 'FAKE_PATH_' + index, true));
 	            currentChildren = currentChildren[0].getChildren();
 	            index++;
 	        }
@@ -6378,7 +6524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -6396,7 +6542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var context_1 = __webpack_require__(6);
 	var context_2 = __webpack_require__(6);
 	var headerRenderer_1 = __webpack_require__(66);
-	var renderedHeaderCell_1 = __webpack_require__(73);
+	var renderedHeaderCell_1 = __webpack_require__(74);
 	var gridOptionsWrapper_1 = __webpack_require__(3);
 	var AutoWidthCalculator = (function () {
 	    function AutoWidthCalculator() {
@@ -6510,7 +6656,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -6557,9 +6703,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.logger = this.loggerFactory.create('RowRenderer');
 	        this.logger = loggerFactory.create('BalancedColumnTreeBuilder');
 	    };
+	    RowRenderer.prototype.setupDocumentFragments = function () {
+	        var usingDocumentFragments = !!document.createDocumentFragment;
+	        if (usingDocumentFragments) {
+	            this.eBodyContainerDF = document.createDocumentFragment();
+	            if (!this.gridOptionsWrapper.isForPrint()) {
+	                this.ePinnedLeftColsContainerDF = document.createDocumentFragment();
+	                this.ePinnedRightColsContainerDF = document.createDocumentFragment();
+	            }
+	        }
+	    };
 	    RowRenderer.prototype.init = function () {
 	        var _this = this;
 	        this.getContainersFromGridPanel();
+	        this.setupDocumentFragments();
 	        var columnListener = this.onColumnEvent.bind(this);
 	        var refreshViewListener = this.refreshView.bind(this);
 	        this.eventService.addEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, columnListener);
@@ -6609,7 +6766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var eCells = [];
 	        utils_1.Utils.iterateObject(this.renderedRows, callback);
 	        utils_1.Utils.iterateObject(this.renderedBottomFloatingRows, callback);
-	        utils_1.Utils.iterateObject(this.renderedBottomFloatingRows, callback);
+	        utils_1.Utils.iterateObject(this.renderedTopFloatingRows, callback);
 	        function callback(key, renderedRow) {
 	            var eCell = renderedRow.getCellForCol(column);
 	            if (eCell) {
@@ -6644,7 +6801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        if (rowNodes) {
 	            rowNodes.forEach(function (node, rowIndex) {
-	                var renderedRow = new renderedRow_1.RenderedRow(_this.$scope, _this, eBodyContainer, eFullWidthContainer, ePinnedLeftContainer, ePinnedRightContainer, node, rowIndex);
+	                var renderedRow = new renderedRow_1.RenderedRow(_this.$scope, _this, eBodyContainer, null, eFullWidthContainer, ePinnedLeftContainer, null, ePinnedRightContainer, null, node, rowIndex);
 	                _this.context.wireBean(renderedRow);
 	                renderedRows.push(renderedRow);
 	            });
@@ -6853,7 +7010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return this.lastRenderedRow;
 	    };
 	    RowRenderer.prototype.ensureRowsRendered = function () {
-	        //var start = new Date().getTime();
+	        // var timer = new Timer();
 	        var _this = this;
 	        // at the end, this array will contain the items we need to remove
 	        var rowsToRemove = Object.keys(this.renderedRows);
@@ -6870,32 +7027,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.insertRow(node, rowIndex);
 	            }
 	        }
+	        // timer.print('creating template');
 	        // at this point, everything in our 'rowsToRemove' . . .
 	        this.removeVirtualRow(rowsToRemove);
+	        // timer.print('removing');
+	        if (this.eBodyContainerDF) {
+	            this.eBodyContainer.appendChild(this.eBodyContainerDF);
+	            if (!this.gridOptionsWrapper.isForPrint()) {
+	                this.ePinnedLeftColsContainer.appendChild(this.ePinnedLeftColsContainerDF);
+	                this.ePinnedRightColsContainer.appendChild(this.ePinnedRightColsContainerDF);
+	            }
+	        }
 	        // if we are doing angular compiling, then do digest the scope here
 	        if (this.gridOptionsWrapper.isAngularCompileRows()) {
 	            // we do it in a timeout, in case we are already in an apply
 	            setTimeout(function () { _this.$scope.$apply(); }, 0);
 	        }
-	        //var end = new Date().getTime();
-	        //console.log(end-start);
-	    };
-	    RowRenderer.prototype.onMouseEvent = function (eventName, mouseEvent, cell) {
-	        var renderedRow;
-	        switch (cell.floating) {
-	            case constants_1.Constants.FLOATING_TOP:
-	                renderedRow = this.renderedTopFloatingRows[cell.rowIndex];
-	                break;
-	            case constants_1.Constants.FLOATING_BOTTOM:
-	                renderedRow = this.renderedBottomFloatingRows[cell.rowIndex];
-	                break;
-	            default:
-	                renderedRow = this.renderedRows[cell.rowIndex];
-	                break;
-	        }
-	        if (renderedRow) {
-	            renderedRow.onMouseEvent(eventName, mouseEvent, cell);
-	        }
+	        // timer.print('total');
 	    };
 	    RowRenderer.prototype.insertRow = function (node, rowIndex) {
 	        var columns = this.columnController.getAllDisplayedColumns();
@@ -6903,7 +7051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (utils_1.Utils.missingOrEmpty(columns)) {
 	            return;
 	        }
-	        var renderedRow = new renderedRow_1.RenderedRow(this.$scope, this, this.eBodyContainer, this.eFullWidthContainer, this.ePinnedLeftColsContainer, this.ePinnedRightColsContainer, node, rowIndex);
+	        var renderedRow = new renderedRow_1.RenderedRow(this.$scope, this, this.eBodyContainer, this.eBodyContainerDF, this.eFullWidthContainer, this.ePinnedLeftColsContainer, this.ePinnedLeftColsContainerDF, this.ePinnedRightColsContainer, this.ePinnedRightColsContainerDF, node, rowIndex);
 	        this.context.wireBean(renderedRow);
 	        this.renderedRows[rowIndex] = renderedRow;
 	    };
@@ -7164,7 +7312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -7275,9 +7423,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    GridPanel.prototype.agWire = function (loggerFactory) {
 	        // makes code below more readable if we pull 'forPrint' out
 	        this.forPrint = this.gridOptionsWrapper.isForPrint();
-	        this.scrollWidth = utils_1.Utils.getScrollbarWidth();
+	        this.setScrollBarWidth();
 	        this.logger = loggerFactory.create('GridPanel');
 	        this.findElements();
+	    };
+	    GridPanel.prototype.setScrollBarWidth = function () {
+	        // the user might be using some non-standard scrollbar, eg a scrollbar that has zero
+	        // width and overlays (like the Safari scrollbar, but presented in Chrome). so we
+	        // allow the user to provide the scroll width before we work it out.
+	        var scrollWidth = this.gridOptionsWrapper.getScrollbarWidth();
+	        if (typeof scrollWidth !== 'number' || scrollWidth < 0) {
+	            scrollWidth = utils_1.Utils.getScrollbarWidth();
+	        }
+	        this.scrollWidth = scrollWidth;
 	    };
 	    GridPanel.prototype.destroy = function () {
 	        this.destroyFunctions.forEach(function (func) { return func(); });
@@ -7320,7 +7478,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.sizeHeaderAndBody();
 	        this.disableBrowserDragging();
 	        this.addShortcutKeyListeners();
-	        this.addCellListeners();
+	        this.addMouseEvents();
+	        this.addKeyboardEvents();
 	        this.addBodyViewportListener();
 	        if (this.$scope) {
 	            this.addAngularApplyCheck();
@@ -7361,11 +7520,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    };
 	    GridPanel.prototype.addEventListeners = function () {
-	        this.eventService.addEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, this.onDisplayedColumnsChanged.bind(this));
-	        this.eventService.addEventListener(events_1.Events.EVENT_COLUMN_RESIZED, this.onColumnResized.bind(this));
-	        this.eventService.addEventListener(events_1.Events.EVENT_FLOATING_ROW_DATA_CHANGED, this.sizeHeaderAndBody.bind(this));
-	        this.gridOptionsWrapper.addEventListener(gridOptionsWrapper_1.GridOptionsWrapper.PROP_HEADER_HEIGHT, this.sizeHeaderAndBody.bind(this));
-	        this.eventService.addEventListener(events_1.Events.EVENT_ROW_DATA_CHANGED, this.onRowDataChanged.bind(this));
+	        var _this = this;
+	        var displayedColumnsChangedListener = this.onDisplayedColumnsChanged.bind(this);
+	        var columnResizedListener = this.onColumnResized.bind(this);
+	        var sizeHeaderAndBodyListener = this.sizeHeaderAndBody.bind(this);
+	        var rowDataChangedListener = this.onRowDataChanged.bind(this);
+	        this.eventService.addEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, displayedColumnsChangedListener);
+	        this.eventService.addEventListener(events_1.Events.EVENT_COLUMN_RESIZED, columnResizedListener);
+	        this.eventService.addEventListener(events_1.Events.EVENT_FLOATING_ROW_DATA_CHANGED, sizeHeaderAndBodyListener);
+	        this.gridOptionsWrapper.addEventListener(gridOptionsWrapper_1.GridOptionsWrapper.PROP_HEADER_HEIGHT, sizeHeaderAndBodyListener);
+	        this.eventService.addEventListener(events_1.Events.EVENT_ROW_DATA_CHANGED, rowDataChangedListener);
+	        this.eventService.addEventListener(events_1.Events.EVENT_ITEMS_ADDED, rowDataChangedListener);
+	        this.eventService.addEventListener(events_1.Events.EVENT_ITEMS_REMOVED, rowDataChangedListener);
+	        this.destroyFunctions.push(function () {
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, displayedColumnsChangedListener);
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_COLUMN_RESIZED, columnResizedListener);
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_FLOATING_ROW_DATA_CHANGED, sizeHeaderAndBodyListener);
+	            _this.gridOptionsWrapper.removeEventListener(gridOptionsWrapper_1.GridOptionsWrapper.PROP_HEADER_HEIGHT, sizeHeaderAndBodyListener);
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_ROW_DATA_CHANGED, rowDataChangedListener);
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_ITEMS_ADDED, rowDataChangedListener);
+	            _this.eventService.removeEventListener(events_1.Events.EVENT_ITEMS_REMOVED, rowDataChangedListener);
+	        });
 	    };
 	    GridPanel.prototype.addDragListeners = function () {
 	        var _this = this;
@@ -7377,20 +7552,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var containers = [this.ePinnedLeftColsContainer, this.ePinnedRightColsContainer, this.eBodyContainer,
 	            this.eFloatingTop, this.eFloatingBottom];
 	        containers.forEach(function (container) {
-	            _this.dragService.addDragSource({
+	            var params = {
 	                dragStartPixels: 0,
 	                eElement: container,
 	                onDragStart: _this.rangeController.onDragStart.bind(_this.rangeController),
 	                onDragStop: _this.rangeController.onDragStop.bind(_this.rangeController),
 	                onDragging: _this.rangeController.onDragging.bind(_this.rangeController)
-	            });
+	            };
+	            _this.dragService.addDragSource(params);
+	            _this.destroyFunctions.push(function () { return _this.dragService.removeDragSource(params); });
 	        });
 	    };
-	    GridPanel.prototype.addCellListeners = function () {
+	    GridPanel.prototype.addMouseEvents = function () {
 	        var _this = this;
 	        var eventNames = ['click', 'mousedown', 'dblclick', 'contextmenu'];
 	        eventNames.forEach(function (eventName) {
 	            var listener = _this.processMouseEvent.bind(_this, eventName);
+	            _this.eAllCellContainers.forEach(function (container) {
+	                container.addEventListener(eventName, listener);
+	                _this.destroyFunctions.push(function () { return container.removeEventListener(eventName, listener); });
+	            });
+	        });
+	    };
+	    GridPanel.prototype.addKeyboardEvents = function () {
+	        var _this = this;
+	        var eventNames = ['keydown', 'keypress'];
+	        eventNames.forEach(function (eventName) {
+	            var listener = _this.processKeyboardEvent.bind(_this, eventName);
 	            _this.eAllCellContainers.forEach(function (container) {
 	                container.addEventListener(eventName, listener);
 	                _this.destroyFunctions.push(function () { return container.removeEventListener(eventName, listener); });
@@ -7416,11 +7604,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.eBodyViewport.addEventListener('contextmenu', listener);
 	        this.destroyFunctions.push(function () { return _this.eBodyViewport.removeEventListener('contextmenu', listener); });
 	    };
+	    GridPanel.prototype.getCellForEvent = function (event) {
+	        var domDataKey = this.gridOptionsWrapper.getDomDataKey();
+	        var sourceElement = utils_1.Utils.getTarget(event);
+	        while (sourceElement) {
+	            var domData = sourceElement[domDataKey];
+	            if (domData && domData.renderedCell) {
+	                return domData.renderedCell;
+	            }
+	            sourceElement = sourceElement.parentElement;
+	        }
+	        return null;
+	    };
+	    GridPanel.prototype.getRowForEvent = function (event) {
+	        var domDataKey = this.gridOptionsWrapper.getDomDataKey();
+	        var sourceElement = utils_1.Utils.getTarget(event);
+	        while (sourceElement) {
+	            var domData = sourceElement[domDataKey];
+	            if (domData && domData.renderedRow) {
+	                return domData.renderedRow;
+	            }
+	            sourceElement = sourceElement.parentElement;
+	        }
+	        return null;
+	    };
+	    GridPanel.prototype.processKeyboardEvent = function (eventName, keyboardEvent) {
+	        var renderedCell = this.getCellForEvent(keyboardEvent);
+	        if (renderedCell) {
+	            switch (eventName) {
+	                case 'keydown':
+	                    renderedCell.onKeyDown(keyboardEvent);
+	                    break;
+	                case 'keypress':
+	                    renderedCell.onKeyPress(keyboardEvent);
+	                    break;
+	            }
+	        }
+	    };
 	    GridPanel.prototype.processMouseEvent = function (eventName, mouseEvent) {
-	        var cell = this.mouseEventService.getCellForMouseEvent(mouseEvent);
-	        if (utils_1.Utils.exists(cell)) {
-	            //console.log(`row = ${cell.rowIndex}, floating = ${floating}`);
-	            this.rowRenderer.onMouseEvent(eventName, mouseEvent, cell);
+	        var renderedCell = this.getCellForEvent(mouseEvent);
+	        if (renderedCell) {
+	            renderedCell.onMouseEvent(eventName, mouseEvent);
+	        }
+	        var renderedRow = this.getRowForEvent(mouseEvent);
+	        if (renderedRow) {
+	            renderedRow.onMouseEvent(eventName, mouseEvent);
 	        }
 	        this.preventDefaultOnContextMenu(mouseEvent);
 	    };
@@ -7448,6 +7676,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this;
 	        this.eAllCellContainers.forEach(function (container) {
 	            container.addEventListener('keydown', function (event) {
+	                // if the cell the event came from is editing, then we do not
+	                // want to do the default shortcut keys, otherwise the editor
+	                // (eg a text field) would not be able to do the normal cut/copy/paste
+	                var renderedCell = _this.getCellForEvent(event);
+	                if (renderedCell && renderedCell.isEditing()) {
+	                    return;
+	                }
 	                if (event.ctrlKey || event.metaKey) {
 	                    switch (event.which) {
 	                        case constants_1.Constants.KEY_A: return _this.onCtrlAndA(event);
@@ -7590,11 +7825,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (viewportScrolledPastRow) {
 	            // if row is before, scroll up with row at top
 	            eViewportToScroll.scrollTop = rowTopPixel;
+	            this.rowRenderer.drawVirtualRows();
 	        }
 	        else if (viewportScrolledBeforeRow) {
 	            // if row is below, scroll down with row at bottom
 	            var newScrollPosition = rowBottomPixel - viewportHeight;
 	            eViewportToScroll.scrollTop = newScrollPosition;
+	            this.rowRenderer.drawVirtualRows();
 	        }
 	        // otherwise, row is already in view, so do nothing
 	    };
@@ -8101,21 +8338,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	                that.rowRenderer.drawVirtualRows();
 	            }
 	        }
-	        if (this.useScrollLag) {
-	            this.eBodyViewport.addEventListener('scroll', this.debounce.bind(this, onBodyViewportScroll));
-	            this.ePinnedRightColsViewport.addEventListener('scroll', this.debounce.bind(this, onPinnedRightScroll));
-	        }
-	        else {
-	            this.eBodyViewport.addEventListener('scroll', onBodyViewportScroll);
-	            this.ePinnedRightColsViewport.addEventListener('scroll', onPinnedRightScroll);
-	        }
+	        var bodyViewportScrollListener = this.useScrollLag ? this.debounce.bind(this, onBodyViewportScroll) : onBodyViewportScroll;
+	        var pinnedRightScrollListener = this.useScrollLag ? this.debounce.bind(this, onPinnedRightScroll) : onPinnedRightScroll;
+	        this.eBodyViewport.addEventListener('scroll', bodyViewportScrollListener);
+	        this.ePinnedRightColsViewport.addEventListener('scroll', pinnedRightScrollListener);
+	        this.destroyFunctions.push(function () {
+	            _this.eBodyViewport.removeEventListener('scroll', bodyViewportScrollListener);
+	            _this.ePinnedRightColsViewport.removeEventListener('scroll', pinnedRightScrollListener);
+	        });
 	        // this means the pinned panel was moved, which can only
 	        // happen when the user is navigating in the pinned container
 	        // as the pinned col should never scroll. so we rollback
 	        // the scroll on the pinned.
-	        this.ePinnedLeftColsViewport.addEventListener('scroll', function () {
+	        var pinnedLeftColsViewportScrollListener = function () {
 	            _this.ePinnedLeftColsViewport.scrollTop = 0;
+	        };
+	        this.ePinnedLeftColsViewport.addEventListener('scroll', pinnedLeftColsViewportScrollListener);
+	        this.destroyFunctions.push(function () {
+	            _this.ePinnedLeftColsViewport.removeEventListener('scroll', pinnedLeftColsViewportScrollListener);
 	        });
+	        this.addIEPinFix(onPinnedRightScroll);
+	    };
+	    // this bit is a fix / hack for IE due to this:
+	    // https://www.ag-grid.com/forum/showthread.php?tid=4303
+	    // it gets the left panel to reposition itself after a model change
+	    GridPanel.prototype.addIEPinFix = function (onPinnedRightScroll) {
+	        var _this = this;
+	        var listener = function () {
+	            if (_this.columnController.isPinningRight()) {
+	                setTimeout(function () {
+	                    onPinnedRightScroll();
+	                }, 0);
+	            }
+	        };
+	        this.eventService.addEventListener(events_1.Events.EVENT_MODEL_UPDATED, listener);
+	        this.destroyFunctions.push(function () { return _this.eventService.removeEventListener(events_1.Events.EVENT_MODEL_UPDATED, listener); });
 	    };
 	    GridPanel.prototype.setLeftAndRightBounds = function () {
 	        if (this.gridOptionsWrapper.isForPrint()) {
@@ -8319,7 +8576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -8532,7 +8789,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -8688,7 +8945,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -8778,9 +9035,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return this.selected;
 	    };
-	    RowNode.prototype.deptFirstSearch = function (callback) {
+	    RowNode.prototype.depthFirstSearch = function (callback) {
 	        if (this.childrenAfterGroup) {
-	            this.childrenAfterGroup.forEach(function (child) { return child.deptFirstSearch(callback); });
+	            this.childrenAfterGroup.forEach(function (child) { return child.depthFirstSearch(callback); });
 	        }
 	        callback(this);
 	    };
@@ -8950,7 +9207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var inMemoryRowModel = this.rowModel;
 	        inMemoryRowModel.getTopLevelNodes().forEach(function (topLevelNode) {
 	            if (topLevelNode.group) {
-	                topLevelNode.deptFirstSearch(function (childNode) {
+	                topLevelNode.depthFirstSearch(function (childNode) {
 	                    if (childNode.group) {
 	                        childNode.calculateSelectedFromChildren();
 	                    }
@@ -9033,7 +9290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -9115,7 +9372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        var inMemoryRowModel = this.rowModel;
 	        inMemoryRowModel.getTopLevelNodes().forEach(function (rowNode) {
-	            rowNode.deptFirstSearch(function (rowNode) {
+	            rowNode.depthFirstSearch(function (rowNode) {
 	                if (rowNode.group) {
 	                    rowNode.calculateSelectedFromChildren();
 	                }
@@ -9157,6 +9414,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this.selectedNodes[rowNode.id] !== undefined) {
 	            rowNode.setSelectedInitialValue(true);
 	            this.selectedNodes[rowNode.id] = rowNode;
+	        }
+	        else {
+	            rowNode.setSelectedInitialValue(false);
 	        }
 	    };
 	    SelectionController.prototype.reset = function () {
@@ -9293,7 +9553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -9484,7 +9744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -9745,7 +10005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -9772,14 +10032,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onMouseMoveListener = this.onMouseMove.bind(this);
 	        this.onTouchEndListener = this.onTouchUp.bind(this);
 	        this.onTouchMoveListener = this.onTouchMove.bind(this);
-	        this.destroyFunctions = [];
+	        this.dragEndFunctions = [];
+	        this.dragSources = [];
 	    }
 	    DragService.prototype.init = function () {
 	        this.logger = this.loggerFactory.create('DragService');
 	        this.eBody = document.querySelector('body');
 	    };
 	    DragService.prototype.destroy = function () {
-	        this.destroyFunctions.forEach(function (func) { return func(); });
+	        this.dragSources.forEach(this.removeListener.bind(this));
+	        this.dragSources.length = 0;
+	    };
+	    DragService.prototype.removeListener = function (dragSourceAndListener) {
+	        var element = dragSourceAndListener.dragSource.eElement;
+	        var mouseDownListener = dragSourceAndListener.mouseDownListener;
+	        element.removeEventListener('mousedown', mouseDownListener);
+	        // remove touch listener only if it exists
+	        if (dragSourceAndListener.touchEnabled) {
+	            var touchStartListener = dragSourceAndListener.touchStartListener;
+	            element.removeEventListener('touchstart', touchStartListener);
+	        }
+	    };
+	    DragService.prototype.removeDragSource = function (params) {
+	        var dragSourceAndListener = utils_1.Utils.find(this.dragSources, function (item) { return item.dragSource === params; });
+	        if (!dragSourceAndListener) {
+	            return;
+	        }
+	        this.removeListener(dragSourceAndListener);
+	        utils_1.Utils.removeFromArray(this.dragSources, dragSourceAndListener);
 	    };
 	    DragService.prototype.setNoSelectToBody = function (noSelect) {
 	        if (utils_1.Utils.exists(this.eBody)) {
@@ -9790,33 +10070,47 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (includeTouch === void 0) { includeTouch = false; }
 	        var mouseListener = this.onMouseDown.bind(this, params);
 	        params.eElement.addEventListener('mousedown', mouseListener);
-	        this.destroyFunctions.push(function () { return params.eElement.removeEventListener('mousedown', mouseListener); });
-	        if (includeTouch && this.gridOptionsWrapper.isEnableTouch()) {
-	            var touchListener = this.onTouchStart.bind(this, params);
+	        var touchListener = null;
+	        var suppressTouch = this.gridOptionsWrapper.isSuppressTouch();
+	        var reallyIncludeTouch = includeTouch && !suppressTouch;
+	        if (reallyIncludeTouch) {
+	            touchListener = this.onTouchStart.bind(this, params);
 	            params.eElement.addEventListener('touchstart', touchListener);
-	            this.destroyFunctions.push(function () { return params.eElement.removeEventListener('touchstart', touchListener); });
 	        }
+	        this.dragSources.push({
+	            dragSource: params,
+	            mouseDownListener: mouseListener,
+	            touchStartListener: touchListener,
+	            touchEnabled: includeTouch
+	        });
 	    };
 	    // gets called whenever mouse down on any drag source
 	    DragService.prototype.onTouchStart = function (params, touchEvent) {
-	        touchEvent.preventDefault();
+	        var _this = this;
 	        this.currentDragParams = params;
 	        this.dragging = false;
-	        var touch = touchEvent.targetTouches[0];
+	        var touch = touchEvent.touches[0];
 	        this.touchLastTime = touch;
 	        this.touchStart = touch;
+	        touchEvent.preventDefault();
 	        // we temporally add these listeners, for the duration of the drag, they
-	        // are removed in mouseup handling.
-	        document.addEventListener('touchmove', this.onTouchMoveListener);
-	        document.addEventListener('touchend', this.onTouchEndListener);
-	        document.addEventListener('touchcancel', this.onTouchEndListener);
+	        // are removed in touch end handling.
+	        params.eElement.addEventListener('touchmove', this.onTouchMoveListener);
+	        params.eElement.addEventListener('touchend', this.onTouchEndListener);
+	        params.eElement.addEventListener('touchcancel', this.onTouchEndListener);
+	        this.dragEndFunctions.push(function () {
+	            params.eElement.removeEventListener('touchmove', _this.onTouchMoveListener);
+	            params.eElement.removeEventListener('touchend', _this.onTouchEndListener);
+	            params.eElement.removeEventListener('touchcancel', _this.onTouchEndListener);
+	        });
 	        // see if we want to start dragging straight away
 	        if (params.dragStartPixels === 0) {
-	            this.onTouchMove(touchEvent);
+	            this.onCommonMove(touch, this.touchStart);
 	        }
 	    };
 	    // gets called whenever mouse down on any drag source
 	    DragService.prototype.onMouseDown = function (params, mouseEvent) {
+	        var _this = this;
 	        // only interested in left button clicks
 	        if (mouseEvent.button !== 0) {
 	            return;
@@ -9829,6 +10123,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // are removed in mouseup handling.
 	        document.addEventListener('mousemove', this.onMouseMoveListener);
 	        document.addEventListener('mouseup', this.onMouseUpListener);
+	        this.dragEndFunctions.push(function () {
+	            document.removeEventListener('mousemove', _this.onMouseMoveListener);
+	            document.removeEventListener('mouseup', _this.onMouseUpListener);
+	        });
 	        // see if we want to start dragging straight away
 	        if (params.dragStartPixels === 0) {
 	            this.onMouseMove(mouseEvent);
@@ -9839,12 +10137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    DragService.prototype.isEventNearStartEvent = function (currentEvent, startEvent) {
 	        // by default, we wait 4 pixels before starting the drag
 	        var requiredPixelDiff = utils_1.Utils.exists(this.currentDragParams.dragStartPixels) ? this.currentDragParams.dragStartPixels : 4;
-	        if (requiredPixelDiff === 0) {
-	            return false;
-	        }
-	        var diffX = Math.abs(currentEvent.clientX - startEvent.clientX);
-	        var diffY = Math.abs(currentEvent.clientY - startEvent.clientY);
-	        return Math.max(diffX, diffY) <= requiredPixelDiff;
+	        return utils_1.Utils.areEventsNear(currentEvent, startEvent, requiredPixelDiff);
 	    };
 	    DragService.prototype.getFirstActiveTouch = function (touchList) {
 	        for (var i = 0; i < touchList.length; i++) {
@@ -9873,10 +10166,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.currentDragParams.onDragging(currentEvent);
 	    };
 	    DragService.prototype.onTouchMove = function (touchEvent) {
-	        var touch = this.getFirstActiveTouch(touchEvent.changedTouches);
+	        var touch = this.getFirstActiveTouch(touchEvent.touches);
 	        if (!touch) {
 	            return;
 	        }
+	        // this.___statusBar.setInfoText(Math.random() + ' onTouchMove preventDefault stopPropagation');
 	        this.onCommonMove(touch, this.touchStart);
 	    };
 	    // only gets called after a mouse down - as this is only added after mouseDown
@@ -9894,25 +10188,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!touch) {
 	            touch = this.touchLastTime;
 	        }
-	        document.removeEventListener('touchmove', this.onTouchMoveListener);
-	        document.removeEventListener('touchend', this.onTouchEndListener);
-	        document.removeEventListener('touchcancel', this.onTouchEndListener);
+	        // if mouse was left up before we started to move, then this is a tap.
+	        // we check this before onUpCommon as onUpCommon resets the dragging
+	        // var tap = !this.dragging;
+	        // var tapTarget = this.currentDragParams.eElement;
 	        this.onUpCommon(touch);
+	        // if tap, tell user
+	        // console.log(`${Math.random()} tap = ${tap}`);
+	        // if (tap) {
+	        //     tapTarget.click();
+	        // }
 	    };
 	    DragService.prototype.onMouseUp = function (mouseEvent) {
-	        document.removeEventListener('mouseup', this.onMouseUpListener);
-	        document.removeEventListener('mousemove', this.onMouseMoveListener);
 	        this.onUpCommon(mouseEvent);
 	    };
-	    DragService.prototype.onUpCommon = function (mouseEvent) {
+	    DragService.prototype.onUpCommon = function (eventOrTouch) {
+	        if (this.dragging) {
+	            this.dragging = false;
+	            this.currentDragParams.onDragStop(eventOrTouch);
+	            this.eventService.dispatchEvent(events_1.Events.EVENT_DRAG_STOPPED);
+	        }
 	        this.setNoSelectToBody(false);
 	        this.mouseStartEvent = null;
 	        this.mouseEventLastTime = null;
-	        if (this.dragging) {
-	            this.dragging = false;
-	            this.currentDragParams.onDragStop(mouseEvent);
-	            this.eventService.dispatchEvent(events_1.Events.EVENT_DRAG_STOPPED);
-	        }
+	        this.touchStart = null;
+	        this.touchLastTime = null;
+	        this.currentDragParams = null;
+	        this.dragEndFunctions.forEach(function (func) { return func(); });
+	        this.dragEndFunctions.length = 0;
 	    };
 	    __decorate([
 	        context_1.Autowired('loggerFactory'), 
@@ -9953,7 +10256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -9991,10 +10294,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	    MouseEventService.prototype.getFloating = function (mouseEvent) {
-	        var floatingTopRect = this.gridPanel.getFloatingTopClientRect();
-	        var floatingBottomRect = this.gridPanel.getFloatingBottomClientRect();
 	        var floatingTopRowsExist = !this.floatingRowModel.isEmpty(constants_1.Constants.FLOATING_TOP);
 	        var floatingBottomRowsExist = !this.floatingRowModel.isEmpty(constants_1.Constants.FLOATING_BOTTOM);
+	        var floatingTopRect = floatingTopRowsExist ? this.gridPanel.getFloatingTopClientRect() : null;
+	        var floatingBottomRect = floatingBottomRowsExist ? this.gridPanel.getFloatingBottomClientRect() : null;
 	        if (floatingTopRowsExist && floatingTopRect.bottom >= mouseEvent.clientY) {
 	            return constants_1.Constants.FLOATING_TOP;
 	        }
@@ -10129,7 +10432,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -10161,7 +10464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -10235,7 +10538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -10420,7 +10723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -10511,7 +10814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -10539,7 +10842,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cellRendererFactory_1 = __webpack_require__(55);
 	var gridPanel_1 = __webpack_require__(24);
 	var RenderedRow = (function () {
-	    function RenderedRow(parentScope, rowRenderer, eBodyContainer, eFullWidthContainer, ePinnedLeftContainer, ePinnedRightContainer, node, rowIndex) {
+	    function RenderedRow(parentScope, rowRenderer, eBodyContainer, eBodyContainerDF, eFullWidthContainer, ePinnedLeftContainer, ePinnedLeftContainerDF, ePinnedRightContainer, ePinnedRightContainerDF, node, rowIndex) {
 	        this.eAllRowContainers = [];
 	        this.renderedCells = {};
 	        this.destroyFunctions = [];
@@ -10548,9 +10851,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.parentScope = parentScope;
 	        this.rowRenderer = rowRenderer;
 	        this.eBodyContainer = eBodyContainer;
+	        this.eBodyContainerDF = eBodyContainerDF;
 	        this.eFullWidthContainer = eFullWidthContainer;
 	        this.ePinnedLeftContainer = ePinnedLeftContainer;
+	        this.ePinnedLeftContainerDF = ePinnedLeftContainerDF;
 	        this.ePinnedRightContainer = ePinnedRightContainer;
+	        this.ePinnedRightContainerDF = ePinnedRightContainerDF;
 	        this.rowIndex = rowIndex;
 	        this.rowNode = node;
 	    }
@@ -10568,6 +10874,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.setupNormalContainers();
 	        }
 	    };
+	    RenderedRow.prototype.addDomData = function (eRowContainer) {
+	        var domDataKey = this.gridOptionsWrapper.getDomDataKey();
+	        var gridCellNoType = eRowContainer;
+	        gridCellNoType[domDataKey] = {
+	            renderedRow: this
+	        };
+	        this.destroyFunctions.push(function () { gridCellNoType[domDataKey] = null; });
+	    };
 	    RenderedRow.prototype.setupFullWidthContainers = function () {
 	        this.fullWidthRow = true;
 	        this.fullWidthCellRenderer = this.gridOptionsWrapper.getFullWidthCellRenderer();
@@ -10575,7 +10889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (utils_1.Utils.missing(this.fullWidthCellRenderer)) {
 	            console.warn("ag-Grid: you need to provide a fullWidthCellRenderer if using isFullWidthCell()");
 	        }
-	        this.eFullWidthRow = this.createRowContainer(this.eFullWidthContainer);
+	        this.eFullWidthRow = this.createRowContainer(null, this.eFullWidthContainer);
 	        if (!this.gridOptionsWrapper.isForPrint()) {
 	            this.addMouseWheelListenerToFullWidthRow();
 	        }
@@ -10602,14 +10916,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                innerRenderer: this.gridOptionsWrapper.getGroupRowInnerRenderer(),
 	            };
 	        }
-	        this.eFullWidthRow = this.createRowContainer(this.eFullWidthContainer);
+	        this.eFullWidthRow = this.createRowContainer(null, this.eFullWidthContainer);
+	        if (!this.gridOptionsWrapper.isForPrint()) {
+	            this.addMouseWheelListenerToFullWidthRow();
+	        }
 	    };
 	    RenderedRow.prototype.setupNormalContainers = function () {
 	        this.fullWidthRow = false;
-	        this.eBodyRow = this.createRowContainer(this.eBodyContainer);
+	        this.eBodyRow = this.createRowContainer(this.eBodyContainerDF, this.eBodyContainer);
 	        if (!this.gridOptionsWrapper.isForPrint()) {
-	            this.ePinnedLeftRow = this.createRowContainer(this.ePinnedLeftContainer);
-	            this.ePinnedRightRow = this.createRowContainer(this.ePinnedRightContainer);
+	            this.ePinnedLeftRow = this.createRowContainer(this.ePinnedLeftContainerDF, this.ePinnedLeftContainer);
+	            this.ePinnedRightRow = this.createRowContainer(this.ePinnedRightContainerDF, this.ePinnedRightContainer);
 	        }
 	    };
 	    RenderedRow.prototype.init = function () {
@@ -10655,21 +10972,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.forEachRenderedCell(function (renderedCell) {
 	            renderedCell.stopEditing(cancel);
 	        });
-	        this.setEditingRow(false);
-	        if (!cancel) {
-	            var event = {
-	                node: this.rowNode,
-	                data: this.rowNode.data,
-	                api: this.gridOptionsWrapper.getApi(),
-	                context: this.gridOptionsWrapper.getContext()
-	            };
-	            this.mainEventService.dispatchEvent(events_1.Events.EVENT_ROW_VALUE_CHANGED, event);
+	        if (this.editingRow) {
+	            this.setEditingRow(false);
+	            if (!cancel) {
+	                var event = {
+	                    node: this.rowNode,
+	                    data: this.rowNode.data,
+	                    api: this.gridOptionsWrapper.getApi(),
+	                    context: this.gridOptionsWrapper.getContext()
+	                };
+	                this.mainEventService.dispatchEvent(events_1.Events.EVENT_ROW_VALUE_CHANGED, event);
+	            }
 	        }
 	    };
 	    RenderedRow.prototype.startRowEditing = function (keyPress, charPress, sourceRenderedCell) {
 	        if (keyPress === void 0) { keyPress = null; }
 	        if (charPress === void 0) { charPress = null; }
 	        if (sourceRenderedCell === void 0) { sourceRenderedCell = null; }
+	        // don't do it if already editing
+	        if (this.editingRow) {
+	            return;
+	        }
 	        this.forEachRenderedCell(function (renderedCell) {
 	            var cellStartedEdit = renderedCell === sourceRenderedCell;
 	            if (cellStartedEdit) {
@@ -10829,8 +11152,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_ROW_SELECTED, rowSelectedListener);
 	        });
 	    };
+	    RenderedRow.prototype.onMouseEvent = function (eventName, mouseEvent) {
+	        switch (eventName) {
+	            case 'dblclick':
+	                this.onRowDblClick(mouseEvent);
+	                break;
+	            case 'click':
+	                this.onRowClick(mouseEvent);
+	                break;
+	        }
+	    };
 	    RenderedRow.prototype.addHoverFunctionality = function () {
 	        var _this = this;
+	        // because we are adding listeners to the row, we give the user the choice to not add
+	        // the hover class, as it slows things down, especially in IE, when you add listeners
+	        // to each row. we cannot do the trick of adding one listener to the GridPanel (like we
+	        // do for other mouse events) as these events don't propogate
+	        if (this.gridOptionsWrapper.isSuppressRowHoverClass()) {
+	            return;
+	        }
 	        var onGuiMouseEnter = this.rowNode.onMouseEnter.bind(this.rowNode);
 	        var onGuiMouseLeave = this.rowNode.onMouseLeave.bind(this.rowNode);
 	        this.eAllRowContainers.forEach(function (eRow) {
@@ -10895,12 +11235,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.destroyFunctions.push(function () {
 	            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_DATA_CHANGED, nodeDataChangedListener);
 	        });
-	    };
-	    RenderedRow.prototype.onMouseEvent = function (eventName, mouseEvent, cell) {
-	        var renderedCell = this.renderedCells[cell.column.getId()];
-	        if (renderedCell) {
-	            renderedCell.onMouseEvent(eventName, mouseEvent);
-	        }
 	    };
 	    RenderedRow.prototype.setTopAndHeightCss = function () {
 	        // if showing scrolls, position on the container
@@ -10980,8 +11314,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.angular1Compile(this.eFullWidthRow);
 	    };
 	    RenderedRow.prototype.destroyFullWidthComponent = function () {
-	        if (this.fullWidthRowComponent && this.fullWidthRowComponent.destroy) {
-	            this.fullWidthRowComponent.destroy();
+	        if (this.fullWidthRowComponent) {
+	            if (this.fullWidthRowComponent.destroy) {
+	                this.fullWidthRowComponent.destroy();
+	            }
 	            this.fullWidthRowComponent = null;
 	        }
 	        utils_1.Utils.removeAllChildren(this.eFullWidthRow);
@@ -11081,17 +11417,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        agEvent.eventSource = eventSource;
 	        return agEvent;
 	    };
-	    RenderedRow.prototype.createRowContainer = function (eParent) {
+	    RenderedRow.prototype.createRowContainer = function (eParentDF, eParent) {
 	        var eRow = document.createElement('div');
-	        var rowClickListener = this.onRowClick.bind(this);
-	        var rowDblClickListener = this.onRowDblClick.bind(this);
-	        eRow.addEventListener("click", rowClickListener);
-	        eRow.addEventListener("dblclick", rowDblClickListener);
-	        eParent.appendChild(eRow);
+	        this.addDomData(eRow);
+	        var eTarget = eParentDF ? eParentDF : eParent;
+	        eTarget.appendChild(eRow);
 	        this.eAllRowContainers.push(eRow);
 	        this.destroyFunctions.push(function () {
-	            eRow.removeEventListener("click", rowClickListener);
-	            eRow.removeEventListener("dblclick", rowDblClickListener);
 	            eParent.removeChild(eRow);
 	        });
 	        return eRow;
@@ -11297,7 +11629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -11582,8 +11914,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.addHighlightListener();
 	        this.addChangeListener();
 	        this.addCellFocusedListener();
-	        this.addKeyDownListener();
-	        this.addKeyPressListener();
+	        this.addDomData();
+	        // this.addSuppressShortcutKeyListenersWhileEditing();
 	        var setLeftFeature = new setLeftFeature_1.SetLeftFeature(this.column, this.eGridCell);
 	        this.addDestroyFunc(setLeftFeature.destroy.bind(setLeftFeature));
 	        // only set tab index if cell selection is enabled
@@ -11595,6 +11927,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.setInlineEditingClass();
 	        this.createParentOfValue();
 	        this.populateCell();
+	    };
+	    RenderedCell.prototype.addDomData = function () {
+	        var domDataKey = this.gridOptionsWrapper.getDomDataKey();
+	        var gridCellNoType = this.eGridCell;
+	        gridCellNoType[domDataKey] = {
+	            renderedCell: this
+	        };
+	        this.addDestroyFunc(function () { return gridCellNoType[domDataKey] = null; });
 	    };
 	    RenderedCell.prototype.onEnterKeyDown = function () {
 	        if (this.editingCell) {
@@ -11654,38 +11994,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // if we don't prevent default, the grid will scroll with the navigation keys
 	        event.preventDefault();
 	    };
-	    RenderedCell.prototype.addKeyPressListener = function () {
-	        var _this = this;
-	        var keyPressListener = function (event) {
-	            // check this, in case focus is on a (for example) a text field inside the cell,
-	            // in which cse we should not be listening for these key pressed
-	            var eventTarget = utils_1.Utils.getTarget(event);
-	            var eventOnChildComponent = eventTarget !== _this.getGui();
-	            if (eventOnChildComponent) {
-	                return;
+	    RenderedCell.prototype.onKeyPress = function (event) {
+	        // check this, in case focus is on a (for example) a text field inside the cell,
+	        // in which cse we should not be listening for these key pressed
+	        var eventTarget = utils_1.Utils.getTarget(event);
+	        var eventOnChildComponent = eventTarget !== this.getGui();
+	        if (eventOnChildComponent) {
+	            return;
+	        }
+	        if (!this.editingCell) {
+	            var pressedChar = String.fromCharCode(event.charCode);
+	            if (pressedChar === ' ') {
+	                this.onSpaceKeyPressed(event);
 	            }
-	            if (!_this.editingCell) {
-	                var pressedChar = String.fromCharCode(event.charCode);
-	                if (pressedChar === ' ') {
-	                    _this.onSpaceKeyPressed(event);
-	                }
-	                else {
-	                    if (RenderedCell.PRINTABLE_CHARACTERS.indexOf(pressedChar) >= 0) {
-	                        _this.startRowOrCellEdit(null, pressedChar);
-	                        // if we don't prevent default, then the keypress also gets applied to the text field
-	                        // (at least when doing the default editor), but we need to allow the editor to decide
-	                        // what it wants to do. we only do this IF editing was started - otherwise it messes
-	                        // up when the use is not doing editing, but using rendering with text fields in cellRenderer
-	                        // (as it would block the the user from typing into text fields).
-	                        event.preventDefault();
-	                    }
+	            else {
+	                if (RenderedCell.PRINTABLE_CHARACTERS.indexOf(pressedChar) >= 0) {
+	                    this.startRowOrCellEdit(null, pressedChar);
+	                    // if we don't prevent default, then the keypress also gets applied to the text field
+	                    // (at least when doing the default editor), but we need to allow the editor to decide
+	                    // what it wants to do. we only do this IF editing was started - otherwise it messes
+	                    // up when the use is not doing editing, but using rendering with text fields in cellRenderer
+	                    // (as it would block the the user from typing into text fields).
+	                    event.preventDefault();
 	                }
 	            }
-	        };
-	        this.eGridCell.addEventListener('keypress', keyPressListener);
-	        this.addDestroyFunc(function () {
-	            _this.eGridCell.removeEventListener('keypress', keyPressListener);
-	        });
+	        }
 	    };
 	    RenderedCell.prototype.onKeyDown = function (event) {
 	        var key = event.which || event.keyCode;
@@ -11713,14 +12046,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.onNavigationKeyPressed(event, key);
 	                break;
 	        }
-	    };
-	    RenderedCell.prototype.addKeyDownListener = function () {
-	        var _this = this;
-	        var editingKeyListener = this.onKeyDown.bind(this);
-	        this.eGridCell.addEventListener('keydown', editingKeyListener);
-	        this.addDestroyFunc(function () {
-	            _this.eGridCell.removeEventListener('keydown', editingKeyListener);
-	        });
 	    };
 	    RenderedCell.prototype.createCellEditorParams = function (keyPress, charPress, cellStartedEdit) {
 	        var params = {
@@ -11768,8 +12093,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (keyPress === void 0) { keyPress = null; }
 	        if (charPress === void 0) { charPress = null; }
 	        if (cellStartedEdit === void 0) { cellStartedEdit = false; }
+	        // don't do it if not editable
 	        if (!this.isCellEditable()) {
-	            return false;
+	            return;
+	        }
+	        // don't do it if already editing
+	        if (this.editingCell) {
+	            return;
 	        }
 	        var cellEditor = this.createCellEditor(keyPress, charPress, cellStartedEdit);
 	        if (cellEditor.isCancelBeforeStart && cellEditor.isCancelBeforeStart()) {
@@ -12211,7 +12541,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        else {
 	            // if we insert undefined, then it displays as the string 'undefined', ugly!
-	            var valueToRender = utils_1.Utils.exists(valueFormatted) ? valueFormatted : this.value;
+	            var valueFormattedExits = valueFormatted !== null && valueFormatted !== undefined;
+	            var valueToRender = valueFormattedExits ? valueFormatted : this.value;
 	            if (utils_1.Utils.exists(valueToRender) && valueToRender !== '') {
 	                // not using innerHTML to prevent injection of HTML
 	                // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations
@@ -12368,7 +12699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -12503,7 +12834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -12827,7 +13158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -13185,7 +13516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -13361,7 +13692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -13412,7 +13743,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                utils_1.Utils.removeFromArray(modelKeys, colId);
 	                var newModel = model[colId];
 	                _this.setModelOnFilterWrapper(filterWrapper.filter, newModel);
-	                _this.setModelOnFilterWrapper(filterWrapper.filter, newModel);
 	            });
 	            // at this point, processedFields contains data for which we don't have a filter working yet
 	            utils_1.Utils.iterateArray(modelKeys, function (colId) {
@@ -13459,18 +13789,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    FilterManager.prototype.isAdvancedFilterPresent = function () {
 	        var atLeastOneActive = false;
 	        utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
-	            if (!filterWrapper.filter.isFilterActive) {
-	                console.error('Filter is missing method isFilterActive');
-	            }
 	            if (filterWrapper.filter.isFilterActive()) {
 	                atLeastOneActive = true;
-	                filterWrapper.column.setFilterActive(true);
-	            }
-	            else {
-	                filterWrapper.column.setFilterActive(false);
 	            }
 	        });
 	        return atLeastOneActive;
+	    };
+	    FilterManager.prototype.updateFilterFlagInColumns = function () {
+	        utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
+	            var filterActive = filterWrapper.filter.isFilterActive();
+	            filterWrapper.column.setFilterActive(filterActive);
+	        });
 	    };
 	    // returns true if quickFilter or advancedFilter
 	    FilterManager.prototype.isAnyFilterPresent = function () {
@@ -13531,6 +13860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    FilterManager.prototype.onFilterChanged = function () {
 	        this.eventService.dispatchEvent(events_1.Events.EVENT_BEFORE_FILTER_CHANGED);
 	        this.advancedFilterPresent = this.isAdvancedFilterPresent();
+	        this.updateFilterFlagInColumns();
 	        this.checkExternalFilter();
 	        utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
 	            if (filterWrapper.filter.onAnyFilterChanged) {
@@ -13573,24 +13903,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return true;
 	    };
 	    FilterManager.prototype.aggregateRowForQuickFilter = function (node) {
-	        var aggregatedText = '';
-	        var that = this;
-	        this.columnController.getAllPrimaryColumns().forEach(function (column) {
-	            var value = that.valueService.getValue(column, node);
-	            if (value && value !== '') {
-	                aggregatedText = aggregatedText + value.toString().toUpperCase() + "_";
+	        var _this = this;
+	        var stringParts = [];
+	        var columns = this.columnController.getAllPrimaryColumns();
+	        columns.forEach(function (column) {
+	            var value = _this.valueService.getValue(column, node);
+	            var valueAfterCallback;
+	            var colDef = column.getColDef();
+	            if (column.getColDef().getQuickFilterText) {
+	                var params = {
+	                    value: value,
+	                    node: node,
+	                    data: node.data,
+	                    column: column,
+	                    colDef: colDef
+	                };
+	                valueAfterCallback = column.getColDef().getQuickFilterText(params);
+	            }
+	            else {
+	                valueAfterCallback = value;
+	            }
+	            if (valueAfterCallback && valueAfterCallback !== '') {
+	                stringParts.push(valueAfterCallback.toString().toUpperCase());
 	            }
 	        });
-	        node.quickFilterAggregateText = aggregatedText;
+	        node.quickFilterAggregateText = stringParts.join('_');
 	    };
 	    FilterManager.prototype.onNewRowsLoaded = function () {
-	        var that = this;
-	        Object.keys(this.allFilters).forEach(function (field) {
-	            var filter = that.allFilters[field].filter;
-	            if (filter.onNewRowsLoaded) {
-	                filter.onNewRowsLoaded();
+	        utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
+	            if (filterWrapper.filter.onNewRowsLoaded) {
+	                filterWrapper.filter.onNewRowsLoaded();
 	            }
 	        });
+	        this.updateFilterFlagInColumns();
 	    };
 	    FilterManager.prototype.createValueGetter = function (column) {
 	        var that = this;
@@ -13630,7 +13975,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return null;
 	        }
 	        var filterInstance = new FilterClass();
+	        this.checkFilterHasAllMandatoryMethods(filterInstance, column);
 	        this.context.wireBean(filterInstance);
+	        return filterInstance;
+	    };
+	    FilterManager.prototype.checkFilterHasAllMandatoryMethods = function (filterInstance, column) {
 	        // help the user, check the mandatory methods exist
 	        ['getGui', 'isFilterActive', 'doesFilterPass', 'getModel', 'setModel'].forEach(function (methodName) {
 	            var methodIsMissing = !filterInstance[methodName];
@@ -13638,7 +13987,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                throw "Filter for column " + column.getColId() + " is missing method " + methodName;
 	            }
 	        });
-	        return filterInstance;
 	    };
 	    FilterManager.prototype.createParams = function (filterWrapper) {
 	        var _this = this;
@@ -13821,7 +14169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -13984,12 +14332,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                eBody.addEventListener('keydown', hidePopupOnEsc);
 	            }
 	            eBody.addEventListener('click', hidePopup);
+	            eBody.addEventListener('touchstart', hidePopup);
 	            eBody.addEventListener('contextmenu', hidePopup);
 	            //eBody.addEventListener('mousedown', hidePopup);
-	            eChild.addEventListener('click', consumeClick);
+	            eChild.addEventListener('click', consumeMouseClick);
+	            eChild.addEventListener('touchstart', consumeTouchClick);
 	            //eChild.addEventListener('mousedown', consumeClick);
 	        }, 0);
-	        var eventFromChild = null;
+	        // var timeOfMouseEventOnChild = new Date().getTime();
+	        var childMouseClick = null;
+	        var childTouch = null;
 	        function hidePopupOnEsc(event) {
 	            var key = event.which || event.keyCode;
 	            if (key === constants_1.Constants.KEY_ESCAPE) {
@@ -13997,7 +14349,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	        function hidePopup(event) {
-	            if (event && event === eventFromChild) {
+	            // we don't hide popup if the event was on the child
+	            if (event && event === childMouseClick) {
+	                return;
+	            }
+	            if (event && event === childTouch) {
 	                return;
 	            }
 	            // this method should only be called once. the client can have different
@@ -14011,15 +14367,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            eBody.removeEventListener('keydown', hidePopupOnEsc);
 	            //eBody.removeEventListener('mousedown', hidePopupOnEsc);
 	            eBody.removeEventListener('click', hidePopup);
+	            eBody.removeEventListener('touchstart', hidePopup);
 	            eBody.removeEventListener('contextmenu', hidePopup);
-	            eChild.removeEventListener('click', consumeClick);
+	            eChild.removeEventListener('click', consumeMouseClick);
+	            eChild.removeEventListener('touchstart', consumeTouchClick);
 	            //eChild.removeEventListener('mousedown', consumeClick);
 	            if (closedCallback) {
 	                closedCallback();
 	            }
 	        }
-	        function consumeClick(event) {
-	            eventFromChild = event;
+	        function consumeMouseClick(event) {
+	            childMouseClick = event;
+	        }
+	        function consumeTouchClick(event) {
+	            childTouch = event;
 	        }
 	        return hidePopup;
 	    };
@@ -14042,7 +14403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14223,7 +14584,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14406,7 +14767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14632,7 +14993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14740,7 +15101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14834,7 +15195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14901,7 +15262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -14981,7 +15342,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15010,7 +15371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15039,7 +15400,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15106,7 +15467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15190,7 +15551,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15277,7 +15638,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15377,7 +15738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15469,7 +15830,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	    GroupCellRenderer.prototype.createFromInnerRenderer = function (params) {
-	        this.cellRendererService.useCellRenderer(params.innerRenderer, this.eValue, params);
+	        var innerComponent = this.cellRendererService.useCellRenderer(params.innerRenderer, this.eValue, params);
+	        this.addDestroyFunc(function () {
+	            if (innerComponent && innerComponent.destroy) {
+	                innerComponent.destroy();
+	            }
+	        });
 	    };
 	    GroupCellRenderer.prototype.createFooterCell = function (params) {
 	        var footerValue;
@@ -15553,8 +15919,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.eValue.innerHTML = params.value;
 	        }
 	    };
+	    GroupCellRenderer.prototype.isUserWantsSelected = function (params) {
+	        if (typeof params.checkbox === 'function') {
+	            return params.checkbox(params);
+	        }
+	        else {
+	            return params.checkbox === true;
+	        }
+	    };
 	    GroupCellRenderer.prototype.addCheckboxIfNeeded = function (params) {
-	        var checkboxNeeded = params.checkbox
+	        var checkboxNeeded = this.isUserWantsSelected(params)
 	            && !this.rowNode.footer
 	            && !this.rowNode.floating
 	            && !this.rowNode.flower;
@@ -15663,7 +16037,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -15768,156 +16142,107 @@ return /******/ (function(modules) { // webpackBootstrap
 	    //    var svg = `<svg width="${size}" height="${size}" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1312v-704q0-40-28-68t-68-28h-704q-40 0-68-28t-28-68v-64q0-40-28-68t-68-28h-320q-40 0-68 28t-28 68v960q0 40 28 68t68 28h1216q40 0 68-28t28-68zm128-704v704q0 92-66 158t-158 66h-1216q-92 0-158-66t-66-158v-960q0-92 66-158t158-66h320q92 0 158 66t66 158v32h672q92 0 158 66t66 158z"/></svg>`;
 	    //    return _.loadTemplate(svg);
 	    //}
+	    SvgFactory.getFromCacheOrCreate = function (key, data) {
+	        // return document.createElement('img');
+	        var eCachedImg = this.imageCache[key];
+	        if (!eCachedImg) {
+	            eCachedImg = document.createElement('img');
+	            eCachedImg.src = data;
+	            this.imageCache[key] = eCachedImg;
+	        }
+	        return eCachedImg.cloneNode();
+	    };
 	    SvgFactory.prototype.createFolderOpen = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZpJREFUeNqkU0tLQkEUPjN3ShAzF66CaNGiaNEviFpLgbSpXf2ACIqgFkELaVFhtAratQ8qokU/oFVbMQtJvWpWGvYwtet9TWfu1QorvOGBb84M5/WdOTOEcw7tCKHBlT8sMIhr4BfLGXC4BrALM8QUoveHG9oPQ/NhwVCQbOjp0C5F6zDiwE7Aed/p5tKWruufTlY8bkqliqVN8wvH6wvhydWd5UYdkYCqqgaKotQTCEewnJuDBSqVmshOrWhKgCJVqeHcKtiGKdqTgGIOQmwGum7AxVUKinXKzX1/1y5Xp6g8gpe8iBxuGZhcKjyXQZIkmBkfczS62YnRQCKX75/b3t8QDNhD8QX83V5Ipe7Bybug2Pt5NJ7A4nEqGOQKT+Bzu0HTDNB1syUYYxCJy0kwzIRogb0rKjAiQVXXHLVQrqqvsZtsFu8hbyXwe73WeMQtO5GonJGxuiyeC+Oa4fF5PEirw9nbx9FdxtN5eMwkzcgRnoeCa9DVM/CvH/R2l+axkz3clQguOFjw1f+FUzEQCqJG2v3OHwIMAOW1JPnAAAJxAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('FolderOpen', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZpJREFUeNqkU0tLQkEUPjN3ShAzF66CaNGiaNEviFpLgbSpXf2ACIqgFkELaVFhtAratQ8qokU/oFVbMQtJvWpWGvYwtet9TWfu1QorvOGBb84M5/WdOTOEcw7tCKHBlT8sMIhr4BfLGXC4BrALM8QUoveHG9oPQ/NhwVCQbOjp0C5F6zDiwE7Aed/p5tKWruufTlY8bkqliqVN8wvH6wvhydWd5UYdkYCqqgaKotQTCEewnJuDBSqVmshOrWhKgCJVqeHcKtiGKdqTgGIOQmwGum7AxVUKinXKzX1/1y5Xp6g8gpe8iBxuGZhcKjyXQZIkmBkfczS62YnRQCKX75/b3t8QDNhD8QX83V5Ipe7Bybug2Pt5NJ7A4nEqGOQKT+Bzu0HTDNB1syUYYxCJy0kwzIRogb0rKjAiQVXXHLVQrqqvsZtsFu8hbyXwe73WeMQtO5GonJGxuiyeC+Oa4fF5PEirw9nbx9FdxtN5eMwkzcgRnoeCa9DVM/CvH/R2l+axkz3clQguOFjw1f+FUzEQCqJG2v3OHwIMAOW1JPnAAAJxAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createFolderClosed = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARlJREFUeNqsUz1PwzAUPDtOUASpYKkQVWcQA/+DhbLA32CoKAMSTAwgFsQfQWLoX4GRDFXGIiqiyk4e7wUWmg8phJPOtvzunc6WrYgIXaD06KKhij0eD2uqUxBeDC9OmcNKCYd7ujm7ryodXz5ong6UPpqcP9+O76y1vwS+7yOOY1jr0OttlQyiaB0n148TAyK9XFqkaboiSTEYDNnkDUkyKxkkiSQkzQbwsiyHcBXz+Tv6/W1m+QiSEDT1igTO5RBWYbH4rNwPw/AnQU5ek0EdCj33SgLjHEHYzoAkgfmHBDmZuktsQqHPvxN0MyCbbWjtIQjWWhlIj/QqtT+6QrSz+6ef9DF7VTwFzE2madnu5K2prt/5S4ABADcIlSf6Ag8YAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('FolderClosed', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARlJREFUeNqsUz1PwzAUPDtOUASpYKkQVWcQA/+DhbLA32CoKAMSTAwgFsQfQWLoX4GRDFXGIiqiyk4e7wUWmg8phJPOtvzunc6WrYgIXaD06KKhij0eD2uqUxBeDC9OmcNKCYd7ujm7ryodXz5ong6UPpqcP9+O76y1vwS+7yOOY1jr0OttlQyiaB0n148TAyK9XFqkaboiSTEYDNnkDUkyKxkkiSQkzQbwsiyHcBXz+Tv6/W1m+QiSEDT1igTO5RBWYbH4rNwPw/AnQU5ek0EdCj33SgLjHEHYzoAkgfmHBDmZuktsQqHPvxN0MyCbbWjtIQjWWhlIj/QqtT+6QrSz+6ef9DF7VTwFzE2madnu5K2prt/5S4ABADcIlSf6Ag8YAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createColumnIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAYAAAAMn20lAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTcwQ0JFMzlENjZEMTFFNUFEQ0U5RDRCNjFFRENGMUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTcwQ0JFM0FENjZEMTFFNUFEQ0U5RDRCNjFFRENGMUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFNzBDQkUzN0Q2NkQxMUU1QURDRTlENEI2MUVEQ0YxQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNzBDQkUzOEQ2NkQxMUU1QURDRTlENEI2MUVEQ0YxQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqDOrJYAAABxSURBVHjalJBBDsAgCAQXxXvj2/o/X9Cvmd4lUpV4MXroJMTAuihQSklVMSCysxSBW4uWKzjG6zZLDxrlWis5EVEThoWmi3N+nxAYs2WnXQY34L3HisMWPQlHB+2FPtNW6D/8+ziBRcroOXc0B/wEGABY6TPS1FU0bwAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('ColumnIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAYAAAAMn20lAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTcwQ0JFMzlENjZEMTFFNUFEQ0U5RDRCNjFFRENGMUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTcwQ0JFM0FENjZEMTFFNUFEQ0U5RDRCNjFFRENGMUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFNzBDQkUzN0Q2NkQxMUU1QURDRTlENEI2MUVEQ0YxQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNzBDQkUzOEQ2NkQxMUU1QURDRTlENEI2MUVEQ0YxQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqDOrJYAAABxSURBVHjalJBBDsAgCAQXxXvj2/o/X9Cvmd4lUpV4MXroJMTAuihQSklVMSCysxSBW4uWKzjG6zZLDxrlWis5EVEThoWmi3N+nxAYs2WnXQY34L3HisMWPQlHB+2FPtNW6D/8+ziBRcroOXc0B/wEGABY6TPS1FU0bwAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createColumnsIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENFQkI4NDhENzJDMTFFNUJDNEVFRjgwRDI3MkU1Q0EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENFQkI4NDlENzJDMTFFNUJDNEVFRjgwRDI3MkU1Q0EiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0VCQjg0NkQ3MkMxMUU1QkM0RUVGODBEMjcyRTVDQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0VCQjg0N0Q3MkMxMUU1QkM0RUVGODBEMjcyRTVDQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pj6ozGQAAAAuSURBVHjaYmRgYPjPgBswQml8anBK/idGDQsxNpCghnTAOBoGo2EwGgZgABBgAHbrH/l4grETAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('ColumnsIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENFQkI4NDhENzJDMTFFNUJDNEVFRjgwRDI3MkU1Q0EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENFQkI4NDlENzJDMTFFNUJDNEVFRjgwRDI3MkU1Q0EiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0VCQjg0NkQ3MkMxMUU1QkM0RUVGODBEMjcyRTVDQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0VCQjg0N0Q3MkMxMUU1QkM0RUVGODBEMjcyRTVDQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pj6ozGQAAAAuSURBVHjaYmRgYPjPgBswQml8anBK/idGDQsxNpCghnTAOBoGo2EwGgZgABBgAHbrH/l4grETAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createPinIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAedJREFUeNqkUktLG1EYPTN31CIN0oWbIAWhKJR0FXcG6gOqkKGKVvEXCKULC91YSBcK7jXgQoIbFxn3ErFgFlIfCxUsQsCoIJYEm9LWNsGmJjPTM+Oo44Aa6IUzd+bec77H+UYyTRP/s5SsLFfCCxEjOhD9CXw64ccXJj7nLleYaMSvaa/+Au9Y73P3RUUBDIuXyaAxGu35A7xnkM57A7icCZXIO8/nkVleRn1/f9cv0xzjfVclFdi9N8ZivfnDQxQKBTwoFvFicLCVQSesJIpHMEY8dSqQWa54Eov1fF9ZQVHXsZNMblhnNE/wPmJPIX1zjOG2+fkgslnozHR2eopLcSIe3yoD48y45FbIxoVJNjimyMehoW3T58PvdBq53V18zeWwFo+vUfyBlCVvj0Li4/M1DnaAUtXCQkNDR4f/294eaoTAwdHRCROMWlzJZfC+1cKcJF07b5o+btWvV1eDyVBouyUcDj5UFDg924tVYtERpz0mCkmSulOp1GQgEIj0yvKPYiKBlwMDQXfPU47walEEmb8z0a5p2qaiKMPEoz6ezQLdM8DWNDDzltym24YthHimquoshSoDicvzZkK9S+h48pjCN4ZhrBPHTptlD0qevezwdCtAHVHrMti4A7rr3eb+E2AAoGnGkgkzpg8AAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('PinIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAedJREFUeNqkUktLG1EYPTN31CIN0oWbIAWhKJR0FXcG6gOqkKGKVvEXCKULC91YSBcK7jXgQoIbFxn3ErFgFlIfCxUsQsCoIJYEm9LWNsGmJjPTM+Oo44Aa6IUzd+bec77H+UYyTRP/s5SsLFfCCxEjOhD9CXw64ccXJj7nLleYaMSvaa/+Au9Y73P3RUUBDIuXyaAxGu35A7xnkM57A7icCZXIO8/nkVleRn1/f9cv0xzjfVclFdi9N8ZivfnDQxQKBTwoFvFicLCVQSesJIpHMEY8dSqQWa54Eov1fF9ZQVHXsZNMblhnNE/wPmJPIX1zjOG2+fkgslnozHR2eopLcSIe3yoD48y45FbIxoVJNjimyMehoW3T58PvdBq53V18zeWwFo+vUfyBlCVvj0Li4/M1DnaAUtXCQkNDR4f/294eaoTAwdHRCROMWlzJZfC+1cKcJF07b5o+btWvV1eDyVBouyUcDj5UFDg924tVYtERpz0mCkmSulOp1GQgEIj0yvKPYiKBlwMDQXfPU47walEEmb8z0a5p2qaiKMPEoz6ezQLdM8DWNDDzltym24YthHimquoshSoDicvzZkK9S+h48pjCN4ZhrBPHTptlD0qevezwdCtAHVHrMti4A7rr3eb+E2AAoGnGkgkzpg8AAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createPlusIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAatJREFUeNqkU71KA0EQ/vaiib+lWCiordidpSg+QHwDBSt7n8DGhwhYCPoEgqCCINomARuLVIqgYKFG5f6z68xOzrvzYuXA3P7MzLffN7unjDH4jw3xx91bQXuxU4woNDjUX7VgsFOIH3/BnHgC0J65AzwFjDpZgoG7vb7lMsPDq6MiuK+B+kjGwFpCUjwK1DIQ3/dl0ssVh5TTM0UJP8aBgBKGleSGIWyP0oKYRm3KPSgYJ0Q0EpEgCASA2WmWZQY3kazBmjP9UhBFEbTWAgA0f9W2yHeG+vrd+tqGy5r5xNTT9erSqpvfdxwHN7fXOQZ0QhzH1oWArLsfXXieJ/KTGEZLcbVaTVn9ALTOLk9L+mYX5lxd0Xh6eGyVgspK6APwI8n3x9hmNpORJOuBo5ah8GcTc7dAHmkhNpYQlpHr47Hq2NspA1yEwHkoO/MVYLMmWJNarjEUQBzQw7rPvardFC8tZuOEwwB4p9PHqXgCdm738sUDJPB8mnwKj7qCTtJ527+XyAs6tOf2Bb6SP0OeGxRTVMp2h9nweWMoKS20l3+QT/vwqfZbgAEAUCrnlLQ+w4QAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('PlusIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAatJREFUeNqkU71KA0EQ/vaiib+lWCiordidpSg+QHwDBSt7n8DGhwhYCPoEgqCCINomARuLVIqgYKFG5f6z68xOzrvzYuXA3P7MzLffN7unjDH4jw3xx91bQXuxU4woNDjUX7VgsFOIH3/BnHgC0J65AzwFjDpZgoG7vb7lMsPDq6MiuK+B+kjGwFpCUjwK1DIQ3/dl0ssVh5TTM0UJP8aBgBKGleSGIWyP0oKYRm3KPSgYJ0Q0EpEgCASA2WmWZQY3kazBmjP9UhBFEbTWAgA0f9W2yHeG+vrd+tqGy5r5xNTT9erSqpvfdxwHN7fXOQZ0QhzH1oWArLsfXXieJ/KTGEZLcbVaTVn9ALTOLk9L+mYX5lxd0Xh6eGyVgspK6APwI8n3x9hmNpORJOuBo5ah8GcTc7dAHmkhNpYQlpHr47Hq2NspA1yEwHkoO/MVYLMmWJNarjEUQBzQw7rPvardFC8tZuOEwwB4p9PHqXgCdm738sUDJPB8mnwKj7qCTtJ527+XyAs6tOf2Bb6SP0OeGxRTVMp2h9nweWMoKS20l3+QT/vwqfZbgAEAUCrnlLQ+w4QAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createMinusIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKVJREFUeNpi/P//PwMlgImBQjBqAAMDy3JGRgZGBoaZQGxMikZg3J0F4nSWHxC+cUBamvHXr18Zfv36Bca/f/8G43///oExKLphmImJieHagQMQF7QDiSwg/vnzJ8P3799RDPj79y+KRhhmBLr6I1DPNJABtxkYZM4xMFx7uXAhSX5/CtQD0gv0OgMfyCAgZgViZiL1/wXi30D8h3E0KVNuAECAAQDr51qtGxzf1wAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('MinusIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKVJREFUeNpi/P//PwMlgImBQjBqAAMDy3JGRgZGBoaZQGxMikZg3J0F4nSWHxC+cUBamvHXr18Zfv36Bca/f/8G43///oExKLphmImJieHagQMQF7QDiSwg/vnzJ8P3799RDPj79y+KRhhmBLr6I1DPNJABtxkYZM4xMFx7uXAhSX5/CtQD0gv0OgMfyCAgZgViZiL1/wXi30D8h3E0KVNuAECAAQDr51qtGxzf1wAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createMoveIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAoZJREFUeNpsU81rE0EUf7uzu2lNVJL6Eb0IBWusepqcKm3wEFkvxqDgQbwUtYeeg5cccwj4F7QKChEPipRcdMGDiaAoJAexLYViwYsfbU1JYkx3Zz98b8220Wbg7ez7vXm/mffmN9Kh1G2QGQOmMDiRyYEkSaCoKjDGdAAooOUdxzFsIcDzPPhSvgeO7YDrOLBRmQdlJHULVE0DNRSCvqFjUuHqhWP8+etvhR5m0CeengVhmiAsywdl2Dt03K1wZSrO220XaCaf8AFrQel32s0mrDcaWfovrq3Vc9OTvHj/Tb0Xzh6JxQwNyxtIgPXpqqJk94fDM+1Oh6CaEF4QTiIOGJ/DdQtBObsEmGxbll/rkCyDPDwMzW4XhHD88EH0NcRxDUeX4/qdnsi0s8Aas+kEp8Zg82pMkmpDigKbjSbQTD7hFL94/jin9ZRHBNLo3Wrt+uUkbzQsiEZVMPGKfv76DaawodnahkhY86+PNnXxs77ZgVOjMahWVuufi1NJRZhWvvT0beHGtQn++Nm7en+DzqXO8vfVxX+wsYnT/JWxWEe95P0eILsvkkdPKn4PUEBJmunILab5992PLVU++skoNmOniT7JX2Fkt5GM1EjqbMohXzQmqo7KwCQ6zYKiabu30PpQAnZ0HKSRMcMRwnBddw4ZOO4GLRYKFFdDhrrteTMMdWB9/QTdH8sIp0EKmNT4GWDjGZAPJ3TcrbBv+ibfwtwDqBvzYck/truxYjjLZRDflwLt7JUmEoAymdPV7INa5IXn0Uw+4f8PIqATMLQIWpQ0E/RFTmQ4nLx0B1Zfzrsr5eAmbLQW2hYpHwkcqfegNBJhzwY9sGC4aCZaF81CAvePAAMAcwtApJX/Wo0AAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('MoveIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAoZJREFUeNpsU81rE0EUf7uzu2lNVJL6Eb0IBWusepqcKm3wEFkvxqDgQbwUtYeeg5cccwj4F7QKChEPipRcdMGDiaAoJAexLYViwYsfbU1JYkx3Zz98b8220Wbg7ez7vXm/mffmN9Kh1G2QGQOmMDiRyYEkSaCoKjDGdAAooOUdxzFsIcDzPPhSvgeO7YDrOLBRmQdlJHULVE0DNRSCvqFjUuHqhWP8+etvhR5m0CeengVhmiAsywdl2Dt03K1wZSrO220XaCaf8AFrQel32s0mrDcaWfovrq3Vc9OTvHj/Tb0Xzh6JxQwNyxtIgPXpqqJk94fDM+1Oh6CaEF4QTiIOGJ/DdQtBObsEmGxbll/rkCyDPDwMzW4XhHD88EH0NcRxDUeX4/qdnsi0s8Aas+kEp8Zg82pMkmpDigKbjSbQTD7hFL94/jin9ZRHBNLo3Wrt+uUkbzQsiEZVMPGKfv76DaawodnahkhY86+PNnXxs77ZgVOjMahWVuufi1NJRZhWvvT0beHGtQn++Nm7en+DzqXO8vfVxX+wsYnT/JWxWEe95P0eILsvkkdPKn4PUEBJmunILab5992PLVU++skoNmOniT7JX2Fkt5GM1EjqbMohXzQmqo7KwCQ6zYKiabu30PpQAnZ0HKSRMcMRwnBddw4ZOO4GLRYKFFdDhrrteTMMdWB9/QTdH8sIp0EKmNT4GWDjGZAPJ3TcrbBv+ibfwtwDqBvzYck/truxYjjLZRDflwLt7JUmEoAymdPV7INa5IXn0Uw+4f8PIqATMLQIWpQ0E/RFTmQ4nLx0B1Zfzrsr5eAmbLQW2hYpHwkcqfegNBJhzwY9sGC4aCZaF81CAvePAAMAcwtApJX/Wo0AAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createLeftIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAe9JREFUeNqkUz1oE2EYfu7uuyRKLCFt6g+4VNQWWod+mQRRR1En0UFOHKoNCMKNju4SEQsOzsFNcRGl4CS42AzaKhKcsqhk0Etj7u+773y/6+USbOLSF5574b33eX+e906L4xh7MaYeC/c/IFcowMznEzDTBGPMoldnqEFtkPy708mIqvHHe0s7BcaYJYSwRwPu9vbYRH1XJI4tEYb2jYtHOHko9LvdxE9cYZQcBoF9+9oJ7jgRQt+HFAJSyv9rkO6UkGvXF3mr9QelkpkUINsYR6T8Jrkay8i+b9+5yfnmppMmSFw6e4yrIynBBsdS3jQ1PH/zeTiBIt+9dZpvbTlZh1+Oh/Z3F33XRUj7R1GUxA3DwMx0EYHnDUUMPe9Rfe1tc26uiL6M8aXno+UH6O7PIShPIapMQx6sQMxW4JbL+MkKCKhwNgGN2FD7Pnz82j63coF/aoc4ekDHtxfrzUniaZrW/FfEBomI9Scv7fnVq7zdBwIqajBWpeTd99d3vgBNCaQSzMOLyJ+6ApSPWxSzD61a/MfThupSjVuvxk2A3sazYYGBGbML0OcvW9rMyeRLFO8eVGXnKyacMiug5ikSplLs05dXzqNQWpbv6/URjpK+m6JH3GhQQI2QI+RTmBO0EwQ/RUBcqe31d/4rwAB0lPTXqN6HzgAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('LeftIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAe9JREFUeNqkUz1oE2EYfu7uuyRKLCFt6g+4VNQWWod+mQRRR1En0UFOHKoNCMKNju4SEQsOzsFNcRGl4CS42AzaKhKcsqhk0Etj7u+773y/6+USbOLSF5574b33eX+e906L4xh7MaYeC/c/IFcowMznEzDTBGPMoldnqEFtkPy708mIqvHHe0s7BcaYJYSwRwPu9vbYRH1XJI4tEYb2jYtHOHko9LvdxE9cYZQcBoF9+9oJ7jgRQt+HFAJSyv9rkO6UkGvXF3mr9QelkpkUINsYR6T8Jrkay8i+b9+5yfnmppMmSFw6e4yrIynBBsdS3jQ1PH/zeTiBIt+9dZpvbTlZh1+Oh/Z3F33XRUj7R1GUxA3DwMx0EYHnDUUMPe9Rfe1tc26uiL6M8aXno+UH6O7PIShPIapMQx6sQMxW4JbL+MkKCKhwNgGN2FD7Pnz82j63coF/aoc4ekDHtxfrzUniaZrW/FfEBomI9Scv7fnVq7zdBwIqajBWpeTd99d3vgBNCaQSzMOLyJ+6ApSPWxSzD61a/MfThupSjVuvxk2A3sazYYGBGbML0OcvW9rMyeRLFO8eVGXnKyacMiug5ikSplLs05dXzqNQWpbv6/URjpK+m6JH3GhQQI2QI+RTmBO0EwQ/RUBcqe31d/4rwAB0lPTXqN6HzgAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createRightIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAfBJREFUeNqkUz1s00AU/hwSh1SEhiFCYuhCVSExgHRiYKjEVCEyMMGAsjCxZunesWM7dIgEA8JISPyoUhFDFoZOSE2GgtrSIAYWSEPb1HUS23c+8+7iuE5/JKQ+6fOdz/e+970fG2EY4jyWVo9b819hGEZ8WCgW4z2dV2lZFUJYgnNwz9PwXRebc3cGBMfN6XSQy+eHryyCMuv43dRpBCpSz7b1qlB+cI3RWkEYlv+LQFkgBLxuV8s9OAhQLk0w7vsnSHQKVMhqQuYRSRBouK5AqyXwpHSdvfywUYkKb8UEFIU9fXybOY6A+jbszGAP7O/7RBKg2eR4dH+KvV5ej0k0gaqobXO0214c3acUDnt99Pp9cKqDUqLsx68LuHd3gtU+b1eOCOiSaaZQKJjgMsSOy7EnJcSYCZnLwKbojic1weTVMXz81KhTexeSKdSXqrUzh2X84Qxr9SQmx1P48q6mnTPZrJUs4jMp5QlHlSd1Y203fRGFK8DPV28HzqZpjXShW3+D00bamCrpNU9DuvvcGsjea1rO+nvw39+AxRCGckyO8ciQFG8gPT27ptX8/b4gt1asYGdzRGE6MVCXCJcj5NShbG9B/NnYhttpyMYL5XmTYEdw1KgMFSgJJiEbIXNGPQXBi+CTrzTO+zv/E2AA3Y8Nbp4Kn1sAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('RightIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAfBJREFUeNqkUz1s00AU/hwSh1SEhiFCYuhCVSExgHRiYKjEVCEyMMGAsjCxZunesWM7dIgEA8JISPyoUhFDFoZOSE2GgtrSIAYWSEPb1HUS23c+8+7iuE5/JKQ+6fOdz/e+970fG2EY4jyWVo9b819hGEZ8WCgW4z2dV2lZFUJYgnNwz9PwXRebc3cGBMfN6XSQy+eHryyCMuv43dRpBCpSz7b1qlB+cI3RWkEYlv+LQFkgBLxuV8s9OAhQLk0w7vsnSHQKVMhqQuYRSRBouK5AqyXwpHSdvfywUYkKb8UEFIU9fXybOY6A+jbszGAP7O/7RBKg2eR4dH+KvV5ej0k0gaqobXO0214c3acUDnt99Pp9cKqDUqLsx68LuHd3gtU+b1eOCOiSaaZQKJjgMsSOy7EnJcSYCZnLwKbojic1weTVMXz81KhTexeSKdSXqrUzh2X84Qxr9SQmx1P48q6mnTPZrJUs4jMp5QlHlSd1Y203fRGFK8DPV28HzqZpjXShW3+D00bamCrpNU9DuvvcGsjea1rO+nvw39+AxRCGckyO8ciQFG8gPT27ptX8/b4gt1asYGdzRGE6MVCXCJcj5NShbG9B/NnYhttpyMYL5XmTYEdw1KgMFSgJJiEbIXNGPQXBi+CTrzTO+zv/E2AA3Y8Nbp4Kn1sAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createColumnVisibleIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdhJREFUeNrUk01LAlEUhu845QdRUxZBhIIWtFBso2AwRAVNLqKltHCb63b9A/9AixZCELhyYdAmEyYCBcOlNa1CSQoxog/DMY3x9p5B27Zw1YGH8XrO+55759wROOdsmLCwIWNoAwFh/ugfZQKsAQV4gbNf9woqIAeuQHOgGxgIMNix2Wx7iqIsxmKxWU3TxgqFgpWSsix3fT5fK5VKPedyuftOp5OE7oz60hHsYD8UCh3k83k5k8ksGYYx5XK5rK2WzgiIrPQf5aiGakljakVRjKDrZaPR6Oi6zglVVTlFMnnMZXmdK8o2x674IE+1pCHtCFx2w+GwE9u3drtd81yJRAKdDXZ4eGSuFxb87PHxjg3yVEsaNNolg5NSqTTVbDaX7Agq8Hg8TFWLbGVl0xTY7TY2Our5NfhCQPNAWtFisdSr1WqvWCwawWBwRpKkcZyXadoN83qXmSQ50V1jGxurpnGlUqnH4/FzvItTmoo5ApjQNMIOh2MrEon4o9Gov1arzZXL5XHKBwKBT7fbXU+n07fZbPa23W5f4BVd93o9TgYimATTMHHCbB5PN9ZSf0LmrsEHRDWInvB8w/oFvAv920iFDkBzF/64fHTjvoFOxsL//5h+BBgAwjbgRLl5ImwAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('ColumnVisibleIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdhJREFUeNrUk01LAlEUhu845QdRUxZBhIIWtFBso2AwRAVNLqKltHCb63b9A/9AixZCELhyYdAmEyYCBcOlNa1CSQoxog/DMY3x9p5B27Zw1YGH8XrO+55759wROOdsmLCwIWNoAwFh/ugfZQKsAQV4gbNf9woqIAeuQHOgGxgIMNix2Wx7iqIsxmKxWU3TxgqFgpWSsix3fT5fK5VKPedyuftOp5OE7oz60hHsYD8UCh3k83k5k8ksGYYx5XK5rK2WzgiIrPQf5aiGakljakVRjKDrZaPR6Oi6zglVVTlFMnnMZXmdK8o2x674IE+1pCHtCFx2w+GwE9u3drtd81yJRAKdDXZ4eGSuFxb87PHxjg3yVEsaNNolg5NSqTTVbDaX7Agq8Hg8TFWLbGVl0xTY7TY2Our5NfhCQPNAWtFisdSr1WqvWCwawWBwRpKkcZyXadoN83qXmSQ50V1jGxurpnGlUqnH4/FzvItTmoo5ApjQNMIOh2MrEon4o9Gov1arzZXL5XHKBwKBT7fbXU+n07fZbPa23W5f4BVd93o9TgYimATTMHHCbB5PN9ZSf0LmrsEHRDWInvB8w/oFvAv920iFDkBzF/64fHTjvoFOxsL//5h+BBgAwjbgRLl5ImwAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createColumnHiddenIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0ZGNDRBMkJENkU3MTFFNUIwOTBGRTc0MTA3OTI2OEYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0ZGNDRBMkNENkU3MTFFNUIwOTBGRTc0MTA3OTI2OEYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3RkY0NEEyOUQ2RTcxMUU1QjA5MEZFNzQxMDc5MjY4RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RkY0NEEyQUQ2RTcxMUU1QjA5MEZFNzQxMDc5MjY4RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjQ0mkwAAACISURBVHjaYvz//z8DJYCJgUIwDAxgKSwspMwAIOYDYlcgtgNiJSBWBGJhIGaHyoHAJyD+CcRvgfg+EN8D4kNAvBtkwGEg1iNgkSCUlgBibSg7D4gvgwywRXKBChArALEIELMCsQBU8Qcg/g3Eb4D4ARDfBeKDMBeAnLcWikkGjKMpcRAYABBgACqXGpPEq63VAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('ColumnHiddenIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0ZGNDRBMkJENkU3MTFFNUIwOTBGRTc0MTA3OTI2OEYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0ZGNDRBMkNENkU3MTFFNUIwOTBGRTc0MTA3OTI2OEYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3RkY0NEEyOUQ2RTcxMUU1QjA5MEZFNzQxMDc5MjY4RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RkY0NEEyQUQ2RTcxMUU1QjA5MEZFNzQxMDc5MjY4RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjQ0mkwAAACISURBVHjaYvz//z8DJYCJgUIwDAxgKSwspMwAIOYDYlcgtgNiJSBWBGJhIGaHyoHAJyD+CcRvgfg+EN8D4kNAvBtkwGEg1iNgkSCUlgBibSg7D4gvgwywRXKBChArALEIELMCsQBU8Qcg/g3Eb4D4ARDfBeKDMBeAnLcWikkGjKMpcRAYABBgACqXGpPEq63VAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createColumnIndeterminateIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUY1QTkyNDUxRTkzMTFFNkFEQzVDNjE1NDE4RDlEQUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUY1QTkyNDYxRTkzMTFFNkFEQzVDNjE1NDE4RDlEQUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5RjVBOTI0MzFFOTMxMUU2QURDNUM2MTU0MThEOURBQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5RjVBOTI0NDFFOTMxMUU2QURDNUM2MTU0MThEOURBQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Por9Q7gAAAGzSURBVHja1JOxSwJRHMffqXcqSoVBQ0FDNN7iIBxO5WA3NYoEjm0u/T2Bkw2ONZlgNEk4Bw6GiGiippmRnp76+n4PbWhpcOoHH57P+36/7/e8n4qUUmxSLrFhbRygoJwPq6tsgRMQB0cgtNINQA0UwCMYrX3rAAUB516v9zIejx+nUqm90WgUDIfDaq1WE9PpdK6q6mc2m+0WCoUX7K/hu+O5TPCBq0gkUiqXy0PbtqVlWXK5XDqwuE4mEzmfzyU11NJDr3C73SZOfeh0OtPxeCyR7oixlzhdVqtV2ev1nCB+Tw219NDrQRtJwzBCaF+bzWbsSGQyGVEsFoWmacLj8YjBYCBisZhIp9MC3Qhq6YEmyQ5OTdO8bTQak263K8m69d+FIOc5tfTQywAvTrmIRqM3pVLptd1uy3q9/nN3slgsZLPZlHxGDbX00Ou8ApfLxbdh+P3+MyTriURC7/f7+7hCsFKpCF3XvwKBQCuXyz3n8/ln/Bb3yH9iOAPcYAfsIiSEsAOsh9hvA99qDizwAVMDphbWd+zfwFBZTSOFfqBxJv4YPk6cDcYMVv7/n+lbgAEAtdcjOjP715MAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('ColumnIndeterminateIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUY1QTkyNDUxRTkzMTFFNkFEQzVDNjE1NDE4RDlEQUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUY1QTkyNDYxRTkzMTFFNkFEQzVDNjE1NDE4RDlEQUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5RjVBOTI0MzFFOTMxMUU2QURDNUM2MTU0MThEOURBQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5RjVBOTI0NDFFOTMxMUU2QURDNUM2MTU0MThEOURBQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Por9Q7gAAAGzSURBVHja1JOxSwJRHMffqXcqSoVBQ0FDNN7iIBxO5WA3NYoEjm0u/T2Bkw2ONZlgNEk4Bw6GiGiippmRnp76+n4PbWhpcOoHH57P+36/7/e8n4qUUmxSLrFhbRygoJwPq6tsgRMQB0cgtNINQA0UwCMYrX3rAAUB516v9zIejx+nUqm90WgUDIfDaq1WE9PpdK6q6mc2m+0WCoUX7K/hu+O5TPCBq0gkUiqXy0PbtqVlWXK5XDqwuE4mEzmfzyU11NJDr3C73SZOfeh0OtPxeCyR7oixlzhdVqtV2ev1nCB+Tw219NDrQRtJwzBCaF+bzWbsSGQyGVEsFoWmacLj8YjBYCBisZhIp9MC3Qhq6YEmyQ5OTdO8bTQak263K8m69d+FIOc5tfTQywAvTrmIRqM3pVLptd1uy3q9/nN3slgsZLPZlHxGDbX00Ou8ApfLxbdh+P3+MyTriURC7/f7+7hCsFKpCF3XvwKBQCuXyz3n8/ln/Bb3yH9iOAPcYAfsIiSEsAOsh9hvA99qDizwAVMDphbWd+zfwFBZTSOFfqBxJv4YPk6cDcYMVv7/n+lbgAEAtdcjOjP715MAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createGroupIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NUVCNUI1OUNENkYwMTFFNThGNjJDNUE3ODIwMEZERDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NUVCNUI1OURENkYwMTFFNThGNjJDNUE3ODIwMEZERDciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1RUI1QjU5QUQ2RjAxMUU1OEY2MkM1QTc4MjAwRkRENyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1RUI1QjU5QkQ2RjAxMUU1OEY2MkM1QTc4MjAwRkRENyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlkCTGoAAACDSURBVHjaYmRgYPjPgBswQun/+BT8X3x5DoZErG4KCj/3/DcMNZMNuRiYGPADRiRX4HYBJV5AB0QrhAGW//8hehgZES6FiaGLYzUAq7sxNf0nxQCsinHFAguegCPKBYxoYfAfWQxNnPgwINJVYMDEQCEYfLHASGoKRQlxPN7BqQggwAAN+SopPnDCwgAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('GroupIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NUVCNUI1OUNENkYwMTFFNThGNjJDNUE3ODIwMEZERDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NUVCNUI1OURENkYwMTFFNThGNjJDNUE3ODIwMEZERDciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1RUI1QjU5QUQ2RjAxMUU1OEY2MkM1QTc4MjAwRkRENyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1RUI1QjU5QkQ2RjAxMUU1OEY2MkM1QTc4MjAwRkRENyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlkCTGoAAACDSURBVHjaYmRgYPjPgBswQun/+BT8X3x5DoZErG4KCj/3/DcMNZMNuRiYGPADRiRX4HYBJV5AB0QrhAGW//8hehgZES6FiaGLYzUAq7sxNf0nxQCsinHFAguegCPKBYxoYfAfWQxNnPgwINJVYMDEQCEYfLHASGoKRQlxPN7BqQggwAAN+SopPnDCwgAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createPivotIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAitJREFUeNqcU01rE1EUPfPVJjFqdYw2pJQkNS2hYhQUiwj+AaugKFYUBWutG3HjokgNrroRKYKbglBBFF0o1IW404qClGIDxpYKTQgULZJmmpiYkPnwvmtNspPmweOcmXnnvPPufSOdjsf7AfjR3PiOU6OjV50mh9CqtmVJDlkNjWU3tPXEiA6hlS3Lkm3HQbFYxO5hnTF0pQ3Bwa3MAxc98F9wMd95TsOOswpzoRFa1TJNyaKHtTUD07cNdv9wx6jtNDNW53N369xyOiC0qmmanMAwcjh+/yimrr/D28kjf8WLizjY3c38YzKJw729zKcTCU4gtLUE+Xwejy+94gWfl5agKQr8uo4Eccu2USr48SWVQq5QWE/gcAJZuIgF5XIF5yf7GfcGg9Cos4O3UoiFw2jFLrx+/wtRet+3nkJoOAEbkJtty5g484I+yUivrODekxb4tmuInZhCuFPHyHAXZubnUTXNWgKhlc1qlY+gaZsw9PwkY4fPhxsDXvxcrWL25TE8G+8DFAOxSAQHotG6AWlrRXS52vD08ifGr5kM1+BBPIBkOo3flQpaNA2zCwug+8MGdkMCPoLbvQ0DDw8xRgIBBNvbsUoF6yK+h+pQJpN91JH9PT2NCWS1Ui4rNhtswZubPxi/LS9TTWxemKTK/9t1jtramEBo1Vw226pRvEfj3oaL6v3vVRYaoZXcodA12ePpbOZXtEuljEToprmZprpBvehn4Y8AAwDB0mLL0M405wAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('PivotIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAitJREFUeNqcU01rE1EUPfPVJjFqdYw2pJQkNS2hYhQUiwj+AaugKFYUBWutG3HjokgNrroRKYKbglBBFF0o1IW404qClGIDxpYKTQgULZJmmpiYkPnwvmtNspPmweOcmXnnvPPufSOdjsf7AfjR3PiOU6OjV50mh9CqtmVJDlkNjWU3tPXEiA6hlS3Lkm3HQbFYxO5hnTF0pQ3Bwa3MAxc98F9wMd95TsOOswpzoRFa1TJNyaKHtTUD07cNdv9wx6jtNDNW53N369xyOiC0qmmanMAwcjh+/yimrr/D28kjf8WLizjY3c38YzKJw729zKcTCU4gtLUE+Xwejy+94gWfl5agKQr8uo4Eccu2USr48SWVQq5QWE/gcAJZuIgF5XIF5yf7GfcGg9Cos4O3UoiFw2jFLrx+/wtRet+3nkJoOAEbkJtty5g484I+yUivrODekxb4tmuInZhCuFPHyHAXZubnUTXNWgKhlc1qlY+gaZsw9PwkY4fPhxsDXvxcrWL25TE8G+8DFAOxSAQHotG6AWlrRXS52vD08ifGr5kM1+BBPIBkOo3flQpaNA2zCwug+8MGdkMCPoLbvQ0DDw8xRgIBBNvbsUoF6yK+h+pQJpN91JH9PT2NCWS1Ui4rNhtswZubPxi/LS9TTWxemKTK/9t1jtramEBo1Vw226pRvEfj3oaL6v3vVRYaoZXcodA12ePpbOZXtEuljEToprmZprpBvehn4Y8AAwDB0mLL0M405wAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createAggregationIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMZJREFUeNpi/P//PwMlgImBQjDwBrCgmMYENq8RiLVxqL8KxPX//v1DiIACEYYZGRlBmBOIe4B4PRDrQMUYoGyQGIoebAbADJkAxFuAWA9JXJdYA0CYC4inAPFOINZHlkPWgxKIcFMhQA0aFveB+DbOUERxDhQAbTEC4qNAPBfqEmRx3F6AAhOgojNAvBikGckumDiKHhY0B3ECcTVQQhRIg/B1NNeeB1IgQ7/BXYvmdE6oAnYcPv4NxF+BerAbMDTzAkCAAQChYIl8b86M1gAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('AggregationIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMZJREFUeNpi/P//PwMlgImBQjDwBrCgmMYENq8RiLVxqL8KxPX//v1DiIACEYYZGRlBmBOIe4B4PRDrQMUYoGyQGIoebAbADJkAxFuAWA9JXJdYA0CYC4inAPFOINZHlkPWgxKIcFMhQA0aFveB+DbOUERxDhQAbTEC4qNAPBfqEmRx3F6AAhOgojNAvBikGckumDiKHhY0B3ECcTVQQhRIg/B1NNeeB1IgQ7/BXYvmdE6oAnYcPv4NxF+BerAbMDTzAkCAAQChYIl8b86M1gAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createDropNotAllowedIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjUyQ0MxNDY0NjBDMTFFNkEzMUVGQUE3NkQzQzU4MjYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjUyQ0MxNDc0NjBDMTFFNkEzMUVGQUE3NkQzQzU4MjYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNTJDQzE0NDQ2MEMxMUU2QTMxRUZBQTc2RDNDNTgyNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyNTJDQzE0NTQ2MEMxMUU2QTMxRUZBQTc2RDNDNTgyNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PstpFisAAAGLSURBVHjalJNPKERRFMbnvRmKpAnjhURKWXjJLNQsqDE7KxI1NhYU2cjKxtbGZpSNqSFT/qxkYafmLWyU2LElCwYLo0SS8J36rk7XbJz61f33nXPuuec6ad8PWdYHJsEAaOPaDTgGeXCqD0cs8TqYCf21bjIHsmC2nIMCGOT4C3yCV44rQRXPS4BOkNIOchTL4RI4A0fggvtdYAj0g2qeFc10hKlNUXwF1sAOeALfdHCuxMZEsyoOFrjwTK8bTN3YMGvjcf7BzF3RukxHIl2DfSVuALvgQIn3wCJ44zwpDpqY/i2458YouARpzmV9BEyAExWk2RTRARUgxiuMqytsg3nWRCzMgL/PWATtoJfVr+PeHd/70OoJ6bxajotyhYCTmBJv8XVssdRljD0hFoiDDCcyfgcrjFyyxFGwBBI8K5YJ+573iEEriHOjBdSr55KoSbDM4ppekFrlHPWZCupJpcoP4IWCRt7bRA5MK7sqxRQ/irxIDegAPez7qDqbNeJyv1Huvvmf7/wjwABtLlYtICx9HQAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('DropNotAllowedIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjUyQ0MxNDY0NjBDMTFFNkEzMUVGQUE3NkQzQzU4MjYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjUyQ0MxNDc0NjBDMTFFNkEzMUVGQUE3NkQzQzU4MjYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNTJDQzE0NDQ2MEMxMUU2QTMxRUZBQTc2RDNDNTgyNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyNTJDQzE0NTQ2MEMxMUU2QTMxRUZBQTc2RDNDNTgyNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PstpFisAAAGLSURBVHjalJNPKERRFMbnvRmKpAnjhURKWXjJLNQsqDE7KxI1NhYU2cjKxtbGZpSNqSFT/qxkYafmLWyU2LElCwYLo0SS8J36rk7XbJz61f33nXPuuec6ad8PWdYHJsEAaOPaDTgGeXCqD0cs8TqYCf21bjIHsmC2nIMCGOT4C3yCV44rQRXPS4BOkNIOchTL4RI4A0fggvtdYAj0g2qeFc10hKlNUXwF1sAOeALfdHCuxMZEsyoOFrjwTK8bTN3YMGvjcf7BzF3RukxHIl2DfSVuALvgQIn3wCJ44zwpDpqY/i2458YouARpzmV9BEyAExWk2RTRARUgxiuMqytsg3nWRCzMgL/PWATtoJfVr+PeHd/70OoJ6bxajotyhYCTmBJv8XVssdRljD0hFoiDDCcyfgcrjFyyxFGwBBI8K5YJ+573iEEriHOjBdSr55KoSbDM4ppekFrlHPWZCupJpcoP4IWCRt7bRA5MK7sqxRQ/irxIDegAPez7qDqbNeJyv1Huvvmf7/wjwABtLlYtICx9HQAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createGroupIcon12 = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTNFQzE0NTdEOTk1MTFFNUI4MjJGMjBFRDk4MkMxNjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTNFQzE0NThEOTk1MTFFNUI4MjJGMjBFRDk4MkMxNjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxM0VDMTQ1NUQ5OTUxMUU1QjgyMkYyMEVEOTgyQzE2MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxM0VDMTQ1NkQ5OTUxMUU1QjgyMkYyMEVEOTgyQzE2MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiInRbAAAAEjSURBVHjaYuTi5XqkpKvI9/fXHwZWDlaGZ/eeM7x59raDAQj4pOQrBBUVGP78+MfAzMbE8PLKhU8Mhnb6/6//P/f/8N/d/x8AWUn1cf+BaleCsFPt5P/T/v//3/zj//8JQFrB1vM/I5IN3EAbfgBt+Au0QRBqw3sMG0DiQMwPxFuB2BzKZmLAAViA+BOU/QOI7wPxRyhfCIhT0NT/ZETi7AZiZiD+DOXL6EdlGdkWFzF8evaDgUuIg2F9eiTYBrhuIJ4NxHegfDsgnobuJGQbNgBxMRDfhfLFgDgB3UnInPVALMxAACDbcBGItwDxAyhfCRismejBiuyHiUBsDMQmUL6cSXIJf0hTDsNboEN42RkYJth58TPisV0eaMNFdBsAAgwANVJzd8zQrUcAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('GroupIcon12', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTNFQzE0NTdEOTk1MTFFNUI4MjJGMjBFRDk4MkMxNjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTNFQzE0NThEOTk1MTFFNUI4MjJGMjBFRDk4MkMxNjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxM0VDMTQ1NUQ5OTUxMUU1QjgyMkYyMEVEOTgyQzE2MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxM0VDMTQ1NkQ5OTUxMUU1QjgyMkYyMEVEOTgyQzE2MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiInRbAAAAEjSURBVHjaYuTi5XqkpKvI9/fXHwZWDlaGZ/eeM7x59raDAQj4pOQrBBUVGP78+MfAzMbE8PLKhU8Mhnb6/6//P/f/8N/d/x8AWUn1cf+BaleCsFPt5P/T/v//3/zj//8JQFrB1vM/I5IN3EAbfgBt+Au0QRBqw3sMG0DiQMwPxFuB2BzKZmLAAViA+BOU/QOI7wPxRyhfCIhT0NT/ZETi7AZiZiD+DOXL6EdlGdkWFzF8evaDgUuIg2F9eiTYBrhuIJ4NxHegfDsgnobuJGQbNgBxMRDfhfLFgDgB3UnInPVALMxAACDbcBGItwDxAyhfCRismejBiuyHiUBsDMQmUL6cSXIJf0hTDsNboEN42RkYJth58TPisV0eaMNFdBsAAgwANVJzd8zQrUcAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createCutIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlRJREFUeNqkU09okmEcfj6ThNRhjUEJDhxDZ1t4sI3lDrKDhESHpC6x6yBoh52GfcdBJDvtElEUdKhOSq1JjF0SabSton9OmIeRxVKIrUgdU5xvv8e+hXXYpRcefv+e5/mh7/tpSin8z9Gi0Sg0TTsv+edarfa+Wq2iUqmgXC6DudVqhd1uh81ma+UWi8Uv3G5ZPJ9MJmGq1+twOBynBOek6T9oG+fkkU8djymVSiGTyWBiYuL6QSb7YvLIp679+D0ej57NZpX8JD0QCPj7+vrgcrnAyJp9zskj3zD928Tr9er5fF5FIhFdiH4aMLJmn/N98R+Dq5qGSUFQwKFs1AuFggqFQrrT6bzIyJp9zoMGn7qWQU6ST4JNQeK3kd/n8+nFYlGFw+HFdDqtWLOfMHjk5wwDjckRwGYGeJVnBMdXgaNrbveJKysr/etu91pHtVo8BnyXWUnwsgHM7wAVX7MJ0cEmjWvW4eGzjpGRXnNnZ8cFeRi9pRI+dnXtjMbj/cLp57rG1tbPH0tLwd3l5QHp3RBU8E7Txr4MDb1V8bh60tOzfhN4vTc9rRYkCm4tGDX7nJNHPnWt/+CFpt1rF9emptScxKfA2DNZwThn9NtNWjoxMH1Tqru+va02NzbK47FY4PHMzJtdYPYD8OChGDCyZp9z8sinrnWXt4E7q4ODRbrelw0x2Xjyn1fImn3OySOfutYt+IDRSeCycAZeAYm7wKLkshR87A1+cILDAss4EDkNXJI8Ows8yin1nENn+5MXNA3hnpHzHBKYjWhqe4lffwkwAMRcPMqRQZ4vAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CutIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlRJREFUeNqkU09okmEcfj6ThNRhjUEJDhxDZ1t4sI3lDrKDhESHpC6x6yBoh52GfcdBJDvtElEUdKhOSq1JjF0SabSton9OmIeRxVKIrUgdU5xvv8e+hXXYpRcefv+e5/mh7/tpSin8z9Gi0Sg0TTsv+edarfa+Wq2iUqmgXC6DudVqhd1uh81ma+UWi8Uv3G5ZPJ9MJmGq1+twOBynBOek6T9oG+fkkU8djymVSiGTyWBiYuL6QSb7YvLIp679+D0ej57NZpX8JD0QCPj7+vrgcrnAyJp9zskj3zD928Tr9er5fF5FIhFdiH4aMLJmn/N98R+Dq5qGSUFQwKFs1AuFggqFQrrT6bzIyJp9zoMGn7qWQU6ST4JNQeK3kd/n8+nFYlGFw+HFdDqtWLOfMHjk5wwDjckRwGYGeJVnBMdXgaNrbveJKysr/etu91pHtVo8BnyXWUnwsgHM7wAVX7MJ0cEmjWvW4eGzjpGRXnNnZ8cFeRi9pRI+dnXtjMbj/cLp57rG1tbPH0tLwd3l5QHp3RBU8E7Txr4MDb1V8bh60tOzfhN4vTc9rRYkCm4tGDX7nJNHPnWt/+CFpt1rF9emptScxKfA2DNZwThn9NtNWjoxMH1Tqru+va02NzbK47FY4PHMzJtdYPYD8OChGDCyZp9z8sinrnWXt4E7q4ODRbrelw0x2Xjyn1fImn3OySOfutYt+IDRSeCycAZeAYm7wKLkshR87A1+cILDAss4EDkNXJI8Ows8yin1nENn+5MXNA3hnpHzHBKYjWhqe4lffwkwAMRcPMqRQZ4vAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createCopyIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAgBJREFUeNqMk79rFEEcxd/M7V2QAzVFEOMFGwNiIGCjEdIEhYODmEawsFf8G4QQSCPYyqUWCdhY2qSQECSpInvFJYT8Ki6dZO8Sb2P29pfvu+4sm+UKv/AYZna/b95ndla9WFyEUmoewG0Mr+9hGB5EYYhypZIseO0fCHa3sP/LhxVFkazd+by0tOIFAQac+3w5imPYto1Pa2tv+VxR+8bRuv8EevIRxn5uQoszpWI2RjSIBgMMLi/hui76/T6+Li+v8Pkz9k0Wo409pFHAJooUCiWqYlk46nTQ2ttD+/gY75pNPKjVmmfd7gf2vKbu5U0sMWBpzWatNcAkv7n789lZ1GdmMqQ3cbxApIUikg58H5S0JgkSE/L/L1JmoNJmMZEDzCNdK5cxwtFxHHxcXcXTqalm27Zf7rRaRKBBhkAhxcgjiYlUo16HfKlqtYpv29u95Az81EClCFLyaQ0SCib/dtNJ6qsGfDmJnRqoXIKiyVUDz8sSSGy5VnI3ikh5k1KplBnog/V19BxnRCZmV15dGCSdO1wziphcS3rrT7d71zk5Ob8+Pf3eMN4aH3/8qtGYM0hp7iyJbO0bBOrMPTz8kl6OpGoTEzEncwapaCLrRNfu6Wli0Etl6mbfdb0MiYrlXsjZyAUTE0qwOxsbo9aQ3/dGEWlYRRcX5xxG/wowAC8cIjzfyA4lAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CopyIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAgBJREFUeNqMk79rFEEcxd/M7V2QAzVFEOMFGwNiIGCjEdIEhYODmEawsFf8G4QQSCPYyqUWCdhY2qSQECSpInvFJYT8Ki6dZO8Sb2P29pfvu+4sm+UKv/AYZna/b95ndla9WFyEUmoewG0Mr+9hGB5EYYhypZIseO0fCHa3sP/LhxVFkazd+by0tOIFAQac+3w5imPYto1Pa2tv+VxR+8bRuv8EevIRxn5uQoszpWI2RjSIBgMMLi/hui76/T6+Li+v8Pkz9k0Wo409pFHAJooUCiWqYlk46nTQ2ttD+/gY75pNPKjVmmfd7gf2vKbu5U0sMWBpzWatNcAkv7n789lZ1GdmMqQ3cbxApIUikg58H5S0JgkSE/L/L1JmoNJmMZEDzCNdK5cxwtFxHHxcXcXTqalm27Zf7rRaRKBBhkAhxcgjiYlUo16HfKlqtYpv29u95Az81EClCFLyaQ0SCib/dtNJ6qsGfDmJnRqoXIKiyVUDz8sSSGy5VnI3ikh5k1KplBnog/V19BxnRCZmV15dGCSdO1wziphcS3rrT7d71zk5Ob8+Pf3eMN4aH3/8qtGYM0hp7iyJbO0bBOrMPTz8kl6OpGoTEzEncwapaCLrRNfu6Wli0Etl6mbfdb0MiYrlXsjZyAUTE0qwOxsbo9aQ3/dGEWlYRRcX5xxG/wowAC8cIjzfyA4lAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createPasteIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAadJREFUeNpinGLPAAaMjAxwcJ9Tk+0Bt7YPkCkKFXqt8PXqFsXv13/B1Pz/D6FZENoYZgKxMYgh9OI6i567q5hFUp4kiH9i3qTnT3auqWPgZ/gDVXsWiNPBFk+2hxtwxi0syfjy5csM0vFzGTg42Bj4+XnAEh8/fmH48eMXw9OFyQy6uroMu1bNAxlgAnbB338IJ6hlzWU4uXgJw6FDO4Ga+Rl4eXkZWFlZGb58/crw6eNHBjG7Iga1yAiG7SvmwfWw/P2LMADkraiYaIb79+4xYAOKSkpgNch6UFzwFxgy//79Y5BTUMBqwF+g3H8mJgZkPSgu+Ac04M+/fwz4AAswulBc8Ocfqg1/kGWxAEagAch6WP78RfUCIQOYmJkZ/qC44A+qAb8JeIEZZMkfXC4gwgsQNUgG/CbRC2BXIhvw8AsDgzQnkgEEvACxBMJ++h0YJmufMTA8ABry8xckGkFOxIdBakBqQXpAekGZiXPTSwbeUAEgB5hsObm58acDoJp3nxkYNn1gEANyP4MNAGKxh18ZbsXxsjMQA97/Z7gF0gPEfwACDAB/y9xB1I3/FQAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('PasteIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAadJREFUeNpinGLPAAaMjAxwcJ9Tk+0Bt7YPkCkKFXqt8PXqFsXv13/B1Pz/D6FZENoYZgKxMYgh9OI6i567q5hFUp4kiH9i3qTnT3auqWPgZ/gDVXsWiNPBFk+2hxtwxi0syfjy5csM0vFzGTg42Bj4+XnAEh8/fmH48eMXw9OFyQy6uroMu1bNAxlgAnbB338IJ6hlzWU4uXgJw6FDO4Ga+Rl4eXkZWFlZGb58/crw6eNHBjG7Iga1yAiG7SvmwfWw/P2LMADkraiYaIb79+4xYAOKSkpgNch6UFzwFxgy//79Y5BTUMBqwF+g3H8mJgZkPSgu+Ac04M+/fwz4AAswulBc8Ocfqg1/kGWxAEagAch6WP78RfUCIQOYmJkZ/qC44A+qAb8JeIEZZMkfXC4gwgsQNUgG/CbRC2BXIhvw8AsDgzQnkgEEvACxBMJ++h0YJmufMTA8ABry8xckGkFOxIdBakBqQXpAekGZiXPTSwbeUAEgB5hsObm58acDoJp3nxkYNn1gEANyP4MNAGKxh18ZbsXxsjMQA97/Z7gF0gPEfwACDAB/y9xB1I3/FQAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createMenuIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjM3MUVBMzlERkJEMTFFNUEwMjFFNDJDMDlCMUY3OTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjM3MUVBM0FERkJEMTFFNUEwMjFFNDJDMDlCMUY3OTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCMzcxRUEzN0RGQkQxMUU1QTAyMUU0MkMwOUIxRjc5NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCMzcxRUEzOERGQkQxMUU1QTAyMUU0MkMwOUIxRjc5NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pux7nZcAAAGtSURBVHjalFM9a8JQFL0veYkfYJUQEYuIIF07uToVpGuHOgid3dJN+i+K4C6CXQqFjplcCoKbXZ0EqRUFP/CTxCS9NzTdNOmBx32P3Nx3zj33sXq9/tRqtbRYLCaLomhBANi2La5WK7NSqTRYNpt1LMsCLACO47iLMXY2CoIAm80GZFkGoVQqfWy3WzBNE6gQVveNhmHAbreDYrHYZaPRKKTr+i0ykTDBPnUzgfYEvFkYDAZWoVDQWb/fB9QD6XQajscjBCkQDodhOBzCcrkEVq1WXfoEL9EPlEdSZrMZ8Pl8frVYLO7QgRB+sPx+/GUk4qUGNvOdYSO+JpPJJdHyc8ADnUluIpH45vv9XiFbiFIQC71IjuBe5ZlM5gYlPHLOL7C4AcEgofXbXC7X4PF4vKuqahf+AWJxOBwgEokA6/V67kFRFFcGLU/SqShJkusATSNbr9fQ6XSuU6mUQP3BBIaJZyM6BuPx2Mnn85+sVqu9ttvt+2QyGXgOqInT6RTK5fIbwwl0iFI0Gv2btCA9QPdcOVzTtOdms/mAnnKkaAexES0UcG/hc375EWAA94tOP0vEOEcAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('MenuIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjM3MUVBMzlERkJEMTFFNUEwMjFFNDJDMDlCMUY3OTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjM3MUVBM0FERkJEMTFFNUEwMjFFNDJDMDlCMUY3OTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCMzcxRUEzN0RGQkQxMUU1QTAyMUU0MkMwOUIxRjc5NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCMzcxRUEzOERGQkQxMUU1QTAyMUU0MkMwOUIxRjc5NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pux7nZcAAAGtSURBVHjalFM9a8JQFL0veYkfYJUQEYuIIF07uToVpGuHOgid3dJN+i+K4C6CXQqFjplcCoKbXZ0EqRUFP/CTxCS9NzTdNOmBx32P3Nx3zj33sXq9/tRqtbRYLCaLomhBANi2La5WK7NSqTRYNpt1LMsCLACO47iLMXY2CoIAm80GZFkGoVQqfWy3WzBNE6gQVveNhmHAbreDYrHYZaPRKKTr+i0ykTDBPnUzgfYEvFkYDAZWoVDQWb/fB9QD6XQajscjBCkQDodhOBzCcrkEVq1WXfoEL9EPlEdSZrMZ8Pl8frVYLO7QgRB+sPx+/GUk4qUGNvOdYSO+JpPJJdHyc8ADnUluIpH45vv9XiFbiFIQC71IjuBe5ZlM5gYlPHLOL7C4AcEgofXbXC7X4PF4vKuqahf+AWJxOBwgEokA6/V67kFRFFcGLU/SqShJkusATSNbr9fQ6XSuU6mUQP3BBIaJZyM6BuPx2Mnn85+sVqu9ttvt+2QyGXgOqInT6RTK5fIbwwl0iFI0Gv2btCA9QPdcOVzTtOdms/mAnnKkaAexES0UcG/hc375EWAA94tOP0vEOEcAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createCheckboxCheckedIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBRkJCRDU1MTEyM0ExMUU2ODE4MUUyOTNBNTRGQkIxNyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBRkJCRDU1MDEyM0ExMUU2ODE4MUUyOTNBNTRGQkIxNyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+riMaEQAAAL5JREFUeNqUks0JhDAQhSd7tgtLMDUIyTXF2IdNWIE3c0ruYg9LtgcPzvpEF8SfHR8MGR75hpcwRERmrjQXCyutDKUQAkuFu2AUpsyiJ1JK0UtycRgGMsbsPBFYVRVZaw/+7Zu895znOY/j+PPWT7oGp2lirTU3TbPz/4IAAGLALeic47Ztlx7RELHrusPAAwgoy7LlrOuay7I8TXIadYOLouC+7+XgBiP2lTbw0crFGAF9ANq1kS75G8xXgAEAiqu9OeWZ/voAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxCheckedIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBRkJCRDU1MTEyM0ExMUU2ODE4MUUyOTNBNTRGQkIxNyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBRkJCRDU1MDEyM0ExMUU2ODE4MUUyOTNBNTRGQkIxNyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+riMaEQAAAL5JREFUeNqUks0JhDAQhSd7tgtLMDUIyTXF2IdNWIE3c0ruYg9LtgcPzvpEF8SfHR8MGR75hpcwRERmrjQXCyutDKUQAkuFu2AUpsyiJ1JK0UtycRgGMsbsPBFYVRVZaw/+7Zu895znOY/j+PPWT7oGp2lirTU3TbPz/4IAAGLALeic47Ztlx7RELHrusPAAwgoy7LlrOuay7I8TXIadYOLouC+7+XgBiP2lTbw0crFGAF9ANq1kS75G8xXgAEAiqu9OeWZ/voAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createCheckboxCheckedReadOnlyIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTZENDVDNkY0NDVFMTFFNkI1MjZCRkJDQ0FEMUEyNDMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTZENDVDNzA0NDVFMTFFNkI1MjZCRkJDQ0FEMUEyNDMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkQ0NUM2RDQ0NUUxMUU2QjUyNkJGQkNDQUQxQTI0MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkQ0NUM2RTQ0NUUxMUU2QjUyNkJGQkNDQUQxQTI0MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiE1TFsAAAGLSURBVHjadJI9a8JQFIbfSFBBakDaDg5O0nay4OSPsEFoCq4JODhUShd3F9emFreKqJOlS6Xg4OB/cIkZijjXwRa/uthzLokESS683I+cJ+fec15pv9/DHfP5/JSmR1KedOEcW6QP0nMqlfp2YyUXJOiWpleSAv/xQzIIfudNyAO9+UHr9Rrtdhuz2SzOMU4sQrQ4o7nF2f3SDIdD1Ot19Ho9ODEtYs454z0p7gdNp1OYpontdot0Ou0ec+wDgyrvlsslxuPxAdpsNmg0GnxFVCoVaJrm/WeewSte9ft9lMtljEYj8YWvNhgMkMvloOs6ZFn2gpeHnaIoohDNZhO73Q7dbhfRaBTVahWJROL4FX+y06frQqGAyWSCTqcDy7KwWq1Qq9WQzWb9nv8VcpqLcDgsrprJZASkqiqKxWJAS/HJ4IvTXCSTSRiGISpYKpUQiUSCjPAknOMxgLRYLGDbtsgci8WOIbbZHbvHaznNMcJJwPV+SbprOSnA5Ddccq4eyeY3kUyvyf8FGAAA/p3KIKgjXwAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxCheckedReadOnlyIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTZENDVDNkY0NDVFMTFFNkI1MjZCRkJDQ0FEMUEyNDMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTZENDVDNzA0NDVFMTFFNkI1MjZCRkJDQ0FEMUEyNDMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkQ0NUM2RDQ0NUUxMUU2QjUyNkJGQkNDQUQxQTI0MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkQ0NUM2RTQ0NUUxMUU2QjUyNkJGQkNDQUQxQTI0MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiE1TFsAAAGLSURBVHjadJI9a8JQFIbfSFBBakDaDg5O0nay4OSPsEFoCq4JODhUShd3F9emFreKqJOlS6Xg4OB/cIkZijjXwRa/uthzLokESS683I+cJ+fec15pv9/DHfP5/JSmR1KedOEcW6QP0nMqlfp2YyUXJOiWpleSAv/xQzIIfudNyAO9+UHr9Rrtdhuz2SzOMU4sQrQ4o7nF2f3SDIdD1Ot19Ho9ODEtYs454z0p7gdNp1OYpontdot0Ou0ec+wDgyrvlsslxuPxAdpsNmg0GnxFVCoVaJrm/WeewSte9ft9lMtljEYj8YWvNhgMkMvloOs6ZFn2gpeHnaIoohDNZhO73Q7dbhfRaBTVahWJROL4FX+y06frQqGAyWSCTqcDy7KwWq1Qq9WQzWb9nv8VcpqLcDgsrprJZASkqiqKxWJAS/HJ4IvTXCSTSRiGISpYKpUQiUSCjPAknOMxgLRYLGDbtsgci8WOIbbZHbvHaznNMcJJwPV+SbprOSnA5Ddccq4eyeY3kUyvyf8FGAAA/p3KIKgjXwAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createCheckboxUncheckedIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2MkU1Rjk1NDExNDExMUU2ODhEQkMyRTJGOUNGODYyQyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2MkU1Rjk1MzExNDExMUU2ODhEQkMyRTJGOUNGODYyQyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI1MkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+t+CXswAAAFBJREFUeNrsksENwDAIA023a9YGNqlItkixlAFIn1VOMv5wvACAOxOZWUwsB6Gqswp36QivJNhBRHDhI0f8j9jNrCy4O2twNMobT/7QeQUYAFaKU1yE2OfhAAAAAElFTkSuQmCC';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxUncheckedIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2MkU1Rjk1NDExNDExMUU2ODhEQkMyRTJGOUNGODYyQyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2MkU1Rjk1MzExNDExMUU2ODhEQkMyRTJGOUNGODYyQyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI1MkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+t+CXswAAAFBJREFUeNrsksENwDAIA023a9YGNqlItkixlAFIn1VOMv5wvACAOxOZWUwsB6Gqswp36QivJNhBRHDhI0f8j9jNrCy4O2twNMobT/7QeQUYAFaKU1yE2OfhAAAAAElFTkSuQmCC');
 	    };
 	    SvgFactory.prototype.createCheckboxUncheckedReadOnlyIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjE4MjE1MTc0NDVFMTFFNjgyNzA5QzQ5MjBBRTM0QTkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjE4MjE1MTg0NDVFMTFFNjgyNzA5QzQ5MjBBRTM0QTkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTgyMTUxNTQ0NUUxMUU2ODI3MDlDNDkyMEFFMzRBOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MTgyMTUxNjQ0NUUxMUU2ODI3MDlDNDkyMEFFMzRBOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoIZc5kAAADFSURBVHjaYvz//z8DDDx69EgESBUBsQ8Qq0GFbwDxJiCeJCcn9wamlhGmEagpGEjNBWJ+BuzgExAnATWvhWuEaloN4jPgByBbQkGaGR8+fCgK5NwBYj4G4gDIZlUmIJFLgiYGqNoCkEY/BtKBD0ijBhka1ZkYyAO/mKDxRCq4xwSNXFLBVlB0iAEZt0mODmBkvgKlCGjkMhCRAECp5xU4cKDJKAyIP+PR9BmWalDSKloi9wUFOSj0gPgWyE9APBE5kQMEGAD0/UBfnjaiGAAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxUncheckedReadOnlyIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjE4MjE1MTc0NDVFMTFFNjgyNzA5QzQ5MjBBRTM0QTkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjE4MjE1MTg0NDVFMTFFNjgyNzA5QzQ5MjBBRTM0QTkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTgyMTUxNTQ0NUUxMUU2ODI3MDlDNDkyMEFFMzRBOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MTgyMTUxNjQ0NUUxMUU2ODI3MDlDNDkyMEFFMzRBOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoIZc5kAAADFSURBVHjaYvz//z8DDDx69EgESBUBsQ8Qq0GFbwDxJiCeJCcn9wamlhGmEagpGEjNBWJ+BuzgExAnATWvhWuEaloN4jPgByBbQkGaGR8+fCgK5NwBYj4G4gDIZlUmIJFLgiYGqNoCkEY/BtKBD0ijBhka1ZkYyAO/mKDxRCq4xwSNXFLBVlB0iAEZt0mODmBkvgKlCGjkMhCRAECp5xU4cKDJKAyIP+PR9BmWalDSKloi9wUFOSj0gPgWyE9APBE5kQMEGAD0/UBfnjaiGAAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createCheckboxIndeterminateIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMjU4MzhGQjEyM0ExMUU2QjAxM0Q2QjZFQ0IzNzM4NiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMjU4MzhGQTEyM0ExMUU2QjAxM0Q2QjZFQ0IzNzM4NiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+2Xml2QAAAGBJREFUeNpiYGBg8ATiZ0D8n0j8DKqH4dnhw4f/EwtAakF6GEGmAAEDKYCRkZGBiYFMQH+NLNjcjw2ghwMLIQWDx48Do/H5kSNHiNZw9OhREPUCRHiBNJOQyJ+A9AAEGACqkFldNkPUwwAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxIndeterminateIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFQ0VGQkU3ODM4MTFFNjExQjlCQzhERUVDNkNGMzFDMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMjU4MzhGQjEyM0ExMUU2QjAxM0Q2QjZFQ0IzNzM4NiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMjU4MzhGQTEyM0ExMUU2QjAxM0Q2QjZFQ0IzNzM4NiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMkM4M0M1M0MxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVDRUZCRTc4MzgxMUU2MTFCOUJDOERFRUM2Q0YzMUMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+2Xml2QAAAGBJREFUeNpiYGBg8ATiZ0D8n0j8DKqH4dnhw4f/EwtAakF6GEGmAAEDKYCRkZGBiYFMQH+NLNjcjw2ghwMLIQWDx48Do/H5kSNHiNZw9OhREPUCRHiBNJOQyJ+A9AAEGACqkFldNkPUwwAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createCheckboxIndeterminateReadOnlyIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Nzg3RjczNTA0NDVFMTFFNkE4Q0NDN0E3NUI3Qjk5QjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Nzg3RjczNTE0NDVFMTFFNkE4Q0NDN0E3NUI3Qjk5QjIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3ODdGNzM0RTQ0NUUxMUU2QThDQ0M3QTc1QjdCOTlCMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3ODdGNzM0RjQ0NUUxMUU2QThDQ0M3QTc1QjdCOTlCMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhD2+R8AAADRSURBVHjaYvz//z8DDDx69EgESBUBsQ8Qq0GFbwDxJiCeJCcn9wamlhGmEagpGEjNBWJ+BuzgExAnATWvhWuEaloN4jPgByBbQkGaGR8+fCgK5NwBYj4G4gDIZlUmIJFLgiYGqNoCkEY/BtKBDwuQ0IDx5OXl8aoGegvGVGdiIA/8YoHGkz6aiYTAPSZo5JIKtoKiQwzIuE1ydAAj8xUoRUAjl4GIBABKPa/AgQNNRmFA/BmPps+wVIOSVtESuS8oyEGhB8S3QH4C4onIiRwgwABzikY1hHfO+QAAAABJRU5ErkJggg==';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('CheckboxIndeterminateReadOnlyIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Nzg3RjczNTA0NDVFMTFFNkE4Q0NDN0E3NUI3Qjk5QjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Nzg3RjczNTE0NDVFMTFFNkE4Q0NDN0E3NUI3Qjk5QjIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3ODdGNzM0RTQ0NUUxMUU2QThDQ0M3QTc1QjdCOTlCMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3ODdGNzM0RjQ0NUUxMUU2QThDQ0M3QTc1QjdCOTlCMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhD2+R8AAADRSURBVHjaYvz//z8DDDx69EgESBUBsQ8Qq0GFbwDxJiCeJCcn9wamlhGmEagpGEjNBWJ+BuzgExAnATWvhWuEaloN4jPgByBbQkGaGR8+fCgK5NwBYj4G4gDIZlUmIJFLgiYGqNoCkEY/BtKBDwuQ0IDx5OXl8aoGegvGVGdiIA/8YoHGkz6aiYTAPSZo5JIKtoKiQwzIuE1ydAAj8xUoRUAjl4GIBABKPa/AgQNNRmFA/BmPps+wVIOSVtESuS8oyEGhB8S3QH4C4onIiRwgwABzikY1hHfO+QAAAABJRU5ErkJggg==');
 	    };
 	    SvgFactory.prototype.createGroupExpandedIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzBBODQ4M0ExMjM4MTFFNkFDNEJDMjUzQUJBQ0I2QjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzBBODQ4M0IxMjM4MTFFNkFDNEJDMjUzQUJBQ0I2QjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3MEE4NDgzODEyMzgxMUU2QUM0QkMyNTNBQkFDQjZCOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3MEE4NDgzOTEyMzgxMUU2QUM0QkMyNTNBQkFDQjZCOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhKAo60AAADVSURBVHjajFC9DkRgEJzzFhqiligURKcjR+UFJK7wGN7jOq+glXgCvSgUCnyVn47GHsVdcURsss3s7OzOPEzTdB3HeTPGeMMw0DQNOI4Dz/PI8xyWZSGO4y4MwxeSJGnruqarGseRNE1r4fv+YSgIwgErioJwpgrggHmeR7Bt+xZ5GAbCNE2/0zvpv78v6bpOUFX1lvK6roQz92dkWZYJiqLcSmOeZ9qDb6uqusx5WRaSJIlBFEUnTdNuC536vifXdaksSwqCgLIsoyiKdnNs23l+BBgAK/54I/P5bhMAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('GroupExpandedIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzBBODQ4M0ExMjM4MTFFNkFDNEJDMjUzQUJBQ0I2QjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzBBODQ4M0IxMjM4MTFFNkFDNEJDMjUzQUJBQ0I2QjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3MEE4NDgzODEyMzgxMUU2QUM0QkMyNTNBQkFDQjZCOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3MEE4NDgzOTEyMzgxMUU2QUM0QkMyNTNBQkFDQjZCOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhKAo60AAADVSURBVHjajFC9DkRgEJzzFhqiligURKcjR+UFJK7wGN7jOq+glXgCvSgUCnyVn47GHsVdcURsss3s7OzOPEzTdB3HeTPGeMMw0DQNOI4Dz/PI8xyWZSGO4y4MwxeSJGnruqarGseRNE1r4fv+YSgIwgErioJwpgrggHmeR7Bt+xZ5GAbCNE2/0zvpv78v6bpOUFX1lvK6roQz92dkWZYJiqLcSmOeZ9qDb6uqusx5WRaSJIlBFEUnTdNuC536vifXdaksSwqCgLIsoyiKdnNs23l+BBgAK/54I/P5bhMAAAAASUVORK5CYII=');
 	    };
 	    SvgFactory.prototype.createGroupContractedIcon = function () {
-	        var eImg = document.createElement('img');
-	        eImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0U2QUVBRDYxMjM4MTFFNjk3NjVBRUM0MUJDRjFCODgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0U2QUVBRDcxMjM4MTFFNjk3NjVBRUM0MUJDRjFCODgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3RTZBRUFENDEyMzgxMUU2OTc2NUFFQzQxQkNGMUI4OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RTZBRUFENTEyMzgxMUU2OTc2NUFFQzQxQkNGMUI4OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhjzsKsAAADSSURBVHjajJAvioVgFMXPuAuLYhYMBsVmU54mNyA4wWW4j2luwSq4ArsYDAZ9X/JP0+KZ58CkgTffD264l3MPnPPh+34cRdGXEEL1PA/TNEFRFKiqirZtEQQByrJ85nn+iaqq5nEc+Y5t2+g4zow0TSlD13XEf66/JElChGEoJV7Xldj3/WfRNI0A/sx9v3Fdl7BtW8r5ui6CkpimSViWJSU+joN38fMwDG+F53nSMAwBXdejuq6fr9K5LAvjOGbf98yyjE3TsCiKO5x4/Ty+BRgA3R6JXc/jqsQAAAAASUVORK5CYII=';
-	        return eImg;
+	        return SvgFactory.getFromCacheOrCreate('GroupContractedIcon', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0U2QUVBRDYxMjM4MTFFNjk3NjVBRUM0MUJDRjFCODgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0U2QUVBRDcxMjM4MTFFNjk3NjVBRUM0MUJDRjFCODgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3RTZBRUFENDEyMzgxMUU2OTc2NUFFQzQxQkNGMUI4OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RTZBRUFENTEyMzgxMUU2OTc2NUFFQzQxQkNGMUI4OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhjzsKsAAADSSURBVHjajJAvioVgFMXPuAuLYhYMBsVmU54mNyA4wWW4j2luwSq4ArsYDAZ9X/JP0+KZ58CkgTffD264l3MPnPPh+34cRdGXEEL1PA/TNEFRFKiqirZtEQQByrJ85nn+iaqq5nEc+Y5t2+g4zow0TSlD13XEf66/JElChGEoJV7Xldj3/WfRNI0A/sx9v3Fdl7BtW8r5ui6CkpimSViWJSU+joN38fMwDG+F53nSMAwBXdejuq6fr9K5LAvjOGbf98yyjE3TsCiKO5x4/Ty+BRgA3R6JXc/jqsQAAAAASUVORK5CYII=');
 	    };
+	    SvgFactory.imageCache = {};
 	    return SvgFactory;
 	})();
 	exports.SvgFactory = SvgFactory;
@@ -16010,7 +16335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16118,7 +16443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16180,7 +16505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16263,7 +16588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16310,7 +16635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16328,7 +16653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16551,7 +16876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16685,7 +17010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16707,7 +17032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var eventService_1 = __webpack_require__(4);
 	var events_1 = __webpack_require__(10);
 	var headerRowComp_1 = __webpack_require__(69);
-	var bodyDropTarget_1 = __webpack_require__(75);
+	var bodyDropTarget_1 = __webpack_require__(76);
 	var HeaderContainer = (function () {
 	    function HeaderContainer(eContainer, eViewport, eRoot, pinned) {
 	        this.headerRowComps = [];
@@ -16811,7 +17136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -16842,6 +17167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var DragSourceType = exports.DragSourceType;
 	var DragAndDropService = (function () {
 	    function DragAndDropService() {
+	        this.dragSourceAndParamsList = [];
 	        this.dropTargets = [];
 	    }
 	    DragAndDropService.prototype.init = function () {
@@ -16863,17 +17189,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	            console.warn('ag-Grid: could not find document body, it is needed for dragging columns');
 	        }
 	    };
-	    // we do not need to clean up drag sources, as we are just adding a listener to the element.
-	    // when the element is disposed, the drag source is also disposed, even though this service
-	    // remains. this is a bit different to normal 'addListener' methods
 	    DragAndDropService.prototype.addDragSource = function (dragSource, allowTouch) {
 	        if (allowTouch === void 0) { allowTouch = false; }
-	        this.dragService.addDragSource({
+	        var params = {
 	            eElement: dragSource.eElement,
 	            onDragStart: this.onDragStart.bind(this, dragSource),
 	            onDragStop: this.onDragStop.bind(this),
 	            onDragging: this.onDragging.bind(this)
-	        }, allowTouch);
+	        };
+	        this.dragSourceAndParamsList.push({ params: params, dragSource: dragSource });
+	        this.dragService.addDragSource(params, allowTouch);
+	    };
+	    DragAndDropService.prototype.removeDragSource = function (dragSource) {
+	        var sourceAndParams = utils_1.Utils.find(this.dragSourceAndParamsList, function (item) { return item.dragSource === dragSource; });
+	        if (sourceAndParams) {
+	            this.dragService.removeDragSource(sourceAndParams.params);
+	            utils_1.Utils.removeFromArray(this.dragSourceAndParamsList, sourceAndParams);
+	        }
+	    };
+	    DragAndDropService.prototype.destroy = function () {
+	        var _this = this;
+	        this.dragSourceAndParamsList.forEach(function (sourceAndParams) {
+	            _this.dragService.removeDragSource(sourceAndParams.params);
+	        });
+	        this.dragSourceAndParamsList.length = 0;
 	    };
 	    DragAndDropService.prototype.nudge = function () {
 	        if (this.dragging) {
@@ -17126,6 +17465,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        __metadata('design:paramtypes', [logger_1.LoggerFactory]), 
 	        __metadata('design:returntype', void 0)
 	    ], DragAndDropService.prototype, "setBeans", null);
+	    __decorate([
+	        context_1.PreDestroy, 
+	        __metadata('design:type', Function), 
+	        __metadata('design:paramtypes', []), 
+	        __metadata('design:returntype', void 0)
+	    ], DragAndDropService.prototype, "destroy", null);
 	    DragAndDropService = __decorate([
 	        context_1.Bean('dragAndDropService'), 
 	        __metadata('design:paramtypes', [])
@@ -17141,7 +17486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -17165,7 +17510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var columnGroup_1 = __webpack_require__(14);
 	var columnController_1 = __webpack_require__(13);
 	var renderedHeaderGroupCell_1 = __webpack_require__(70);
-	var renderedHeaderCell_1 = __webpack_require__(73);
+	var renderedHeaderCell_1 = __webpack_require__(74);
 	var eventService_1 = __webpack_require__(4);
 	var events_1 = __webpack_require__(10);
 	var utils_1 = __webpack_require__(7);
@@ -17291,7 +17636,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -17315,6 +17660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cssClassApplier_1 = __webpack_require__(72);
 	var dragAndDropService_1 = __webpack_require__(68);
 	var setLeftFeature_1 = __webpack_require__(63);
+	var touchListener_1 = __webpack_require__(73);
 	var svgFactory = svgFactory_1.SvgFactory.getInstance();
 	var RenderedHeaderGroupCell = (function () {
 	    function RenderedHeaderGroupCell(columnGroup, eRoot, dragSourceDropTarget) {
@@ -17333,8 +17679,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    RenderedHeaderGroupCell.prototype.init = function () {
 	        this.eHeaderGroupCell = document.createElement('div');
-	        cssClassApplier_1.CssClassApplier.addHeaderClassesFromCollDef(this.columnGroup.getColGroupDef(), this.eHeaderGroupCell, this.gridOptionsWrapper);
-	        this.displayName = this.columnGroup.getHeaderName();
+	        cssClassApplier_1.CssClassApplier.addHeaderClassesFromCollDef(this.columnGroup.getColGroupDef(), this.eHeaderGroupCell, this.gridOptionsWrapper, null, this.columnGroup);
+	        // this.displayName = this.columnGroup.getHeaderName();
+	        this.displayName = this.columnController.getDisplayNameForColumnGroup(this.columnGroup);
 	        this.setupResize();
 	        this.addClasses();
 	        this.setupLabel();
@@ -17365,11 +17712,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell');
 	        // having different classes below allows the style to not have a bottom border
 	        // on the group header, if no group is specified
-	        if (this.columnGroup.getColGroupDef()) {
-	            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-with-group');
+	        // columnGroup.getColGroupDef
+	        if (this.columnGroup.isPadding()) {
+	            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-no-group');
 	        }
 	        else {
-	            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-no-group');
+	            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-with-group');
 	        }
 	    };
 	    RenderedHeaderGroupCell.prototype.setupResize = function () {
@@ -17419,6 +17767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return result;
 	    };
 	    RenderedHeaderGroupCell.prototype.setupMove = function () {
+	        var _this = this;
 	        var eLabel = this.eHeaderGroupCell.querySelector('.ag-header-group-cell-label');
 	        if (!eLabel) {
 	            return;
@@ -17436,6 +17785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                dragSourceDropTarget: this.dragSourceDropTarget
 	            };
 	            this.dragAndDropService.addDragSource(dragSource, true);
+	            this.destroyFunctions.push(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
 	        }
 	    };
 	    // when moving the columns, we want to move all the columns in this group in one go, and in the order they
@@ -17472,6 +17822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    };
 	    RenderedHeaderGroupCell.prototype.addGroupExpandIcon = function (eGroupCellLabel) {
+	        var _this = this;
 	        var eGroupIcon;
 	        if (this.columnGroup.isExpanded()) {
 	            eGroupIcon = utils_1.Utils.createIcon('columnGroupOpened', this.gridOptionsWrapper, null, svgFactory.createGroupContractedIcon);
@@ -17481,11 +17832,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        eGroupIcon.className = 'ag-header-expand-icon';
 	        eGroupCellLabel.appendChild(eGroupIcon);
-	        var that = this;
-	        eGroupIcon.onclick = function () {
-	            var newExpandedValue = !that.columnGroup.isExpanded();
-	            that.columnController.setColumnGroupOpened(that.columnGroup, newExpandedValue);
+	        var expandAction = function () {
+	            var newExpandedValue = !_this.columnGroup.isExpanded();
+	            _this.columnController.setColumnGroupOpened(_this.columnGroup, newExpandedValue);
 	        };
+	        eGroupIcon.addEventListener('click', expandAction);
+	        this.destroyFunctions.push(function () {
+	            eGroupIcon.removeEventListener('click', expandAction);
+	        });
+	        var touchListener = new touchListener_1.TouchListener(eGroupIcon);
+	        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_TAP, expandAction);
+	        this.destroyFunctions.push(function () {
+	            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_TAP, expandAction);
+	            touchListener.destroy();
+	        });
 	    };
 	    RenderedHeaderGroupCell.prototype.onDragStart = function () {
 	        var _this = this;
@@ -17564,7 +17924,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -17670,7 +18030,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -17678,7 +18038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var CssClassApplier = (function () {
 	    function CssClassApplier() {
 	    }
-	    CssClassApplier.addHeaderClassesFromCollDef = function (abstractColDef, eHeaderCell, gridOptionsWrapper) {
+	    CssClassApplier.addHeaderClassesFromCollDef = function (abstractColDef, eHeaderCell, gridOptionsWrapper, column, columnGroup) {
 	        if (abstractColDef && abstractColDef.headerClass) {
 	            var classToUse;
 	            if (typeof abstractColDef.headerClass === 'function') {
@@ -17687,6 +18047,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    // however most people won't appreciate the difference,
 	                    // so keeping it as colDef to avoid confusion.
 	                    colDef: abstractColDef,
+	                    column: column,
+	                    columnGroup: columnGroup,
 	                    context: gridOptionsWrapper.getContext(),
 	                    api: gridOptionsWrapper.getApi()
 	                };
@@ -17717,7 +18079,104 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
+	 * @link http://www.ag-grid.com/
+	 * @license MIT
+	 */
+	var eventService_1 = __webpack_require__(4);
+	var utils_1 = __webpack_require__(7);
+	var TouchListener = (function () {
+	    function TouchListener(eElement) {
+	        var _this = this;
+	        this.destroyFuncs = [];
+	        this.touching = false;
+	        this.eventService = new eventService_1.EventService();
+	        this.eElement = eElement;
+	        var startListener = this.onTouchStart.bind(this);
+	        var moveListener = this.onTouchMove.bind(this);
+	        var endListener = this.onTouchEnd.bind(this);
+	        this.eElement.addEventListener('touchstart', startListener);
+	        this.eElement.addEventListener('touchmove', moveListener);
+	        this.eElement.addEventListener('touchend', endListener);
+	        this.destroyFuncs.push(function () {
+	            _this.eElement.addEventListener('touchstart', startListener);
+	            _this.eElement.addEventListener('touchmove', moveListener);
+	            _this.eElement.addEventListener('touchend', endListener);
+	        });
+	    }
+	    TouchListener.prototype.getActiveTouch = function (touchList) {
+	        for (var i = 0; i < touchList.length; i++) {
+	            var matches = touchList[i].identifier === this.touchStart.identifier;
+	            if (matches) {
+	                return touchList[i];
+	            }
+	        }
+	        return null;
+	    };
+	    TouchListener.prototype.addEventListener = function (eventType, listener) {
+	        this.eventService.addEventListener(eventType, listener);
+	    };
+	    TouchListener.prototype.removeEventListener = function (eventType, listener) {
+	        this.eventService.removeEventListener(eventType, listener);
+	    };
+	    TouchListener.prototype.onTouchStart = function (touchEvent) {
+	        var _this = this;
+	        // only looking at one touch point at any time
+	        if (this.touching) {
+	            return;
+	        }
+	        this.touchStart = touchEvent.touches[0];
+	        this.touching = true;
+	        this.moved = false;
+	        var touchStartCopy = this.touchStart;
+	        setTimeout(function () {
+	            var touchesMatch = _this.touchStart === touchStartCopy;
+	            if (_this.touching && touchesMatch && !_this.moved) {
+	                _this.moved = true;
+	                _this.eventService.dispatchEvent(TouchListener.EVENT_LONG_TAP, _this.touchStart);
+	            }
+	        }, 500);
+	    };
+	    TouchListener.prototype.onTouchMove = function (touchEvent) {
+	        if (!this.touching) {
+	            return;
+	        }
+	        var touch = this.getActiveTouch(touchEvent.touches);
+	        if (!touch) {
+	            return;
+	        }
+	        var eventIsFarAway = !utils_1.Utils.areEventsNear(touch, this.touchStart, 4);
+	        if (eventIsFarAway) {
+	            this.moved = true;
+	        }
+	    };
+	    TouchListener.prototype.onTouchEnd = function (touchEvent) {
+	        if (!this.touching) {
+	            return;
+	        }
+	        if (!this.moved) {
+	            this.eventService.dispatchEvent(TouchListener.EVENT_TAP, this.touchStart);
+	        }
+	        this.touching = false;
+	    };
+	    TouchListener.prototype.destroy = function () {
+	        this.destroyFuncs.forEach(function (func) { return func(); });
+	    };
+	    // private mostRecentTouch: Touch;
+	    TouchListener.EVENT_TAP = 'tap';
+	    TouchListener.EVENT_LONG_TAP = 'longTap';
+	    return TouchListener;
+	})();
+	exports.TouchListener = TouchListener;
+
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -17734,7 +18193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var column_1 = __webpack_require__(15);
 	var filterManager_1 = __webpack_require__(43);
 	var columnController_1 = __webpack_require__(13);
-	var headerTemplateLoader_1 = __webpack_require__(74);
+	var headerTemplateLoader_1 = __webpack_require__(75);
 	var gridOptionsWrapper_1 = __webpack_require__(3);
 	var horizontalDragService_1 = __webpack_require__(71);
 	var gridCore_1 = __webpack_require__(40);
@@ -17743,6 +18202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var dragAndDropService_1 = __webpack_require__(68);
 	var sortController_1 = __webpack_require__(42);
 	var setLeftFeature_1 = __webpack_require__(63);
+	var touchListener_1 = __webpack_require__(73);
 	var RenderedHeaderCell = (function () {
 	    function RenderedHeaderCell(column, eRoot, dragSourceDropTarget) {
 	        // for better structured code, anything we need to do when this column gets destroyed,
@@ -17761,13 +18221,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        utils_1.Utils.addCssClass(this.eHeaderCell, 'ag-header-cell');
 	        this.createScope();
 	        this.addAttributes();
-	        cssClassApplier_1.CssClassApplier.addHeaderClassesFromCollDef(this.column.getColDef(), this.eHeaderCell, this.gridOptionsWrapper);
+	        cssClassApplier_1.CssClassApplier.addHeaderClassesFromCollDef(this.column.getColDef(), this.eHeaderCell, this.gridOptionsWrapper, this.column, null);
 	        // label div
 	        var eHeaderCellLabel = this.eHeaderCell.querySelector('#agHeaderCellLabel');
-	        this.displayName = this.columnController.getDisplayNameForCol(this.column, true);
+	        this.displayName = this.columnController.getDisplayNameForColumn(this.column, true);
 	        this.setupMovingCss();
 	        this.setupTooltip();
 	        this.setupResize();
+	        this.setupTap();
 	        this.setupMove(eHeaderCellLabel);
 	        this.setupMenu();
 	        this.setupSort(eHeaderCellLabel);
@@ -17907,6 +18368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    };
 	    RenderedHeaderCell.prototype.setupMove = function (eHeaderCellLabel) {
+	        var _this = this;
 	        var suppressMove = this.gridOptionsWrapper.isSuppressMovableColumns()
 	            || this.column.getColDef().suppressMovable
 	            || this.gridOptionsWrapper.isForPrint();
@@ -17923,7 +18385,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	                dragSourceDropTarget: this.dragSourceDropTarget
 	            };
 	            this.dragAndDropService.addDragSource(dragSource, true);
+	            this.destroyFunctions.push(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
 	        }
+	    };
+	    RenderedHeaderCell.prototype.setupTap = function () {
+	        var _this = this;
+	        if (this.gridOptionsWrapper.isSuppressTouch()) {
+	            return;
+	        }
+	        var touchListener = new touchListener_1.TouchListener(this.getGui());
+	        var tapListener = function (touch) {
+	            _this.sortController.progressSort(_this.column, false);
+	        };
+	        var longTapListener = function (touch) {
+	            _this.gridOptionsWrapper.getApi().showColumnMenuAfterMouseClick(_this.column, touch);
+	        };
+	        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_TAP, tapListener);
+	        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_LONG_TAP, longTapListener);
+	        this.destroyFunctions.push(function () {
+	            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_TAP, tapListener);
+	            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_LONG_TAP, longTapListener);
+	            touchListener.destroy();
+	        });
 	    };
 	    RenderedHeaderCell.prototype.setupResize = function () {
 	        var _this = this;
@@ -18100,12 +18583,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18203,12 +18686,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18223,10 +18706,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var dragAndDropService_1 = __webpack_require__(68);
 	var context_1 = __webpack_require__(6);
-	var moveColumnController_1 = __webpack_require__(76);
+	var moveColumnController_1 = __webpack_require__(77);
 	var column_1 = __webpack_require__(15);
 	var gridPanel_1 = __webpack_require__(24);
-	var bodyDropPivotTarget_1 = __webpack_require__(77);
+	var bodyDropPivotTarget_1 = __webpack_require__(78);
 	var columnController_1 = __webpack_require__(13);
 	var BodyDropTarget = (function () {
 	    function BodyDropTarget(pinned, eContainer) {
@@ -18322,12 +18805,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18604,12 +19087,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18709,12 +19192,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18803,12 +19286,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18846,12 +19329,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -18878,139 +19361,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
-	 * @link http://www.ag-grid.com/
-	 * @license MIT
-	 */
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var __param = (this && this.__param) || function (paramIndex, decorator) {
-	    return function (target, key) { decorator(target, key, paramIndex); }
-	};
-	var utils_1 = __webpack_require__(7);
-	var logger_1 = __webpack_require__(5);
-	var context_1 = __webpack_require__(6);
-	var context_2 = __webpack_require__(6);
-	/** Functionality for internal DnD functionality between GUI widgets. Eg this service is used to drag columns
-	 * from the 'available columns' list and putting them into the 'grouped columns' in the tool panel.
-	 * This service is NOT used by the column headers for resizing and moving, that is a different use case. */
-	var OldToolPanelDragAndDropService = (function () {
-	    function OldToolPanelDragAndDropService() {
-	        this.destroyFunctions = [];
-	    }
-	    OldToolPanelDragAndDropService.prototype.agWire = function (loggerFactory) {
-	        this.logger = loggerFactory.create('OldToolPanelDragAndDropService');
-	        // need to clean this up, add to 'finished' logic in grid
-	        var mouseUpListener = this.stopDragging.bind(this);
-	        document.addEventListener('mouseup', mouseUpListener);
-	        this.destroyFunctions.push(function () { document.removeEventListener('mouseup', mouseUpListener); });
-	    };
-	    OldToolPanelDragAndDropService.prototype.destroy = function () {
-	        this.destroyFunctions.forEach(function (func) { return func(); });
-	        document.removeEventListener('mouseup', this.mouseUpEventListener);
-	    };
-	    OldToolPanelDragAndDropService.prototype.stopDragging = function () {
-	        if (this.dragItem) {
-	            this.setDragCssClasses(this.dragItem.eDragSource, false);
-	            this.dragItem = null;
-	        }
-	    };
-	    OldToolPanelDragAndDropService.prototype.setDragCssClasses = function (eListItem, dragging) {
-	        utils_1.Utils.addOrRemoveCssClass(eListItem, 'ag-dragging', dragging);
-	        utils_1.Utils.addOrRemoveCssClass(eListItem, 'ag-not-dragging', !dragging);
-	    };
-	    OldToolPanelDragAndDropService.prototype.addDragSource = function (eDragSource, dragSourceCallback) {
-	        this.setDragCssClasses(eDragSource, false);
-	        eDragSource.addEventListener('mousedown', this.onMouseDownDragSource.bind(this, eDragSource, dragSourceCallback));
-	    };
-	    OldToolPanelDragAndDropService.prototype.onMouseDownDragSource = function (eDragSource, dragSourceCallback) {
-	        if (this.dragItem) {
-	            this.stopDragging();
-	        }
-	        var data;
-	        if (dragSourceCallback.getData) {
-	            data = dragSourceCallback.getData();
-	        }
-	        var containerId;
-	        if (dragSourceCallback.getContainerId) {
-	            containerId = dragSourceCallback.getContainerId();
-	        }
-	        this.dragItem = {
-	            eDragSource: eDragSource,
-	            data: data,
-	            containerId: containerId
-	        };
-	        this.setDragCssClasses(this.dragItem.eDragSource, true);
-	    };
-	    OldToolPanelDragAndDropService.prototype.addDropTarget = function (eDropTarget, dropTargetCallback) {
-	        var _this = this;
-	        var mouseIn = false;
-	        var acceptDrag = false;
-	        eDropTarget.addEventListener('mouseover', function () {
-	            if (!mouseIn) {
-	                mouseIn = true;
-	                if (_this.dragItem) {
-	                    acceptDrag = dropTargetCallback.acceptDrag(_this.dragItem);
-	                }
-	                else {
-	                    acceptDrag = false;
-	                }
-	            }
-	        });
-	        eDropTarget.addEventListener('mouseout', function () {
-	            if (acceptDrag) {
-	                dropTargetCallback.noDrop();
-	            }
-	            mouseIn = false;
-	            acceptDrag = false;
-	        });
-	        eDropTarget.addEventListener('mouseup', function () {
-	            // dragItem should never be null, checking just in case
-	            if (acceptDrag && _this.dragItem) {
-	                dropTargetCallback.drop(_this.dragItem);
-	            }
-	        });
-	    };
-	    __decorate([
-	        __param(0, context_2.Qualifier('loggerFactory')), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', [logger_1.LoggerFactory]), 
-	        __metadata('design:returntype', void 0)
-	    ], OldToolPanelDragAndDropService.prototype, "agWire", null);
-	    __decorate([
-	        context_1.PreDestroy, 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], OldToolPanelDragAndDropService.prototype, "destroy", null);
-	    OldToolPanelDragAndDropService = __decorate([
-	        context_1.Bean('oldToolPanelDragAndDropService'), 
-	        __metadata('design:paramtypes', [])
-	    ], OldToolPanelDragAndDropService);
-	    return OldToolPanelDragAndDropService;
-	})();
-	exports.OldToolPanelDragAndDropService = OldToolPanelDragAndDropService;
-
-
-/***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19093,7 +19449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19193,7 +19549,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19298,7 +19654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19427,7 +19783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19696,7 +20052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -19758,7 +20114,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    VirtualPageCache.prototype.getRowIndexAtPixel = function (pixel) {
 	        if (this.cacheParams.rowHeight !== 0) {
-	            return Math.floor(pixel / this.cacheParams.rowHeight);
+	            var rowIndexForPixel = Math.floor(pixel / this.cacheParams.rowHeight);
+	            if (rowIndexForPixel >= this.virtualRowCount) {
+	                return this.virtualRowCount - 1;
+	            }
+	            else {
+	                return rowIndexForPixel;
+	            }
 	        }
 	        else {
 	            return 0;
@@ -20020,7 +20382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -20216,7 +20578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -20320,8 +20682,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	    InMemoryRowModel.prototype.isEmpty = function () {
-	        return utils_1.Utils.missing(this.rootNode) || utils_1.Utils.missing(this.rootNode.allLeafChildren)
-	            || this.rootNode.allLeafChildren.length === 0 || !this.columnController.isReady();
+	        var rowsMissing;
+	        var rowsAlreadyGrouped = utils_1.Utils.exists(this.gridOptionsWrapper.getNodeChildDetailsFunc());
+	        if (rowsAlreadyGrouped) {
+	            rowsMissing = utils_1.Utils.missing(this.rootNode.childrenAfterGroup) || this.rootNode.childrenAfterGroup.length === 0;
+	        }
+	        else {
+	            rowsMissing = utils_1.Utils.missing(this.rootNode.allLeafChildren) || this.rootNode.allLeafChildren.length === 0;
+	        }
+	        var empty = utils_1.Utils.missing(this.rootNode) || rowsMissing || !this.columnController.isReady();
+	        return empty;
 	    };
 	    InMemoryRowModel.prototype.isRowsToRender = function () {
 	        return utils_1.Utils.exists(this.rowsToDisplay) && this.rowsToDisplay.length > 0;
@@ -20639,7 +21009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -20814,7 +21184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -20976,7 +21346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21038,7 +21408,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21078,7 +21448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21123,7 +21493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21239,7 +21609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21342,7 +21712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21386,7 +21756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */
@@ -21544,7 +21914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
-	 * @version v6.1.0
+	 * @version v6.3.0
 	 * @link http://www.ag-grid.com/
 	 * @license MIT
 	 */

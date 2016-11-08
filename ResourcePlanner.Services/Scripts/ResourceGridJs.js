@@ -7,13 +7,14 @@
         enableColResize: true,
         rowSelection: 'single',
         rowDeselection: true,
-        columnDefs: startingResourceColumnDefs,
         rowModelType: 'virtual',
         paginationPageSize: 300,
         paginationOverflowSize: 2,
         maxConcurrentDatasourceRequests: 2,
         paginationInitialRowCount: 1,
         maxPagesInCache: 6,
+        defaultColGroupDef: { headerClass: headerClassFunc },
+        defaultColDef: { headerClass: headerClassFunc },
         onRowSelected: rowSelectedFunc,
         getRowNodeId: function (item) {
             return item.Id;
@@ -22,22 +23,21 @@
 };
 
 var startingResourceColumnDefs = [
-    { headerName: "Resource"    , field: "ResourceName"  , width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
-    { headerName: "Position"    , field: "Position"   , width: 150, suppressMenu: true, pinned: 'left' },
-    { headerName: "City"        , field: "City"       , width: 150, suppressMenu: true, pinned: 'left' },
-    { headerName: "Practice"    , field: "Practice"   , width: 150, suppressMenu: true, pinned: 'left' },
-    { headerName: "Sub-Practice", field: "SubPractice", width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 0 }, headerName: "Resource"    , field: "ResourceName", width: 150, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer },
+    { context: { type: "resourceColumn", index: 1 }, headerName: "Position"    , field: "Position"    , width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 2 }, headerName: "City"        , field: "City"        , width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 3 }, headerName: "Practice"    , field: "Practice"    , width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 4 }, headerName: "Sub-Practice", field: "SubPractice" , width: 150, suppressMenu: true, pinned: 'left' },
 ];
 
 function initializeResourceGrid() {
     var gridDiv = document.querySelector(resourceGrid.name);
     new agGrid.Grid(gridDiv, resourceGrid.options);
 
-    refreshResourceGrid();
-
-    var startingResourceColumns = createResourceColumns(startingResourceColumnDefs, startingColumns);
-
+    var startingResourceColumns = createColumns(startingResourceColumnDefs, "resourceGroupColumn");
     resourceGrid.options.api.setColumnDefs(startingResourceColumns);
+
+    refreshResourceGrid();
 }
 
 function refreshResourceGrid() {
@@ -52,7 +52,6 @@ function refreshResourceGrid() {
     };
 
     resourceGrid.options.api.setDatasource(dataSource);
-    resourceGrid.options.api.refreshHeader();
 }
 
 function buildResourceQuery(params) {
@@ -111,12 +110,11 @@ function buildResourceQuery(params) {
 }
 
 function onCallResourceSuccess(params, query, httpResponse) {
-    //var columns = createResourceColumns(startingResourceColumnDefs, httpResponse);
     var rows = createRows(httpResponse.Resources, httpResponse.TimePeriods, createResourceRow);
 
     for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
         var timePeriod = httpResponse.TimePeriods[i];
-        headers[i] = timePeriod;
+        resourceGroupHeaders[i] = timePeriod;
     }
 
     params.successCallback(rows, httpResponse.TotalRowCount);
@@ -132,16 +130,16 @@ function createResourceRow(row, resource, timePeriods) {
 
 function addResourceData(row, resource) {
     row.ResourceName = (resource.LastName + ", " || "" ) + resource.FirstName;
-    row.City      = resource.City;
-    row.Position = resource.Position;
-    row.Practice = resource.Practice;
+    row.City        = resource.City;
+    row.Position    = resource.Position;
+    row.Practice    = resource.Practice;
     row.SubPractice = resource.SubPractice;
-    row.Id        = resource.ResourceId;
+    row.Id          = resource.ResourceId;
 }
 
 function rowSelectedFunc(event) {
     if (event.node.isSelected()) {
         selectedResource.Id = event.node.data.Id;
-        refreshResourceDetailGrid(event);
+        refreshResourceDetailGridEvent(event);
     }
 }
