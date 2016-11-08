@@ -69,24 +69,30 @@
         }
     });
 
-    var daysOfWeek = [{ id: 1, text: 'Sunday' }
-                ,{ id: 2, text: 'Monday' }
-                ,{ id: 3, text: 'Tuesday' }
-                ,{ id: 4, text: 'Wednesday' }
-                ,{ id: 5, text: 'Thursday' }
-                ,{ id: 6, text: 'Friday' }
-                , { id: 7, text: 'Saturday' }];
+    var daysOfWeek = [{ id: 2, text: 'Monday', short: "Mon" }
+                ,{ id: 3, text: 'Tuesday', short: "Tue" }
+                ,{ id: 4, text: 'Wednesday', short: "Wed" }
+                , { id: 5, text: 'Thursday', short: "Thu" }
+                , { id: 6, text: 'Friday', short: "Fri" }
+                , { id: 7, text: 'Saturday', short: "Sat" }
+                ,{ id: 1, text: 'Sunday', short: "Sun" }];
 
     $(".dayofweek-selector").select2({
-        data: daysOfWeek,
-        initSelection : function (element, callback) {
-            var data = [{ id: 2, text: 'Monday' }
-                    ,{ id: 3, text: 'Tuesday' }
-                    ,{ id: 4, text: 'Wednesday' }
-                    ,{ id: 5, text: 'Thursday' }
-                    ,{ id: 6, text: 'Friday' }];
-           callback(data);
-        }
+        data: daysOfWeek
     });
 
+   
+    $('#startdatepicker').datetimepicker({
+        format: "MM/DD/YYYY"
+    });
+    $('#enddatepicker').datetimepicker({
+        format: "MM/DD/YYYY",
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#startdatepicker").on("dp.change", function (e) {
+        $('#enddatepicker').data("DateTimePicker").minDate(e.date);
+    });
+    $("#enddatepicker").on("dp.change", function (e) {
+        $('#startdatepicker').data("DateTimePicker").maxDate(e.date);
+    });
 });

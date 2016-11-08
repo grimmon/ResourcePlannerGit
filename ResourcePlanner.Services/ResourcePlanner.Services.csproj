@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
     <Content Include="Images\alerts.png" />
@@ -167,10 +168,11 @@
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\DateTimeUtility.js" />
     <Content Include="Scripts\DropdownJs.js" />
     <Content Include="Scripts\jquery.tagit.css" />
-    <Content Include="Scripts\modalStyle.css" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\PageControls.js" />
     <Content Include="Scripts\ResourceDetailGridJs.js" />
     <Content Include="Scripts\ResourceGridJs.js" />
