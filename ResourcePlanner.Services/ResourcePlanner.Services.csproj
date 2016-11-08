@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -20,6 +21,7 @@
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -148,8 +150,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="App\app.js" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
     <Content Include="Images\alerts.png" />
@@ -158,6 +160,9 @@
     <Content Include="Images\search.svg.png" />
     <Content Include="Images\usericon.svg.png" />
     <Content Include="index.html" />
+    <Content Include="karma-test-shim.js" />
+    <Content Include="karma.conf.js" />
+    <Content Include="protractor.config.js" />
     <Content Include="Scripts\ag-grid.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -182,6 +187,10 @@
     <Content Include="Scripts\tag-it.js" />
     <Content Include="Scripts\ui-grid.css" />
     <Content Include="Scripts\ui-grid.js" />
+    <Content Include="styles.css" />
+    <Content Include="systemjs.config.extras.js" />
+    <Content Include="systemjs.config.js" />
+    <Content Include="wallaby.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -221,8 +230,18 @@
     </Content>
     <Content Include="Scripts\ui-grid.ttf" />
     <Content Include="Scripts\ui-grid.woff" />
+    <Content Include=".dockerignore" />
+    <Content Include=".editorconfig" />
+    <Content Include=".travis.yml" />
+    <Content Include="CHANGELOG.md" />
+    <Content Include="Dockerfile" />
+    <Content Include="LICENSE" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy.pubxml" />
     <Content Include="Scripts\tagit.ui-zendesk.css" />
+    <Content Include="README.md" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -239,6 +258,16 @@
       <Name>ResourcePlanner.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="App\app.component.spec.ts" />
+    <TypeScriptCompile Include="App\app.component.ts" />
+    <TypeScriptCompile Include="App\app.module.ts" />
+    <TypeScriptCompile Include="App\main.ts" />
+    <TypeScriptCompile Include="Hello.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -250,6 +279,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
