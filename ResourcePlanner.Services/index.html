@@ -57,7 +57,7 @@
                     </div>
                     <div class="headerbuttonbox">
                         <div class="headerbutton">
-                            <a data-toggle="modal" data-target="#myModal" id="assignmentModalOpen">
+                            <a data-toggle="modal" data-target="#myModal"  id="assignmentModalLoad">
                                 <div>
                                     <img src="/Images/add.png" alt="Add" height="50" />
                                 </div>
@@ -77,7 +77,7 @@
 
                 </div>
             </div>
-           
+
             <div class="container2" style="padding-top: 100px;">
                 <div class="panel-group" id="filterAccordion">
                     <div class="panel panel-default">
@@ -89,7 +89,7 @@
 
                         <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body" style="background: #C8C8C8">
-                               
+
 
                                 <div style="width: 500px">
                                     <script type="text/javascript">
@@ -186,56 +186,57 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
+    <div id="myModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Add Assignment</h4>
                 </div>
-                <div class="modal-body">
-                    <div>
-
-                        <select class="project-selector" style="width: 50%"></select>
-                        <select class="position-selector" multiple="multiple" style="width: 50%"></select>
-                        <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
-                            <option value="2" selected ="selected">Monday</option>
-                            <option value="3" selected="selected">Tuesday</option>
-                            <option value="4" selected="selected">Wednesday</option>
-                            <option value="5" selected="selected">Thursday</option>
-                            <option value="6" selected="selected">Friday</option>
-                        </select>
-
-                    </div>
-                    <div>
-                        <div class='input-group date' id='startdatepicker'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select class="project-selector" style="width: 50%"></select>
+                                <select class="position-selector" multiple="multiple" style="width: 50%"></select>
+                                <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
+                                    <option value="2" selected="selected">Monday</option>
+                                    <option value="3" selected="selected">Tuesday</option>
+                                    <option value="4" selected="selected">Wednesday</option>
+                                    <option value="5" selected="selected">Thursday</option>
+                                    <option value="6" selected="selected">Friday</option>
+                                </select>
+                            
+                                <div class='input-group date' id='startdatepicker'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <div class='input-group date' id='enddatepicker'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="assignmentGridApply">Apply</button>
+                            </div>
+                       
+                        <div class="col-md-8">
+                            <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
+                                <div id="AssignmentGrid" style="height: 400px;" class="ag-fresh"></div>
+                            </div>
                         </div>
-                        <div class='input-group date' id='enddatepicker'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-primary">Save changes</button>
+                 </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-                    <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
-                        <div id="AssignmentGrid" style="height: 200px;" class="ag-fresh"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </body>
 
 </html>

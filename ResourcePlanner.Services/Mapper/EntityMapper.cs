@@ -49,6 +49,7 @@ namespace ResourcePlanner.Services.Mapper
                 assignment.TimePeriod = reader.GetString("TimePeriod");
                 assignment.ForecastHours = reader.GetDouble("ForecastHours");
                 assignment.ActualHours = reader.GetDouble("ActualHours");
+                assignment.ResourceHours = reader.GetDouble("ResourceHours");
 
                 resources[curr].Assignments.Add(assignment);
 
@@ -168,8 +169,9 @@ namespace ResourcePlanner.Services.Mapper
                 assignment.TimePeriod = reader.GetString("TimePeriod");
                 assignment.ForecastHours = reader.GetDouble("ForecastHours");
                 assignment.ActualHours = reader.GetDouble("ActualHours");
+                assignment.ResourceHours = reader.GetDouble("ResourceHours");
 
-               projects[curr].Assignments.Add(assignment);
+                projects[curr].Assignments.Add(assignment);
 
 
             }

@@ -29,6 +29,7 @@ namespace ResourcePlanner.Services.Controllers
             int? orgUnit = null, 
             int? practice = null, 
             int? subpractice = null, 
+            string title = "",
             string searchterm1 = "", 
             string searchterm2 = "", 
             string searchterm3 = "", 
@@ -64,6 +65,11 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SubPractice = subpractice;
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
+
+            if (title != "")
+            {
+                pageParams.Positions = title.Split(',').Select(Int32.Parse).ToArray();
+            }
             
 #if Mock
             var access = new MockDataAccess();

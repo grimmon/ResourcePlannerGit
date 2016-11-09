@@ -67,6 +67,7 @@ namespace ResourcePlanner.Services.Models
         public string TimePeriod { get; set; }
         public double ForecastHours { get; set; }
         public double ActualHours{ get; set; }
+        public double ResourceHours { get; set; }
     }
 
     public class Project
@@ -98,6 +99,7 @@ namespace ResourcePlanner.Services.Models
         public int? Market { get; set; }
         public int? Practice { get; set; }
         public int? SubPractice { get; set; }
+        public int[] Positions { get; set; }
         public string SearchTerm1 { get; set; }
         public string SearchTerm2 { get; set; }
         public string SearchTerm3 { get; set; }

@@ -40,11 +40,16 @@ var resourceAssignmentHeaders = [
 document.addEventListener('DOMContentLoaded', function () {
     getDropdownValues();
     dateTimeInit();
-    assignmentModalInit();
+    assignmentModalLoad();
+    assignmentGridApply();
 });
 
-function assignmentModalInit() {
-    $("#assignmentModalOpen").click(refreshResourceAssignmentGrid);
+function assignmentModalLoad() {
+    $("#assignmentModalLoad").click(refreshResourceAssignmentGrid);
+}
+
+function assignmentGridApply() {
+    $("#assignmentGridApply").click(refreshResourceAssignmentGrid);
 }
 
 function dropDownInit() {
@@ -76,12 +81,12 @@ function onDropDownSuccess() {
 }
 
 function buttonHookups() {
-    var applyButton     = document.getElementById("applyButton");
-    var filterButton    = document.getElementById("filterButton");
-    var pageLeftButton  = document.getElementById("pageLeftButton");
+    var applyButton = document.getElementById("applyButton");
+    var filterButton = document.getElementById("filterButton");
+    var pageLeftButton = document.getElementById("pageLeftButton");
     var pageRightButton = document.getElementById("pageRightButton");
-    var modal           = document.getElementById("errorModal");
-    var span            = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById("errorModal");
+    var span = document.getElementsByClassName("close")[0];
 
     span.onclick = function () {
         modal.style.display = "none";
@@ -181,15 +186,15 @@ function addResourceAssignments(row, assignments) {
 }
 
 function addAssignment(row, assignment, timePeriod) {
-    var actualHoursIndex   = timePeriod + "-ActualHours";
+    var actualHoursIndex = timePeriod + "-ActualHours";
     var forecastHoursIndex = timePeriod + "-ForecastHours";
 
-    row[actualHoursIndex  ] = assignment.ActualHours;
+    row[actualHoursIndex] = assignment.ActualHours;
     row[forecastHoursIndex] = assignment.ForecastHours;
 }
 
 function addResourceAssignment(row, assignment, timePeriod) {
-    var resourceHoursIndex = timePeriod + "-ResourceHours";;
+    var resourceHoursIndex = timePeriod + "-ResourceHours";
 
     row[resourceHoursIndex] = assignment.ResourceHours;
 }
@@ -247,9 +252,9 @@ function createAssignmentColumns(startingColumns, groupType) {
 function createColumn(fieldName, groupType) {
     return {
         suppressMenu: true,
-        context: { type: groupType, index: fieldName},
+        context: { type: groupType, index: fieldName },
         children: [
-            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
             { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
         ]
     };
@@ -259,9 +264,11 @@ function createAssignmentColumn(fieldName, groupType) {
     return {
         suppressMenu: true,
         context: { type: groupType, index: fieldName },
-        children: [
-            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ResourceHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
-        ]
+        width: 67,
+        field: fieldName + "-ResourceHours",
+        cellRenderer: timePeriodCellRenderer,
+        suppressSorting: true,
+        suppressMenu: true,
     };
 }
 

@@ -186,6 +186,10 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3Param", 50, SqlDbType.VarChar, pageParams.SearchTerm3));
             }
+            if(pageParams.Positions != null)
+            {
+                parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("PositionParam", "rpdb.typeIntTable", SqlDbType.Structured, pageParams.Positions));
+            }
             return parameterList.ToArray();
         }
 

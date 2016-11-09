@@ -116,3 +116,13 @@
     padding-top : 25px;
     padding-left: 25px;
 }
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+  padding-top: 120px;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+#tallModal .modal-body p { margin-bottom: 900px }
