@@ -38,7 +38,7 @@ var resourceAssignmentHeaders = [
 ]
 
 document.addEventListener('DOMContentLoaded', function () {
-    dropDownInit();
+    getDropdownValues();
     dateTimeInit();
     assignmentModalInit();
 });
