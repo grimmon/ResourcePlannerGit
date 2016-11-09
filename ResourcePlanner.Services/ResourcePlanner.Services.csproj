@@ -179,6 +179,7 @@
     <Content Include="Scripts\jquery.tagit.css" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\PageControls.js" />
+    <Content Include="Scripts\ResourceAssignmentGrid.js" />
     <Content Include="Scripts\ResourceDetailGridJs.js" />
     <Content Include="Scripts\ResourceGridJs.js" />
     <Content Include="Scripts\ResourceUtilityJs.js" />
@@ -188,7 +189,6 @@
     <Content Include="Scripts\ui-grid.css" />
     <Content Include="Scripts\ui-grid.js" />
     <Content Include="styles.css" />
-    <Content Include="systemjs.config.extras.js" />
     <Content Include="systemjs.config.js" />
     <Content Include="wallaby.js" />
     <Content Include="Web.config" />

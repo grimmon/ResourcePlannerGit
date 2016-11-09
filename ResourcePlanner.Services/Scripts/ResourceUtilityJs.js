@@ -6,8 +6,13 @@ var dataHeaders = [
     "forecast"
 ];
 
+var assignmentDataHeaders = [
+    "Resourced"
+]
+
 var resourceGroupHeaders = [];
 var resourceDetailGroupHeaders = [];
+var resourceAssignmentGroupHeaders = [];
 
 var resourceHeaders = [
     "Resource",
@@ -27,10 +32,20 @@ var resourceDetailHeaders = [
     "Description",
 ];
 
+var resourceAssignmentHeaders = [
+    "Resource",
+    "Title"
+]
+
 document.addEventListener('DOMContentLoaded', function () {
     dropDownInit();
     dateTimeInit();
+    assignmentModalInit();
 });
+
+function assignmentModalInit() {
+    $("#assignmentModalOpen").click(refreshResourceAssignmentGrid);
+}
 
 function dropDownInit() {
     var query = 'api/dropdown';
@@ -57,6 +72,7 @@ function onDropDownSuccess() {
 
     initializeResourceGrid();
     initializeResourceDetailGrid();
+    initializeResourceAssignmentGrid();
 }
 
 function buttonHookups() {
@@ -105,6 +121,9 @@ function headerClassFunc(params) {
         else if (columnType == "resourceDetailColumn") {
             params.colDef.headerName = resourceDetailHeaders[index];
         }
+        else if (columnType == "resourceAssignmentColumn") {
+            params.colDef.headerName = resourceAssignmentHeaders[index];
+        }
         else if (columnType == "resourceGroupColumn") {
             params.colDef.headerName = resourceGroupHeaders[index];
         }
@@ -113,6 +132,9 @@ function headerClassFunc(params) {
         }
         else if (columnType == "dataColumn") {
             params.colDef.headerName = dataHeaders[index];
+        }
+        else if (columnType == "assignmentDataColumn") {
+            params.colDef.headerName = assignmentDataHeaders[index];
         }
     }
 }
@@ -149,6 +171,15 @@ function addAssignments(row, assignments) {
     }
 }
 
+function addResourceAssignments(row, assignments) {
+    for (i = 0; i < assignments.length; i++) {
+        var assignment = assignments[i];
+        timePeriod = assignment.TimePeriod;
+
+        addResourceAssignment(row, assignment, i);
+    }
+}
+
 function addAssignment(row, assignment, timePeriod) {
     var actualHoursIndex   = timePeriod + "-ActualHours";
     var forecastHoursIndex = timePeriod + "-ForecastHours";
@@ -156,6 +187,13 @@ function addAssignment(row, assignment, timePeriod) {
     row[actualHoursIndex  ] = assignment.ActualHours;
     row[forecastHoursIndex] = assignment.ForecastHours;
 }
+
+function addResourceAssignment(row, assignment, timePeriod) {
+    var resourceHoursIndex = timePeriod + "-ResourceHours";;
+
+    row[resourceHoursIndex] = assignment.ResourceHours;
+}
+
 
 function showError(httpRequest, errorName) {
     var modal = document.getElementById('errorModal');
@@ -184,6 +222,26 @@ function createColumns(startingColumns, groupType) {
     return newColumns;
 }
 
+function createAssignmentColumns(startingColumns, groupType) {
+    var newColumns = [startingColumns.length + dataColumnsCount];
+
+    //add initial colummns
+    for (var i = 0; i < startingColumns.length; i++) {
+        var column = startingColumns[i];
+
+        newColumns[i] = column;
+    }
+
+    for (i = 0; i < dataColumnsCount; i++) {
+        column = createAssignmentColumn(i, groupType);
+
+        var newColumnIndex = i + startingColumns.length;
+        newColumns[newColumnIndex] = column;
+    }
+
+    return newColumns;
+}
+
 
 
 function createColumn(fieldName, groupType) {
@@ -193,6 +251,16 @@ function createColumn(fieldName, groupType) {
         children: [
             { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ActualHours"  , cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
             { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
+        ]
+    };
+}
+
+function createAssignmentColumn(fieldName, groupType) {
+    return {
+        suppressMenu: true,
+        context: { type: groupType, index: fieldName },
+        children: [
+            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ResourceHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
         ]
     };
 }

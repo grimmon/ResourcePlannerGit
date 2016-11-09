@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="C:\Repos\ResourcePlannerGit2\ResourcePlannerGit\ResourcePlanner.Services\systemjs.config.extras.js" />
+$(document).ready(function () {
     $(".project-selector").select2({
         placeholder: "Select a project",
         minimumInputLength: 3,
