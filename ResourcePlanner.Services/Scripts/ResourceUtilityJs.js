@@ -28,15 +28,9 @@ var resourceDetailHeaders = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
-    dropDownInit();
+    getDropdownValues();
     dateTimeInit();
 });
-
-function dropDownInit() {
-    var query = 'api/dropdown';
-
-    callResourceServerAuth(null, query, dropDownSuccessCallback, showError);
-}
 
 function dateTimeInit() {
     var now = new Date();

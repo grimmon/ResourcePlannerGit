@@ -263,7 +263,13 @@
     <TypeScriptCompile Include="App\app.component.ts" />
     <TypeScriptCompile Include="App\app.module.ts" />
     <TypeScriptCompile Include="App\main.ts" />
+    <TypeScriptCompile Include="DropdownService.ts" />
     <TypeScriptCompile Include="Hello.ts" />
+    <TypeScriptCompile Include="IDropdownValue.ts" />
+    <TypeScriptCompile Include="IResource.ts" />
+    <TypeScriptCompile Include="IResourceDetail.ts" />
+    <TypeScriptCompile Include="ResourceDetailService.ts" />
+    <TypeScriptCompile Include="ResourceService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
