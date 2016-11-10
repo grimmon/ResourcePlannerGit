@@ -135,6 +135,9 @@ function headerClassFunc(params) {
         else if (columnType == "resourceDetailGroupColumn") {
             params.colDef.headerName = resourceDetailGroupHeaders[index];
         }
+        else if (columnType == "resourceAssignmentGroupColumn") {
+            params.colDef.headerName = resourceAssignmentGroupHeaders[index];
+        }
         else if (columnType == "dataColumn") {
             params.colDef.headerName = dataHeaders[index];
         }

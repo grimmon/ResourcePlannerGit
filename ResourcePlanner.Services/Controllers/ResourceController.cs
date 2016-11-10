@@ -34,7 +34,8 @@ namespace ResourcePlanner.Services.Controllers
             string searchterm2 = "", 
             string searchterm3 = "", 
             DateTime? StartDate = null, 
-            DateTime? EndDate = null)
+            DateTime? EndDate = null,
+            bool availability = false)
         {
 
             if (StartDate == null)
@@ -54,6 +55,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SortDirection = sortDirection;
             pageParams.PageSize = pageSize;
             pageParams.PageNum = pageNum;
+            pageParams.Availability = availability;
             pageParams.City = city;
             pageParams.OrgUnit = orgUnit;
             pageParams.Market = market;

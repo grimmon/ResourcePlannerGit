@@ -105,6 +105,7 @@ namespace ResourcePlanner.Services.Models
         public string SearchTerm3 { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool Availability { get; set; }
 
     }
 

@@ -6,16 +6,18 @@ using ResourcePlanner.Core.Extensions;
 using ResourcePlanner.Services.Models;
 using ResourcePlanner.Services.Enums;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ResourcePlanner.Services.Mapper
 {
     public static class EntityMapper
     {
-        public static ResourcePage MapToResourcePage(SqlDataReader reader, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)
+        public static ResourcePage MapToResourcePage(SqlDataReader reader, ResourceQuery param)
         {
 
             var resources = new Dictionary<int, Resource>();
 
+            var dailyAvailHours = Int32.Parse(ConfigurationManager.AppSettings["DailyAvailableHours"]);
             var first = true;
             var totalRowCount = 0;
             int curr = 0;
@@ -47,10 +49,20 @@ namespace ResourcePlanner.Services.Mapper
                 }
 
                 assignment.TimePeriod = reader.GetString("TimePeriod");
-                assignment.ForecastHours = reader.GetDouble("ForecastHours");
-                assignment.ActualHours = reader.GetDouble("ActualHours");
-                assignment.ResourceHours = reader.GetDouble("ResourceHours");
 
+                if (param.Availability)
+                {
+                    int WeekWorkHours = reader.GetInt32("WeekWorkDays") * dailyAvailHours;
+                    assignment.ForecastHours = WeekWorkHours - reader.GetDouble("ForecastHours");
+                    assignment.ActualHours = WeekWorkHours - reader.GetDouble("ActualHours");
+                    assignment.ResourceHours = WeekWorkHours - reader.GetDouble("ResourceHours");
+                }
+                else
+                {
+                    assignment.ForecastHours = reader.GetDouble("ForecastHours");
+                    assignment.ActualHours = reader.GetDouble("ActualHours");
+                    assignment.ResourceHours = reader.GetDouble("ResourceHours");
+                }
                 resources[curr].Assignments.Add(assignment);
 
 
@@ -60,7 +72,7 @@ namespace ResourcePlanner.Services.Mapper
 
             var resourcePage = new ResourcePage()
             {
-                Resources = SortPage(resources.Values.ToList(), order, direction),
+                Resources = SortPage(resources.Values.ToList(), param.Sort, param.SortDirection),
                 TotalRowCount = totalRowCount
             };
 
