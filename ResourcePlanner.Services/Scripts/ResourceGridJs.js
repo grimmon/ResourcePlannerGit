@@ -18,8 +18,11 @@
         onRowSelected: rowSelectedFunc,
         getRowNodeId: function (item) {
             return item.Id;
-        }
-    }
+        },
+    },
+    currentDate: new Date(),
+    currentAggregation: {},
+    pageSize: 8,
 };
 
 var startingResourceColumnDefs = [
@@ -79,8 +82,8 @@ function buildResourceQuery(params) {
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
     var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
 
-    var startDate = dateTimeUtility.getStartDate();
-    var endDate = dateTimeUtility.getEndDate();
+    var startDate = dateTimeUtility.getStartDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize);
+    var endDate = dateTimeUtility.getEndDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize);
 
     var formattedStartDate = dateTimeUtility.formatDate(startDate);
     var formattedEndDate = dateTimeUtility.formatDate(endDate);
@@ -142,4 +145,8 @@ function rowSelectedFunc(event) {
         selectedResource.Id = event.node.data.Id;
         refreshResourceDetailGridEvent(event);
     }
+}
+
+function updateResourceAggregation(aggregation) {
+    resourceGrid.currentAggregation = aggregation;
 }

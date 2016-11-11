@@ -1,45 +1,43 @@
 ﻿var dateTimeUtility = {
-    currentDate: {},
-    currentAggregation: {},
-    pageSize: 3,
 
-    updateCurrentDate: function (periodOffset) {
-        var newDate = this.moveDate(this.currentDate, periodOffset * this.pageSize);
-        this.currentDate = newDate;
+    updateCurrentDate: function (currentDate, currentAggregation, pageSize, periodOffset) {
+        var newDate = this.moveDate(currentDate, currentAggregation, periodOffset * pageSize);
+        return newDate;
     },
 
-    getStartDate: function () {
+
+    getStartDate: function (currentDate, currentAggregation, pageSize) {
         var periodOffset = -1; //we want to start with the previous period.
-        var date = this.moveDate(this.currentDate, periodOffset);
+        var date = this.moveDate(currentDate, currentAggregation, periodOffset);
 
         return date;
     },
 
-    getEndDate: function() {
-        var periodOffset = this.pageSize - 1; //The number of periods into the future we want.
-        var date = this.moveDate(this.currentDate, periodOffset);
+    getEndDate: function(currentDate, currentAggregation, pageSize) {
+        var periodOffset = pageSize - 1; //The number of periods into the future we want.
+        var date = this.moveDate(currentDate, currentAggregation, periodOffset);
 
         return date;
     },
 
-    moveDate: function (date, periodOffset) {
+    moveDate: function (currentDate, currentAggregation, periodOffset) {
         var startDate = {};
 
-        if (this.currentAggregation == '0') {
+        if (currentAggregation == '0') {
             //Daily
-            startDate = this.getDate(this.currentDate, periodOffset);
+            startDate = this.getDate(currentDate, periodOffset);
         }
-        else if (this.currentAggregation == '1') {
+        else if (currentAggregation == '1') {
             //Weekly
-            startDate = this.getWeek(this.currentDate, periodOffset);
+            startDate = this.getWeek(currentDate, periodOffset);
         }
-        else if (this.currentAggregation == '2') {
+        else if (currentAggregation == '2') {
             //Monthly
-            startDate = this.getMonth(this.currentDate, periodOffset);
+            startDate = this.getMonth(currentDate, periodOffset);
         }
-        else if (this.currentAggregation == '3') {
+        else if (currentAggregation == '3') {
             //Quarterly
-            startDate = this.getQuarter(this.currentDate, periodOffset);
+            startDate = this.getQuarter(currentDate, periodOffset);
         }
 
         return startDate;

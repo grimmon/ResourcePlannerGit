@@ -18,7 +18,10 @@
         getRowNodeId: function (item) {
             return item.Id;
         }
-    }
+    },
+    currentDate: new Date(),
+    currentAggregation: {},
+    pageSize: 8
 };
 
 var startingResourceDetailColumnDefs = [
@@ -76,8 +79,8 @@ function buildResourceDetailQuery(params) {
 
     var aggregation = document.getElementById('aggregationsDropdown').value;
     
-    var startDate = dateTimeUtility.getStartDate();
-    var endDate = dateTimeUtility.getEndDate();
+    var startDate = dateTimeUtility.getStartDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize);
+    var endDate = dateTimeUtility.getEndDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize);
 
     var formattedStartDate = dateTimeUtility.formatDate(startDate);
     var formattedEndDate = dateTimeUtility.formatDate(endDate);
@@ -125,4 +128,8 @@ function addProjectData(row, project) {
     row.Description      = project.Description;
     row.OpportunityOwner = (project.OpportunityOwnerLastName + ", " || "") + project.OpportunityOwnerFirstName; 
     row.ProjectManager   = (project.ProjectManagerLastName   + ", " || "") + project.ProjectManagerFirstName;
+}
+
+function updateResourceDetailAggregation(aggregation) {
+    resourceDetailGrid.currentAggregation = aggregation;
 }

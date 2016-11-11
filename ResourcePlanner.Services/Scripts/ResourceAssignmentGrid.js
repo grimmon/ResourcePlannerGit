@@ -21,7 +21,10 @@ var resourceAssignmentGrid = {
         getRowNodeId: function (item) {
             return item.Id;
         }
-    }
+    },
+    currentDate: new Date(),
+    currentAggregation: {},
+    pageSize: 8
 };
 
 var startingResourceAssignmentColumnDefs = [
@@ -33,7 +36,7 @@ function initializeResourceAssignmentGrid() {
     var gridDiv = document.querySelector(resourceAssignmentGrid.name);
     new agGrid.Grid(gridDiv, resourceAssignmentGrid.options);
 
-    var startingResourceAssignmentColumns = createAssignmentColumns(startingResourceAssignmentColumnDefs, "resourceAssingmentGroupColumn");
+    var startingResourceAssignmentColumns = createAssignmentColumns(startingResourceAssignmentColumnDefs, "resourceAssignmentGroupColumn");
     resourceAssignmentGrid.options.api.setColumnDefs(startingResourceAssignmentColumns);
 
     //refreshResourceAssignmentGrid();
@@ -72,8 +75,8 @@ function buildResourceAssignmentQuery(params) {
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
     var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
 
-    var startDate = new Date($('#startdatepicker').data('DateTimePicker').date());
-    var endDate = new Date($('#enddatepicker').data('DateTimePicker').date());
+    var startDate = dateTimeUtility.getStartDate(resourceAssignmentGrid.currentDate, resourceAssignmentGrid.currentAggregation, resourceAssignmentGrid.pageSize);
+    var endDate = dateTimeUtility.getEndDate(resourceAssignmentGrid.currentDate, resourceAssignmentGrid.currentAggregation, resourceAssignmentGrid.pageSize);
 
     var formattedStartDate = dateTimeUtility.formatDate(startDate);
     var formattedEndDate = dateTimeUtility.formatDate(endDate);
@@ -135,8 +138,6 @@ function addResourceAssignmentData(row, resource) {
     row.Id = resource.ResourceId;
 }
 
-function rowSelectedFunc(event) {
-    if (event.node.isSelected()) {
-        selectedResource.Id = event.node.data.Id;
-    }
+function updateResourceAssignmentAggregation(aggregation) {
+    resourceAssignmentGrid.currentAggregation = aggregation;
 }

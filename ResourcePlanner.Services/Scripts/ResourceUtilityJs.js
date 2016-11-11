@@ -1,14 +1,11 @@
 ﻿var dataColumnsCount = 8;
 var selectedResource = {};
+var selectedResources = {};
 
 var dataHeaders = [
     "actual",
     "forecast"
 ];
-
-var assignmentDataHeaders = [
-    "Resourced"
-]
 
 var resourceGroupHeaders = [];
 var resourceDetailGroupHeaders = [];
@@ -49,7 +46,7 @@ function assignmentModalLoad() {
 }
 
 function assignmentGridApply() {
-    $("#assignmentGridApply").click(refreshResourceAssignmentGrid);
+    $("#assignmentGridApply").click(AssignmentApply);
 }
 
 function dropDownInit() {
@@ -65,15 +62,24 @@ function dateTimeInit() {
     now.setMinutes(0);
     now.setSeconds(0);
 
-    dateTimeUtility.currentDate = now;
-    dateTimeUtility.pageSize = dataColumnsCount;
+    resourceGrid.currentDate = now;
+    resourceDetailGrid.currentDate = now;
+    resourceAssignmentGrid.currentDate = now;
+    
+    resourceGrid.pageSize = dataColumnsCount;
+    resourceDetailGrid.pageSize = dataColumnsCount;
+    resourceAssignmentGrid.pageSize = dataColumnsCount;
+    
+    resourceAssignmentGrid.currentAggregation = '1';
 }
 
 function onDropDownSuccess() {
     buttonHookups();
 
     var aggregationDropdown = document.getElementById("aggregationsDropdown");
-    dateTimeUtility.currentAggregation = aggregationDropdown.value;
+
+    resourceGrid.currentAggregation = aggregationDropdown.value;
+    resourceDetailGrid.currentAggregation = aggregationDropdown.value;
 
     initializeResourceGrid();
     initializeResourceDetailGrid();
@@ -104,7 +110,8 @@ function buttonHookups() {
     applyButton.onclick = function () {
         var aggregation = document.getElementById('aggregationsDropdown').value;
 
-        dateTimeUtility.currentAggregation = aggregation;
+        resourceGrid.currentAggregation = aggregation;
+        resourceDetailGrid.currentAggregation = aggregation;
 
         refreshResourceGrid();
         refreshResourceDetailGrid();
@@ -149,17 +156,26 @@ function headerClassFunc(params) {
 
 
 function pageUp() {
-    dateTimeUtility.updateCurrentDate(1);
+    resourceGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize, 1);
+    resourceDetailGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize, 1);
 
     refreshResourceGrid();
     refreshResourceDetailGrid();
 }
 
 function pageDown() {
-    dateTimeUtility.updateCurrentDate(-1);
+    resourceGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize, -1);
+    ResourceDetailGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize, - 1);
 
     refreshResourceGrid();
     refreshResourceDetailGrid();
+}
+
+function AssignmentApply() {
+    var selectedStartDate = $('#startdatepicker').data('DateTimePicker').date();
+    resourceAssignmentGrid.currentDate = new Date(selectedStartDate);
+
+    refreshResourceAssignmentGrid();
 }
 
 function addTimePeriods(row, timePeriods) {
