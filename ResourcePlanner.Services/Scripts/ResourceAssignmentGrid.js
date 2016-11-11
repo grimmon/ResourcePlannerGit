@@ -141,3 +141,60 @@ function addResourceAssignmentData(row, resource) {
 function updateResourceAssignmentAggregation(aggregation) {
     resourceAssignmentGrid.currentAggregation = aggregation;
 }
+
+function addAssignmentsToServer() {
+    var assingmentInsertQuery = buildAssignmentInsertQuery();
+    callAssignmentServerAuth(params, query, onCallResourceAssignmentSuccess, showError);
+}
+
+function buildAssignmentInsertQuery() {
+    var filters = "?"
+    var resourceIds = resourceAssignmentGrid.options.api.getSelectedRows();
+
+    if (resourceIds != null) {
+        if (resourceIds.length > 0) {
+            filters += "resourceIds=";
+            for (i = 0; i < resourceIds.length; i++) {
+                if (resourceIds[i] != "") {
+                    if (i > 0) {
+                        filters += ",";
+                    }
+                    filters += resourceIds[i].Id;
+                }
+            }
+        }
+    }
+    var projectId = $(".project-selector").select2("val");
+    filters += "&projectId=" + projectId;
+    var hours = document.getElementById("hoursPerDay").value;
+    filters += "&hoursPerDay=" + hours;
+    
+    var startDate = StartDate = $('#startdatepicker').data('DateTimePicker').date();
+    var endDate = $('#enddatepicker').data('DateTimePicker').date();
+
+    var formattedStartDate = dateTimeUtility.formatDate(new Date(startDate));
+    var formattedEndDate = dateTimeUtility.formatDate(new Date(endDate));
+    
+    filters += "&startdate=" + formattedStartDate;
+    filters += "&enddate=" + formattedEndDate;
+
+
+    var daysOfWeek = $(".dayofweek-selector").select2("val");
+    if (daysOfWeek != null) {
+        if (daysOfWeek.length > 0) {
+            filters += "&daysOfWeek=";
+            for (i = 0; i < daysOfWeek.length; i++) {
+                if (daysOfWeek[i] != "") {
+                    if (i > 0) {
+                        filters += ",";
+                    }
+                    filters += daysOfWeek[i];
+                }
+            }
+        }
+    }
+
+    var query = 'api/addassignment' + filters;
+
+    return query;
+} 

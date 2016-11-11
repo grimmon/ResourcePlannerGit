@@ -125,9 +125,9 @@ namespace ResourcePlanner.Services.Models
 
     }
 
-    public class AddAssignment
+    public class AddAssignments
     {
-        public int ResourceId {get; set;}
+        public int[] ResourceIds {get; set;}
         public int ProjectId {get; set;}                                   
         public double Hours {get; set;}
         public DateTime StartDate {get; set;}                  

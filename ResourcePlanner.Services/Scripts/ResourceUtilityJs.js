@@ -39,7 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
     dateTimeInit();
     assignmentModalLoad();
     assignmentGridApply();
+    assignmentSave();
 });
+
+function assignmentSave() {
+    $("#saveAssignment").click(addAssignmentsToServer);
+}
 
 function assignmentModalLoad() {
     $("#assignmentModalLoad").click(refreshResourceAssignmentGrid);
@@ -350,6 +355,38 @@ function callResourceServerAuth(params, query, resourceSuccessCallback, resource
 function callResourceServer(params, query, resourceSuccessCallback, resourceFailureCallback, token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', query);
+    httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
+    httpRequest.send();
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState == 4) {
+            if (httpRequest.status == 200) {
+                httpResponse = JSON.parse(httpRequest.responseText);
+                resourceSuccessCallback(params, query, httpResponse);
+            }
+            else {
+                resourceFailureCallback(httpRequest);
+            }
+        }
+    };
+
+
+}
+
+function callAssignmentServerAuth(params, query, resourceSuccessCallback, resourceFailureCallback) {
+    var authContext = new AuthenticationContext(config);
+
+    authContext.acquireToken(authContext.config.clientId, function (error, token) {
+        if (error || !token) {
+            alert('ADAL Error: ' + error);
+            return;
+        }
+        callResourceServer(params, query, resourceSuccessCallback, resourceFailureCallback, token);
+    });
+}
+
+function callAssignmentServer(params, query, resourceSuccessCallback, resourceFailureCallback, token) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', query);
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {

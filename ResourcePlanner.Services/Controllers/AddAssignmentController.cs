@@ -14,7 +14,7 @@ namespace ResourcePlanner.Services.Controllers
 {
     public class AddAssignmentController : ApiController
     {
-        public async Task<IHttpActionResult> Post(int ResourceId, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate, Enums.Enums.DayOfWeek[] daysOfWeek)
+        public async Task<IHttpActionResult> Post(string ResourceIds, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate, Enums.Enums.DayOfWeek[] daysOfWeek)
         {
 
             var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
@@ -42,9 +42,9 @@ namespace ResourcePlanner.Services.Controllers
 
 
 
-            var asgn = new AddAssignment()
+            var asgn = new AddAssignments()
             {
-                ResourceId = ResourceId,
+                ResourceIds = ResourceIds.Split(',').Select(Int32.Parse).ToArray(),
                 ProjectId = ProjectId,
                 Hours = Hours,
                 StartDate = StartDate,

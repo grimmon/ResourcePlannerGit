@@ -22,7 +22,7 @@ namespace ResourcePlanner.Services.DataAccess
         }
 
 
-        public void AddAssignment(AddAssignment asgn)
+        public void AddAssignment(AddAssignments asgn)
         {
 
             AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
@@ -61,11 +61,11 @@ namespace ResourcePlanner.Services.DataAccess
             return returnValue;
         }
 
-        private SqlParameter[] AssignmentParameters(AddAssignment asgn)
+        private SqlParameter[] AssignmentParameters(AddAssignments asgn)
         {
             var parameterList = new List<SqlParameter>();
 
-            parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
+            parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("ResourceIds", "rpdb.typeIntTable", SqlDbType.Structured, asgn.ResourceIds));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, asgn.ProjectId));
             parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));

@@ -96,4 +96,7 @@ $(document).ready(function () {
     $("#enddatepicker").on("dp.change", function (e) {
         $('#startdatepicker').data("DateTimePicker").maxDate(e.date);
     });
+
+
+
 });
