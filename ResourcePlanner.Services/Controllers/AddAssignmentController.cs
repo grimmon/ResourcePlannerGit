@@ -14,7 +14,10 @@ namespace ResourcePlanner.Services.Controllers
 {
     public class AddAssignmentController : ApiController
     {
-        public async Task<IHttpActionResult> Post(string ResourceIds, int ProjectId, double Hours, DateTime StartDate, DateTime EndDate, Enums.Enums.DayOfWeek[] daysOfWeek)
+        [Authorize]
+        [HttpPost]
+
+        public async Task<IHttpActionResult> Post(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
 
             var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
@@ -35,22 +38,32 @@ namespace ResourcePlanner.Services.Controllers
 
             int days = 0;
 
+            var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
+
             if (daysOfWeek.Length > 0)
             {
-                days = getDaysAsInt(daysOfWeek);
+                days = getDaysAsInt(daysOfWeekEnum);
             }
 
 
+            var daysOfWeekIds = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek) i).ToArray();
+           
+
+            foreach(var id in daysOfWeekIds)
+            {
+
+            }
+            
 
             var asgn = new AddAssignments()
             {
-                ResourceIds = ResourceIds.Split(',').Select(Int32.Parse).ToArray(),
-                ProjectId = ProjectId,
-                Hours = Hours,
-                StartDate = StartDate,
-                EndDate = EndDate,
+                ResourceIds = resourceIds.Split(',').Select(Int32.Parse).ToArray(),
+                ProjectId = projectId,
+                Hours = hoursPerDay,
+                StartDate = startdate,
+                EndDate = enddate,
                 DaysOfWeek = days
-            };
+        };
 
             try
             {

@@ -372,7 +372,7 @@ function callResourceServer(params, query, resourceSuccessCallback, resourceFail
 
 }
 
-function callAssignmentServerAuth(params, query, resourceSuccessCallback, resourceFailureCallback) {
+function callAssignmentServerAuth(query, resourceSuccessCallback, resourceFailureCallback) {
     var authContext = new AuthenticationContext(config);
 
     authContext.acquireToken(authContext.config.clientId, function (error, token) {
@@ -380,11 +380,11 @@ function callAssignmentServerAuth(params, query, resourceSuccessCallback, resour
             alert('ADAL Error: ' + error);
             return;
         }
-        callResourceServer(params, query, resourceSuccessCallback, resourceFailureCallback, token);
+        callAssignmentServer(query, resourceSuccessCallback, resourceFailureCallback, token);
     });
 }
 
-function callAssignmentServer(params, query, resourceSuccessCallback, resourceFailureCallback, token) {
+function callAssignmentServer(query, resourceSuccessCallback, resourceFailureCallback, token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', query);
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -393,7 +393,7 @@ function callAssignmentServer(params, query, resourceSuccessCallback, resourceFa
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 httpResponse = JSON.parse(httpRequest.responseText);
-                resourceSuccessCallback(params, query, httpResponse);
+                resourceSuccessCallback(query, httpResponse);
             }
             else {
                 resourceFailureCallback(httpRequest);

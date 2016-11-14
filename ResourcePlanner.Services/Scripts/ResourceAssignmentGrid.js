@@ -143,8 +143,8 @@ function updateResourceAssignmentAggregation(aggregation) {
 }
 
 function addAssignmentsToServer() {
-    var assingmentInsertQuery = buildAssignmentInsertQuery();
-    callAssignmentServerAuth(params, query, onCallResourceAssignmentSuccess, showError);
+    var query = buildAssignmentInsertQuery();
+    callAssignmentServerAuth(query, onCallAddAssignmentSuccess, showError);
 }
 
 function buildAssignmentInsertQuery() {
@@ -197,4 +197,9 @@ function buildAssignmentInsertQuery() {
     var query = 'api/addassignment' + filters;
 
     return query;
-} 
+}
+
+function onCallAddAssignmentSuccess()
+{
+
+}
