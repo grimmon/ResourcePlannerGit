@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function assignmentSave() {
     $("#saveAssignment").click(addAssignmentsToServer);
+    
 }
 
 function assignmentModalLoad() {
@@ -170,7 +171,7 @@ function pageUp() {
 
 function pageDown() {
     resourceGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize, -1);
-    ResourceDetailGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize, - 1);
+    resourceDetailGrid.currentDate = dateTimeUtility.updateCurrentDate(resourceDetailGrid.currentDate, resourceDetailGrid.currentAggregation, resourceDetailGrid.pageSize, - 1);
 
     refreshResourceGrid();
     refreshResourceDetailGrid();
@@ -372,7 +373,7 @@ function callResourceServer(params, query, resourceSuccessCallback, resourceFail
 
 }
 
-function callAssignmentServerAuth(query, resourceSuccessCallback, resourceFailureCallback) {
+function callAssignmentServerAuth(query, assignmentSuccessCallback, assignmentFailureCallback) {
     var authContext = new AuthenticationContext(config);
 
     authContext.acquireToken(authContext.config.clientId, function (error, token) {
@@ -380,11 +381,11 @@ function callAssignmentServerAuth(query, resourceSuccessCallback, resourceFailur
             alert('ADAL Error: ' + error);
             return;
         }
-        callAssignmentServer(query, resourceSuccessCallback, resourceFailureCallback, token);
+        callAssignmentServer(query, assignmentSuccessCallback, resourceFailureCallback, token);
     });
 }
 
-function callAssignmentServer(query, resourceSuccessCallback, resourceFailureCallback, token) {
+function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailureCallback, token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', query);
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -393,10 +394,10 @@ function callAssignmentServer(query, resourceSuccessCallback, resourceFailureCal
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 httpResponse = JSON.parse(httpRequest.responseText);
-                resourceSuccessCallback(query, httpResponse);
+                assignmentSuccessCallback(query, httpResponse);
             }
             else {
-                resourceFailureCallback(httpRequest);
+                assignmentFailureCallback(httpRequest);
             }
         }
     };

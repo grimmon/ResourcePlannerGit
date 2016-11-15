@@ -143,6 +143,7 @@ function updateResourceAssignmentAggregation(aggregation) {
 }
 
 function addAssignmentsToServer() {
+    $("#saveAssignment").prop("disabled", true);
     var query = buildAssignmentInsertQuery();
     callAssignmentServerAuth(query, onCallAddAssignmentSuccess, showError);
 }
@@ -199,7 +200,9 @@ function buildAssignmentInsertQuery() {
     return query;
 }
 
-function onCallAddAssignmentSuccess()
+function onCallAddAssignmentSuccess(query, httpResponse)
 {
-
+    $("#saveAssignment").prop('disabled', false);
+    alert("Assignment Saved");
+    
 }
