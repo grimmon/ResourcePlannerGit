@@ -139,6 +139,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                     var totalActualHours     = timePeriodAssignments.Sum(assignment => assignment.ActualHours);
                     var totalForecastedHours = timePeriodAssignments.Sum(assignment => assignment.ForecastHours);
+                    var totalResourcedHours  = timePeriodAssignments.Sum(assignment => assignment.ResourceHours);
                     
                     if (totalActualHours > 0 || totalForecastedHours > 0)
                     {
@@ -170,8 +171,9 @@ namespace ResourcePlanner.Services.DataAccess
 
                     assignment.ForecastHours = _rand.Next() % 2 == 0 ? 0 : Math.Round(_rand.NextDouble() * 8, 2);
                     assignment.ActualHours   = _rand.Next() % 2 == 0 ? 0 : Math.Round(_rand.NextDouble() * 8, 2);
+                    assignment.ResourceHours = _rand.Next() % 2 == 0 ? 0 : Math.Round(_rand.NextDouble() * 8, 2);
 
-                    if (assignment.ForecastHours > 0 || assignment.ActualHours > 0)
+                    if (assignment.ForecastHours > 0 || assignment.ActualHours > 0 || assignment.ResourceHours > 0)
                     {
                         result.Add(assignment);
                     }
@@ -570,6 +572,7 @@ namespace ResourcePlanner.Services.DataAccess
 
             result.ActualHours = assignments.Sum(assignment => assignment.ActualHours);
             result.ForecastHours = assignments.Sum(assignment => assignment.ForecastHours);
+            result.ResourceHours = assignments.Sum(assignment => assignment.ResourceHours);
 
             return result;
         }

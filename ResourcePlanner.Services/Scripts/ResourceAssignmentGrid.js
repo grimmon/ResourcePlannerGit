@@ -200,7 +200,7 @@ function buildAssignmentInsertQuery() {
     return query;
 }
 
-function onCallAddAssignmentSuccess(query, httpResponse)
+function onCallAddAssignmentSuccess(query)
 {
     $("#saveAssignment").prop('disabled', false);
     alert("Assignment Saved");

@@ -19,7 +19,9 @@ namespace ResourcePlanner.Services.Controllers
 
         public async Task<IHttpActionResult> Post(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
-
+#if Mock
+            return Ok();
+#endif
             var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
             var CurrentUser = User.Identity as ClaimsIdentity;

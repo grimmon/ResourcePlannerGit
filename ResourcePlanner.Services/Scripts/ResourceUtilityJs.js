@@ -381,7 +381,7 @@ function callAssignmentServerAuth(query, assignmentSuccessCallback, assignmentFa
             alert('ADAL Error: ' + error);
             return;
         }
-        callAssignmentServer(query, assignmentSuccessCallback, resourceFailureCallback, token);
+        callAssignmentServer(query, assignmentSuccessCallback, assignmentFailureCallback, token);
     });
 }
 
@@ -393,8 +393,8 @@ function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailur
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
-                httpResponse = JSON.parse(httpRequest.responseText);
-                assignmentSuccessCallback(query, httpResponse);
+                //httpResponse = JSON.parse(httpRequest.responseText);
+                assignmentSuccessCallback(query);
             }
             else {
                 assignmentFailureCallback(httpRequest);
