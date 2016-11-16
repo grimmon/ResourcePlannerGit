@@ -17,7 +17,7 @@ var resourceAssignmentGrid = {
         maxPagesInCache: 6,
         defaultColGroupDef: { headerClass: headerClassFunc },
         defaultColDef: { headerClass: headerClassFunc },
-        onRowSelected: rowSelectedFunc,
+        onRowSelected: rowsSelectedFunc,
         getRowNodeId: function (item) {
             return item.Id;
         }
@@ -126,11 +126,18 @@ function onCallResourceAssignmentSuccess(params, query, httpResponse) {
     resourceAssignmentGrid.options.api.refreshHeader();
 }
 
+function rowsSelectedFunc(event) {
+    if (event.node.isSelected()) {
+        selectedResources.Id = event.node.data.Id;
+    }
+}
+
 function createResourceAssignmentRow(row, resource, timePeriods) {
     addResourceAssignmentData(row, resource);
     addTimePeriods(row, timePeriods);
     addResourceAssignments(row, resource.Assignments);
 }
+
 
 function addResourceAssignmentData(row, resource) {
     row.ResourceName = (resource.LastName + ", " || "") + resource.FirstName;
