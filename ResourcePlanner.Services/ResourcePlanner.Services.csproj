@@ -196,6 +196,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AddAssignmentController.cs" />
+    <Compile Include="Controllers\AuthorizedController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\PositionController.cs" />

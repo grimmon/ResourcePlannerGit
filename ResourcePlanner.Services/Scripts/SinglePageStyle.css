@@ -93,15 +93,16 @@
     right: 0px;
     padding-right: 5px;
     width: 290px;
-    background-color: #A6A6A6
+    /*background-color: */
 }
 
 .headerbuttonbox  {
     float:right;
     width: 90px;
     height: 100px;
-    margin-left: 5px;
-    background-color: #FFF
+    /*margin-left: 5px;*/
+    background-color: #FFF;
+    border-left: 5px #A6A6A6;
 }
 .headerbutton {
     margin-top: 25px;

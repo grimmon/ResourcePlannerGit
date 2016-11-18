@@ -55,9 +55,9 @@
                         </div>
 
                     </div>
-                    <div class="headerbuttonbox">
+                    <div class="headerbuttonbox" id="addAssignmentGrid" style="display: none;">
                         <div class="headerbutton">
-                            <a data-toggle="modal" data-target="#myModal"  id="assignmentModalLoad">
+                            <a data-toggle="modal" data-target="#myModal" id="assignmentModalLoad">
                                 <div>
                                     <img src="/Images/add.png" alt="Add" height="50" />
                                 </div>
@@ -69,7 +69,7 @@
                         <div class="headerbutton">
                             <a id="filterButton">
                                 <div>
-                                    <img src="../Images/search.svg.png" alt="Search" height="50" width="50">
+                                    <img src="../Images/filters.svg.png" alt="Filters" height="50" width="50">
                                 </div>
                             </a>
                         </div>
@@ -91,7 +91,7 @@
                             <div class="panel-body" style="background: #C8C8C8">
 
 
-                                <div style="width: 500px">
+                                <div style="width: 500px;">
                                     <script type="text/javascript">
                                         $(document).ready(function () {
                                             $("#myTags").tagit({
@@ -111,38 +111,52 @@
                                     <ul id="myTags"></ul>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Cities</label>
-                                        <select id="citiesDropdown"></select>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Cities</label>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Org Units</label>
-                                        <select id="orgUnitsDropdown"></select>
+                                    <div class="col-sm-2">
+                                        <select id="citiesDropdown" style="width:100%"></select>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Regions</label>
-                                        <select id="regionsDropdown"></select>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Org Units</label>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Markets</label>
-                                        <select id="marketsDropdown"></select>
+                                    <div class="col-sm-2">
+                                        <select id="orgUnitsDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Regions</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="regionsDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Markets</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="marketsDropdown" style="width:100%"></select>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Practices</label>
-                                        <select id="practicesDropdown"></select>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Practices</label>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Sub-Practices</label>
-                                        <select id="subpracticesDropdown"></select>
+                                    <div class="col-sm-2">
+                                        <select id="practicesDropdown" style="width:100%"></select>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Interval</label>
-                                        <select id="aggregationsDropdown"></select>
-
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Sub-Practices</label>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
+                                        <select id="subpracticesDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Interval</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="aggregationsDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-2">
                                         <button id="applyButton">Apply</button>
                                     </div>
                                 </div>
@@ -156,7 +170,7 @@
                 <button id="pageRightButton" style="right: 0px">&gt;</button>
             </div>
         </div>
-        <my-app>Loading...</my-app>
+        <!--<my-app>Loading...</my-app>-->
         <div class="body">
             <div id="myGrid" class="ag-fresh"></div>
         </div>
@@ -194,50 +208,50 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Add Assignment</h4>
                 </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <select class="project-selector" style="width: 50%"></select>
-                                <select class="position-selector" multiple="multiple" style="width: 50%"></select>
-                                <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
-                                    <option value="2" selected="selected">Monday</option>
-                                    <option value="3" selected="selected">Tuesday</option>
-                                    <option value="4" selected="selected">Wednesday</option>
-                                    <option value="5" selected="selected">Thursday</option>
-                                    <option value="6" selected="selected">Friday</option>
-                                </select>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="project-selector" style="width: 50%"></select>
+                            <select class="position-selector" multiple="multiple" style="width: 50%"></select>
+                            <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
+                                <option value="2" selected="selected">Monday</option>
+                                <option value="3" selected="selected">Tuesday</option>
+                                <option value="4" selected="selected">Wednesday</option>
+                                <option value="5" selected="selected">Thursday</option>
+                                <option value="6" selected="selected">Friday</option>
+                            </select>
 
-                                <div class="form-group">
-                                    <label for="hoursPerDay">Hours per day:</label>
-                                    <input type="number" ng-required="required" class="form-control" min="0" id="hoursPerDay">
-                                </div>
-                            
-                                <div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                                <div class='input-group date' id='enddatepicker'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                                <button type="button" class="btn btn-primary" id="assignmentGridApply">Apply</button>
+                            <div class="form-group">
+                                <label for="hoursPerDay">Hours per day:</label>
+                                <input type="number" ng-required="required" class="form-control" min="0" id="hoursPerDay">
                             </div>
-                       
+
+                            <div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <div class='input-group date' id='enddatepicker'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="assignmentGridApply">Apply</button>
+                        </div>
+
                         <div class="col-md-8">
                             <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
                                 <div id="AssignmentGrid" style="height: 400px;" class="ag-fresh"></div>
                             </div>
                         </div>
                     </div>
-                 </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="saveAssignment">Save changes</button>
-                 </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveAssignment">Save changes</button>
+                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

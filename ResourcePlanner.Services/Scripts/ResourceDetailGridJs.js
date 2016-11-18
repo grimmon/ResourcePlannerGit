@@ -66,7 +66,7 @@ function refreshResourceDetailGrid() {
 }
 
 function updateSelectedUser(data) {
-    $("#selectedUser").text("Resource Detail: " + data.FirstName + " " + data.LastName);
+    $("#selectedUser").text("Resource Detail: " + (data.ResourceName == null ? "" : data.ResourceName));
     $('#collapseOne').collapse('show');
 }
 
@@ -121,13 +121,12 @@ function createProjectRow(row, project, timePeriods) {
 
 function addProjectData(row, project) {
     row.ProjectName      = project.ProjectName;
-    row.FirstName        = project.FirstName;
-    row.LastName         = project.LastName;
+    row.ProjectNumber    = project.ProjectNumber;
     row.WBSElement       = project.WBSElement; 
-    row.Customer         = project.Customer; 
-    row.Description      = project.Description;
-    row.OpportunityOwner = (project.OpportunityOwnerLastName + ", " || "") + project.OpportunityOwnerFirstName; 
-    row.ProjectManager   = (project.ProjectManagerLastName   + ", " || "") + project.ProjectManagerFirstName;
+    row.Customer         = isNullOrUndefined(project.Customer) ? "" : project.Customer; 
+    row.Description      = isNullOrUndefined(project.Description) ? "" : project.Description;
+    row.OpportunityOwner = isNullOrUndefined(project.OpportunityOwnerLastName) ? "" : (project.OpportunityOwnerLastName + ", " + project.OpportunityOwnerFirstName); 
+    row.ProjectManager   = isNullOrUndefined(project.ProjectManagerLastName) ? "" : (project.ProjectManagerLastName + ", " + project.ProjectManagerFirstName);
 }
 
 function updateResourceDetailAggregation(aggregation) {

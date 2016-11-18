@@ -3,8 +3,10 @@ var selectedResource = {};
 var selectedResources = {};
 
 var dataHeaders = [
-    "actual",
-    "forecast"
+    "RES",
+    "FOR",
+    "ACT",
+    "&#916;"
 ];
 
 var resourceGroupHeaders = [];
@@ -37,10 +39,21 @@ var resourceAssignmentHeaders = [
 document.addEventListener('DOMContentLoaded', function () {
     getDropdownValues();
     dateTimeInit();
-    assignmentModalLoad();
-    assignmentGridApply();
-    assignmentSave();
+    ShowAddIfAuth();
+    //assignmentModalLoad();
+    //assignmentGridApply();
+    //assignmentSave();
 });
+
+function ShowAddIfAuth() {
+    var params = {};
+    callResourceServerAuth(params, "api/authorized", function () {
+        document.getElementById("addAssignmentGrid").style.display = "block";
+        assignmentModalLoad();
+        assignmentGridApply();
+        assignmentSave();
+    }, function () { });
+}
 
 function assignmentSave() {
     $("#saveAssignment").click(addAssignmentsToServer);
@@ -211,11 +224,15 @@ function addResourceAssignments(row, assignments) {
 }
 
 function addAssignment(row, assignment, timePeriod) {
-    var actualHoursIndex = timePeriod + "-ActualHours";
+    var resourceHoursIndex = timePeriod + "-ResourceHours";
     var forecastHoursIndex = timePeriod + "-ForecastHours";
+    var actualHoursIndex = timePeriod + "-ActualHours";
+    var deltaHoursIndex = timePeriod + "-DeltaHours";
 
-    row[actualHoursIndex] = assignment.ActualHours;
+    row[resourceHoursIndex] = assignment.ResourceHours;
     row[forecastHoursIndex] = assignment.ForecastHours;
+    row[actualHoursIndex] = assignment.ActualHours;
+    row[deltaHoursIndex] = assignment.ResourceHours - assignment.ForecastHours;
 }
 
 function addResourceAssignment(row, assignment, timePeriod) {
@@ -279,8 +296,10 @@ function createColumn(fieldName, groupType) {
         suppressMenu: true,
         context: { type: groupType, index: fieldName },
         children: [
-            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
-            { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
+            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ResourceHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 67, context: { type: "dataColumn", index: 2 }, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 67, context: { type: "dataColumn", index: 3 }, field: fieldName + "-DeltaHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
         ]
     };
 }
@@ -402,3 +421,5 @@ function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailur
         }
     };
 }
+
+function isNullOrUndefined(obj) { return obj === undefined || obj == null; }
