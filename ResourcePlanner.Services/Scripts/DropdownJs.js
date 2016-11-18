@@ -34,12 +34,14 @@ function processDropdownData(httpResponse) {
 
 function attachDropdownValues(dropdownValues) {
 
-    addNoneOptionToDropdown("orgUnitsDropdown"    );
-    addNoneOptionToDropdown("citiesDropdown"      );
-    addNoneOptionToDropdown("regionsDropdown"     );
-    addNoneOptionToDropdown("marketsDropdown"     );
-    addNoneOptionToDropdown("practicesDropdown"   );
-    addNoneOptionToDropdown("subpracticesDropdown");
+    addDefaultOptionToDropdown("orgUnitsDropdown"              );
+    addDefaultOptionToDropdown("citiesDropdown"                );
+    addDefaultOptionToDropdown("regionsDropdown"               );
+    addDefaultOptionToDropdown("marketsDropdown"               );
+    addDefaultOptionToDropdown("practicesDropdown"             );
+    addDefaultOptionToDropdown("subpracticesDropdown"          );
+    addDefaultOptionToDropdown("assignmentPracticesDropdown"   );
+    addDefaultOptionToDropdown("assignmentSubpracticesDropdown");
     
     addValuesToDropdown("orgUnitsDropdown"    , dropdownValues['OrgUnit'    ]);
     addValuesToDropdown("citiesDropdown"      , dropdownValues['City'       ]);
@@ -47,14 +49,16 @@ function attachDropdownValues(dropdownValues) {
     addValuesToDropdown("marketsDropdown"     , dropdownValues['Market'     ]);
     addValuesToDropdown("practicesDropdown"   , dropdownValues['Practice'   ]);
     addValuesToDropdown("subpracticesDropdown", dropdownValues['SubPractice']);
-    addValuesToDropdown("aggregationsDropdown", dropdownValues['agg'        ]);
+    addValuesToDropdown("aggregationsDropdown", dropdownValues['agg']);
+    addValuesToDropdown("assignmentPracticesDropdown", dropdownValues['Practice']);
+    addValuesToDropdown("assignmentSubpracticesDropdown", dropdownValues['SubPractice']);
 }
 
-function addNoneOptionToDropdown(dropdownName) {
+function addDefaultOptionToDropdown(dropdownName) {
     var dropdown = document.getElementById(dropdownName);
 
     var noneOption = document.createElement('option');
-    noneOption.text = 'None';
+    noneOption.text = "None";
     noneOption.value = -1;
 
     dropdown.appendChild(noneOption);

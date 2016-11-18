@@ -11,26 +11,26 @@ using System.Web.Http;
 
 namespace ResourcePlanner.Services.Controllers
 {
-    public class ProjectController : ApiController
+    public class CustomerController : ApiController
     {
         [HttpGet]
-        //[Authorize]
+        [Authorize]
 
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {
 
 #if Mock
-            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddProjectAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #else
-            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddProjectDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
             List<IdNameGeneric> values;
 
             try
             {
-                values = access.GetProjects(searchTerm);
+                values = access.GetCustomers(searchTerm);
             }
             catch (Exception ex)
             {

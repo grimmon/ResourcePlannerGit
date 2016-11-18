@@ -14,7 +14,7 @@ namespace ResourcePlanner.Services.Controllers
     public class PositionController : ApiController
     {
         [HttpGet]
-        //[Authorize]
+        [Authorize]
 
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {
@@ -23,7 +23,7 @@ namespace ResourcePlanner.Services.Controllers
             var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #else
-            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
             List<IdNameGeneric> values;

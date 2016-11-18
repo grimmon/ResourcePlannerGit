@@ -9,28 +9,34 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+
 namespace ResourcePlanner.Services.Controllers
 {
-    public class ProjectController : ApiController
+    public class ManagerController : ApiController
     {
         [HttpGet]
-        //[Authorize]
+        [Authorize]
 
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {
 
 #if Mock
-            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddProjectAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #else
-            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddProjectDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
             List<IdNameGeneric> values;
 
+            var searchTerms = searchTerm.Split(',', ' ', '.');
+            var searchTerm1 = searchTerms.Length >= 1 ? searchTerms[0] : "";
+            var searchTerm2 = searchTerms.Length >= 2 ? searchTerms[1] : "";
+            var searchTerm3 = searchTerms.Length >= 3 ? searchTerms[2] : "";
+
             try
             {
-                values = access.GetProjects(searchTerm);
+                values = access.GetManagers(searchTerm1, searchTerm2, searchTerm3);
             }
             catch (Exception ex)
             {

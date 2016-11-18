@@ -35,7 +35,7 @@ namespace ResourcePlanner.Services.Controllers
                 return Unauthorized();
             }
              
-            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
             int days = 0;

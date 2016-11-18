@@ -31,6 +31,37 @@ $(document).ready(function () {
     });
 
 
+    $(".client-selector").select2({
+        placeholder: "Select a client",
+        minimumInputLength: 3,
+        ajax: {
+            url: "/api/customer",
+            dataType: 'json',
+            delay: 250,
+            placeholder: "Select a client",
+            minimumInputLength: 5,
+            data: function (params) {
+                var queryParameters = {
+                    searchTerm: params.term, // search term
+                };
+                return queryParameters;
+            },
+            processResults: function (data, params) {
+
+
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.Name,
+                            id: item.Id
+                        }
+                    })
+                };
+            },
+        },
+    });
+
+
 
     $(".position-selector").select2({
         placeholder: "Select a title",
@@ -82,6 +113,7 @@ $(document).ready(function () {
         data: daysOfWeek
     });
 
+
    
     $('#startdatepicker').datetimepicker({
         format: "MM/DD/YYYY"
@@ -95,6 +127,20 @@ $(document).ready(function () {
     });
     $("#enddatepicker").on("dp.change", function (e) {
         $('#startdatepicker').data("DateTimePicker").maxDate(e.date);
+    });
+
+    $('#projectStartdatepicker').datetimepicker({
+        format: "MM/DD/YYYY"
+    });
+    $('#projectEnddatepicker').datetimepicker({
+        format: "MM/DD/YYYY",
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#projectStartdatepicker").on("dp.change", function (e) {
+        $('#projectEnddatepicker').data("DateTimePicker").minDate(e.date);
+    });
+    $("#projectEnddatepicker").on("dp.change", function (e) {
+        $('#projectStartdatepicker').data("DateTimePicker").maxDate(e.date);
     });
 
 

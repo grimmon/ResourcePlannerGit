@@ -170,7 +170,7 @@
                 <button id="pageRightButton" style="right: 0px">&gt;</button>
             </div>
         </div>
-        <!--<my-app>Loading...</my-app>-->
+        <my-app></my-app>
         <div class="body">
             <div id="myGrid" class="ag-fresh"></div>
         </div>
@@ -213,6 +213,12 @@
                         <div class="col-md-4">
                             <select class="project-selector" style="width: 50%"></select>
                             <select class="position-selector" multiple="multiple" style="width: 50%"></select>
+                            <select id="assignmentPracticesDropdown" class="form-control" style="width:50%">
+                                <option selected disabled value="-2">Select a practice</option>
+                            </select>
+                            <select id="assignmentSubpracticesDropdown" class="form-control" style="width:50%">
+                                <option value="-2" selected disabled>Select a subpractice</option>
+                            </select>
                             <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
                                 <option value="2" selected="selected">Monday</option>
                                 <option value="3" selected="selected">Tuesday</option>

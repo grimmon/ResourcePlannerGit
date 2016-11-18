@@ -70,6 +70,8 @@ function buildResourceAssignmentQuery(params) {
     filters += pageSizeParam + pageNumParam;
 
     var title = $(".position-selector").select2("val");
+    var practice    = document.getElementById('assignmentPracticesDropdown'   ).value;
+    var subPractice = document.getElementById('assignmentSubpracticesDropdown').value;
 
     var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
@@ -84,6 +86,11 @@ function buildResourceAssignmentQuery(params) {
     filters += "&startDate=" + formattedStartDate;
     filters += "&endDate=" + formattedEndDate;
     filters += "&availability=true"
+
+    if (practice > 0 && practice != '') { filters += "&practice=" + practice; }
+    if (subPractice > 0 && subPractice != '') { filters += "&subpractice=" + subPractice; }
+
+
 
     if (title != null){
         if (title.length > 0) {

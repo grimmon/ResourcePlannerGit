@@ -10,12 +10,12 @@ using System.Web;
 
 namespace ResourcePlanner.Services.DataAccess
 {
-    public class AssignmentDataAccess
+    public class AddAssignmentDataAccess
     {
         private readonly string _connectionString;
         private readonly int _timeout;
 
-        public AssignmentDataAccess(string connectionString, int timeout)
+        public AddAssignmentDataAccess(string connectionString, int timeout)
         {
             _connectionString = connectionString;
             _timeout = timeout;
