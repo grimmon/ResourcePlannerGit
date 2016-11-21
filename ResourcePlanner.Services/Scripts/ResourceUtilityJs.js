@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
     getDropdownValues();
     dateTimeInit();
     ShowAddIfAuth();
-    //assignmentModalLoad();
-    //assignmentGridApply();
-    //assignmentSave();
 });
 
 function ShowAddIfAuth() {
@@ -50,22 +47,24 @@ function ShowAddIfAuth() {
     callResourceServerAuth(params, "api/authorized", function () {
         document.getElementById("addAssignmentGrid").style.display = "block";
         assignmentModalLoad();
-        assignmentGridApply();
-        assignmentSave();
     }, function () { });
 }
 
 function assignmentSave() {
     $("#saveAssignment").click(addAssignmentsToServer);
-    
+    $("#projectModalUnload").click(closeProjectModal);
 }
 
 function assignmentModalLoad() {
     $("#assignmentModalLoad").click(refreshResourceAssignmentGrid);
-}
-
-function assignmentGridApply() {
     $("#assignmentGridApply").click(AssignmentApply);
+    $("#saveAssignment").click(addAssignmentsToServer);
+    $("#saveProject").click(addProjectToServer);
+    $("#projectModalLoad").click(openProjectModal);
+    $("#projectModalBack").click(closeProjectModal);
+    $("#addClient").click(newClient);
+    $("#closeClient").click(closeClient);
+
 }
 
 function dropDownInit() {
@@ -74,6 +73,27 @@ function dropDownInit() {
     callResourceServerAuth(null, query, dropDownSuccessCallback, showError);
 }
 
+function openProjectModal() {
+    $("#assignmentModal").modal("hide");
+    $("#projectModal").modal("show");
+}
+
+function closeProjectModal() {
+    $("#projectModal").modal("hide");
+    $("#assignmentModal").modal("show");
+}
+
+function newClient() {
+    document.getElementById('clientSelector').style.display = "none";
+    document.getElementById('newClient').style.display = "block";
+}
+
+function closeClient() {
+    document.getElementById('newClient').value = "";
+    document.getElementById('newClient').style.display = "none";
+    document.getElementById('clientSelector').style.display = "block";
+    
+}
 function dateTimeInit() {
     var now = new Date();
 
@@ -360,6 +380,66 @@ var loadingCellRenderer = function (params) {
     }
 };
 
+
+function addProjectToServer() {
+    $("#saveProject").prop("disabled", true);
+    var query = buildProjectQuery();
+    callAssignmentServerAuth(query, onCallAddProjectSuccess, showError);
+}
+
+function buildProjectQuery() {
+    var filters = "?"
+    var projectName = document.getElementById('projectName').value;
+    filters += "projectName=" + projectName;
+    var projectDescription = document.getElementById('projectDescription').value;
+    if (!isNullOrUndefined(projectDescription)) {
+        filters += "&projectDescription"
+    }
+    var clientName = document.getElementById('clientName').value;
+    var clientId = $(".client-selector").select2("val");
+
+    if (!isNullOrUndefined(clientName)) {
+        filters += "&customerName=" + clientName;
+    }
+    else if (clientId > 0) {
+        filters += "&customerId=" + clientId;
+    }
+
+    var startDate = StartDate = $('#projectstartdatepicker').data('DateTimePicker').date();
+    var endDate = $('#projectenddatepicker').data('DateTimePicker').date();
+
+    var formattedStartDate = dateTimeUtility.formatDate(new Date(startDate));
+    var formattedEndDate = dateTimeUtility.formatDate(new Date(endDate));
+
+    filters += "&startdate=" + formattedStartDate;
+    filters += "&enddate=" + formattedEndDate;
+
+    var projectManagerId = $(".pm-selector").select2("val");
+    
+    if (projectManagerId > 0) {
+        filters += "&projectmanager=" + projectManagerId;
+    }
+    
+    var opportunityOwnerId = $(".oo-selector").select2("val");
+
+    if (opportunityOwnerId > 0) {
+        filters += "&opportunityOwner=" + opportunityOwnerId;
+    }
+
+    var query = 'api/addproject' + filters;
+
+    return query;
+}
+
+function onCallAddProjectSuccess(params, query, httpResponse) {
+    $("#saveAssignment").prop('disabled', false);
+    $("#projectModal").modal("hide");
+    $("#assignmentModal").modal("show");
+    //$(".project-selector").data.push({ id: httpResponse.id, text: httpResponse.name });
+    //$(".project-selector").val(httpResponse.id).trigger("change");
+
+}
+
 function callResourceServerAuth(params, query, resourceSuccessCallback, resourceFailureCallback) {
     var authContext = new AuthenticationContext(config);
 
@@ -422,4 +502,4 @@ function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailur
     };
 }
 
-function isNullOrUndefined(obj) { return obj === undefined || obj == null; }
+function isNullOrUndefined(obj) { return obj === undefined || obj == null || obj == ""; }

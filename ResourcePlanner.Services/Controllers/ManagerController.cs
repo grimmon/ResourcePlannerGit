@@ -15,7 +15,7 @@ namespace ResourcePlanner.Services.Controllers
     public class ManagerController : ApiController
     {
         [HttpGet]
-        [Authorize]
+        //[Authorize]
 
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {
@@ -36,7 +36,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                values = access.GetManagers(searchTerm1, searchTerm2, searchTerm3);
+              values = access.GetManagers(searchTerm1, searchTerm2, searchTerm3);
             }
             catch (Exception ex)
             {

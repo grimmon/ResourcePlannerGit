@@ -57,7 +57,7 @@
                     </div>
                     <div class="headerbuttonbox" id="addAssignmentGrid" style="display: none;">
                         <div class="headerbutton">
-                            <a data-toggle="modal" data-target="#myModal" id="assignmentModalLoad">
+                            <a data-toggle="modal" data-target="#assignmentModal" id="assignmentModalLoad">
                                 <div>
                                     <img src="/Images/add.png" alt="Add" height="50" />
                                 </div>
@@ -201,7 +201,7 @@
         </div>
     </div>
 
-    <div id="myModal" class="modal modal-wide fade">
+    <div id="assignmentModal" class="modal modal-wide fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -212,6 +212,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <select class="project-selector" style="width: 50%"></select>
+                            <a id="projectModalLoad">
+                                <div>
+                                    <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" />
+                                </div>
+                            </a>
+
                             <select class="position-selector" multiple="multiple" style="width: 50%"></select>
                             <select id="assignmentPracticesDropdown" class="form-control" style="width:50%">
                                 <option selected disabled value="-2">Select a practice</option>
@@ -257,6 +263,63 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveAssignment">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="projectModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a Project</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectName">Name:</label>
+                        <input type="text" class="form-control" id="projectName">
+                        <label for="projectDescription">Description:</label>
+                        <input type="text" class="form-control" id="projectDescription">
+                    </div>
+                    <div id="clientSelector">
+                        <select class="client-selector"></select>
+                        <a id="addClient">
+                            <div>
+                                <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="" />
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="form-group" id="newClient" style="display: none">
+                        <label for="clientName">Add client name:</label>
+                        <input type="text" class="form-control" id="clientName">
+                        <a id="closeClient">
+                            <div>
+                                <img src="/Images/IRMT_Icons_CloseBtn.png" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class='input-group date' id='projectstartdatepicker' data-date-format="YYYY-MM-DD">
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <div class='input-group date' id='projectenddatepicker'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <select class="pm-selector"></select>
+                    <select class="oo-selector"></select>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="projectModalBack">Back</button>
+                    <button type="button" class="btn btn-primary" id="saveProject">Save Project</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

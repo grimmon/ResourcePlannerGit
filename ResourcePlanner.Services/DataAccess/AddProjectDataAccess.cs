@@ -65,17 +65,17 @@ namespace ResourcePlanner.Services.DataAccess
             var parameterList = new List<SqlParameter>();
 
             
-            if (searchTerm1 == "")
+            if (searchTerm1 != "")
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm1", 100, SqlDbType.VarChar, searchTerm1));
             }
-            if (searchTerm2 == "")
+            if (searchTerm2 != "")
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm2", 100, SqlDbType.VarChar, searchTerm2));
             }
-            if (searchTerm3 == "")
+            if (searchTerm3 != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3", SqlDbType.Float, searchTerm3));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3", 100, SqlDbType.VarChar, searchTerm3));
             }
 
             return parameterList.ToArray();
