@@ -102,11 +102,11 @@ namespace ResourcePlanner.Services.DataAccess
             }
             if (project.OpportunityOwnerId.HasValue)
             { 
-                parameterList.Add(AdoUtility.CreateSqlParameter("OpportunityOwnerId", 20, SqlDbType.Date, project.OpportunityOwnerId.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("OpportunityOwnerId", SqlDbType.Int, project.OpportunityOwnerId.Value));
             }
             if (project.ProjectManagerId.HasValue)
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("ProjectManagerId", 20, SqlDbType.Date, project.ProjectManagerId.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("ProjectManagerId", SqlDbType.Int, project.ProjectManagerId.Value));
             }
 
             return parameterList.ToArray();

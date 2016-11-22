@@ -393,16 +393,16 @@ function buildProjectQuery() {
     filters += "projectName=" + projectName;
     var projectDescription = document.getElementById('projectDescription').value;
     if (!isNullOrUndefined(projectDescription)) {
-        filters += "&projectDescription"
+        filters += "&description=" + projectDescription;
     }
     var clientName = document.getElementById('clientName').value;
     var clientId = $(".client-selector").select2("val");
 
     if (!isNullOrUndefined(clientName)) {
-        filters += "&customerName=" + clientName;
+        filters += "&clientName=" + clientName;
     }
     else if (clientId > 0) {
-        filters += "&customerId=" + clientId;
+        filters += "&clientId=" + clientId;
     }
 
     var startDate = StartDate = $('#projectstartdatepicker').data('DateTimePicker').date();
