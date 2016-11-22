@@ -1,7 +1,7 @@
 ﻿function getDropdownValues(){
     var query = 'api/dropdown';
 
-    callResourceServerAuth(null, query, dropDownSuccessCallback, showError);
+    callServerWithResponseAuth('GET', null, query, dropDownSuccessCallback, showError);
 }
 
 function dropDownSuccessCallback(params, query, httpResponse) {

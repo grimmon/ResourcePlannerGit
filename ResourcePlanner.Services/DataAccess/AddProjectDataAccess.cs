@@ -22,15 +22,23 @@ namespace ResourcePlanner.Services.DataAccess
         }
 
 
-        public void AddProject(AddProject project)
+        public IdNameGeneric AddProject(AddProject project)
         {
+            IdNameGeneric result = null;
 
-            AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
+            var results = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectId", "ProjectName"),
                 _connectionString,
                 @"rpdb.InternalProjectInsert",
                 CommandType.StoredProcedure,
                 _timeout,
                 ProjectParameters(project));
+            if (results.Count > 0)
+            {
+                result = results[0];
+            }
+            return result;
+
+            
         }
 
         public List<IdNameGeneric> GetCustomers(string searchTerm)

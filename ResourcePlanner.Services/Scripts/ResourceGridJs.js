@@ -50,7 +50,7 @@ function refreshResourceGrid() {
         rowCount: null, // behave as infinite scroll
         getRows: function getResourceData(params) {
             var query = buildResourceQuery(params);
-            callResourceServerAuth(params, query, onCallResourceSuccess, showError);
+            callServerWithResponseAuth('GET', params, query, onCallResourceSuccess, showError);
         }
     };
 

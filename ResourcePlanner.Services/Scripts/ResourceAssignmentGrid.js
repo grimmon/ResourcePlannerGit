@@ -49,7 +49,7 @@ function refreshResourceAssignmentGrid() {
         rowCount: null, // behave as infinite scroll
         getRows: function getResourceAssignmentData(params) {
             var query = buildResourceAssignmentQuery(params);
-            callResourceServerAuth(params, query, onCallResourceAssignmentSuccess, showError);
+            callServerWithResponseAuth('GET', params, query, onCallResourceAssignmentSuccess, showError);
         }
     };
 
@@ -159,7 +159,7 @@ function updateResourceAssignmentAggregation(aggregation) {
 function addAssignmentsToServer() {
     $("#saveAssignment").prop("disabled", true);
     var query = buildAssignmentInsertQuery();
-    callAssignmentServerAuth(query, onCallAddAssignmentSuccess, showError);
+    callServerAuth(query, onCallAddAssignmentSuccess, showError);
 }
 
 function buildAssignmentInsertQuery() {

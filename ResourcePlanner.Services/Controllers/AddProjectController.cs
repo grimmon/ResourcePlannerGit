@@ -62,14 +62,18 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                access.AddProject(project);
+                var projectReturn = access.AddProject(project);
+                if (projectReturn == null)
+                {
+                    return Content(HttpStatusCode.InternalServerError, "Error retrieving added ProjectId");
+                }
+                return Ok(projectReturn);
             }
             catch (Exception ex)
             {
                 throw;
             }
-
-            return Ok();
+           
         }
     }
 }

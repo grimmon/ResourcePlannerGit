@@ -44,10 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function ShowAddIfAuth() {
     var params = {};
-    callResourceServerAuth(params, "api/authorized", function () {
+    callServerWithResponseAuth('GET', params, "api/authorized", function () {
         document.getElementById("addAssignmentGrid").style.display = "block";
         assignmentModalLoad();
-    }, function () { });
+    }, showError);
+}
+
+function flashTest(httpRequest, errorName) {
+    return false;
 }
 
 function assignmentSave() {
@@ -70,7 +74,7 @@ function assignmentModalLoad() {
 function dropDownInit() {
     var query = 'api/dropdown';
 
-    callResourceServerAuth(null, query, dropDownSuccessCallback, showError);
+    callServerWithResponseAuth('GET', null, query, dropDownSuccessCallback, showError);
 }
 
 function openProjectModal() {
@@ -384,7 +388,7 @@ var loadingCellRenderer = function (params) {
 function addProjectToServer() {
     $("#saveProject").prop("disabled", true);
     var query = buildProjectQuery();
-    callAssignmentServerAuth(query, onCallAddProjectSuccess, showError);
+    callServerWithResponseAuth('POST', null, query, onCallAddProjectSuccess, showError);
 }
 
 function buildProjectQuery() {
@@ -432,15 +436,15 @@ function buildProjectQuery() {
 }
 
 function onCallAddProjectSuccess(params, query, httpResponse) {
-    $("#saveAssignment").prop('disabled', false);
+    $("#saveProject").prop('disabled', false);
     $("#projectModal").modal("hide");
     $("#assignmentModal").modal("show");
-    //$(".project-selector").data.push({ id: httpResponse.id, text: httpResponse.name });
-    //$(".project-selector").val(httpResponse.id).trigger("change");
+    var newProject = new Option(httpResponse.Name, httpResponse.Id, true, true);
+    $(".project-selector").append(newProject).trigger("change");
 
 }
 
-function callResourceServerAuth(params, query, resourceSuccessCallback, resourceFailureCallback) {
+function callServerWithResponseAuth(method, params, query, successCallback, failureCallback) {
     var authContext = new AuthenticationContext(config);
 
     authContext.acquireToken(authContext.config.clientId, function (error, token) {
@@ -448,23 +452,23 @@ function callResourceServerAuth(params, query, resourceSuccessCallback, resource
             alert('ADAL Error: ' + error);
             return;
         }
-        callResourceServer(params, query, resourceSuccessCallback, resourceFailureCallback, token);
+        callServerWithResponse(method, params, query, successCallback, failureCallback, token);
     });
 }
 
-function callResourceServer(params, query, resourceSuccessCallback, resourceFailureCallback, token) {
+function callServerWithResponse(method, params, query, successCallback, failureCallback, token) {
     var httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', query);
+    httpRequest.open(method, query);
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
     httpRequest.send();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 httpResponse = JSON.parse(httpRequest.responseText);
-                resourceSuccessCallback(params, query, httpResponse);
+                successCallback(params, query, httpResponse);
             }
             else {
-                resourceFailureCallback(httpRequest);
+                failureCallback(httpRequest);
             }
         }
     };
@@ -472,7 +476,7 @@ function callResourceServer(params, query, resourceSuccessCallback, resourceFail
 
 }
 
-function callAssignmentServerAuth(query, assignmentSuccessCallback, assignmentFailureCallback) {
+function callServerAuth(query, successCallback, failureCallback) {
     var authContext = new AuthenticationContext(config);
 
     authContext.acquireToken(authContext.config.clientId, function (error, token) {
@@ -480,11 +484,11 @@ function callAssignmentServerAuth(query, assignmentSuccessCallback, assignmentFa
             alert('ADAL Error: ' + error);
             return;
         }
-        callAssignmentServer(query, assignmentSuccessCallback, assignmentFailureCallback, token);
+        callAssignmentServer(query, successCallback, failureCallback, token);
     });
 }
 
-function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailureCallback, token) {
+function callServer(query, successCallback, failureCallback, token) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('POST', query);
     httpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -493,10 +497,10 @@ function callAssignmentServer(query, assignmentSuccessCallback, assignmentFailur
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 //httpResponse = JSON.parse(httpRequest.responseText);
-                assignmentSuccessCallback(query);
+                successCallback(query);
             }
             else {
-                assignmentFailureCallback(httpRequest);
+                failureCallback(httpRequest);
             }
         }
     };
