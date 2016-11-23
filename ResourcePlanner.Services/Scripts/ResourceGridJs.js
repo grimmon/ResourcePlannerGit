@@ -119,12 +119,14 @@ function onCallResourceSuccess(params, query, httpResponse) {
         var timePeriod = httpResponse.TimePeriods[i];
         resourceGroupHeaders[i] = "";
         if (i == 0){
-            resourceGroupHeaders[i] += '<button id="pageLeftButton" style="float: left;">&lt;</button>';
+            resourceGroupHeaders[i] += '<a id="pageLeftButton" style="float: left;"><img src="/Images/IRMT_Icons_BackAWeek.png" alt="Add project" /></a>'
+                                
+                            ;
             //'<a id="pageLeftButton"><div><img src="../Images/filters.svg.png" alt="Filters"></div></a>'
         }
         resourceGroupHeaders[i] +=  timePeriod; 
         if (i == 7) {
-            resourceGroupHeaders[i] += '<button id="pageRightButton" style="float: right;">&gt;</button>';
+            resourceGroupHeaders[i] += '<a id="pageRightButton" style="float: right;"><img src="/Images/IRMT_Icons_ForwardAWeek.png" alt="Add project" /></a>';
         }
     }
 
