@@ -132,8 +132,6 @@ function onDropDownSuccess() {
 function buttonHookups() {
     var applyButton = document.getElementById("applyButton");
     var filterButton = document.getElementById("filterButton");
-    var pageLeftButton = document.getElementById("pageLeftButton");
-    var pageRightButton = document.getElementById("pageRightButton");
     var modal = document.getElementById("errorModal");
     var span = document.getElementsByClassName("close")[0];
 
@@ -146,9 +144,6 @@ function buttonHookups() {
             modal.style.display = "none";
         }
     }
-
-    pageLeftButton.onclick = pageDown;
-    pageRightButton.onclick = pageUp;
 
     applyButton.onclick = function () {
         var aggregation = document.getElementById('aggregationsDropdown').value;
@@ -279,13 +274,13 @@ function createColumns(startingColumns, groupType) {
     //add initial colummns
     for (var i = 0; i < startingColumns.length; i++) {
         var column = startingColumns[i];
-
+        
         newColumns[i] = column;
     }
 
-    for (i = 0; i < dataColumnsCount; i++) {
+    for (i = 0; i < dataColumnsCount; i++) {  
         column = createColumn(i, groupType);
-
+      
         var newColumnIndex = i + startingColumns.length;
         newColumns[newColumnIndex] = column;
     }
@@ -320,10 +315,10 @@ function createColumn(fieldName, groupType) {
         suppressMenu: true,
         context: { type: groupType, index: fieldName },
         children: [
-            { width: 67, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ResourceHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
-            { width: 67, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
-            { width: 67, context: { type: "dataColumn", index: 2 }, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
-            { width: 67, context: { type: "dataColumn", index: 3 }, field: fieldName + "-DeltaHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
+            { width: 45, context: { type: "dataColumn", index: 0 }, field: fieldName + "-ResourceHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 45, context: { type: "dataColumn", index: 1 }, field: fieldName + "-ForecastHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 45, context: { type: "dataColumn", index: 2 }, field: fieldName + "-ActualHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true },
+            { width: 45, context: { type: "dataColumn", index: 3 }, field: fieldName + "-DeltaHours", cellRenderer: timePeriodCellRenderer, suppressSorting: true, suppressMenu: true }
         ]
     };
 }
@@ -369,7 +364,7 @@ var timePeriodCellRenderer = function (params) {
             return '';
         }
 
-        return floatValue.toFixed(2);
+        return floatValue.toFixed(0);
     }
     else {
         return '';
@@ -441,7 +436,6 @@ function onCallAddProjectSuccess(params, query, httpResponse) {
     $("#assignmentModal").modal("show");
     var newProject = new Option(httpResponse.Name, httpResponse.Id, true, true);
     $(".project-selector").append(newProject).trigger("change");
-
 }
 
 function callServerWithResponseAuth(method, params, query, successCallback, failureCallback) {

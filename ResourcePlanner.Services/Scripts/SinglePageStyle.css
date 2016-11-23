@@ -118,6 +118,11 @@
     padding-left: 25px;
 }
 
+.ag-fresh .ag-header-group-cell-label {
+    text-align: center;
+
+}
+
 .modal.modal-wide .modal-dialog {
   width: 90%;
   padding-top: 120px;

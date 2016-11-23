@@ -117,12 +117,24 @@ function onCallResourceSuccess(params, query, httpResponse) {
 
     for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
         var timePeriod = httpResponse.TimePeriods[i];
-        resourceGroupHeaders[i] = timePeriod;
+        resourceGroupHeaders[i] = "";
+        if (i == 0){
+            resourceGroupHeaders[i] += '<button id="pageLeftButton" style="float: left;">&lt;</button>';
+            //'<a id="pageLeftButton"><div><img src="../Images/filters.svg.png" alt="Filters"></div></a>'
+        }
+        resourceGroupHeaders[i] +=  timePeriod; 
+        if (i == 7) {
+            resourceGroupHeaders[i] += '<button id="pageRightButton" style="float: right;">&gt;</button>';
+        }
     }
 
     params.successCallback(rows, httpResponse.TotalRowCount);
     resourceGrid.options.api.hideOverlay();
     resourceGrid.options.api.refreshHeader();
+    var pageLeftButton = document.getElementById("pageLeftButton");
+    var pageRightButton = document.getElementById("pageRightButton");
+    pageLeftButton.onclick = pageDown;
+    pageRightButton.onclick = pageUp;
 }
 
 function createResourceRow(row, resource, timePeriods) {
