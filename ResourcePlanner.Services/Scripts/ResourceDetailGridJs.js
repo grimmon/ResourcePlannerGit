@@ -132,3 +132,7 @@ function addProjectData(row, project) {
 function updateResourceDetailAggregation(aggregation) {
     resourceDetailGrid.currentAggregation = aggregation;
 }
+
+function exportToExcel() {
+
+}

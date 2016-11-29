@@ -204,7 +204,7 @@ namespace ResourcePlanner.Services.DataAccess
             
             try
             {
-                var delay = Task.Delay(_timeout);
+                var delay = Task.Delay(300000);
                 await Task.WhenAny(Task.WhenAll(new Task[] { resourceTask }), delay);
 
                 if (delay.Status == TaskStatus.RanToCompletion)
@@ -216,6 +216,10 @@ namespace ResourcePlanner.Services.DataAccess
                 var excelData = excelMapper.MapResourcePageToExcel(param, page);
 
                 return excelData.ConvertToStream();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
         }
 

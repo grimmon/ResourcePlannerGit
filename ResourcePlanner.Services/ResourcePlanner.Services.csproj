@@ -202,6 +202,7 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\DateTimeUtility.js" />
     <Content Include="Scripts\DropdownJs.js" />
+    <Content Include="Scripts\Filesaver.min.js" />
     <Content Include="Scripts\jquery.tagit.css" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\PageControls.js" />

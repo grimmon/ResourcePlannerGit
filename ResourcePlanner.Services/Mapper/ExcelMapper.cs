@@ -56,6 +56,7 @@ namespace ResourcePlanner.Services.Mapper
                 document.SetCellValue(ExcelUtility.GetExcelAddress(7, rowNumber), datum.ResourceHours);
                 document.SetCellValue(ExcelUtility.GetExcelAddress(8, rowNumber), datum.ForecastHours);
                 document.SetCellValue(ExcelUtility.GetExcelAddress(9, rowNumber), datum.ActualHours);
+                rowNumber++;
             }
 
             return document;

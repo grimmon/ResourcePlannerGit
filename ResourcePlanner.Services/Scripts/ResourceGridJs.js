@@ -39,7 +39,7 @@ function initializeResourceGrid() {
 
     var startingResourceColumns = createColumns(startingResourceColumnDefs, "resourceGroupColumn");
     resourceGrid.options.api.setColumnDefs(startingResourceColumns);
-
+    $("#exportExcel").click(exportResourceToExcel);
     refreshResourceGrid();
 }
 
@@ -57,19 +57,21 @@ function refreshResourceGrid() {
     resourceGrid.options.api.setDatasource(dataSource);
 }
 
-function buildResourceQuery(params) {
-    var pageSize = (params.endRow - params.startRow);
-    var pageNum = params.startRow / pageSize;
-
-    console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+function buildResourceQuery(params, excel) {
+   
 
     var filters = '?';
+    if (excel) { }
+    else {
+        var pageSize = (params.endRow - params.startRow);
+        var pageNum = params.startRow / pageSize;
 
-    var pageSizeParam = 'pageSize=' + pageSize;
-    var pageNumParam  = '&pageNum=' + pageNum;
+        console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+        var pageSizeParam = 'pageSize=' + pageSize;
+        var pageNumParam = '&pageNum=' + pageNum;
 
-    filters += pageSizeParam + pageNumParam;
-
+        filters += pageSizeParam + pageNumParam;
+    }
     var city        = document.getElementById('citiesDropdown'      ).value;
     var orgUnit     = document.getElementById('orgUnitsDropdown'    ).value;
     var region      = document.getElementById('regionsDropdown'     ).value;
@@ -101,14 +103,18 @@ function buildResourceQuery(params) {
     if (searchTerm1 != null && searchTerm1 != '') { filters += "&searchterm1=" + searchTerm1; }
     if (searchTerm2 != null && searchTerm2 != '') { filters += "&searchterm2=" + searchTerm2; }
     if (searchTerm3 != null && searchTerm3 != '') { filters += "&searchterm3=" + searchTerm3; }
-
+    if (!excel){
     if (params.sortModel.length > 0) {
         filters += '&sortOrder='     + params.sortModel[0].colId;
         filters += "&sortDirection=" + params.sortModel[0].sort;
+    }}
+    var query = '';
+    if (excel) {
+        query = 'api/resource/excelexport' + filters;
     }
-
-    var query = 'api/resource' + filters;
-
+    else {
+        query = 'api/resource' + filters;
+    }
     return query;
 }
 
@@ -163,4 +169,11 @@ function rowSelectedFunc(event) {
 
 function updateResourceAggregation(aggregation) {
     resourceGrid.currentAggregation = aggregation;
+}
+
+function exportResourceToExcel() {
+    query = buildResourceQuery(null, true);
+    var iframe = $('<iframe frameborder="0" scrolling="no" id="myFrame"></iframe>');
+    iframe.attr('src', query);
+    iframe.appendTo('body');
 }

@@ -3,16 +3,18 @@ using ResourcePlanner.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.Controllers
 {
-    [RoutePrefix("/api/resource")]
+    [RoutePrefix("api/resource")]
     public class ResourceController : ApiController
     {
         [HttpGet]
@@ -94,10 +96,8 @@ namespace ResourcePlanner.Services.Controllers
             return Ok(resourcePage);
         }
 
-        [Route("ExcelExport")]
+        [Route("excelexport")]
         public async Task<HttpResponseMessage> GetExcel(TimeAggregation agg = TimeAggregation.Weekly,
-            SortOrder sortOrder = SortOrder.LastName,
-            SortDirection sortDirection = SortDirection.Asc,
             int? city = null,
             int? market = null,
             int? region = null,
@@ -115,8 +115,8 @@ namespace ResourcePlanner.Services.Controllers
             var pageParams = new ResourceQuery();
 
             pageParams.Aggregation = agg;
-            pageParams.Sort = sortOrder;
-            pageParams.SortDirection = sortDirection;
+            pageParams.Sort = Enums.Enums.SortOrder.LastName;
+            pageParams.SortDirection = Enums.Enums.SortDirection.Asc;
             pageParams.City = city;
             pageParams.OrgUnit = orgUnit;
             pageParams.Market = market;
@@ -145,12 +145,26 @@ namespace ResourcePlanner.Services.Controllers
 #if MOCK
                 DelayUtility.Delay(ConfigUtility.MockMaxDelayInSeconds * 1000);
 #endif
-                return System.Web.HttpUtility.BuildHttpResponseMessage(stream, name);
+                return BuildHttpResponseMessage(stream, name);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        public HttpResponseMessage BuildHttpResponseMessage(Stream stream, string name)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(@"application/octet-stream");
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = name + ".xlsx"
+            };
+
+            return result;
         }
     }
 }
