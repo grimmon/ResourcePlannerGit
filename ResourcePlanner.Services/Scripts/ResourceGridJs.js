@@ -146,7 +146,7 @@ function createResourceRow(row, resource, timePeriods) {
 }
 
 function addResourceData(row, resource) {
-    row.ResourceName = (resource.LastName + ", " || "" ) + resource.FirstName;
+    row.ResourceName = "<b>" + (resource.LastName + ", " || "" ) + resource.FirstName + "</b>";
     row.City        = resource.City;
     row.Position    = resource.Position;
     row.Practice    = resource.Practice;
