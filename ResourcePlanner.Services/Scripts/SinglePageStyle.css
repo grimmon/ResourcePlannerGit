@@ -120,6 +120,7 @@
 
 .ag-fresh .ag-header-group-cell-label {
     text-align: center;
+    color:#FFFFFF;
 
 }
 
@@ -132,3 +133,75 @@
 }
 
 #tallModal .modal-body p { margin-bottom: 900px }
+
+/* MLD:  11.28.2016 */
+.panel-body{
+    background-color: #CDCAC6;
+}
+
+ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
+    border-bottom:2px solid black;
+}
+
+span.tagit-label {
+    font-size:11pt;
+    font-weight:normal;
+    color:#000000;
+
+}
+
+.ag-pinned-left-header {
+    background-color:#CC0057;
+    font-size: 12pt;
+    font-weight:bold;
+    color:#FFFFFF;
+
+}
+
+.ag-header-group-cell-label {
+   background-color:#534742;
+}
+
+.ag-fresh .ag-row-selected {
+    background-color: #CC0057;
+    opacity:0.15;
+    font-weight:900;
+}
+
+.ag-row-selected > ag-cell-value {
+    font-weight:bold;
+}
+
+#regionsDropdown{
+    color:#FFFFFF;
+    opacity: 0.5;
+}
+
+#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
+    font-size:10pt;
+    font-weight:normal;
+    color:#534742;
+}
+
+.ag-header.group-text{
+    font-size:11pt;
+    font-weight:normal;
+    color:#000000;
+
+}
+#ResourceName{
+    font-size:12pt;
+    font-weight:bold;
+    color:#FFFFFF;
+
+}
+
+.form-control {
+    background-color: #E5E6E7;
+}
+
+span.select2-selection__arrow {
+    background-image: url('../Images/IRMT_Icons_MagnifyingGlass.png');
+    background-repeat:no-repeat;
+}
+
