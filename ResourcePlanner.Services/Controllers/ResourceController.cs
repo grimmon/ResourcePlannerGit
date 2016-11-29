@@ -93,5 +93,64 @@ namespace ResourcePlanner.Services.Controllers
 
             return Ok(resourcePage);
         }
+
+        [Route("ExcelExport")]
+        public async Task<HttpResponseMessage> GetExcel(TimeAggregation agg = TimeAggregation.Weekly,
+            SortOrder sortOrder = SortOrder.LastName,
+            SortDirection sortDirection = SortDirection.Asc,
+            int? city = null,
+            int? market = null,
+            int? region = null,
+            int? orgUnit = null,
+            int? practice = null,
+            int? subpractice = null,
+            string title = "",
+            string searchterm1 = "",
+            string searchterm2 = "",
+            string searchterm3 = "",
+            DateTime? StartDate = null,
+            DateTime? EndDate = null)
+        {
+
+            var pageParams = new ResourceQuery();
+
+            pageParams.Aggregation = agg;
+            pageParams.Sort = sortOrder;
+            pageParams.SortDirection = sortDirection;
+            pageParams.City = city;
+            pageParams.OrgUnit = orgUnit;
+            pageParams.Market = market;
+            pageParams.Region = region;
+            pageParams.SearchTerm1 = searchterm1;
+            pageParams.SearchTerm2 = searchterm2;
+            pageParams.SearchTerm3 = searchterm3;
+            pageParams.Practice = practice;
+            pageParams.SubPractice = subpractice;
+            pageParams.StartDate = StartDate.Value;
+            pageParams.EndDate = EndDate.Value;
+            pageParams.PageNum = 0;
+            pageParams.PageSize = int.MaxValue;
+            pageParams.Excel = true;
+
+#if Mock
+            var access = new MockDataAccess();
+#else
+            var access = new ResourceDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+#endif
+            try
+            {
+                var stream = await access.GetExcelStream(pageParams);
+                var name = string.Format("Resource Data {0}, {1}", pageParams.StartDate, pageParams.EndDate);
+#if MOCK
+                DelayUtility.Delay(ConfigUtility.MockMaxDelayInSeconds * 1000);
+#endif
+                return System.Web.HttpUtility.BuildHttpResponseMessage(stream, name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

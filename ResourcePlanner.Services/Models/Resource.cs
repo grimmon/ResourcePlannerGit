@@ -26,6 +26,19 @@ namespace ResourcePlanner.Services.Models
         public int PageNum { get; set; }
         public int TotalRowCount { get; set; }
     }
+    public class ResourcePageExcelData
+    {
+        public string FirstName { get; set; } 
+        public string LastName { get; set; }
+        public string City { get; set; }
+        public string Position { get; set; }
+        public string Practice { get; set; }
+        public string SubPractice { get; set; }
+        public string TimePeriod { get; set; }
+        public string ForecastHours { get; set; }
+        public string ActualHours { get; set; }
+        public string ResourceHours { get; set; }
+    }
     public class Resource
     {
         public int ResourceId { get; set; }
@@ -106,6 +119,7 @@ namespace ResourcePlanner.Services.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Availability { get; set; }
+        public bool Excel { get; set; }
 
     }
 

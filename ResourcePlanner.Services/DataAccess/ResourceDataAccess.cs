@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web;
 using ResourcePlanner.Services.Models;
@@ -8,6 +10,7 @@ using ResourcePlanner.Services.Mapper;
 using System.Data;
 using System.Data.SqlClient;
 using static ResourcePlanner.Services.Enums.Enums;
+
 
 namespace ResourcePlanner.Services.DataAccess
 {
@@ -86,6 +89,61 @@ namespace ResourcePlanner.Services.DataAccess
             
         }
 
+        public ResourcePageExcelData[] GetResourceExcelData(ResourceQuery pageParams)
+        {
+
+
+            ResourcePageExcelData[] returnValue = new ResourcePageExcelData[] { };
+            switch (pageParams.Aggregation)
+            {
+
+
+                case TimeAggregation.Daily:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
+                        _connectionString,
+                        @"rpdb.ResourcePageDailySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Weekly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
+                        _connectionString,
+                        @"rpdb.ResourcePageWeeklySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Monthly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
+                        _connectionString,
+                        @"rpdb.ResourcePageMonthlySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+
+                case TimeAggregation.Quarterly:
+
+                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
+                        _connectionString,
+                        @"rpdb.ResourcePageQuarterlySelect",
+                        CommandType.StoredProcedure,
+                        _timeout,
+                        CreateResourcePageParamArray(pageParams));
+                    break;
+                default:
+                    break;
+            }
+            return returnValue;
+
+        }
+
         public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
             var returnValue = new DetailPage();
@@ -137,6 +195,28 @@ namespace ResourcePlanner.Services.DataAccess
             }
             returnValue.TimeScale = Aggregation;
             return returnValue;
+        }
+
+        public async Task<Stream> GetExcelStream(ResourceQuery param)
+        {
+            var excelMapper = new ExcelMapper();
+            var resourceTask = Task.Factory.StartNew(() => GetResourceExcelData(param));
+            
+            try
+            {
+                var delay = Task.Delay(_timeout);
+                await Task.WhenAny(Task.WhenAll(new Task[] { resourceTask }), delay);
+
+                if (delay.Status == TaskStatus.RanToCompletion)
+                {
+                    throw new TimeoutException("At least one task exceeded timeout");
+                }
+
+                var page = resourceTask.Result;
+                var excelData = excelMapper.MapResourcePageToExcel(param, page);
+
+                return excelData.ConvertToStream();
+            }
         }
 
         private SqlParameter[] CreateResourcePageParamArray(ResourceQuery pageParams)
