@@ -163,9 +163,8 @@ span.tagit-label {
 }
 
 .ag-fresh .ag-row-selected {
-    background-color: #CC0057;
-    opacity:0.15;
-    font-weight:900;
+    background-color: rgba(204, 0, 87, 0.15);
+    font-weight:bold;
 }
 
 .ag-row-selected > ag-cell-value {
