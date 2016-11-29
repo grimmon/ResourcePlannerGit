@@ -147,7 +147,7 @@ function createResourceAssignmentRow(row, resource, timePeriods) {
 
 
 function addResourceAssignmentData(row, resource) {
-    row.ResourceName = (resource.LastName + ", " || "") + resource.FirstName;
+    row.ResourceName = "<b>" + (resource.LastName + ", " || "") + resource.FirstName + "</b>";
     row.Position = resource.Position;
     row.Id = resource.ResourceId;
 }
