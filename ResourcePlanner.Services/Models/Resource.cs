@@ -112,6 +112,7 @@ namespace ResourcePlanner.Services.Models
         public int? Market { get; set; }
         public int? Practice { get; set; }
         public int? SubPractice { get; set; }
+        public int? ResourceManager { get; set; }
         public int[] Positions { get; set; }
         public string SearchTerm1 { get; set; }
         public string SearchTerm2 { get; set; }

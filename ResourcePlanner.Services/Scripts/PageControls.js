@@ -178,11 +178,24 @@ $(document).ready(function () {
     });
     $("#startdatepicker").on("dp.change", function (e) {
         $('#enddatepicker').data("DateTimePicker").minDate(e.date);
+        AssignmentApply();
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
     });
     $("#enddatepicker").on("dp.change", function (e) {
         $('#startdatepicker').data("DateTimePicker").maxDate(e.date);
+        AssignmentApply();
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
     });
-
     $('#projectstartdatepicker').datetimepicker({
         format: "MM/DD/YYYY"
     });
@@ -192,12 +205,32 @@ $(document).ready(function () {
     });
     $("#projectstartdatepicker").on("dp.change", function (e) {
         $('#projectenddatepicker').data("DateTimePicker").minDate(e.date);
+        if (readyForProjectSave()) {
+            $("#saveProject").prop("disabled", false);
+        }
+        else {
+            $("#saveProject").prop("disabled", true);
+        }
+        
     });
     $("#projectenddatepicker").on("dp.change", function (e) {
         $('#projectstartdatepicker').data("DateTimePicker").maxDate(e.date);
+        if (readyForProjectSave()) {
+            $("#saveProject").prop("disabled", false);
+        }
+        else {
+            $("#saveProject").prop("disabled", true);
+        }
+        
     });
 
-
-
+    $("#hoursPerDay").on("change", function () {
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
+    })
 
 });

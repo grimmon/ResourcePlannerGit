@@ -30,7 +30,8 @@ namespace ResourcePlanner.Services.Controllers
             int? region = null, 
             int? orgUnit = null, 
             int? practice = null, 
-            int? subpractice = null, 
+            int? subpractice = null,
+            int? resourcemanager = null, 
             string title = "",
             string searchterm1 = "", 
             string searchterm2 = "", 
@@ -67,6 +68,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SearchTerm3 = searchterm3;
             pageParams.Practice = practice;
             pageParams.SubPractice = subpractice;
+            pageParams.ResourceManager = resourcemanager;
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
 

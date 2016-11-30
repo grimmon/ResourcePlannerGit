@@ -52,6 +52,8 @@ function attachDropdownValues(dropdownValues) {
     addValuesToDropdown("aggregationsDropdown", dropdownValues['agg']);
     addValuesToDropdown("assignmentPracticesDropdown", dropdownValues['Practice']);
     addValuesToDropdown("assignmentSubpracticesDropdown", dropdownValues['SubPractice']);
+
+
 }
 
 function addDefaultOptionToDropdown(dropdownName) {

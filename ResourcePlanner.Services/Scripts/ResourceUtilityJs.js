@@ -61,7 +61,26 @@ function assignmentSave() {
 
 function assignmentModalLoad() {
     $("#assignmentModalLoad").click(refreshResourceAssignmentGrid);
-    $("#assignmentGridApply").click(AssignmentApply);
+    $(".position-selector").on("change", AssignmentApply);
+    $(".project-selector").on("change", function () {
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
+    });
+    $("#projectName").on("change", function () {
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
+    });
+    $("#assignmentPracticesDropdown").on("change", AssignmentApply);
+    $("#assignmentSubpracticesDropdown").on("change", AssignmentApply);
+
     $("#saveAssignment").click(addAssignmentsToServer);
     $("#saveProject").click(addProjectToServer);
     $("#projectModalLoad").click(openProjectModal);
@@ -211,8 +230,9 @@ function pageDown() {
 
 function AssignmentApply() {
     var selectedStartDate = $('#startdatepicker').data('DateTimePicker').date();
-    resourceAssignmentGrid.currentDate = new Date(selectedStartDate);
-
+    if (!isNullOrUndefined(selectedStartDate)) {
+        resourceAssignmentGrid.currentDate = new Date(selectedStartDate);
+    }
     refreshResourceAssignmentGrid();
 }
 
@@ -436,6 +456,19 @@ function onCallAddProjectSuccess(params, query, httpResponse) {
     $("#assignmentModal").modal("show");
     var newProject = new Option(httpResponse.Name, httpResponse.Id, true, true);
     $(".project-selector").append(newProject).trigger("change");
+}
+
+function readyForProjectSave() {
+
+    var projectName = document.getElementById('projectName').value;
+    var startDate = StartDate = $('#projectstartdatepicker').data('DateTimePicker').date();
+    var endDate = $('#projectenddatepicker').data('DateTimePicker').date();
+
+    if (isNullOrUndefined(projectName)) { return false; }
+    else if (projectName.length < 5) { return false; }
+    if (isNullOrUndefined(startDate) || isNullOrUndefined(endDate)) { return false; }
+
+    return true;
 }
 
 function callServerWithResponseAuth(method, params, query, successCallback, failureCallback) {
