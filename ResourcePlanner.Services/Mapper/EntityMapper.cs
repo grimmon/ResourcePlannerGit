@@ -42,6 +42,8 @@ namespace ResourcePlanner.Services.Mapper
                         Position = reader.GetNullableString("Position"),
                         Practice = reader.GetNullableString("Practice"),
                         SubPractice = reader.GetNullableString("SubPractice"),
+                        ResourceManagerFirstName = reader.GetNullableString("ResourceManagerFirstName"),
+                        ResourceManagerLastName = reader.GetNullableString("ResourceManagerLastName"),
                         Assignments = new List<Assignment>()
                     };
 
@@ -49,7 +51,7 @@ namespace ResourcePlanner.Services.Mapper
 
                 }
 
-                assignment.TimePeriod = reader.GetString("TimePeriod");
+                assignment.TimePeriod = reader.GetString("PeriodName");
 
                 if (param.Availability)
                 {

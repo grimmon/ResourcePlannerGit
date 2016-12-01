@@ -18,7 +18,8 @@ var resourceHeaders = [
      "Position",
      "City",
      "Practice",
-     "Sub-Practice"
+     "Sub-Practice",
+     "Resource Mgr."
 ];
 
 var resourceDetailHeaders = [

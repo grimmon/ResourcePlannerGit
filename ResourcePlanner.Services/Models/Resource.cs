@@ -48,6 +48,8 @@ namespace ResourcePlanner.Services.Models
         public string City { get; set; }
         public string Practice { get; set; }
         public string SubPractice { get; set; }
+        public string ResourceManagerFirstName { get; set; }
+        public string ResourceManagerLastName { get; set; }
         public List<Assignment> Assignments { get; set; }
     }
 

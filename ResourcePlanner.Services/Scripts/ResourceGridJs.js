@@ -30,7 +30,8 @@ var startingResourceColumnDefs = [
     { context: { type: "resourceColumn", index: 1 }, headerName: "Position"    , field: "Position"    , width: 150, suppressMenu: true, pinned: 'left' },
     { context: { type: "resourceColumn", index: 2 }, headerName: "City"        , field: "City"        , width: 150, suppressMenu: true, pinned: 'left' },
     { context: { type: "resourceColumn", index: 3 }, headerName: "Practice"    , field: "Practice"    , width: 150, suppressMenu: true, pinned: 'left' },
-    { context: { type: "resourceColumn", index: 4 }, headerName: "Sub-Practice", field: "SubPractice" , width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 4 }, headerName: "Sub-Practice", field: "SubPractice", width: 150, suppressMenu: true, pinned: 'left' },
+    { context: { type: "resourceColumn", index: 5 }, headerName: "Resource Mgr.", field: "ResourceManager", width: 150, suppressMenu: true, pinned: 'left' },
 ];
 
 function initializeResourceGrid() {
@@ -72,14 +73,15 @@ function buildResourceQuery(params, excel) {
 
         filters += pageSizeParam + pageNumParam;
     }
-    var city        = document.getElementById('citiesDropdown'      ).value;
-    var orgUnit     = document.getElementById('orgUnitsDropdown'    ).value;
-    var region      = document.getElementById('regionsDropdown'     ).value;
-    var market      = document.getElementById('marketsDropdown'     ).value;
-    var practice    = document.getElementById('practicesDropdown'   ).value;
-    var subPractice = document.getElementById('subpracticesDropdown').value;
-    var aggregation = document.getElementById('aggregationsDropdown').value;
-    
+    var city            = document.getElementById('citiesDropdown'         ).value;
+    var orgUnit         = document.getElementById('orgUnitsDropdown'       ).value;
+    var region          = document.getElementById('regionsDropdown'        ).value;
+    var market          = document.getElementById('marketsDropdown'        ).value;
+    var practice        = document.getElementById('practicesDropdown'      ).value;
+    var subPractice     = document.getElementById('subpracticesDropdown'   ).value;
+    var aggregation     = document.getElementById('aggregationsDropdown'   ).value;
+    var resourceManager = document.getElementById('resourceManagerDropdown').value;
+
     var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
     var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
@@ -93,16 +95,17 @@ function buildResourceQuery(params, excel) {
     filters += "&startDate=" + formattedStartDate;
     filters += "&endDate=" + formattedEndDate;
 
-    if (city        != -1   && city        != '') { filters += "&city="        + city;        }
-    if (orgUnit     != -1   && orgUnit     != '') { filters += "&orgUnit="     + orgUnit;     }
-    if (region      != -1   && region      != '') { filters += "&region="      + region;      }
-    if (market      != -1   && market      != '') { filters += "&market="      + market;      }
-    if (practice    != -1   && practice    != '') { filters += "&practice="    + practice;    }
-    if (subPractice != -1   && subPractice != '') { filters += "&subpractice=" + subPractice; }
-    if (aggregation != -1   && aggregation != '') { filters += "&agg="         + aggregation; }
-    if (searchTerm1 != null && searchTerm1 != '') { filters += "&searchterm1=" + searchTerm1; }
-    if (searchTerm2 != null && searchTerm2 != '') { filters += "&searchterm2=" + searchTerm2; }
-    if (searchTerm3 != null && searchTerm3 != '') { filters += "&searchterm3=" + searchTerm3; }
+    if (city            > -1    && city            != '') { filters += "&city="            + city;           }
+    if (orgUnit         > -1    && orgUnit         != '') { filters += "&orgUnit="         + orgUnit;        }
+    if (region          > -1    && region          != '') { filters += "&region="          + region;         }
+    if (market          > -1    && market          != '') { filters += "&market="          + market;         }
+    if (practice        > -1    && practice        != '') { filters += "&practice="        + practice;       }
+    if (subPractice     > -1    && subPractice     != '') { filters += "&subpractice="     + subPractice;    }
+    if (aggregation     > -1    && aggregation     != '') { filters += "&agg="             + aggregation;    }
+    if (resourceManager > -1    && resourceManager != '') { filters += "&resourcemanager=" + resourceManager;}
+    if (searchTerm1     != null && searchTerm1     != '') { filters += "&searchterm1="     + searchTerm1;    }
+    if (searchTerm2     != null && searchTerm2     != '') { filters += "&searchterm2="     + searchTerm2;    }
+    if (searchTerm3     != null && searchTerm3     != '') { filters += "&searchterm3="     + searchTerm3;    }
     if (!excel){
     if (params.sortModel.length > 0) {
         filters += '&sortOrder='     + params.sortModel[0].colId;
@@ -153,11 +156,12 @@ function createResourceRow(row, resource, timePeriods) {
 
 function addResourceData(row, resource) {
     row.ResourceName = "<b>" + (resource.LastName + ", " || "" ) + resource.FirstName + "</b>";
-    row.City        = resource.City;
-    row.Position    = resource.Position;
-    row.Practice    = resource.Practice;
-    row.SubPractice = resource.SubPractice;
-    row.Id          = resource.ResourceId;
+    row.City           = resource.City;
+    row.Position       = resource.Position;
+    row.Practice       = resource.Practice;
+    row.SubPractice    = resource.SubPractice;
+    row.ResourceManager = (resource.ResourceManagerLastName + ", " || "") + resource.ResourceManagerFirstName;
+    row.Id             = resource.ResourceId;
 }
 
 function rowSelectedFunc(event) {

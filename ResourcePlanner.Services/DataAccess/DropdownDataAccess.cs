@@ -31,6 +31,15 @@ namespace ResourcePlanner.Services.DataAccess
                 CommandType.StoredProcedure,
                 _timeout,
                 new SqlParameter[0]);
+
+            var managers = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
+                _connectionString,
+                @"rpdb.ResourceManagerSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                new SqlParameter[0]);
+
+            returnValue.AddRange(managers);
             returnValue.Add(new DropdownValue() { Id = 1, Category = "agg", Name = "Weekly" });
             returnValue.Add(new DropdownValue() { Id = 2, Category = "agg", Name = "Monthly" });
             returnValue.Add(new DropdownValue() { Id = 3, Category = "agg", Name = "Quarterly" });
