@@ -96,11 +96,11 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectName", 100, SqlDbType.VarChar, project.ProjectName));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", SqlDbType.Date, project.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", SqlDbType.Date, project.EndDate));
-            if(project.Description == "")
+            if(project.Description != "")
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("Description", 100, SqlDbType.VarChar, project.Description));
             }
-            if (project.CustomerName == "")
+            if (project.CustomerName != "")
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("CustomerName", 100, SqlDbType.VarChar, project.CustomerName));
             }

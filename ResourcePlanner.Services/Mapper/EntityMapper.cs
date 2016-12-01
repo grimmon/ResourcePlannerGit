@@ -7,6 +7,7 @@ using ResourcePlanner.Services.Models;
 using ResourcePlanner.Services.Enums;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Text;
 
 namespace ResourcePlanner.Services.Mapper
 {
@@ -77,6 +78,31 @@ namespace ResourcePlanner.Services.Mapper
             };
 
             return resourcePage;
+        }
+
+        public static ResourcePageExcelData[] MapToResourceCSV(SqlDataReader reader, ResourceQuery param)
+        {
+            var resourcePage = new List<ResourcePageExcelData>();
+            while (reader.Read())
+            {
+                var resource = new ResourcePageExcelData();
+
+                resource.FirstName = reader.GetNullableString("FirstName");
+                resource.LastName = reader.GetNullableString("LastName");
+                resource.City = reader.GetNullableString("City");
+                resource.Position = reader.GetNullableString("Position");
+                resource.Practice = reader.GetNullableString("Practice");
+                resource.SubPractice = reader.GetNullableString("SubPractice");
+                resource.TimePeriod = reader.GetString("TimePeriod");
+                resource.ForecastHours = reader.GetDouble("ForecastHours").ToString();
+                resource.ActualHours = reader.GetDouble("ActualHours").ToString();
+                resource.ResourceHours = reader.GetDouble("ResourceHours").ToString();
+
+                resourcePage.Add(resource);
+
+            }
+
+            return resourcePage.ToArray();
         }
 
         private static List<Resource> SortPage(List<Resource> input, Enums.Enums.SortOrder order, Enums.Enums.SortDirection direction)

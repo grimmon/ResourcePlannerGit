@@ -14,7 +14,7 @@
     },
 
     getEndDate: function(currentDate, currentAggregation, pageSize) {
-        var periodOffset = pageSize - 1; //The number of periods into the future we want.
+        var periodOffset = pageSize - 2; //The number of periods into the future we want.
         var date = this.moveDate(currentDate, currentAggregation, periodOffset);
 
         return date;

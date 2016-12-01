@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -148,6 +152,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -194,6 +202,7 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\DateTimeUtility.js" />
     <Content Include="Scripts\DropdownJs.js" />
+    <Content Include="Scripts\Filesaver.min.js" />
     <Content Include="Scripts\jquery.tagit.css" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\PageControls.js" />
@@ -233,10 +242,19 @@
     <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
     <Compile Include="DataAccess\ResourceDataAccess.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Excel\ExcelBuilder.cs" />
+    <Compile Include="Excel\ExcelConstants.cs" />
+    <Compile Include="Excel\ExceldocFactory.cs" />
+    <Compile Include="Excel\ExcelExample.cs" />
+    <Compile Include="Excel\ExcelNumberFormat.cs" />
+    <Compile Include="Excel\ExcelStyleFormat.cs" />
+    <Compile Include="Excel\ExcelUtility.cs" />
+    <Compile Include="Excel\IExcelBuilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapper\EntityMapper.cs" />
+    <Compile Include="Mapper\ExcelMapper.cs" />
     <Compile Include="Models\Dropdown.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

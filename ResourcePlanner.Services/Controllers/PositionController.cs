@@ -14,7 +14,7 @@ namespace ResourcePlanner.Services.Controllers
     public class PositionController : ApiController
     {
         [HttpGet]
-        [Authorize]
+        //[Authorize]
 
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {

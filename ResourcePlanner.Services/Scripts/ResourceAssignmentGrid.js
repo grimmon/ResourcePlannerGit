@@ -38,6 +38,14 @@ function initializeResourceAssignmentGrid() {
 
     var startingResourceAssignmentColumns = createAssignmentColumns(startingResourceAssignmentColumnDefs, "resourceAssignmentGroupColumn");
     resourceAssignmentGrid.options.api.setColumnDefs(startingResourceAssignmentColumns);
+    resourceAssignmentGrid.options.api.addEventListener("rowSelected", function () {
+        if (readyForAssignmentSave()) {
+            $("#saveAssignment").prop("disabled", false);
+        }
+        else {
+            $("#saveAssignment").prop("disabled", true);
+        }
+    });
 
     //refreshResourceAssignmentGrid();
 }
@@ -184,7 +192,7 @@ function buildAssignmentInsertQuery() {
     var hours = document.getElementById("hoursPerDay").value;
     filters += "&hoursPerDay=" + hours;
     
-    var startDate = StartDate = $('#startdatepicker').data('DateTimePicker').date();
+    var startDate = $('#startdatepicker').data('DateTimePicker').date();
     var endDate = $('#enddatepicker').data('DateTimePicker').date();
 
     var formattedStartDate = dateTimeUtility.formatDate(new Date(startDate));
@@ -216,7 +224,28 @@ function buildAssignmentInsertQuery() {
 
 function onCallAddAssignmentSuccess(query)
 {
-    $("#saveAssignment").prop('disabled', false);
+    //$("#saveAssignment").prop('disabled', false);
     alert("Assignment Saved");
     
+}
+
+function readyForAssignmentSave() {
+    var resourceIds = resourceAssignmentGrid.options.api.getSelectedRows();
+    if (isNullOrUndefined(resourceIds)) { return false; }
+        
+    else{
+        if (resourceIds.length <= 0) { return false; }
+    }
+
+    var projectId = $(".project-selector").select2("val");
+    if (isNullOrUndefined(projectId)) { return false; }
+
+    var hours = document.getElementById("hoursPerDay").value;
+    if (isNullOrUndefined(hours)) { return false; }
+
+    var startDate = $('#startdatepicker').data('DateTimePicker').date();
+    var endDate = $('#enddatepicker').data('DateTimePicker').date();
+    if (isNullOrUndefined(startDate) || isNullOrUndefined(endDate)) { return false; }
+
+    return true;
 }
