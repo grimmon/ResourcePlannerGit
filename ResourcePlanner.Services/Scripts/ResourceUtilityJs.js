@@ -268,11 +268,12 @@ function addAssignment(row, assignment, timePeriod) {
     var forecastHoursIndex = timePeriod + "-ForecastHours";
     var actualHoursIndex = timePeriod + "-ActualHours";
     var deltaHoursIndex = timePeriod + "-DeltaHours";
+    var deltaValue = assignment.ResourceHours - assignment.ForecastHours;
 
     row[resourceHoursIndex] = assignment.ResourceHours;
     row[forecastHoursIndex] = assignment.ForecastHours;
     row[actualHoursIndex] = assignment.ActualHours;
-    row[deltaHoursIndex] = assignment.ResourceHours - assignment.ForecastHours;
+    row[deltaHoursIndex] = deltaValue;
 }
 
 function addResourceAssignment(row, assignment, timePeriod) {
@@ -384,7 +385,15 @@ var timePeriodCellRenderer = function (params) {
         if (isNaN(floatValue) || floatValue == null) {
             return '';
         }
-
+        var colName = params.column.colId;
+        if (colName.includes('Delta')) {
+            if (floatValue > 0) {
+                return "<img src='Images/IRMT_Icons_GreenUpArrow.png'/> " + floatValue.toFixed(0);
+            }
+            if (floatValue < 0) {
+                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + floatValue.toFixed(0);
+            }
+        }
         return floatValue.toFixed(0);
     }
     else {
