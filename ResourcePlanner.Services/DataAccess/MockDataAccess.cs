@@ -15,10 +15,10 @@ namespace ResourcePlanner.Services.DataAccess
     {
         private static List<DateTime> _timePeriods = new List<DateTime>();
         private static List<Resource> _resources = new List<Resource>();
-        private static List<Project> _projects = new List<Project>();
+        private static List<ProjectDetail> _projects = new List<ProjectDetail>();
 
         private static Dictionary<int, ResourceInfo> _resourceInfos = new Dictionary<int, ResourceInfo>();
-        private static Dictionary<int, List<Project>> _projectsByResource = new Dictionary<int, List<Project>>();
+        private static Dictionary<int, List<ProjectDetail>> _projectsByResource = new Dictionary<int, List<ProjectDetail>>();
 
         private static Random _rand = new Random();
 
@@ -93,7 +93,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             for (int i = 0; i < projectCount; i++)
             {
-                var project = new Project();
+                var project = new ProjectDetail();
 
                 PopulateProject(project);
 
@@ -107,12 +107,12 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 resource.Assignments = new List<Assignment>();
                 var randomProjects = GetRandomProjects();
-                var assignedProjects = new List<Project>();
+                var assignedProjects = new List<ProjectDetail>();
                 var assignments = new List<Assignment>();
                 
                 foreach (var project in randomProjects)
                 {
-                    var copiedProject = new Project()
+                    var copiedProject = new ProjectDetail()
                     {
                         Assignments = new List<Assignment>()
                     };
@@ -183,9 +183,9 @@ namespace ResourcePlanner.Services.DataAccess
             return result;
         }
 
-        public static List<Project> GetRandomProjects()
+        public static List<ProjectDetail> GetRandomProjects()
         {
-            var projects = new List<Project>(_projects);
+            var projects = new List<ProjectDetail>(_projects);
 
             var removeAttemptCount = _rand.Next(projects.Count);
 
@@ -336,14 +336,14 @@ namespace ResourcePlanner.Services.DataAccess
 
             var result = new DetailPage()
             {
-                Projects = new List<Project>()
+                Projects = new List<ProjectDetail>()
             };
 
             var resourceProjects = _projectsByResource[resourceId];
 
             foreach (var project in resourceProjects)
             {
-                var copiedProject = new Project()
+                var copiedProject = new ProjectDetail()
                 {
                     Assignments = new List<Assignment>()
                 };
@@ -634,7 +634,7 @@ namespace ResourcePlanner.Services.DataAccess
             resource.SubPractice = resourceInfo.SubPractice;
         }
         
-        public static void PopulateProject(Project project)
+        public static void PopulateProject(ProjectDetail project)
         {
             project.ProjectName               = LoremIpsumGenerator.LoremIpsum(2, 4, _rand);
             project.WBSElement                = new Guid().ToString();
@@ -646,7 +646,7 @@ namespace ResourcePlanner.Services.DataAccess
             project.ProjectManagerLastName    = LoremIpsumGenerator.LoremIpsum(1, 1, _rand);
         } 
 
-        public static void CopyProject(Project source, Project target)
+        public static void CopyProject(ProjectDetail source, ProjectDetail target)
         {
             target.ProjectName               = source.ProjectName;              
             target.WBSElement                = source.WBSElement;               

@@ -55,7 +55,7 @@ namespace ResourcePlanner.Services.Mapper
 
                 if (param.Availability)
                 {
-                    int WeekWorkHours = reader.GetInt32("WeekWorkDays") * dailyAvailHours;
+                    int WeekWorkHours = reader.GetInt32("WorkDays") * dailyAvailHours;
                     assignment.ForecastHours = WeekWorkHours - reader.GetDouble("ForecastHours");
                     assignment.ActualHours = WeekWorkHours - reader.GetDouble("ActualHours");
                     assignment.ResourceHours = WeekWorkHours - reader.GetDouble("ResourceHours");
@@ -80,6 +80,77 @@ namespace ResourcePlanner.Services.Mapper
             };
 
             return resourcePage;
+        }
+
+        internal static ProjectPage MapToProjectPage(SqlDataReader reader)
+        {
+            var projectInfo = new ProjectInfo();
+            var resources = new Dictionary<string, ProjectResource>();
+            var timePeriods = new List<string>();
+
+            reader.Read();
+
+            projectInfo.ProjectName = reader.GetNullableString("ProjectName");
+            projectInfo.ProjectNumber = reader.GetNullableString("ProjectNumber");
+            projectInfo.Description = reader.GetNullableString("Description");
+            projectInfo.Offering = reader.GetNullableString("Offering");
+            projectInfo.WBSCode = reader.GetNullableString("WbsCode");
+            projectInfo.StartDate = reader.GetDateTime("StartDate");
+            projectInfo.EndDate = reader.GetDateTime("EndDate");
+            projectInfo.ProjectManagerFirstName = reader.GetNullableString("ProjectManagerFirstName");
+            projectInfo.ProjectManagerLastName = reader.GetNullableString("ProjectMangerLastName");
+
+            reader.NextResult();
+
+            while (reader.Read())
+            {
+                timePeriods.Add(reader.GetString("TimePeriod"));
+            }
+
+            reader.NextResult();
+
+
+            string curr = "";
+            while (reader.Read())
+            {
+                var assignment = new Assignment();
+                curr = reader.GetNullableString("EmailAddress");
+                if (!resources.ContainsKey(curr))
+                {
+                    var newResource = new ProjectResource()
+                    {
+                        FirstName = reader.GetNullableString("FirstName"),
+                        LastName = reader.GetNullableString("LastName"),
+                        Position = reader.GetNullableString("Position"),
+                        CostRate = reader.GetDouble("CostRate"),
+                        TotalForecastHours = reader.GetDouble("TotalForecastHours"),
+                        TotalResourceHours = reader.GetDouble("TotalResourceHours"),
+                        Assignments = new List<Assignment>()
+                    };
+                    resources.Add(curr, newResource);
+                }
+
+                assignment.TimePeriod = reader.GetString("TimePeriod");
+                assignment.ForecastHours = reader.GetDouble("ForecastHours");
+                assignment.ActualHours = reader.GetDouble("ActualHours");
+                assignment.ResourceHours = reader.GetDouble("ResourceHours");
+
+                resources[curr].Assignments.Add(assignment);
+
+
+            }
+
+            var resultResources = resources.Values.ToList();
+
+            var projectPage = new ProjectPage()
+            {
+                ProjectInfo = projectInfo,
+                ProjectResource = resultResources,
+                TotalRowCount = resultResources.Count,
+                TimePeriods = timePeriods
+            };
+
+            return projectPage;
         }
 
         public static ResourcePageExcelData[] MapToResourceCSV(SqlDataReader reader, ResourceQuery param)
@@ -158,7 +229,7 @@ namespace ResourcePlanner.Services.Mapper
         public static DetailPage MapToResourceDetail(SqlDataReader reader)
         {
             var resourceInfo = new ResourceInfo();
-            var projects = new Dictionary<string, Project>();
+            var projects = new Dictionary<string, ProjectDetail>();
             var timePeriods = new List<string>();
 
             reader.Read();
@@ -191,7 +262,7 @@ namespace ResourcePlanner.Services.Mapper
                 curr = reader.GetNullableString("WBSElement");
                 if (!projects.ContainsKey(curr))
                 {
-                    var newResource = new Project()
+                    var newResource = new ProjectDetail()
                     {
                         ProjectName                = reader.GetNullableString("ProjectName"),
                         WBSElement                 = curr,

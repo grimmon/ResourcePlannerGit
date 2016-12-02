@@ -16,16 +16,7 @@ namespace ResourcePlanner.Services.Models
         public int TotalRowCount { get; set; }
     }
 
-    public class DetailPage
-    {
-        public TimeAggregation TimeScale { get; set; }
-        public List<string> TimePeriods { get; set; }
-        public ResourceInfo ResourceInfo { get; set; }
-        public List<Project> Projects { get; set; }
-        public int PageSize { get; set; }
-        public int PageNum { get; set; }
-        public int TotalRowCount { get; set; }
-    }
+    
     public class ResourcePageExcelData
     {
         public string FirstName { get; set; } 
@@ -51,54 +42,6 @@ namespace ResourcePlanner.Services.Models
         public string ResourceManagerFirstName { get; set; }
         public string ResourceManagerLastName { get; set; }
         public List<Assignment> Assignments { get; set; }
-    }
-
-    public class ResourceInfo
-    {
-        public int ResourceId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string SubPractice { get; set; }
-        public int SubPracticeId { get; set; }
-        public string Practice { get; set; }
-        public int PracticeId { get; set; }
-        public string Position { get; set; }
-        public int PositionId { get; set; }
-        public string OrgUnit { get; set; }
-        public int OrgUnitId { get; set; }
-        public string Region { get; set; }
-        public int RegionId { get; set; }
-        public string Market { get; set; }
-        public int MarketId { get; set; }
-        public string City { get; set; }
-        public int CityId { get; set; }
-        public string ManagerFirstName { get; set; }
-        public string ManagerLastName { get; set; }
-    }
-
-    public class Assignment
-    {
-        public string ProjectName { get; set; }
-        public string TimePeriod { get; set; }
-        public double ForecastHours { get; set; }
-        public double ActualHours{ get; set; }
-        public double ResourceHours { get; set; }
-    }
-
-    public class Project
-    {
-        public string ProjectName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string WBSElement { get; set; }
-        public string Customer { get; set; }
-        public string Description { get; set; }
-        public string OpportunityOwnerFirstName { get; set; }
-        public string OpportunityOwnerLastName { get; set; }
-        public string ProjectManagerFirstName { get; set; }
-        public string ProjectManagerLastName { get; set; }
-        public List<Assignment> Assignments { get; set; }
-
     }
 
     public class ResourceQuery
@@ -139,29 +82,6 @@ namespace ResourcePlanner.Services.Models
         public string Project { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
-    }
-
-    public class AddAssignments
-    {
-        public int[] ResourceIds {get; set;}
-        public int ProjectId {get; set;}                                   
-        public double Hours {get; set;}
-        public DateTime StartDate {get; set;}                  
-        public DateTime EndDate {get; set;}
-        public int DaysOfWeek { get; set; }
-    }
-
-    public class AddProject
-    {
-        public string ProjectName { get; set; }
-        public int? CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int? OpportunityOwnerId { get; set; }
-        public int? ProjectManagerId { get; set; }
 
     }
 

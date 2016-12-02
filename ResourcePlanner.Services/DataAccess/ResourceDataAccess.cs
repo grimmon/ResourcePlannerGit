@@ -36,18 +36,18 @@ namespace ResourcePlanner.Services.DataAccess
                   CommandType.StoredProcedure,
                   _timeout,
                   CreateResourcePageParamArray(pageParams));
-                
-            
+
+
             returnValue.PageNum = pageParams.PageNum;
             returnValue.PageSize = pageParams.PageSize;
             returnValue.TimeScale = pageParams.Aggregation;
 
-            returnValue.TimePeriods = returnValue.Resources.Count > 0  
+            returnValue.TimePeriods = returnValue.Resources.Count > 0
                 ? returnValue.Resources[0].Assignments.Select(a => a.TimePeriod).ToList()
                 : new List<string>();
-            
+
             return returnValue;
-            
+
         }
 
         public ResourcePageExcelData[] GetResourceExcelData(ResourceQuery pageParams)
@@ -60,69 +60,16 @@ namespace ResourcePlanner.Services.DataAccess
                  CommandType.StoredProcedure,
                  _timeout,
                  CreateResourcePageParamArray(pageParams));
-                   
+
             return returnValue;
 
-        }
-
-        public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
-        {
-            var returnValue = new DetailPage();
-            switch (Aggregation)
-            {
-
-
-                case TimeAggregation.Daily:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                        _connectionString,
-                        @"rpdb.ResourceDetailDailySelect",
-                        CommandType.StoredProcedure,
-                        _timeout,
-                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Weekly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                        _connectionString,
-                        @"rpdb.ResourceDetailWeeklySelect",
-                        CommandType.StoredProcedure,
-                        _timeout,
-                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Monthly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                         _connectionString,
-                         @"rpdb.ResourceDetailMonthlySelect",
-                         CommandType.StoredProcedure,
-                         _timeout,
-                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Quarterly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                         _connectionString,
-                         @"rpdb.ResourceDetailQuarterlySelect",
-                         CommandType.StoredProcedure,
-                         _timeout,
-                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-                default:
-                    break;
-            }
-            returnValue.TimeScale = Aggregation;
-            return returnValue;
         }
 
         public async Task<Stream> GetExcelStream(ResourceQuery param)
         {
             var excelMapper = new ExcelMapper();
             var resourceTask = Task.Factory.StartNew(() => GetResourceExcelData(param));
-            
+
             try
             {
                 var delay = Task.Delay(300000);
@@ -138,7 +85,7 @@ namespace ResourcePlanner.Services.DataAccess
 
                 return excelData.ConvertToStream();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -148,7 +95,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             var parameterList = new List<SqlParameter>();
 
-            if(pageParams.Aggregation == TimeAggregation.Daily)
+            if (pageParams.Aggregation == TimeAggregation.Daily)
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Day"));
             }
@@ -212,20 +159,11 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3Param", 50, SqlDbType.VarChar, pageParams.SearchTerm3));
             }
-            if(pageParams.Positions != null)
+            if (pageParams.Positions != null)
             {
                 parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("PositionParam", "rpdb.typeIntTable", SqlDbType.Structured, pageParams.Positions));
             }
             return parameterList.ToArray();
-        }
-
-        private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, DateTime StartDate, DateTime EndDate)
-        {
-            var StartDateParam = AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, StartDate);
-            var EndDateParam = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, EndDate);
-            var ResourceIdParam = AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, ResourceId);
-
-            return new SqlParameter[] { StartDateParam, EndDateParam, ResourceIdParam };
         }
     }
 }

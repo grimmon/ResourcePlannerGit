@@ -32,6 +32,14 @@ var resourceDetailHeaders = [
     "Description",
 ];
 
+var projectHeaders = [
+    "Resource Name",
+    "Title",
+    "Cost Rate",
+    "Total Resourced",
+    "Total Forecasted"
+]
+
 var resourceAssignmentHeaders = [
     "Resource",
     "Title"

@@ -35,7 +35,7 @@ namespace ResourcePlanner.Services.Controllers
 #if Mock
             var access = new MockDataAccess();
 #else
-            var access = new ResourceDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new ResourceDetailDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
             DetailPage detailPage;
