@@ -42,6 +42,7 @@ namespace ResourcePlanner.Services.Models
 
     public class ProjectDetail
     {
+        public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

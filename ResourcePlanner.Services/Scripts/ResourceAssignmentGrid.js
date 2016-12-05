@@ -28,7 +28,7 @@ var resourceAssignmentGrid = {
 };
 
 var startingResourceAssignmentColumnDefs = [
-    { context: { type: "resourceColumn", index: 0 }, headerName: "Resource", field: "ResourceName", width: 300, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer, checkboxSelection: true},
+    { context: { type: "resourceColumn", index: 0 }, headerName: "ResourceName", field: "ResourceName", width: 300, suppressMenu: true, pinned: 'left', cellRenderer: loadingCellRenderer, checkboxSelection: true},
     { context: { type: "resourceColumn", index: 1 }, headerName: "Position", field: "Position", width: 150, suppressMenu: true, pinned: 'left' },
 ];
 

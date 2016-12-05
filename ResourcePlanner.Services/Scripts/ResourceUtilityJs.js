@@ -12,6 +12,7 @@ var dataHeaders = [
 var resourceGroupHeaders = [];
 var resourceDetailGroupHeaders = [];
 var resourceAssignmentGroupHeaders = [];
+var projectGroupHeaders = [];
 
 var resourceHeaders = [
     "Resource",
@@ -155,6 +156,7 @@ function onDropDownSuccess() {
     initializeResourceGrid();
     initializeResourceDetailGrid();
     initializeResourceAssignmentGrid();
+    initializeProjectGrid();
 }
 
 function buttonHookups() {
@@ -196,6 +198,9 @@ function headerClassFunc(params) {
         if (columnType == "resourceColumn") {
             params.colDef.headerName = resourceHeaders[index];
         }
+        else if (columnType == "projectColumn") {
+            params.colDef.headerName = projectHeaders[index];
+        }
         else if (columnType == "resourceDetailColumn") {
             params.colDef.headerName = resourceDetailHeaders[index];
         }
@@ -207,6 +212,9 @@ function headerClassFunc(params) {
         }
         else if (columnType == "resourceDetailGroupColumn") {
             params.colDef.headerName = resourceDetailGroupHeaders[index];
+        }
+        else if (columnType == "projectGroupColumn") {
+            params.colDef.headerName = projectGroupHeaders[index];
         }
         else if (columnType == "resourceAssignmentGroupColumn") {
             params.colDef.headerName = resourceAssignmentGroupHeaders[index];
@@ -298,8 +306,8 @@ function showError(httpRequest, errorName) {
     $("#errorMessage").text(errorName + " Error: " + httpRequest.responseText);
 }
 
-function createColumns(startingColumns, groupType) {
-    var newColumns = [startingColumns.length + dataColumnsCount];
+function createColumns(startingColumns, groupType, numCols) {
+    var newColumns = [startingColumns.length + numCols];
 
     //add initial colummns
     for (var i = 0; i < startingColumns.length; i++) {
@@ -308,7 +316,7 @@ function createColumns(startingColumns, groupType) {
         newColumns[i] = column;
     }
 
-    for (i = 0; i < dataColumnsCount; i++) {  
+    for (i = 0; i < numCols; i++) {  
         column = createColumn(i, groupType);
       
         var newColumnIndex = i + startingColumns.length;
@@ -399,7 +407,8 @@ var timePeriodCellRenderer = function (params) {
                 return "<img src='Images/IRMT_Icons_GreenUpArrow.png'/> " + floatValue.toFixed(0);
             }
             if (floatValue < 0) {
-                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + math.abs(floatValue.toFixed(0));
+                //return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + math.abs(floatValue.toFixed(0));
+                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + floatValue.toFixed(0);
             }
         }
         return floatValue.toFixed(0);

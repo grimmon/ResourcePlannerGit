@@ -31,7 +31,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToProjectPage(reader),
                  _connectionString,
-                 @"rpdb.ResourceDetailQuarterlySelect",
+                 @"rpdb.ProjectViewSelect",
                  CommandType.StoredProcedure,
                  _timeout,
                  CreateProjectPageParamArray(ProjectId));

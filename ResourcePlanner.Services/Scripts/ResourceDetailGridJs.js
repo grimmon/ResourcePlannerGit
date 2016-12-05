@@ -38,7 +38,7 @@ function initializeResourceDetailGrid() {
     var gridDiv = document.querySelector(resourceDetailGrid.name);
     new agGrid.Grid(gridDiv, resourceDetailGrid.options);
 
-    var startingResourceColumns = createColumns(startingResourceDetailColumnDefs, "resourceDetailGroupColumn");
+    var startingResourceColumns = createColumns(startingResourceDetailColumnDefs, "resourceDetailGroupColumn", resourceDetailGrid.pageSize);
     resourceDetailGrid.options.api.setColumnDefs(startingResourceColumns);
 }
 
@@ -100,8 +100,8 @@ function onCallResourceDetailSuccess(params, query, httpResponse) {
 }
 
 function updateResourceDetailGrid(params, data, rowData, columnData, options) {
-    var columns = createColumns(startingResourceDetailColumnDefs, data.TimePeriods);
-    var rows = createRows(rowData, columnData, createProjectRow);
+    var columns = createColumns(startingResourceDetailColumnDefs, data.TimePeriods, resourceDetailGrid.pageSize);
+    var rows = createRows(rowData, columnData, createDetailRow);
 
     for (var i = 0; i < httpResponse.TimePeriods.length; i++) {
         var timePeriod = httpResponse.TimePeriods[i];
@@ -113,14 +113,14 @@ function updateResourceDetailGrid(params, data, rowData, columnData, options) {
     resourceDetailGrid.options.api.refreshHeader();
 }
 
-function createProjectRow(row, project, timePeriods) {
-    addProjectData(row, project            );
+function createDetailRow(row, project, timePeriods) {
+    addDetailData(row, project            );
     addTimePeriods(row, timePeriods        );
     addAssignments(row, project.Assignments);
 }
 
-function addProjectData(row, project) {
-    row.ProjectName      = project.ProjectName;
+function addDetailData(row, project) {
+    row.ProjectName = '<a onclick="openProjectView(' + project.ProjectId + ')">' + project.ProjectName + "</a>";
     row.ProjectNumber    = project.ProjectNumber;
     row.WBSElement       = project.WBSElement; 
     row.Customer         = isNullOrUndefined(project.Customer) ? "" : project.Customer; 

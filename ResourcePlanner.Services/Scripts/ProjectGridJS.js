@@ -72,7 +72,7 @@ function onCallProjectSuccess(params, query, httpResponse) {
 
 function updateProjectGrid(params, data, rowData, columnData, options) {
     projectGrid.pageSize = data.TimePeriods.length;
-    var columns = createColumns(startingProjectColumnDefs, data.TimePeriods, projectGrid.pageSize);
+    var columns = createColumns(startingProjectColumnDefs, "projectGroupColumn" , projectGrid.pageSize);
     projectGrid.options.api.setColumnDefs(columns);
     var rows = createRows(rowData, columnData, createProjectRow);
 

@@ -38,7 +38,7 @@ function initializeResourceGrid() {
     var gridDiv = document.querySelector(resourceGrid.name);
     new agGrid.Grid(gridDiv, resourceGrid.options);
 
-    var startingResourceColumns = createColumns(startingResourceColumnDefs, "resourceGroupColumn");
+    var startingResourceColumns = createColumns(startingResourceColumnDefs, "resourceGroupColumn", resourceGrid.pageSize);
     resourceGrid.options.api.setColumnDefs(startingResourceColumns);
     $("#exportExcel").click(exportResourceToExcel);
     refreshResourceGrid();

@@ -15,6 +15,7 @@
     <script src="../Scripts/ResourceGridJs.js"></script>
     <script src="../Scripts/ResourceDetailGridJs.js"></script>
     <script src="../Scripts/ResourceAssignmentGrid.js"></script>
+    <script src="../Scripts/ProjectGridJs.js"></script>
     <script src="../Scripts/tag-it.js"></script>
     <script src="../Scripts/select2.min.js"></script>
 
@@ -219,6 +220,27 @@
             </div>
         </div>
     </div>
+
+    <div id="projectViewModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Project View</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
+                            <div id="projectGrid" style="height: 400px;" class="ag-fresh"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <div id="assignmentModal" class="modal modal-wide fade">
         <div class="modal-dialog">

@@ -77,6 +77,9 @@ namespace ResourcePlanner.Services.DataAccess
                     break;
             }
             returnValue.TimeScale = Aggregation;
+            returnValue.TimePeriods = returnValue.Projects.Count > 0
+                ? returnValue.Projects[0].Assignments.Select(a => a.TimePeriod).ToList()
+                : new List<string>();
             return returnValue;
         }
 

@@ -85,7 +85,7 @@ namespace ResourcePlanner.Services.Mapper
         internal static ProjectPage MapToProjectPage(SqlDataReader reader)
         {
             var projectInfo = new ProjectInfo();
-            var resources = new Dictionary<string, ProjectResource>();
+            var resources = new Dictionary<int, ProjectResource>();
             var timePeriods = new List<string>();
 
             reader.Read();
@@ -98,7 +98,7 @@ namespace ResourcePlanner.Services.Mapper
             projectInfo.StartDate = reader.GetDateTime("StartDate");
             projectInfo.EndDate = reader.GetDateTime("EndDate");
             projectInfo.ProjectManagerFirstName = reader.GetNullableString("ProjectManagerFirstName");
-            projectInfo.ProjectManagerLastName = reader.GetNullableString("ProjectMangerLastName");
+            projectInfo.ProjectManagerLastName = reader.GetNullableString("ProjectManagerLastName");
 
             reader.NextResult();
 
@@ -110,11 +110,11 @@ namespace ResourcePlanner.Services.Mapper
             reader.NextResult();
 
 
-            string curr = "";
+            int curr = 0;
             while (reader.Read())
             {
                 var assignment = new Assignment();
-                curr = reader.GetNullableString("EmailAddress");
+                curr = reader.GetInt32("ResourceId");
                 if (!resources.ContainsKey(curr))
                 {
                     var newResource = new ProjectResource()
@@ -122,7 +122,7 @@ namespace ResourcePlanner.Services.Mapper
                         FirstName = reader.GetNullableString("FirstName"),
                         LastName = reader.GetNullableString("LastName"),
                         Position = reader.GetNullableString("Position"),
-                        CostRate = reader.GetDouble("CostRate"),
+                        CostRate = reader.GetNullableDouble("CostRate") ?? 0,
                         TotalForecastHours = reader.GetDouble("TotalForecastHours"),
                         TotalResourceHours = reader.GetDouble("TotalResourceHours"),
                         Assignments = new List<Assignment>()
@@ -264,6 +264,7 @@ namespace ResourcePlanner.Services.Mapper
                 {
                     var newResource = new ProjectDetail()
                     {
+                        ProjectId                  = reader.GetInt32("ProjectId"),
                         ProjectName                = reader.GetNullableString("ProjectName"),
                         WBSElement                 = curr,
                         Customer                   = reader.GetNullableString("Customer"),
