@@ -399,7 +399,7 @@ var timePeriodCellRenderer = function (params) {
                 return "<img src='Images/IRMT_Icons_GreenUpArrow.png'/> " + floatValue.toFixed(0);
             }
             if (floatValue < 0) {
-                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + math.abs(floatValue.toFixed(0));
+                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + Math.abs(floatValue.toFixed(0));
             }
         }
         return floatValue.toFixed(0);

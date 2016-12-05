@@ -204,3 +204,38 @@ span.select2-selection__arrow {
     background-repeat:no-repeat;
 }
 
+#assignmentModal-body{
+    height:580px;
+
+}
+#AssignmentGrid{
+    height:550px;
+}
+#AssignmentProjectSelector{
+    width: 350px;
+    padding-bottom:10px;
+}
+
+#assignmentPositionSelector{
+    width: 350px;
+    padding-bottom:10px;
+}
+#assignmentPracticesDropdown{
+    width: 350px;
+    padding-bottom:10px;
+}
+#assignmentSubpracticesDropdown{
+    width: 350px;
+}
+#assignmentDOWSelector {
+    width: 350px;
+    padding-bottom:10px;
+}
+#startdatepicker{
+    width: 250px;
+    padding-bottom:10px;
+}
+#enddatepicker{
+    width: 250px;
+    padding-bottom:10px;
+}
