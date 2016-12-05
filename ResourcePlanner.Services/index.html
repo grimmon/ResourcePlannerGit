@@ -249,53 +249,55 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Add Assignment</h4>
                 </div>
-                <div class="modal-body">
+                <div id="assignmentModal-body"class="modal-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <select class="project-selector" style="width: 50%"></select>
+                            <select id="AssignmentProjectSelector" class="project-selector"></select>
+                            <br/>
                             <a id="projectModalLoad">
                                 <div>
                                     <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" />
                                 </div>
                             </a>
-
-                            <select class="position-selector" multiple="multiple" style="width: 50%"></select>
-                            <select id="assignmentPracticesDropdown" class="form-control" style="width:50%">
+                            <select id="assignmentPositionSelector" class="position-selector" multiple="multiple" ></select>
+                            <select id="assignmentPracticesDropdown" class="form-control">
                                 <option selected disabled value="-2">Select a practice</option>
                             </select>
-                            <select id="assignmentSubpracticesDropdown" class="form-control" style="width:50%">
+                            <select id="assignmentSubpracticesDropdown" class="form-control">
                                 <option value="-2" selected disabled>Select a subpractice</option>
                             </select>
-                            <select class="dayofweek-selector" multiple="multiple" style="width: 50%">
-                                <option value="2" selected="selected">Monday</option>
-                                <option value="3" selected="selected">Tuesday</option>
-                                <option value="4" selected="selected">Wednesday</option>
-                                <option value="5" selected="selected">Thursday</option>
-                                <option value="6" selected="selected">Friday</option>
+                            <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple">
+                                <option value="2" selected="selected">Mon</option>
+                                <option value="3" selected="selected">Tue</option>
+                                <option value="4" selected="selected">Wed</option>
+                                <option value="5" selected="selected">Thur</option>
+                                <option value="6" selected="selected">Fri</option>
                             </select>
-
+                            <br/>
+                            <span>
+                                Start Date:<div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </span>
+                            <span>End Date:<div class='input-group date' id='enddatepicker'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div></span>
+                            <br/>
                             <div class="form-group">
                                 <label for="hoursPerDay">Hours per day:</label>
                                 <input type="number" ng-required="required" class="form-control" min="0" id="hoursPerDay">
-                            </div>
-
-                            <div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                            <div class='input-group date' id='enddatepicker'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            </div>                           
                         </div>
 
                         <div class="col-md-8">
                             <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
-                                <div id="AssignmentGrid" style="height: 400px;" class="ag-fresh"></div>
+                                <div id="AssignmentGrid" class="ag-fresh"></div>
                             </div>
                         </div>
                     </div>
