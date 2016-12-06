@@ -54,6 +54,6 @@ namespace ResourcePlanner.Services.Models
         public string ProjectManagerFirstName { get; set; }
         public string ProjectManagerLastName { get; set; }
         public List<Assignment> Assignments { get; set; }
-
+        public int ProjectMasterId { get; internal set; }
     }
 }

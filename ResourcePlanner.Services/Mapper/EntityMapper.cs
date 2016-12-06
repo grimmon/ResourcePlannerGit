@@ -229,8 +229,7 @@ namespace ResourcePlanner.Services.Mapper
         public static DetailPage MapToResourceDetail(SqlDataReader reader)
         {
             var resourceInfo = new ResourceInfo();
-            var projects = new Dictionary<string, ProjectDetail>();
-            var timePeriods = new List<string>();
+            var projects = new Dictionary<int, ProjectDetail>();
 
             reader.Read();
 
@@ -246,27 +245,20 @@ namespace ResourcePlanner.Services.Mapper
             resourceInfo.ManagerLastName   = reader.GetNullableString("ManagerLastName");
 
             reader.NextResult();
-          
-            while (reader.Read())
-            {
-                timePeriods.Add(reader.GetString("TimePeriod"));
-            }
 
-            reader.NextResult();
-
-
-            string curr = "";
+            int curr = 0;
             while (reader.Read())
             {
                 var assignment = new Assignment();
-                curr = reader.GetNullableString("WBSElement");
+                curr = reader.GetInt32("ProjectMasterId");
                 if (!projects.ContainsKey(curr))
                 {
                     var newResource = new ProjectDetail()
                     {
-                        ProjectId                  = reader.GetInt32("ProjectId"),
+                        
+                        ProjectId                  = curr,
                         ProjectName                = reader.GetNullableString("ProjectName"),
-                        WBSElement                 = curr,
+                        WBSElement                 = reader.GetNullableString("WBSCode"),
                         Customer                   = reader.GetNullableString("Customer"),
                         Description                = reader.GetNullableString("Description"),
                         OpportunityOwnerFirstName  = reader.GetNullableString("OpportunityOwnerFirstName"),
@@ -278,7 +270,7 @@ namespace ResourcePlanner.Services.Mapper
                     projects.Add(curr, newResource);
                 }
 
-                assignment.TimePeriod = reader.GetString("TimePeriod");
+                assignment.TimePeriod = reader.GetString("PeriodName");
                 assignment.ForecastHours = reader.GetDouble("ForecastHours");
                 assignment.ActualHours = reader.GetDouble("ActualHours");
                 assignment.ResourceHours = reader.GetDouble("ResourceHours");
@@ -294,8 +286,7 @@ namespace ResourcePlanner.Services.Mapper
             {
                 ResourceInfo = resourceInfo,
                 Projects = resultProjects,
-                TotalRowCount = resultProjects.Count,
-                TimePeriods = timePeriods
+                TotalRowCount = resultProjects.Count
             };
 
             return detailPage;

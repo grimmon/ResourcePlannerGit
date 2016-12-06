@@ -29,53 +29,12 @@ namespace ResourcePlanner.Services.DataAccess
 
         public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
-            var returnValue = new DetailPage();
-            switch (Aggregation)
-            {
-
-
-                case TimeAggregation.Daily:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                        _connectionString,
-                        @"rpdb.ResourceDetailDailySelect",
-                        CommandType.StoredProcedure,
-                        _timeout,
-                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Weekly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                        _connectionString,
-                        @"rpdb.ResourceDetailWeeklySelect",
-                        CommandType.StoredProcedure,
-                        _timeout,
-                        CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Monthly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                         _connectionString,
-                         @"rpdb.ResourceDetailMonthlySelect",
-                         CommandType.StoredProcedure,
-                         _timeout,
-                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-
-                case TimeAggregation.Quarterly:
-
-                    returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
-                         _connectionString,
-                         @"rpdb.ResourceDetailQuarterlySelect",
-                         CommandType.StoredProcedure,
-                         _timeout,
-                         CreateResourceDetailParamArray(ResourceId, StartDate, EndDate));
-                    break;
-                default:
-                    break;
-            }
+            var returnValue =  AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
+                  _connectionString,
+                  @"rpdb.ResourceDetailPageSelect",
+                  CommandType.StoredProcedure,
+                  _timeout,
+                  CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate));
             returnValue.TimeScale = Aggregation;
             returnValue.TimePeriods = returnValue.Projects.Count > 0
                 ? returnValue.Projects[0].Assignments.Select(a => a.TimePeriod).ToList()
@@ -123,8 +82,25 @@ namespace ResourcePlanner.Services.DataAccess
         //    }
         //}
 
-        private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, DateTime StartDate, DateTime EndDate)
+        private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
         {
+            var AggParam = new SqlParameter();
+            if (Aggregation == TimeAggregation.Daily)
+            {
+                AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Day");
+            }
+            else if (Aggregation == TimeAggregation.Monthly)
+            {
+                AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Month");
+            }
+            else if (Aggregation == TimeAggregation.Daily)
+            {
+                AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Quarter");
+            }
+            else
+            {
+                AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Week");
+            }
             var StartDateParam = AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, StartDate);
             var EndDateParam = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, EndDate);
             var ResourceIdParam = AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, ResourceId);

@@ -249,3 +249,14 @@ function readyForAssignmentSave() {
 
     return true;
 }
+
+function clearAssignmentPage() {
+   
+    $(".project-selector").select2("val", "");
+    $(".position-selector").select2("val", "");
+    document.getElementById('assignmentPracticesDropdown').prop('selected', function() {return this.defaultSelected;});
+    document.getElementById('assignmentSubpracticesDropdown').prop('selected', function () { return this.defaultSelected; });
+    $("#myTags").tagit("removeAll");   
+    document.getElementById("hoursPerDay").value = 0;
+    var daysOfWeek = $(".dayofweek-selector").select2("val", "");  
+}

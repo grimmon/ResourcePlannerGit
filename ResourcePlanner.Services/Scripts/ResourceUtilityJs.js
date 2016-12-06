@@ -451,7 +451,7 @@ function buildProjectQuery() {
         filters += "&clientId=" + clientId;
     }
 
-    var startDate = StartDate = $('#projectstartdatepicker').data('DateTimePicker').date();
+    var startDate = $('#projectstartdatepicker').data('DateTimePicker').date();
     var endDate = $('#projectenddatepicker').data('DateTimePicker').date();
 
     var formattedStartDate = dateTimeUtility.formatDate(new Date(startDate));
@@ -477,9 +477,21 @@ function buildProjectQuery() {
     return query;
 }
 
+function clearProjectValues(){
+    document.getElementById('projectName').value = "";
+    document.getElementById('projectDescription').value = "";
+    document.getElementById('clientName').value = "";
+    $(".client-selector").select2("val", "");
+    $('#projectstartdatepicker').data('DateTimePicker').date(moment(date));
+    $('#projectenddatepicker').data('DateTimePicker').date(moment(date));
+    $(".pm-selector").select2("val", "");
+    $(".oo-selector").select2("val", "");
+}
+
 function onCallAddProjectSuccess(params, query, httpResponse) {
     $("#saveProject").prop('disabled', false);
     $("#projectModal").modal("hide");
+    clearProjectValues();
     $("#assignmentModal").modal("show");
     var newProject = new Option(httpResponse.Name, httpResponse.Id, true, true);
     $(".project-selector").append(newProject).trigger("change");
@@ -488,7 +500,7 @@ function onCallAddProjectSuccess(params, query, httpResponse) {
 function readyForProjectSave() {
 
     var projectName = document.getElementById('projectName').value;
-    var startDate = StartDate = $('#projectstartdatepicker').data('DateTimePicker').date();
+    var startDate = $('#projectstartdatepicker').data('DateTimePicker').date();
     var endDate = $('#projectenddatepicker').data('DateTimePicker').date();
 
     if (isNullOrUndefined(projectName)) { return false; }
