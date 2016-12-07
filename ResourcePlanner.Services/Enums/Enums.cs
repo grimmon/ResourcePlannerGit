@@ -54,6 +54,14 @@ namespace ResourcePlanner.Services.Enums
             Friday = 6,
             Saturday = 7
         }
+
+        public enum Permission
+        {
+            AssignResources = 1000,
+            ViewAllResources = 1001,
+            ViewOwnedProjectResources = 1002,
+            Administrator = 1003
+        }
     }
     
 }

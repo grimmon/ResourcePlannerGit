@@ -239,3 +239,22 @@ span.select2-selection__arrow {
     width: 250px;
     padding-bottom:10px;
 }
+.tagit input::-webkit-input-placeholder  {
+    color: #666666;
+}
+
+.tagit input::placeholder  {
+    color: #666666;
+}
+
+.tagit input:-moz-placeholder  {
+    color: purple !important;
+}
+
+.tagit input::-moz-placeholder {
+    color: #666666;
+}
+
+.tagit input:-ms-input-placeholder  {
+    color: #666666;
+}

@@ -10,7 +10,7 @@ using ResourcePlanner.Services.Mapper;
 using System.Data;
 using System.Data.SqlClient;
 using static ResourcePlanner.Services.Enums.Enums;
-
+using ResourcePlanner.Services.Excel;
 
 namespace ResourcePlanner.Services.DataAccess
 {
@@ -50,24 +50,20 @@ namespace ResourcePlanner.Services.DataAccess
 
         }
 
-        public ResourcePageExcelData[] GetResourceExcelData(ResourceQuery pageParams)
+        public IExcelBuilder GetResourceExcelData(ResourceQuery pageParams)
         {
 
-
-            ResourcePageExcelData[] returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
+            var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapResourcePageToExcel(pageParams, reader),
                  _connectionString,
-                 @"rpdb.ResourcePageDailySelect",
+                 @"rpdb.ResourcePageSelect",
                  CommandType.StoredProcedure,
                  _timeout,
                  CreateResourcePageParamArray(pageParams));
-
             return returnValue;
-
         }
 
         public async Task<Stream> GetExcelStream(ResourceQuery param)
         {
-            var excelMapper = new ExcelMapper();
             var resourceTask = Task.Factory.StartNew(() => GetResourceExcelData(param));
 
             try
@@ -80,8 +76,7 @@ namespace ResourcePlanner.Services.DataAccess
                     throw new TimeoutException("At least one task exceeded timeout");
                 }
 
-                var page = resourceTask.Result;
-                var excelData = excelMapper.MapResourcePageToExcel(param, page);
+                var excelData = resourceTask.Result;
 
                 return excelData.ConvertToStream();
             }

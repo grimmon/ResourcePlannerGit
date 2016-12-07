@@ -1,4 +1,5 @@
-﻿using ResourcePlanner.Services.DataAccess;
+﻿using ResourcePlanner.Services.Auth;
+using ResourcePlanner.Services.DataAccess;
 using ResourcePlanner.Services.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.Controllers
 {
@@ -16,6 +18,7 @@ namespace ResourcePlanner.Services.Controllers
     {
         [Authorize]
         [HttpPost]
+        [AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
 
         public async Task<IHttpActionResult> Post(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {

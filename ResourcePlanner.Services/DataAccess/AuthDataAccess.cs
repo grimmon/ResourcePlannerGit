@@ -34,5 +34,15 @@ namespace ResourcePlanner.Services.DataAccess
 
             return authorized;
         }
+
+        public List<Enums.Enums.Permission> PermissionsByLogin(string login)
+        {
+            return AdoUtility.ExecuteQuery(reader => EntityMapper.MapToPermissions(reader),
+                _connectionString,
+                @"rpdb.PermissionByPrincipalSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                new SqlParameter[] { AdoUtility.CreateSqlParameter("Login", 100, SqlDbType.VarChar, login)});
+        }
     }
 }

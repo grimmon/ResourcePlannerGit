@@ -143,7 +143,7 @@ namespace ResourcePlanner.Services.Controllers
             try
             {
                 var stream = await access.GetExcelStream(pageParams);
-                var name = string.Format("Resource Data {0}, {1}", pageParams.StartDate, pageParams.EndDate);
+                var name = string.Format("Resource Detail {0}, {1}", pageParams.StartDate, pageParams.EndDate);
 #if MOCK
                 DelayUtility.Delay(ConfigUtility.MockMaxDelayInSeconds * 1000);
 #endif

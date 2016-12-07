@@ -10,7 +10,7 @@ using ResourcePlanner.Services.Mapper;
 using System.Data;
 using System.Data.SqlClient;
 using static ResourcePlanner.Services.Enums.Enums;
-
+using ResourcePlanner.Services.Excel;
 
 namespace ResourcePlanner.Services.DataAccess
 {
@@ -40,6 +40,41 @@ namespace ResourcePlanner.Services.DataAccess
                 ? returnValue.Projects[0].Assignments.Select(a => a.TimePeriod).ToList()
                 : new List<string>();
             return returnValue;
+        }
+
+        public IExcelBuilder GetResourceDetailExcelData(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        {
+
+            var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapResourceDetailPageToExcel(reader, Aggregation, StartDate, EndDate),
+                 _connectionString,
+                 @"rpdb.ResourcePageSelect",
+                 CommandType.StoredProcedure,
+                 _timeout,
+                 CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate));
+            return returnValue;
+        }
+        public async Task<Stream> GetExcelStream(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        {
+            var resourceTask = Task.Factory.StartNew(() => GetResourceDetailExcelData(ResourceId, Aggregation, StartDate, EndDate));
+
+            try
+            {
+                var delay = Task.Delay(300000);
+                await Task.WhenAny(Task.WhenAll(new Task[] { resourceTask }), delay);
+
+                if (delay.Status == TaskStatus.RanToCompletion)
+                {
+                    throw new TimeoutException("At least one task exceeded timeout");
+                }
+
+                var excelData = resourceTask.Result;
+
+                return excelData.ConvertToStream();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //public ResourcePageExcelData[] GetResourceExcelData(ResourceQuery pageParams)

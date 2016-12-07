@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Auth\AuthorizationAttribute.cs" />
     <Compile Include="Controllers\AddAssignmentController.cs" />
     <Compile Include="Controllers\AddProjectController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
