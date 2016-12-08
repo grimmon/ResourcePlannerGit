@@ -75,7 +75,7 @@ namespace ResourcePlanner.Services.DataAccess
 
         private SqlParameter[] CreateProjectPageParamArray(int ProjectId)
         {
-            var ProjectIdParam = AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, ProjectId);
+            var ProjectIdParam = AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, ProjectId);
 
             return new SqlParameter[] { ProjectIdParam };
         }

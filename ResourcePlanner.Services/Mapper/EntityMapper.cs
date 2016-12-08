@@ -95,6 +95,7 @@ namespace ResourcePlanner.Services.Mapper
             projectInfo.Description = reader.GetNullableString("Description");
             projectInfo.Offering = reader.GetNullableString("Offering");
             projectInfo.WBSCode = reader.GetNullableString("WbsCode");
+            projectInfo.Customer = reader.GetNullableString("Customer");
             projectInfo.StartDate = reader.GetDateTime("StartDate");
             projectInfo.EndDate = reader.GetDateTime("EndDate");
             projectInfo.ProjectManagerFirstName = reader.GetNullableString("ProjectManagerFirstName");

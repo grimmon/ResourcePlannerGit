@@ -254,8 +254,8 @@ function clearAssignmentPage() {
    
     $(".project-selector").select2("val", "");
     $(".position-selector").select2("val", "");
-    document.getElementById('assignmentPracticesDropdown').prop('selected', function() {return this.defaultSelected;});
-    document.getElementById('assignmentSubpracticesDropdown').prop('selected', function () { return this.defaultSelected; });
+    $('#assignmentPracticesDropdown').val('-2');
+    $('#assignmentSubpracticesDropdown').val('-2');
     $("#myTags").tagit("removeAll");   
     document.getElementById("hoursPerDay").value = 0;
     var daysOfWeek = $(".dayofweek-selector").select2("val", "");  

@@ -97,6 +97,8 @@ function assignmentModalLoad() {
     $("#projectModalBack").click(closeProjectModal);
     $("#addClient").click(newClient);
     $("#closeClient").click(closeClient);
+    $("#assignmentModal").on('hidden.bs.modal', clearAssignmentPage);
+    $("#projectModal").on('hidden.bs.modal', clearProjectValues);
 
 }
 

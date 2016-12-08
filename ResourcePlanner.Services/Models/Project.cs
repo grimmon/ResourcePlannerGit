@@ -23,6 +23,7 @@ namespace ResourcePlanner.Services.Models
     {
         public string ProjectName { get; set; }
         public string ProjectNumber { get; set; }
+        public string Customer { get; set; }
         public string Offering { get; set; }
         public string WBSCode { get; set; }
         public string Description { get; set; }

@@ -67,6 +67,15 @@ function buildProjectQuery(projectId) {
 }
 
 function onCallProjectSuccess(params, query, httpResponse) {
+    $("#projPageClientName").text(httpResponse.ProjectInfo.Customer);
+    $("#projPageProjectName").text(httpResponse.ProjectInfo.ProjectName);
+    $("#projPageManager").text(httpResponse.ProjectInfo.ProjectManagerLastName + ', ' + httpResponse.ProjectInfo.ProjectManagerFirstName);
+    $("#projPageProjectNumber").text(httpResponse.ProjectInfo.ProjectNumber);
+    $("#projPageOffering").text(httpResponse.ProjectInfo.Offering);
+    $("#ProjPageWBS").text(httpResponse.ProjectInfo.WBSCode); 
+    $("#projPageDescription").text(httpResponse.ProjectInfo.Description);
+    $("#projPageStartDate").text(httpResponse.ProjectInfo.StartDate);                      
+    $("#projPageEndDate").text(httpResponse.ProjectInfo.EndDate);
     updateProjectGrid(params, httpResponse, httpResponse.ProjectResource, httpResponse.TimePeriods, projectGrid.options);
 }
 
