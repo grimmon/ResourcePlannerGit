@@ -409,8 +409,8 @@ var timePeriodCellRenderer = function (params) {
                 return "<img src='Images/IRMT_Icons_GreenUpArrow.png'/> " + floatValue.toFixed(0);
             }
             if (floatValue < 0) {
-                //return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + math.abs(floatValue.toFixed(0));
-                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + floatValue.toFixed(0);
+                return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + Math.abs(floatValue.toFixed(0));
+                //return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + floatValue.toFixed(0);
             }
         }
         return floatValue.toFixed(0);
@@ -431,11 +431,11 @@ var loadingCellRenderer = function (params) {
 
 function addProjectToServer() {
     $("#saveProject").prop("disabled", true);
-    var query = buildProjectQuery();
+    var query = buildAddProjectQuery();
     callServerWithResponseAuth('POST', null, query, onCallAddProjectSuccess, showError);
 }
 
-function buildProjectQuery() {
+function buildAddProjectQuery() {
     var filters = "?"
     var projectName = document.getElementById('projectName').value;
     filters += "projectName=" + projectName;
@@ -483,11 +483,11 @@ function clearProjectValues(){
     document.getElementById('projectName').value = "";
     document.getElementById('projectDescription').value = "";
     document.getElementById('clientName').value = "";
-    $(".client-selector").select2("val", "");
-    $('#projectstartdatepicker').data('DateTimePicker').date(moment(date));
-    $('#projectenddatepicker').data('DateTimePicker').date(moment(date));
-    $(".pm-selector").select2("val", "");
-    $(".oo-selector").select2("val", "");
+    $(".client-selector").val('').trigger('change');
+    $('#projectstartdatepicker').data('DateTimePicker').date(moment());
+    $('#projectenddatepicker').data('DateTimePicker').date(moment());
+    $(".pm-selector").val('').trigger('change');
+    $(".oo-selector").val('').trigger('change');
 }
 
 function onCallAddProjectSuccess(params, query, httpResponse) {

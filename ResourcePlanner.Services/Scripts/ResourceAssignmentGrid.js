@@ -252,11 +252,11 @@ function readyForAssignmentSave() {
 
 function clearAssignmentPage() {
    
-    $(".project-selector").select2("val", "");
-    $(".position-selector").select2("val", "");
+    $(".project-selector").val('').trigger('change');
+    $(".position-selector").val('').trigger('change');
     $('#assignmentPracticesDropdown').val('-2');
     $('#assignmentSubpracticesDropdown').val('-2');
     $("#myTags").tagit("removeAll");   
     document.getElementById("hoursPerDay").value = 0;
-    var daysOfWeek = $(".dayofweek-selector").select2("val", "");  
+    $(".dayofweek-selector").val('').trigger('change');
 }

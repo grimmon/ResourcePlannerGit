@@ -94,11 +94,11 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Day"));
             }
-            if (pageParams.Aggregation == TimeAggregation.Monthly)
+            else if (pageParams.Aggregation == TimeAggregation.Monthly)
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Month"));
             }
-            if (pageParams.Aggregation == TimeAggregation.Daily)
+            else if (pageParams.Aggregation == TimeAggregation.Quarterly)
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Quarter"));
             }

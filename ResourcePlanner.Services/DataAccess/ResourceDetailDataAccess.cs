@@ -128,7 +128,7 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Month");
             }
-            else if (Aggregation == TimeAggregation.Daily)
+            else if (Aggregation == TimeAggregation.Quarterly)
             {
                 AggParam = AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Quarter");
             }
@@ -140,7 +140,7 @@ namespace ResourcePlanner.Services.DataAccess
             var EndDateParam = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, EndDate);
             var ResourceIdParam = AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, ResourceId);
 
-            return new SqlParameter[] { StartDateParam, EndDateParam, ResourceIdParam };
+            return new SqlParameter[] { StartDateParam, EndDateParam, ResourceIdParam, AggParam };
         }
     }
 }
