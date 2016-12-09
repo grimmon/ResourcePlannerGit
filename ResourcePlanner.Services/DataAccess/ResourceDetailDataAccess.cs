@@ -27,14 +27,14 @@ namespace ResourcePlanner.Services.DataAccess
 
         
 
-        public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {
             var returnValue =  AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
                   _connectionString,
                   @"rpdb.ResourceDetailPageSelect",
                   CommandType.StoredProcedure,
                   _timeout,
-                  CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate));
+                  CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate, login));
             returnValue.TimeScale = Aggregation;
             returnValue.TimePeriods = returnValue.Projects.Count > 0
                 ? returnValue.Projects[0].Assignments.Select(a => a.TimePeriod).ToList()
@@ -42,7 +42,7 @@ namespace ResourcePlanner.Services.DataAccess
             return returnValue;
         }
 
-        public IExcelBuilder GetResourceDetailExcelData(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        public IExcelBuilder GetResourceDetailExcelData(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {
 
             var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapResourceDetailPageToExcel(reader, Aggregation, StartDate, EndDate),
@@ -50,12 +50,12 @@ namespace ResourcePlanner.Services.DataAccess
                  @"rpdb.ResourcePageSelect",
                  CommandType.StoredProcedure,
                  _timeout,
-                 CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate));
+                 CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate, login));
             return returnValue;
         }
-        public async Task<Stream> GetExcelStream(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        public async Task<Stream> GetExcelStream(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {
-            var resourceTask = Task.Factory.StartNew(() => GetResourceDetailExcelData(ResourceId, Aggregation, StartDate, EndDate));
+            var resourceTask = Task.Factory.StartNew(() => GetResourceDetailExcelData(ResourceId, Aggregation, StartDate, EndDate, login));
 
             try
             {
@@ -117,7 +117,7 @@ namespace ResourcePlanner.Services.DataAccess
         //    }
         //}
 
-        private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
+        private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {
             var AggParam = new SqlParameter();
             if (Aggregation == TimeAggregation.Daily)
@@ -139,8 +139,8 @@ namespace ResourcePlanner.Services.DataAccess
             var StartDateParam = AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, StartDate);
             var EndDateParam = AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, EndDate);
             var ResourceIdParam = AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, ResourceId);
-
-            return new SqlParameter[] { StartDateParam, EndDateParam, ResourceIdParam, AggParam };
+            var loginParam = AdoUtility.CreateSqlParameter("login", 100, SqlDbType.VarChar, login);
+            return new SqlParameter[] { StartDateParam, EndDateParam, ResourceIdParam, AggParam, loginParam };
         }
     }
 }

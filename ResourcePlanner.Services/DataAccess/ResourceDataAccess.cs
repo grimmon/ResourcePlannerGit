@@ -113,6 +113,7 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString()));
             parameterList.Add(AdoUtility.CreateSqlParameter("PageNum", SqlDbType.Int, pageParams.PageNum));
             parameterList.Add(AdoUtility.CreateSqlParameter("PageSize", SqlDbType.Int, pageParams.PageSize));
+            parameterList.Add(AdoUtility.CreateSqlParameter("login", 100, SqlDbType.VarChar, pageParams.Login));
 
             if (pageParams.City.HasValue)
             {
@@ -153,6 +154,14 @@ namespace ResourcePlanner.Services.DataAccess
             if (pageParams.SearchTerm3 != "")
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm3Param", 50, SqlDbType.VarChar, pageParams.SearchTerm3));
+            }
+            if (pageParams.SearchTerm4 != "")
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm4Param", 50, SqlDbType.VarChar, pageParams.SearchTerm4));
+            }
+            if (pageParams.SearchTerm5 != "")
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm5Param", 50, SqlDbType.VarChar, pageParams.SearchTerm5));
             }
             if (pageParams.Positions != null)
             {

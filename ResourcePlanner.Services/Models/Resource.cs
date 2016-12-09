@@ -46,6 +46,7 @@ namespace ResourcePlanner.Services.Models
 
     public class ResourceQuery
     {
+        public string Login { get; set; }
         public TimeAggregation Aggregation { get; set; }
         public SortOrder Sort { get; set; }
         public SortDirection SortDirection { get; set; }
@@ -62,6 +63,8 @@ namespace ResourcePlanner.Services.Models
         public string SearchTerm1 { get; set; }
         public string SearchTerm2 { get; set; }
         public string SearchTerm3 { get; set; }
+        public string SearchTerm4 { get; set; }
+        public string SearchTerm5 { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Availability { get; set; }

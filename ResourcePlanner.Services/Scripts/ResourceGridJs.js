@@ -85,6 +85,8 @@ function buildResourceQuery(params, excel) {
     var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
     var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
     var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
+    var searchTerm4 = $("#myTags").tagit("assignedTags")[3];
+    var searchTerm5 = $("#myTags").tagit("assignedTags")[4];
 
     var startDate = dateTimeUtility.getStartDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize);
     var endDate = dateTimeUtility.getEndDate(resourceGrid.currentDate, resourceGrid.currentAggregation, resourceGrid.pageSize);
@@ -106,6 +108,9 @@ function buildResourceQuery(params, excel) {
     if (searchTerm1     != null && searchTerm1     != '') { filters += "&searchterm1="     + searchTerm1;    }
     if (searchTerm2     != null && searchTerm2     != '') { filters += "&searchterm2="     + searchTerm2;    }
     if (searchTerm3     != null && searchTerm3     != '') { filters += "&searchterm3="     + searchTerm3;    }
+    if (searchTerm4     != null && searchTerm4     != '') { filters += "&searchterm4="     + searchTerm4;    }
+    if (searchTerm5     != null && searchTerm5     != '') { filters += "&searchterm5="     + searchTerm5;    }
+
     if (!excel){
     if (params.sortModel.length > 0) {
         filters += '&sortOrder='     + params.sortModel[0].colId;

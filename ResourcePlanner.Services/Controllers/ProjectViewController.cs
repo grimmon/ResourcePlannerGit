@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace ResourcePlanner.Services.Controllers
@@ -18,12 +19,8 @@ namespace ResourcePlanner.Services.Controllers
     {
         [HttpGet]
         [Authorize]
-        public async Task<IHttpActionResult> Get(int? ProjectId = null)
+        public async Task<IHttpActionResult> Get(int ProjectId)
         {
-            if (ProjectId == null)
-            {
-                ProjectId = 44981;
-            }
 #if Mock
             var access = new MockDataAccess();
 #else
@@ -31,10 +28,10 @@ namespace ResourcePlanner.Services.Controllers
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
             ProjectPage projectPage;
-
+            var login = HttpContext.Current.User.Identity.Name;
             try
             {
-                projectPage = access.GetProjectPage(ProjectId.Value);
+                projectPage = access.GetProjectPage(ProjectId, login);
             }
             catch (Exception ex)
             {
@@ -56,9 +53,10 @@ namespace ResourcePlanner.Services.Controllers
             var access = new ProjectPageDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
+            var login = HttpContext.Current.User.Identity.Name;
             try
             {
-                var stream = await access.GetExcelStream(ProjectId);
+                var stream = await access.GetExcelStream(ProjectId, login);
                 var name = string.Format("Project Data");
 #if MOCK
                 DelayUtility.Delay(ConfigUtility.MockMaxDelayInSeconds * 1000);

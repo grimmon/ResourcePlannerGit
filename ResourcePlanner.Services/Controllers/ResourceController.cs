@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using static ResourcePlanner.Services.Enums.Enums;
 
@@ -35,7 +36,9 @@ namespace ResourcePlanner.Services.Controllers
             string title = "",
             string searchterm1 = "", 
             string searchterm2 = "", 
-            string searchterm3 = "", 
+            string searchterm3 = "",
+            string searchterm4 = "",
+            string searchterm5 = "",
             DateTime? StartDate = null, 
             DateTime? EndDate = null,
             bool availability = false)
@@ -66,11 +69,14 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SearchTerm1 = searchterm1;
             pageParams.SearchTerm2 = searchterm2;
             pageParams.SearchTerm3 = searchterm3;
+            pageParams.SearchTerm4 = searchterm4;
+            pageParams.SearchTerm5 = searchterm5;
             pageParams.Practice = practice;
             pageParams.SubPractice = subpractice;
             pageParams.ResourceManager = resourcemanager;
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
+            pageParams.Login = HttpContext.Current.User.Identity.Name;
 
             if (title != "")
             {
@@ -110,6 +116,8 @@ namespace ResourcePlanner.Services.Controllers
             string searchterm1 = "",
             string searchterm2 = "",
             string searchterm3 = "",
+            string searchterm4 = "",
+            string searchterm5 = "",
             DateTime? StartDate = null,
             DateTime? EndDate = null)
         {
@@ -126,6 +134,8 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.SearchTerm1 = searchterm1;
             pageParams.SearchTerm2 = searchterm2;
             pageParams.SearchTerm3 = searchterm3;
+            pageParams.SearchTerm4 = searchterm4;
+            pageParams.SearchTerm5 = searchterm5;
             pageParams.Practice = practice;
             pageParams.SubPractice = subpractice;
             pageParams.StartDate = StartDate.Value;
@@ -133,6 +143,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.PageNum = 0;
             pageParams.PageSize = int.MaxValue;
             pageParams.Excel = true;
+            pageParams.Login = HttpContext.Current.User.Identity.Name;
 
 #if Mock
             var access = new MockDataAccess();

@@ -147,9 +147,27 @@ $(document).ready(function () {
         fieldName: "searchbar",
         caseSensitive: false,
         readOnly: false,
-        tagLimit: 3,
+        tagLimit: 5,
         placeholderText: "Search",
         afterTagAdded: function (event, ui) { this.placeholderText = null },
+        onTagLimitExceeded: function (event, ui) {
+            this.readOnly = true;
+        }
+    });
+
+    $("#assignmentTextSearch").tagit({
+        fieldName: "searchbar",
+        caseSensitive: false,
+        readOnly: false,
+        tagLimit: 3,
+        placeholderText: "Search",
+        afterTagAdded: function (event, ui) {
+            this.placeholderText = null
+            AssignmentApply();
+        },
+        afterTagRemoved: function (event, ui) {
+            AssignmentApply();
+        },
         onTagLimitExceeded: function (event, ui) {
             this.readOnly = true;
         }

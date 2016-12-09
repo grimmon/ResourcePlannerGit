@@ -342,6 +342,31 @@
                         </div>
    
                         <div class="col-md-8">
+                            <div style="width: 500px;">
+                                <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $("#assignmentTextSearch").tagit({
+                                                fieldName: "searchbar",
+                                                caseSensitive: false,
+                                                readOnly: false,
+                                                tagLimit: 5,
+                                                placeholderText: "Search",
+                                                afterTagAdded: function (event, ui) {
+                                                    this.placeholderText = null;
+                                                    AssignmentApply();
+                                                },
+                                                afterTagRemoved: function (event, ui) {
+                                                    AssignmentApply();
+                                                },
+                                                onTagLimitExceeded: function (event, ui) {
+                                                    this.readOnly = true;
+                                                }
+                                            });
+                                        });
+                                </script>
+
+                                <ul id="assignmentTextSearch"></ul>
+                            </div>
                             <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
                                 <div id="AssignmentGrid" class="ag-fresh"></div>
                             </div>

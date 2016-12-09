@@ -81,9 +81,11 @@ function buildResourceAssignmentQuery(params) {
     var practice    = document.getElementById('assignmentPracticesDropdown'   ).value;
     var subPractice = document.getElementById('assignmentSubpracticesDropdown').value;
 
-    var searchTerm1 = $("#myTags").tagit("assignedTags")[0];
-    var searchTerm2 = $("#myTags").tagit("assignedTags")[1];
-    var searchTerm3 = $("#myTags").tagit("assignedTags")[2];
+    var searchTerm1 = $("#assignmentTextSearch").tagit("assignedTags")[0];
+    var searchTerm2 = $("#assignmentTextSearch").tagit("assignedTags")[1];
+    var searchTerm3 = $("#assignmentTextSearch").tagit("assignedTags")[2];
+    var searchTerm4 = $("#assignmentTextSearch").tagit("assignedTags")[3];
+    var searchTerm5 = $("#assignmentTextSearch").tagit("assignedTags")[4];
 
     var startDate = dateTimeUtility.getStartDate(resourceAssignmentGrid.currentDate, resourceAssignmentGrid.currentAggregation, resourceAssignmentGrid.pageSize);
     var endDate = dateTimeUtility.getEndDate(resourceAssignmentGrid.currentDate, resourceAssignmentGrid.currentAggregation, resourceAssignmentGrid.pageSize);
@@ -117,6 +119,8 @@ function buildResourceAssignmentQuery(params) {
     if (searchTerm1 != null && searchTerm1 != '') { filters += "&searchterm1=" + searchTerm1; }
     if (searchTerm2 != null && searchTerm2 != '') { filters += "&searchterm2=" + searchTerm2; }
     if (searchTerm3 != null && searchTerm3 != '') { filters += "&searchterm3=" + searchTerm3; }
+    if (searchTerm4 != null && searchTerm4 != '') { filters += "&searchterm4=" + searchTerm4; }
+    if (searchTerm5 != null && searchTerm5 != '') { filters += "&searchterm5=" + searchTerm5; }
 
     if (params.sortModel.length > 0) {
         filters += '&sortOrder=' + params.sortModel[0].colId;
@@ -251,7 +255,8 @@ function readyForAssignmentSave() {
 }
 
 function clearAssignmentPage() {
-   
+
+    $("#assignmentTextSearch").tagit("removeAll");
     $(".project-selector").val('').trigger('change');
     $(".position-selector").val('').trigger('change');
     $('#assignmentPracticesDropdown').val('-2');

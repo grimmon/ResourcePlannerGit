@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using static ResourcePlanner.Services.Enums.Enums;
 
@@ -35,6 +36,7 @@ namespace ResourcePlanner.Services.Controllers
             {
                 ResourceId = 18119;
             }
+            var login = HttpContext.Current.User.Identity.Name;
 #if Mock
             var access = new MockDataAccess();
 #else
@@ -45,7 +47,7 @@ namespace ResourcePlanner.Services.Controllers
 
             try
             {
-                detailPage = access.GetResourceDetail(ResourceId.Value, agg, StartDate.Value, EndDate.Value);
+                detailPage = access.GetResourceDetail(ResourceId.Value, agg, StartDate.Value, EndDate.Value, login);
             }
             catch (Exception ex)
             {
@@ -66,10 +68,11 @@ namespace ResourcePlanner.Services.Controllers
 #else
             var access = new ResourceDetailDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var login = HttpContext.Current.User.Identity.Name;
 #endif
             try
             {
-                var stream = await access.GetExcelStream(ResourceId, agg, StartDate, EndDate);
+                var stream = await access.GetExcelStream(ResourceId, agg, StartDate, EndDate, login);
                 var name = string.Format("Resource Detail {0}, {1}", StartDate, EndDate);
 #if MOCK
                 DelayUtility.Delay(ConfigUtility.MockMaxDelayInSeconds * 1000);

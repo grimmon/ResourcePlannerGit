@@ -27,18 +27,18 @@ namespace ResourcePlanner.Services.DataAccess
 
 
 
-        public ProjectPage GetProjectPage(int ProjectId)
+        public ProjectPage GetProjectPage(int ProjectId, string login)
         {
             var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToProjectPage(reader),
                  _connectionString,
                  @"rpdb.ProjectViewSelect",
                  CommandType.StoredProcedure,
                  _timeout,
-                 CreateProjectPageParamArray(ProjectId));
+                 CreateProjectPageParamArray(ProjectId, login));
             return returnValue;
         }
 
-        public IExcelBuilder GetProjectExcelData(int ProjectId)
+        public IExcelBuilder GetProjectExcelData(int ProjectId, string login)
         {
 
             var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapProjectPageToExcel(reader),
@@ -46,12 +46,12 @@ namespace ResourcePlanner.Services.DataAccess
                  @"rpdb.ProjectViewSelect",
                  CommandType.StoredProcedure,
                  _timeout,
-                 CreateProjectPageParamArray(ProjectId));
+                 CreateProjectPageParamArray(ProjectId, login));
             return returnValue;
         }
-        public async Task<Stream> GetExcelStream(int ProjectId)
+        public async Task<Stream> GetExcelStream(int ProjectId, string login)
         {
-            var resourceTask = Task.Factory.StartNew(() => GetProjectExcelData(ProjectId));
+            var resourceTask = Task.Factory.StartNew(() => GetProjectExcelData(ProjectId, login));
 
             try
             {
@@ -73,11 +73,12 @@ namespace ResourcePlanner.Services.DataAccess
             }
         }
 
-        private SqlParameter[] CreateProjectPageParamArray(int ProjectId)
+        private SqlParameter[] CreateProjectPageParamArray(int ProjectId, string login)
         {
             var ProjectIdParam = AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, ProjectId);
+            var loginParam = AdoUtility.CreateSqlParameter("login", 100, SqlDbType.VarChar, login);
 
-            return new SqlParameter[] { ProjectIdParam };
+            return new SqlParameter[] { ProjectIdParam, loginParam };
         }
     }
 }
