@@ -552,7 +552,7 @@ function callServerAuth(query, successCallback, failureCallback) {
             alert('ADAL Error: ' + error);
             return;
         }
-        callAssignmentServer(query, successCallback, failureCallback, token);
+        callServer(query, successCallback, failureCallback, token);
     });
 }
 

@@ -39,7 +39,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             return AdoUtility.ExecuteQuery(reader => EntityMapper.MapToPermissions(reader),
                 _connectionString,
-                @"rpdb.PermissionByPrincipalSelect",
+                @"auth.PermissionByPrincipalSelect",
                 CommandType.StoredProcedure,
                 _timeout,
                 new SqlParameter[] { AdoUtility.CreateSqlParameter("Login", 100, SqlDbType.VarChar, login)});
