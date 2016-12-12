@@ -1,3 +1,8 @@
-<article class="">
-grid is here
+<article class="" style="height:100%">
+    <timespan-grid id="resource"
+                   [applyTrigger]="applyTrigger"
+                   [gridConfig]="gridConfig"
+                   [queryConfig]="queryConfig"
+                   (dataRequested)="dataRequested($event)">
+    </timespan-grid>
 </article>

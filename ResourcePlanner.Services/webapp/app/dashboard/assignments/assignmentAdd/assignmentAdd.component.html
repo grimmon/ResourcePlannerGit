@@ -2,13 +2,13 @@
     <h3>Add Assignment<span style="padding-left:30px;"></span></h3>
     <div style="height:80%">
         <div style="height:100%">
-            <div class="col-sm-3"  style="border: 1px navy solid;height:100%">
+            <div class="col-sm-3"  style="height:100%">
                 <assignment-new>
 
                 </assignment-new>
             </div>
-            <div class="col-sm-9" style="border: 1px navy solid; height:100%">
-                <assignment-resource-list></assignment-resource-list>
+            <div class="col-sm-9" style="height:100%">
+                <assignment-resource-list [showTrigger]="showList"></assignment-resource-list>
             </div>
         </div>
     </div>

@@ -22,8 +22,11 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this._showTrigger = v;
         if (this._showTrigger) {
             this.messageService.modalToggle(this.visible = true);
+            this.showList++;
         }
     }
+
+    showList = 1;
 
     constructor(
         private messageService: MessageService,

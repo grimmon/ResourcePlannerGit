@@ -73,7 +73,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             enableServerSideSorting: true,
             enableServerSideFilter: true,
             enableColResize: true,
-            rowSelection: 'single',
+            rowSelection: this.gridConfig.rowSelection || 'single',
             rowDeselection: true,
             rowModelType: 'virtual',
             paginationPageSize: 300,
@@ -233,8 +233,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         console.log('asking for ' + params.startRow + ' to ' + params.endRow);
         var pageSize = params.endRow - params.startRow;
         var pageNum = params.startRow / pageSize;
-
-        return `?pageSize=${pageSize}&pageNum=${pageNum}${this.getDateQuery()}${this.getSortQuery(params)}&${this.queryConfig.query}`;
+        return `?pageSize=${pageSize}&pageNum=${pageNum}${this.getDateQuery()}${this.getSortQuery(params)}${this.queryConfig.query ? '&' + this.queryConfig.query : ''}`;
     }
 
     private refresh() {

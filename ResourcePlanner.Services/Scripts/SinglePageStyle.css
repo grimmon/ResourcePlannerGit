@@ -258,3 +258,6 @@ span.select2-selection__arrow {
 .tagit input:-ms-input-placeholder  {
     color: #666666;
 }
+.formrow {
+    margin-top:8px;
+}
