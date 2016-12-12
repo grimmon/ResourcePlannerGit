@@ -318,10 +318,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\app.component.spec.ts" />
-    <TypeScriptCompile Include="App\app.component.ts" />
-    <TypeScriptCompile Include="App\app.module.ts" />
-    <TypeScriptCompile Include="App\main.ts" />
     <TypeScriptCompile Include="DropdownService.ts" />
     <TypeScriptCompile Include="Hello.ts" />
     <TypeScriptCompile Include="IDropdownValue.ts" />
