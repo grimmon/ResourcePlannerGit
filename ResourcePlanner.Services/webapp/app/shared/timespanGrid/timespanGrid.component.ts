@@ -189,7 +189,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private createColumnDefs(timePeriods?: string[]): any[] {
-        var numCols = 8;
+        var numCols = timePeriods ? timePeriods.length : this.periodColumnsCount;
         var datesColumns: any[] = [];
         for (var i = 0; i < numCols; i++) {
             datesColumns.push(this.createDatesColumn(i, "resourceGroupColumn", timePeriods));
