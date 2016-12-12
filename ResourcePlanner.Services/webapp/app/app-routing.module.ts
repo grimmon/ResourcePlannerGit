@@ -3,7 +3,6 @@ import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AssignmentAddComponent } from './assignments/assignmentAdd/assignmentAdd.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard', },
@@ -12,7 +11,6 @@ const routes: Routes = [
     loadChildren: 'app/admin/admin.module#AdminModule',
   },
   { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
-  { path: 'assignments', component: AssignmentAddComponent, data: { title: 'AssignmentAdd' } },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 

@@ -43,6 +43,10 @@ export class NavComponent implements OnInit {
         this.messageService.filteredRequest("export");
     }
 
+    addAssignment() {
+        this.messageService.addAssignmentRequest(true);
+    }
+
     logout() {
         //this.adalService.logOut();
     }

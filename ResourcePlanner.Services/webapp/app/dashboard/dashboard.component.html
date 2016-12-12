@@ -1,6 +1,7 @@
-<article class="" style="position:absolute;top:108px;width: calc(100% - 56px)">
+<article class="" style="position:absolute;top:108px;bottom:0px;width: calc(100% - 56px)">
     <resource-filters [categoryOptions]></resource-filters>
     <resource-list></resource-list>
     <resource-details (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
     <project-list-view [projectToView]="projectToView" [showTrigger]="projectShow"></project-list-view>
+    <assignment-add [showTrigger]="assignmentAddShow"></assignment-add>
 </article>

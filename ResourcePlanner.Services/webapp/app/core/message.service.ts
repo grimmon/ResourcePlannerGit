@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class MessageService {
 
-    // filter panel toggle request
+    // modal mode toggle request
     private modalToggled = new Subject<boolean>();
 
     onModalToggled(handler: (value: boolean) => void) {
@@ -12,6 +12,16 @@ export class MessageService {
     }
     modalToggle(value: boolean) {
         this.modalToggled.next(value);
+    }
+
+    // add assignment request
+    private addAssignmentRequested = new Subject<boolean>();
+
+    onAddAssignmentRequested(handler: (value: boolean) => void) {
+        this.addAssignmentRequested.subscribe(handler)
+    }
+    addAssignmentRequest(value: boolean) {
+        this.addAssignmentRequested.next(value);
     }
 
     // filter panel toggle request

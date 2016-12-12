@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { EntityService } from '../core';
+import { MessageService } from '../core';
 import { CategoryOption } from '../models';
 
 
@@ -20,23 +20,31 @@ export class DashboardComponent implements OnDestroy, OnInit {
     projectShow = 0;
 
     projectResourceViewRequested($event: any) {
-        this.projectToView = $event;
-        //this.projectToView = this.entityService.clone($event);
+        this.projectToView = $event; 
         this.projectShow++;
     }
 
+    assignmentAddShow = 0;
+
+    assignmentAddRequested($event: any) {
+        this.assignmentAddShow++;
+    }
+
     constructor(
-        private entityService: EntityService,
+        private messageService: MessageService,
         private route: ActivatedRoute,
         private router: Router) {
 
         this.categoryOptions.push(new CategoryOption({ Id: 8, Name: 'xxx', Category: 'zzz' }));
 
-    }
-
-    ngOnDestroy() {
+        this.messageService.onAddAssignmentRequested(state => {
+            this.assignmentAddShow++;
+        });
     }
 
     ngOnInit() {
+    }
+
+    ngOnDestroy() {
     }
 }

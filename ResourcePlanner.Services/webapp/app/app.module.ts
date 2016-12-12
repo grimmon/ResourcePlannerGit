@@ -21,12 +21,10 @@ import { ResourceProfileComponent } from './dashboard/resourceProfile/resourcePr
 import { ResourceProjectsComponent } from './dashboard/resourceProjects/resourceProjects.component';
 import { ResourceViewsComponent } from './dashboard/resourceViews/resourceViews.component';
 import { ProjectListViewComponent } from './dashboard/projectListView/projectListView.component';
-
-import { ProjectAddComponent } from './projects/projectAdd/projectAdd.component';
-
-import { AssignmentAddComponent } from './assignments/assignmentAdd/assignmentAdd.component';
-import { AssignmentNewComponent } from './assignments/assignmentNew/assignmentNew.component';
-import { AssignmentResourceListComponent } from './assignments/assignmentResourceList/assignmentResourceList.component';
+import { ProjectAddComponent } from './dashboard/projectAdd/projectAdd.component';
+import { AssignmentAddComponent } from './dashboard/assignments/assignmentAdd/assignmentAdd.component';
+import { AssignmentNewComponent } from './dashboard/assignments/assignmentNew/assignmentNew.component';
+import { AssignmentResourceListComponent } from './dashboard/assignments/assignmentResourceList/assignmentResourceList.component';
 
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './page-not-found.component';
