@@ -1,0 +1,82 @@
+<div id="collapse1" class="panel-collapse" [style.display]="visible ? 'block' : 'none'">
+    <div class="panel-body" style="background: #C8C8C8">
+        <div style="width: 500px;">
+            <ul id="myTags"></ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <label style="float: right;">Cities</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="citiesDropdown" style="width:100%" [(ngModel)]="selectedCity">
+                    <option *ngFor="let option of getCities()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Org Units</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="orgUnitsDropdown" style="width:100%" [(ngModel)]="selectedOrgUnit">
+                    <option *ngFor="let option of getOrgUnits()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Regions</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="regionDropdown" style="width:100%" [(ngModel)]="selectedRegion">
+                    <option *ngFor="let option of getRegions()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+           </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Markets</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="marketsDropdown" style="width:100%" [(ngModel)]="selectedMarket">
+                    <option *ngFor="let option of getMarkets()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <label style="float: right;">Practices</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="practicesDropdown" style="width:100%" [(ngModel)]="selectedPractice">
+                    <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Sub-Practices</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="subpracticesDropdown" style="width:100%" [(ngModel)]="selectedSubPractice">
+                    <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Interval</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="aggregationsDropdown" style="width:100%" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)"> 
+                    <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float:right;">Resource Mgr.</label>
+            </div>
+            <div class="col-sm-2">
+                <select id="resourceManagerDropdown" style="width:100%" [(ngModel)]="selectedResourceManager">
+                    <option *ngFor="let option of getResourceManagers()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" id="applyButton" (click)="apply()">Apply</button>
+                <button type="button" class="btn btn-primary" id="clearButton" (click)="clear()">Clear</button>
+            </div>
+       </div>
+    </div>
+</div>

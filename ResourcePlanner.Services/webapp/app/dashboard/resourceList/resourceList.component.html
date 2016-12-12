@@ -1,0 +1,10 @@
+<article class="" style="height:450px">
+    <timespan-grid id="resource" 
+        [applyTrigger]="applyTrigger" 
+        [gridConfig]="gridConfig" 
+        [queryConfig]="queryConfig"
+        (dataRequested)="dataRequested($event)"
+        (periodScrolled)="periodScrolled($event)"
+        (rowSelected)="rowSelected($event)">
+    </timespan-grid>
+ </article>

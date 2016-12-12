@@ -1,0 +1,37 @@
+﻿<div (click)="gridClicked($event)" style="height:100%">
+    <ag-grid-ng2 #agGrid style="width: 100%;" class="ag-fresh" [style.height]="gridConfig.height"
+             [gridOptions]="gridOptions"
+             [columnDefs]="columnDefs"
+             [showToolPanel]="showToolPanel"
+             [rowData]="rowData"
+             enableColResize
+             groupHeaders
+             rowModelType='virtual'
+             toolPanelSuppressGroups
+             toolPanelSuppressValues
+             rowHeight="22"
+             (modelUpdated)="onModelUpdated()"
+             (cellClicked)="onCellClicked($event)"
+             (cellDoubleClicked)="onCellDoubleClicked($event)"
+             (cellContextMenu)="onCellContextMenu($event)"
+             (cellValueChanged)="onCellValueChanged($event)"
+             (cellFocused)="onCellFocused($event)"
+             (rowSelected)="onRowSelected($event)"
+             (selectionChanged)="onSelectionChanged()"
+             (beforeFilterChanged)="onBeforeFilterChanged()"
+             (afterFilterChanged)="onAfterFilterChanged()"
+             (filterModified)="onFilterModified()"
+             (beforeSortChanged)="onBeforeSortChanged()"
+             (afterSortChanged)="onAfterSortChanged()"
+             (virtualRowRemoved)="onVirtualRowRemoved($event)"
+             (gridReady)="onReady($event)"
+             (columnEverythingChanged)="onColumnEvent($event)"
+             (columnRowGroupChanged)="onColumnEvent($event)"
+             (columnValueChanged)="onColumnEvent($event)"
+             (columnMoved)="onColumnEvent($event)"
+             (columnVisible)="onColumnEvent($event)"
+             (columnGroupOpened)="onColumnEvent($event)"
+             (columnResized)="onColumnEvent($event)"
+             (columnPinnedCountChanged)="onColumnEvent($event)">
+    </ag-grid-ng2>
+</div>

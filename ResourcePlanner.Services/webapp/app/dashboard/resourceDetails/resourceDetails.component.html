@@ -1,0 +1,9 @@
+<article class="">
+    <span (click)="visible=!visible"><b>{{title}}</b></span><span style="padding-left: 20px" [style.display]="visible ? 'inline' : 'none'">
+    <span style="border: 1px solid navy">Projects</span>&nbsp;
+    <span style="border: 1px solid navy">Profile</span></span>
+    <div [style.display]="visible ? 'block' : 'none'">
+        <resource-projects [resourceId]="resourceId"></resource-projects>
+        <resource-profile [resourceId]="resourceId"></resource-profile>
+    </div>
+</article>

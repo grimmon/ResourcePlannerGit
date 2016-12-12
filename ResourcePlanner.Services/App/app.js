@@ -23,5 +23,10 @@
         authContext.config.redirectUri = window.location.href;
         authContext.login();
         return;
-    }
+    } 
+    authContext.acquireToken(authContext.config.clientId, function (error, token) {
+        if (token) {
+            localStorage.setItem('id_token', token);
+        }
+    });
 }());

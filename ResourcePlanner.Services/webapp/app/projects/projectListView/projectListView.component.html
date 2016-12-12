@@ -1,0 +1,16 @@
+<article class="" style="height:500px">
+    <div class="row">
+        <timespan-grid id="resource"
+                        [applyTrigger]="applyTrigger"
+                        [gridConfig]="gridConfig"
+                        [queryConfig]="queryConfig"
+                        (dataRequested)="dataRequested($event)">
+        </timespan-grid>
+    </div>
+    <div class="row">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" id="clearButton" (click)="close()">Close</button>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,43 @@
+<div class="header-nav" style="top:0px;">
+    <div class="appLogo">
+        <img src="../Images/IRMT_Icons_InsightLogo.png" alt="Insight" />
+    </div>
+    <div class="header-buttoncontainer">
+        <div class="headerbuttonbox">
+            <div class="headerbutton">
+                <div>
+                    <img src="../Images/IRMT_NavIcons_Profile.png" alt="User" />
+                </div>
+            </div>
+
+        </div>
+        <div class="headerbuttonbox" id="addAssignmentGrid" [style.display]="addAssigmentAllowed ? 'block' : 'none'">
+            <div class="headerbutton">
+                <a data-toggle="modal" data-target="#assignmentModal" id="assignmentModalLoad">
+                    <div>
+                        <img src="../Images/IRMT_NavIcons_AssignNewResource.png" alt="Add" />
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <div class="headerbuttonbox" style="margin-left: 0px;">
+            <div class="headerbutton">
+                <a id="filterButton">
+                    <div>
+                        <img src="../Images/IRMT_NavIcons_SearchRefine.png" (click)="toggleFilters()" alt="Filters">
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="headerbuttonbox" style="margin-left: 0px;">
+            <div class="headerbutton">
+                <a id="exportExcel">
+                    <div>
+                        <img src="../Images/tempxls.png" (click)="export()" alt="Export to Excel" height="50" width="50">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
