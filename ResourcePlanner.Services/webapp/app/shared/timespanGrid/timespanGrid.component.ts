@@ -35,6 +35,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             this.refresh();
         }
     }
+
     _periodScrollTrigger: any;
 
     set periodScrollTrigger(v: any) {
@@ -205,6 +206,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         }
     }
 
+    private clickedFirstColumn = false;
+
     private currentDate: Date;
     private periodColumnsCount: number = CONFIG.periodColumnsCount;
 
@@ -279,17 +282,19 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellClicked($event: any) {
-        //console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
-        //clickedColumnName = $event.colDef.field;
+        this.clickedFirstColumn = $event.colDef.context.index == 0;
     }
 
     private onRowSelected($event: any) {
-       console.log('onRowSelected');
-       if ($event.node.isSelected()) {
+        //console.log('onRowSelected');
+    }
+
+    private onRowClicked($event: any) {
+        if (this.clickedFirstColumn) {
             this.rowSelected.emit({
                 rowData: $event.node.data,
             });
-      }
+        }
     }
 
     private onCellValueChanged($event: any) {

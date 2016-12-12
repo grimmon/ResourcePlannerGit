@@ -15,6 +15,7 @@ class MenuItem {
 export class NavComponent implements OnInit {
     menuItems: MenuItem[];
 
+    modal = false;
 
     addAssigmentAllowed: boolean = true;
 
@@ -30,6 +31,8 @@ export class NavComponent implements OnInit {
     constructor(
         //private adalService: AdalService,
         private messageService: MessageService) {
+
+        this.messageService.onModalToggled(on => this.modal = on);
     }
 
     toggleFilters() {

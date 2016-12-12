@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -21,10 +21,18 @@ export class ResourceDetailsComponent implements OnDestroy, OnInit {
 
     resourceId: number;
 
+    projectViewRequested($event: any) {
+        this.projectResourceViewRequested.emit($event);
+    }
+
+    @Output() projectResourceViewRequested: EventEmitter<any>;
+
     constructor(
         private messageService: MessageService,
         private route: ActivatedRoute,
         private router: Router) {
+
+        this.projectResourceViewRequested = new EventEmitter();
 
         this.messageService.onApplyRequested(filters => {
             this.resourceId = 0;

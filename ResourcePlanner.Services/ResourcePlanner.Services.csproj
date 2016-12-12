@@ -231,8 +231,8 @@
     <Content Include="webapp\app\navigation\nav.component.html" />
     <Content Include="webapp\app\projects\projectAdd\projectAdd.component.css" />
     <Content Include="webapp\app\projects\projectAdd\projectAdd.component.html" />
-    <Content Include="webapp\app\projects\projectListView\projectListView.component.css" />
-    <Content Include="webapp\app\projects\projectListView\projectListView.component.html" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.css" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.html" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.css" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.html" />
     <Content Include="webapp\protractor.config.js" />
@@ -389,7 +389,7 @@
     <TypeScriptCompile Include="webapp\app\navigation\nav.component.ts" />
     <TypeScriptCompile Include="webapp\app\page-not-found.component.ts" />
     <TypeScriptCompile Include="webapp\app\projects\projectAdd\projectAdd.component.ts" />
-    <TypeScriptCompile Include="webapp\app\projects\projectListView\projectListView.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
     <TypeScriptCompile Include="webapp\main.ts" />
   </ItemGroup>

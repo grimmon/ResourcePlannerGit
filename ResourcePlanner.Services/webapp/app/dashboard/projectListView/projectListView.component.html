@@ -1,0 +1,16 @@
+<article class=""  style="background-color: white;position:absolute;top:0;width: 100%;height:100%" [style.display]="visible ? 'block' : 'none'">
+    <h3>Project<span style="padding-left:30px;">{{projectToView.ProjectName}}</span></h3>
+    <div style="height:80%">
+        <timespan-grid id="resource"
+                        [applyTrigger]="applyTrigger"
+                        [gridConfig]="gridConfig"
+                        [queryConfig]="queryConfig"
+                        (dataRequested)="dataRequested($event)">
+        </timespan-grid>
+    </div>
+    <div style="position:absolute;bottom:0px;height:10%;width:100%">
+        <div style="height:100%;text-align:right">
+            <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:40px;">Close</button>
+        </div>
+    </div>
+</article>

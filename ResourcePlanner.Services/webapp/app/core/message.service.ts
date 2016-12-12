@@ -5,6 +5,16 @@ import { Subject } from 'rxjs/Subject';
 export class MessageService {
 
     // filter panel toggle request
+    private modalToggled = new Subject<boolean>();
+
+    onModalToggled(handler: (value: boolean) => void) {
+        this.modalToggled.subscribe(handler)
+    }
+    modalToggle(value: boolean) {
+        this.modalToggled.next(value);
+    }
+
+    // filter panel toggle request
     private filterPanelToggled = new Subject<string>();
 
     onFilterPanelToggled(handler: (value: string) => void) {

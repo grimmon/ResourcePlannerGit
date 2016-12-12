@@ -3,7 +3,7 @@
     <span style="border: 1px solid navy">Projects</span>&nbsp;
     <span style="border: 1px solid navy">Profile</span></span>
     <div [style.display]="visible ? 'block' : 'none'">
-        <resource-projects [resourceId]="resourceId"></resource-projects>
+        <resource-projects [resourceId]="resourceId" (projectViewRequested)="projectViewRequested($event)"></resource-projects>
         <resource-profile [resourceId]="resourceId"></resource-profile>
     </div>
 </article>

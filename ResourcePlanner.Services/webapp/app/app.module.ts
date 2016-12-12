@@ -20,8 +20,8 @@ import { ResourceFiltersComponent } from './dashboard/resourceFilters/resourceFi
 import { ResourceProfileComponent } from './dashboard/resourceProfile/resourceProfile.component';
 import { ResourceProjectsComponent } from './dashboard/resourceProjects/resourceProjects.component';
 import { ResourceViewsComponent } from './dashboard/resourceViews/resourceViews.component';
+import { ProjectListViewComponent } from './dashboard/projectListView/projectListView.component';
 
-import { ProjectListViewComponent } from './projects/projectListView/projectListView.component';
 import { ProjectAddComponent } from './projects/projectAdd/projectAdd.component';
 
 import { AssignmentAddComponent } from './assignments/assignmentAdd/assignmentAdd.component';
@@ -52,8 +52,10 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         NavComponent,
         PageNotFoundComponent,
 
-        DashboardComponent, ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
-        ProjectListViewComponent, ProjectAddComponent,
+        DashboardComponent,
+            ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
+            ProjectListViewComponent,
+        ProjectAddComponent,
         AssignmentAddComponent, AssignmentNewComponent, AssignmentResourceListComponent,
     ],
     providers: [

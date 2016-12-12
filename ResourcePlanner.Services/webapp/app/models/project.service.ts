@@ -18,7 +18,7 @@ export class ProjectService {
     //}
 
     getProjects(queryString: string) {
-        return this.serverService.get<ProjectResource[]>(CONFIG.urls.projects + queryString);
+        return this.serverService.get<ProjectResource[]>(CONFIG.urls.projectView + queryString);
     }
 
     getProject(id: number) {

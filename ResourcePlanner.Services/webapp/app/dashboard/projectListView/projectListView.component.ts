@@ -10,24 +10,54 @@ import { ProjectPage, ProjectResourceRow, ProjectService } from '../../models';
     moduleId: module.id,
     selector: 'project-list-view',
     templateUrl: 'projectListView.component.html',
-    styleUrls: ['projectListView.component.css']
+    styleUrls: ['projectListView.component.css'],
+    inputs: ['projectToView', 'showTrigger'],
 })
 export class ProjectListViewComponent implements OnDestroy, OnInit {
+    visible: boolean = false;
+
     gridConfig: any = {
         getItems: (page: ProjectPage) => page.ProjectResource,
         createRow: ProjectResourceRow,
         hideTimePeriodScroll: true,
-        height: "500px",
+        height: "100%",
     };
 
     queryConfig: any = {
-        query: "projectId=",
+        query: "projectId=0",
     };
 
-    applyTrigger: number = 0;
+    _showTrigger: any;
+    _projectTrigged = 0;
+
+    set showTrigger(v: any) {
+        this._showTrigger = v;
+        if (this._projectToView.Id) {
+            if (this._projectTrigged != this._projectToView.Id) {
+                this.applyTrigger++;
+                this._projectTrigged = this._projectToView.Id
+            }
+            this.messageService.modalToggle(this.visible = true);
+        }
+    }
+
+    applyTrigger = 0;
+
+    _projectToView: any = {};
+    set projectToView(v: number) {
+        this._projectToView = v;
+    }
+    get projectToView() {
+        return this._projectToView;
+    }
+
+    close() {
+        this.messageService.modalToggle(this.visible = false);
+    }
+
 
     dataRequested($event: any) {
-        $event.dataObservable = this.projectService.getProjects($event.query);
+        $event.dataObservable = this.projectService.getProjects("?projectId=" + this._projectToView.Id);
     }
 
     constructor(
@@ -35,8 +65,6 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
         private projectService: ProjectService,
         private route: ActivatedRoute,
         private router: Router) {
-
-        this.messageService.onApplyRequested(filters => this.apply(filters));
 
         this.createColumns();
     }
@@ -92,11 +120,6 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             },
         ];
 
-    }
-
-    private apply(filters: any) {
-        this.queryConfig.query = filters;
-        this.applyTrigger++;
     }
 
     ngOnDestroy() {

@@ -3,7 +3,6 @@ import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProjectListViewComponent } from './projects/projectListView/projectListView.component';
 import { AssignmentAddComponent } from './assignments/assignmentAdd/assignmentAdd.component';
 
 const routes: Routes = [
@@ -14,7 +13,6 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
   { path: 'assignments', component: AssignmentAddComponent, data: { title: 'AssignmentAdd' } },
-  { path: 'projects', component: ProjectListViewComponent, data: { title: 'ProjectsListView' } },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 

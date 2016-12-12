@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -48,10 +48,10 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     }
 
     rowSelected($event: any) {
-        alert($event.rowData);
-        this.router.navigateByUrl('/projects/' + $event.rowData.Id);
-        //this.messageService.resourceProjectSelect($event.rowData); // announce that resource project selection done
+        this.projectViewRequested.emit($event.rowData)
     }
+
+    @Output() projectViewRequested: EventEmitter<any>;
 
     constructor(
         private messageService: MessageService,
@@ -59,6 +59,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
         private resourceService: ResourceService,
         private route: ActivatedRoute,
         private router: Router) {
+
+        this.projectViewRequested = new EventEmitter<any>();
 
         this.messageService.onResourcePeriodScrolled(step => this.periodScrollTrigger = { step: step });
 
