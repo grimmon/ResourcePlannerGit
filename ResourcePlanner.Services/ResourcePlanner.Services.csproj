@@ -354,11 +354,9 @@
     <TypeScriptCompile Include="webapp\app\app-routing.module.ts" />
     <TypeScriptCompile Include="webapp\app\app.component.ts" />
     <TypeScriptCompile Include="webapp\app\app.module.ts" />
-    <TypeScriptCompile Include="webapp\app\assignments\assignments-routing.module.ts" />
     <TypeScriptCompile Include="webapp\app\assignments\assignmentAdd\assignmentAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\assignments\assignmentNew\assignmentNew.component.ts" />
     <TypeScriptCompile Include="webapp\app\assignments\assignmentResourceList\assignmentResourceList.component.ts" />
-    <TypeScriptCompile Include="webapp\app\assignments\assignments.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\config.ts" />
     <TypeScriptCompile Include="webapp\app\core\core.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\grid.service.ts" />
@@ -373,9 +371,7 @@
     <TypeScriptCompile Include="webapp\app\core\spinner\spinner.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\spinner\spinner.service.ts" />
     <TypeScriptCompile Include="webapp\app\core\rxjs-extensions.ts" />
-    <TypeScriptCompile Include="webapp\app\dashboard\dashboard-routing.module.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\dashboard.component.ts" />
-    <TypeScriptCompile Include="webapp\app\dashboard\dashboard.module.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\resourceViews\resourceViews.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.ts" />
@@ -392,8 +388,6 @@
     <TypeScriptCompile Include="webapp\app\models\resource.service.ts" />
     <TypeScriptCompile Include="webapp\app\navigation\nav.component.ts" />
     <TypeScriptCompile Include="webapp\app\page-not-found.component.ts" />
-    <TypeScriptCompile Include="webapp\app\projects\projects-routing.module.ts" />
-    <TypeScriptCompile Include="webapp\app\projects\projects.module.ts" />
     <TypeScriptCompile Include="webapp\app\projects\projectAdd\projectAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\projects\projectListView\projectListView.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
