@@ -3,7 +3,7 @@
         <select id="AssignmentProjectSelector" class="project-selector"></select>
         <a id="projectModalLoad">
             <div>
-                <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" />
+                <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
             </div>
         </a>
     </div>
@@ -21,7 +21,7 @@
         </select>
     </div>
     <div class="formrow">
-        <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple">
+        <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple" [(ngModel)]="daysOfWeek">
             <option value="2" selected="selected">Mon</option>
             <option value="3" selected="selected">Tue</option>
             <option value="4" selected="selected">Wed</option>
@@ -52,7 +52,7 @@
     <div class="formrow">
         <div class="form-group">
             <label for="hoursPerDay">Hours per day:</label>
-            <input type="number" ng-required="required" class="form-control" min="0" id="hoursPerDay">
+            <input type="number" ng-required="required" class="form-control" min="0" max="16" id="hoursPerDay" [(ngModel)]="hoursPerDay">
         </div>
     </div>
 </article>

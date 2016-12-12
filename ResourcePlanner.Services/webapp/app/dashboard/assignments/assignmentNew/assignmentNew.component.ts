@@ -12,15 +12,19 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AssignmentNewComponent implements OnDestroy, OnInit {
 
-    title: string;
+    hoursPerDay: number;
+    daysOfWeek: any;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router) { }
 
-    ngOnDestroy() {
+    ngOnInit() {
     }
 
-    ngOnInit() {
+    addProject() {
+    }
+
+    ngOnDestroy() {
     }
 }
