@@ -1,5 +1,6 @@
 <article class="">
     <div class="formrow">
+        <label>project</label><br />
         <select id="AssignmentProjectSelector" class="project-selector"></select>
         <a id="projectModalLoad">
             <div>
@@ -8,18 +9,21 @@
         </a>
     </div>
     <div class="formrow">
-        <select id="assignmentPositionSelector" class="position-selector" multiple="multiple"></select>
+        <label>Position</label><br />
+        <select id="assignmentPositionSelector" class="position-selector"></select>
     </div>
     <div class="formrow">
-        <select id="assignmentPracticesDropdown" class="form-control">
-            <option selected disabled value="-2">Select a practice</option>
+       <label>Practice</label>
+       <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="selectedPractice">
+            <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
         </select>
     </div>
     <div class="formrow">
-        <select id="assignmentSubpracticesDropdown" class="form-control">
-            <option value="-2" selected disabled>Select a subpractice</option>
+        <label>Sub Practice</label>
+       <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="selectedSubPractice">
+            <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
         </select>
-    </div>
+   </div>
     <div class="formrow">
         <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple" [(ngModel)]="daysOfWeek">
             <option value="2" selected="selected">Mon</option>
@@ -29,30 +33,16 @@
             <option value="6" selected="selected">Fri</option>
         </select>
     </div>
-    <div class="formrow">
-        <span>
-            Start Date:<div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </span>
+    <div class="formrow" style="width:180px">
+        <label>Start Date</label>
+        <input type='date' class="form-control" [(ngModel)]="startDate" />
+    </div>
+    <div class="formrow" style="width:180px">
+        <label>End Date</label>
+        <input type='date' class="form-control" [(ngModel)]="endDate" />
     </div>
     <div class="formrow">
-        <span>
-            End Date:<div class='input-group date' id='enddatepicker'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </span>
-    </div>
-    <div class="formrow">
-        <div class="form-group">
-            <label for="hoursPerDay">Hours per day:</label>
-            <input type="number" ng-required="required" class="form-control" min="0" max="16" id="hoursPerDay" [(ngModel)]="hoursPerDay">
-        </div>
+        <label>Hours per day:</label>
+        <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="hoursPerDay" style="width:180px">
     </div>
 </article>

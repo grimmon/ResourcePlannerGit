@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { Option, OptionService } from '../../../models';
 
 
 @Component({
@@ -14,15 +14,26 @@ export class AssignmentNewComponent implements OnDestroy, OnInit {
 
     hoursPerDay: number;
     daysOfWeek: any;
+    startDate: Date;
+    endDate: Date;
+    selectedPractice: number = -1;
+    selectedSubPractice: number = -1;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router) { }
+        private optionService: OptionService) { }
 
     ngOnInit() {
     }
 
     addProject() {
+    }
+
+    getPractices() {
+        return this.optionService.practices;
+    }
+
+    getSubPractices() {
+        return this.optionService.subPractices;
     }
 
     ngOnDestroy() {
