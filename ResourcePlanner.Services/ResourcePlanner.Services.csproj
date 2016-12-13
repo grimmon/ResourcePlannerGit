@@ -205,12 +205,8 @@
     <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.html" />
     <Content Include="webapp\app\app.component.css" />
     <Content Include="webapp\app\app.component.html" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentAdd\assignmentAdd.component.css" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentAdd\assignmentAdd.component.html" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentNew\assignmentNew.component.css" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentNew\assignmentNew.component.html" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentResourceList\assignmentResourceList.component.css" />
-    <Content Include="webapp\app\dashboard\assignments\assignmentResourceList\assignmentResourceList.component.html" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.css" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.html" />
     <Content Include="webapp\app\core\spinner\spinner.component.css" />
     <Content Include="webapp\app\core\spinner\spinner.component.html" />
     <Content Include="webapp\app\dashboard\dashboard.component.css" />
@@ -354,9 +350,7 @@
     <TypeScriptCompile Include="webapp\app\app-routing.module.ts" />
     <TypeScriptCompile Include="webapp\app\app.component.ts" />
     <TypeScriptCompile Include="webapp\app\app.module.ts" />
-    <TypeScriptCompile Include="webapp\app\dashboard\assignments\assignmentAdd\assignmentAdd.component.ts" />
-    <TypeScriptCompile Include="webapp\app\dashboard\assignments\assignmentNew\assignmentNew.component.ts" />
-    <TypeScriptCompile Include="webapp\app\dashboard\assignments\assignmentResourceList\assignmentResourceList.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\core\config.ts" />
     <TypeScriptCompile Include="webapp\app\core\core.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\grid.service.ts" />

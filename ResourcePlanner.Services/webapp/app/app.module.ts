@@ -22,9 +22,7 @@ import { ResourceProjectsComponent } from './dashboard/resourceProjects/resource
 import { ResourceViewsComponent } from './dashboard/resourceViews/resourceViews.component';
 import { ProjectListViewComponent } from './dashboard/projectListView/projectListView.component';
 import { ProjectAddComponent } from './dashboard/projectAdd/projectAdd.component';
-import { AssignmentAddComponent } from './dashboard/assignments/assignmentAdd/assignmentAdd.component';
-import { AssignmentNewComponent } from './dashboard/assignments/assignmentNew/assignmentNew.component';
-import { AssignmentResourceListComponent } from './dashboard/assignments/assignmentResourceList/assignmentResourceList.component';
+import { AssignmentAddComponent } from './dashboard/assignmentAdd/assignmentAdd.component';
 
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -51,10 +49,8 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         PageNotFoundComponent,
 
         DashboardComponent,
-            ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
-            ProjectListViewComponent,
-        ProjectAddComponent,
-        AssignmentAddComponent, AssignmentNewComponent, AssignmentResourceListComponent,
+        ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
+        ProjectListViewComponent, ProjectAddComponent, AssignmentAddComponent,
     ],
     providers: [
         EntityService,
