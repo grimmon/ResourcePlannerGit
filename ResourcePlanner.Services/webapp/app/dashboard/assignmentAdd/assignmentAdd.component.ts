@@ -200,11 +200,13 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     startDateChanged($event: any) {
         this.startDate = $event.target.value;
         this.currentDate = new Date(this.startDate);
+        this.endDate = this.dateService.min(this.currentDate, this.endDate);
         this.reloadGrid();
     }
 
     endDateChanged($event: any) {
         this.endDate = $event.target.value;
+        this.startDate = this.dateService.max(new Date(this.endDate), this.startDate);
         this.reloadGrid();
     }
 
