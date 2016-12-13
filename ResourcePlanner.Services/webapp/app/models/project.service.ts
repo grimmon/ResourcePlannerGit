@@ -10,7 +10,7 @@ export class ProjectService {
     }
 
     addProject(project: ProjectResource) {
-        return this.serverService.add<ProjectResource>(CONFIG.urls.projectAdd, project);
+        return this.serverService.post<ProjectResource>(CONFIG.urls.projectAdd, project);
     }
 
     //deleteProject(project: ProjectResource) {

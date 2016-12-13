@@ -27,6 +27,7 @@
             // ag libraries
             'ag-grid-ng2': 'npm:ag-grid-ng2',
             'ag-grid': 'npm:ag-grid',
+            'ng2-auto-complete': 'npm:ng2-auto-complete/dist',
 
             // other libraries
             'rxjs': 'npm:rxjs',
@@ -46,6 +47,7 @@
             'ag-grid': {
                 defaultExtension: "js"
             },
+            'ng2-auto-complete': { main: 'ng2-auto-complete.umd.js', defaultExtension: 'js' },
             rxjs: {
                 defaultExtension: 'js'
             },

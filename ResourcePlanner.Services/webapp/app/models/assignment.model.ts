@@ -7,10 +7,10 @@ export class Assignment {
 }
 
 export class AddAssignments {
-    ResourceIds: number[];
-    ProjectId: number;
-    Hours: number;
-    StartDate: Date;
-    EndDate: Date;
-    DaysOfWeek: number;
+    resourceIds: number[];
+    projectId: number;
+    hoursPerDay: number;
+    startDate: string;
+    endDate: string;
+    daysOfWeek: number[];
 }

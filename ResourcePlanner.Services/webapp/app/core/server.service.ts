@@ -24,12 +24,26 @@ export class ServerService {
         return res;
     }
 
-    add<T>(url: string, entity: T) {
+    post<T>(url: string, entity: T) {
         let body = JSON.stringify(entity);
         this.showProcess(true);
         return <Observable<T>>this.http
-            .post(`${url}`, body)
-            .map(res => res.json().data)
+            .post(`${url}`, body, {
+                headers: this.getAuth()
+            })
+            .map(res => this.extractData<T>(res))
+            .catch(this.exceptionService.catchBadResponse)
+            .finally(() => this.showProcess(false));
+    }
+
+    postQuery<T>(url: string, entity: T) {
+        let query = Object.getOwnPropertyNames(entity).map(key => key + "=" + entity[key]).join('&');
+        this.showProcess(true);
+        return <Observable<T>>this.http
+            .post(`${url}?${query}`, '', {
+                headers: this.getAuth()
+            })
+            .map(res => this.extractData<T>(res))
             .catch(this.exceptionService.catchBadResponse)
             .finally(() => this.showProcess(false));
     }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Resource, ResourcePage, DetailPage } from './resource.model';
+import { AddAssignments } from './assignment.model';
 import { CONFIG, ServerService } from '../core';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class ResourceService {
     }
 
     addResource(resource: Resource) {
-        return this.serverService.add<Resource>(CONFIG.urls.resources, resource);
+        return this.serverService.post<Resource>(CONFIG.urls.resources, resource);
     }
 
     deleteResource(resource: Resource) {
@@ -34,6 +35,10 @@ export class ResourceService {
 
     updateResource(resource: Resource) {
         return this.serverService.update<Resource>(CONFIG.urls.resources, resource, resource.ResourceId);
+    }
+
+    addAssignments(assignment: AddAssignments) {
+        return this.serverService.postQuery<AddAssignments>(CONFIG.urls.assignmentAdd, assignment);
     }
 
     export(query: string) {

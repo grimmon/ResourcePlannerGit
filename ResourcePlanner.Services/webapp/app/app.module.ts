@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import './core/rxjs-extensions';
 
 import { AgGridModule } from 'ag-grid-ng2/main';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +39,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         CommonModule,
 
         AgGridModule.forRoot(),
+        Ng2AutoCompleteModule,
 
         AppRoutingModule,
         CoreModule

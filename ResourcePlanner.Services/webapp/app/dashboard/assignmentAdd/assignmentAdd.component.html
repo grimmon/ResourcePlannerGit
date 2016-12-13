@@ -1,73 +1,70 @@
 <article class="" style="background-color: white;position:absolute;top:0;width: 100%;height:100%" [style.display]="visible ? 'block' : 'none'">
-    <h3>Add Assignment<span style="padding-left:30px;"></span></h3>
+    <h3>Add Assignment</h3>
     <div style="height:80%">
         <div style="height:100%">
-            <div class="col-sm-3"  style="height:100%">
-                <article class="">
-                    <div class="formrow">
-                        <label>project</label><br />
-                        <select id="AssignmentProjectSelector" class="project-selector"></select>
-                        <a id="projectModalLoad">
-                            <div>
-                                <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="formrow">
-                        <label>Position</label><br />
-                        <select id="assignmentPositionSelector" class="position-selector"></select>
-                    </div>
-                    <div class="formrow">
-                        <label>Practice</label>
-                        <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="selectedPractice">
-                            <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
-                        </select>
-                    </div>
-                    <div class="formrow">
-                        <label>Sub Practice</label>
-                        <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="selectedSubPractice">
-                            <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
-                        </select>
-                    </div>
-                    <div class="formrow">
-                        <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple" [(ngModel)]="daysOfWeek">
-                            <option value="2" selected="selected">Mon</option>
-                            <option value="3" selected="selected">Tue</option>
-                            <option value="4" selected="selected">Wed</option>
-                            <option value="5" selected="selected">Thur</option>
-                            <option value="6" selected="selected">Fri</option>
-                        </select>
-                    </div>
-                    <div class="formrow" style="width:180px">
-                        <label>Start Date</label>
-                        <input type='date' class="form-control" [(ngModel)]="startDate" />
-                    </div>
-                    <div class="formrow" style="width:180px">
-                        <label>End Date</label>
-                        <input type='date' class="form-control" [(ngModel)]="endDate" />
-                    </div>
-                    <div class="formrow">
-                        <label>Hours per day:</label>
-                        <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="hoursPerDay" style="width:180px">
-                    </div>
-                </article>
+            <div id="newAssignmentForm" class="col-sm-3"  style="height:100%">
+                <div class="formrow">
+                    <label>project</label><br />
+                    <input id="AssignmentProjectSelector" auto-complete [(ngModel)]="addAssignments.projectId" [source]="projectSource" />
+                    <a id="projectModalLoad">
+                        <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
+                    </a>
+                </div>
+                <div class="formrow">
+                    <label>Position</label><br />
+                    <select id="assignmentPositionSelector" class="position-selector"></select>
+                </div>
+                <div class="formrow">
+                    <label>Practice</label>
+                    <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="selectedPractice" (change)="practiceChanged($event)">
+                        <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
+                    </select>
+                </div>
+                <div class="formrow">
+                    <label>Sub Practice</label>
+                    <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="selectedSubPractice" (change)="subPracticeChanged($event)">
+                        <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
+                    </select>
+                </div>
+                <div class="formrow">
+                    <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple" [(ngModel)]="addAssignments.daysOfWeek">
+                        <option value="2" selected="selected">Mon</option>
+                        <option value="3" selected="selected">Tue</option>
+                        <option value="4" selected="selected">Wed</option>
+                        <option value="5" selected="selected">Thur</option>
+                        <option value="6" selected="selected">Fri</option>
+                    </select>
+                </div>
+                <div class="formrow" style="width:180px">
+                    <label>Start Date</label>
+                    <input type='date' class="form-control" [(ngModel)]="addAssignments.startDate" (input)="startDateChanged($event)" />
+                </div>
+                <div class="formrow" style="width:180px">
+                    <label>End Date</label>
+                    <input type='date' class="form-control" [(ngModel)]="addAssignments.endDate" (input)="endDateChanged($event)"/>
+                </div>
+                <div class="formrow">
+                    <label>Hours per day:</label>
+                    <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="addAssignments.hoursPerDay" style="width:180px">
+                    <br />
+                </div>
             </div>
-            <div class="col-sm-9" style="height:100%">
-                <article class="" style="height:100%">
-                    <timespan-grid id="resource"
-                                   [applyTrigger]="applyTrigger"
-                                   [gridConfig]="gridConfig"
-                                   [queryConfig]="queryConfig"
-                                   (dataRequested)="dataRequested($event)">
-                    </timespan-grid>
-                </article>
+            <div id="AssignmentResources" class="col-sm-9" style="height:100%">
+                <timespan-grid id="resource"
+                               [applyTrigger]="applyTrigger"
+                               [gridConfig]="gridConfig"
+                               [queryConfig]="queryConfig"
+                               [currentDate]="currentDate"
+                               (refreshed)="refreshed($event)"
+                               (dataRequested)="dataRequested($event)">
+                </timespan-grid>
             </div>
         </div>
     </div>
     <div style="position:absolute;bottom:0px;height:10%;width:100%">
         <div style="height:100%;text-align:right">
             <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:10px;">Close</button>
-            <button type="button" class="btn btn-primary" id="saverButton" (click)="save()" style="margin-right:40px;">Save Changes</button>
+            <button type="button" class="btn btn-primary" id="saverButton" (click)="save()" [disabled]="saving" style="margin-right:40px;">Save Changes</button>
         </div>
     </div>
 </article>

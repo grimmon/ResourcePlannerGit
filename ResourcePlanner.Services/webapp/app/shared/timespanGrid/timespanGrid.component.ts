@@ -15,6 +15,7 @@ import { TimeDataPage, TimeAggregation } from '../../models';
         'applyTrigger',
         'periodScrollTrigger',
         'queryConfig',
+        'currentDate',
         'gridConfig'],
     styles: ['.toolbar button {margin: 2px; padding: 0px;}'],
 })
@@ -26,8 +27,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     queryConfig: any;
 
+    _currentDate: number;
+    set currentDate(v: number) {
+        this.queryConfig.currentDate = new Date(v);
+        this.resetCurrentDate();
+    }
     _applyTrigger: number;
-
     set applyTrigger(v: number) {
         this._applyTrigger = v;
         if (this.ready) {
@@ -37,7 +42,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     _periodScrollTrigger: any;
-
     set periodScrollTrigger(v: any) {
         this._periodScrollTrigger = v;
         if (this.ready) {
@@ -48,6 +52,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     @Output() dataRequested: EventEmitter<any>;
     @Output() rowSelected: EventEmitter<any>;
     @Output() periodScrolled: EventEmitter<any>;
+    @Output() refreshed: EventEmitter<any>;
 
     rowData: any[];
     columnDefs: any[];
@@ -60,6 +65,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.dataRequested = new EventEmitter<any>();
         this.rowSelected = new EventEmitter<any>();
         this.periodScrolled = new EventEmitter<any>();
+        this.refreshed = new EventEmitter<any>();
     }
 
     ngOnInit() {
@@ -88,10 +94,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private resetCurrentDate() {
-        this.currentDate = new Date();
-        this.currentDate.setHours(0);
-        this.currentDate.setMinutes(0);
-        this.currentDate.setSeconds(0);
+        if (!this.queryConfig.currentDate) {
+            this.queryConfig.currentDate = new Date();
+        }
+        this.queryConfig.currentDate.setHours(0);
+        this.queryConfig.currentDate.setMinutes(0);
+        this.queryConfig.currentDate.setSeconds(0);
     }
 
     private gridClicked($event: any) {
@@ -208,13 +216,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     private clickedFirstColumn = false;
 
-    private currentDate: Date;
     private periodColumnsCount: number = CONFIG.periodColumnsCount;
 
     private getDateQuery(): string {
-        var start = `&startDate=${this.dateService.format(this.dateService.getStart(this.currentDate, this.queryConfig.aggregation, this.periodColumnsCount))}`;
-        var end = `&endDate=${this.dateService.format(this.dateService.getEnd(this.currentDate, this.queryConfig.aggregation, this.periodColumnsCount))}`;
-        return start + end;
+        var start = this.queryConfig.startDate =this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
+        var end = this.queryConfig.endDate =this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
+        return `&startDate=${this.dateService.format(start)}&${this.dateService.format(end)}`;
     }
 
     private getSortQuery(params: any): string {
@@ -225,7 +232,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private periodScroll(step: number) {
-        this.currentDate = this.dateService.update(this.currentDate, this.queryConfig.aggregation, this.periodColumnsCount, step);
+        this.queryConfig.currentDate = this.dateService.update(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount, step);
         this.refresh();
     }
 
@@ -255,6 +262,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                     }
                     params.successCallback(rows, page.TotalRowCount);
                     api.refreshHeader();
+                    this.refreshed.emit(page);
                 });
             }
         });
@@ -285,7 +293,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onRowSelected($event: any) {
-        //console.log('onRowSelected');
+        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridConfig.selectedIds = selectedNodes.map(node => node.id);
     }
 
     private onRowClicked($event: any) {
