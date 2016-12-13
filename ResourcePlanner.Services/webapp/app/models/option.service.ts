@@ -16,15 +16,10 @@ export class OptionService {
     resourceManagers: Option[] = [];
     positions: Option[] = [];
 
-    getOptions(url: string, term?: string): Observable<Option[]> {
-        if (url == CONFIG.urls.position) {
-            // we have position options locally
-            if (term) {
+    categories: Observable<any>;
 
-            } else {
-            }
-        } 
-        return this.serverService.get<Option[]>(url, term);
+    getOptions(url: string, term: string): Observable<Option[]> {
+        return this.serverService.get<Option[]>(url, "?searchTerm=" + term);
     }
 
     constructor(
@@ -34,7 +29,9 @@ export class OptionService {
     }
 
     private createCategories() {
-        this.serverService.get<CategoryOption[]>(CONFIG.urls.categoryOptions)
+        this.categories = this.serverService.get<CategoryOption[]>(CONFIG.urls.categoryOptions);
+
+        this.categories
             .subscribe(categoryOptions => {
                 this.orgUnits = this.createCategory('OrgUnit', categoryOptions);
                 this.cities = this.createCategory('City', categoryOptions);

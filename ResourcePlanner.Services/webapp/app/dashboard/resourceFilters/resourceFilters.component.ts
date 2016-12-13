@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService } from '../../core';
 import { Option, CategoryOption, OptionService, TimeAggregation } from '../../models';
-declare var tagit: any;
 
 @Component({
     moduleId: module.id,

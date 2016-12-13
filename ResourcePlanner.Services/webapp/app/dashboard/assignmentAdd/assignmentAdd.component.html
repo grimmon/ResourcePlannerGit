@@ -5,14 +5,24 @@
             <div id="newAssignmentForm" class="col-sm-3"  style="height:100%">
                 <div class="formrow">
                     <label>project</label><br />
-                    <input id="AssignmentProjectSelector" auto-complete [(ngModel)]="addAssignments.projectId" [source]="projectSource" />
+                    <input id="AssignmentProjectSelector" 
+                           auto-complete 
+                           auto-complete-placeholder="Select a project"
+                           value-property-name="Id"
+                           display-property-name="Name"
+                           [(ngModel)]="selectedProject" 
+                           max-num-list="16"
+                           min-chars="4" 
+                           [source]="projectSource" 
+                           [list-formatter]="projectListFormatter"
+                           loading-text="Looking for projects..."/>
                     <a id="projectModalLoad">
                         <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
                     </a>
                 </div>
                 <div class="formrow">
                     <label>Position</label><br />
-                    <select id="assignmentPositionSelector" class="position-selector"></select>
+                    <select id="assignmentPositionSelector" class="position-selector" multiple="multiple"></select>
                 </div>
                 <div class="formrow">
                     <label>Practice</label>
