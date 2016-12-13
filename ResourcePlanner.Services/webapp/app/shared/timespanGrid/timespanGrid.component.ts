@@ -219,9 +219,9 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     private periodColumnsCount: number = CONFIG.periodColumnsCount;
 
     private getDateQuery(): string {
-        var start = this.queryConfig.startDate =this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
-        var end = this.queryConfig.endDate =this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
-        return `&startDate=${this.dateService.format(start)}&${this.dateService.format(end)}`;
+        var start = this.queryConfig.startDate = this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
+        var end = this.queryConfig.endDate = this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
+        return `&startDate=${this.dateService.format(start)}&endDate=${this.dateService.format(end)}`;
     }
 
     private getSortQuery(params: any): string {

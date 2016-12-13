@@ -20,12 +20,12 @@ export class DateService {
         return this.moveDate(currentDate, currentAggregation, pageSize - 2); //The number of periods into the future we want.
     }
 
-    min(date: Date, minDate: string): string {
-        return !minDate || date < new Date(minDate)? this.format(date) : minDate;
+    min(startDate: string, endDate: string): string {
+        return startDate > endDate ? endDate : startDate;
     }
 
-    max(date: Date, maxDate: string): string {
-        return !maxDate || date > new Date(maxDate) ? this.format(date) : maxDate;
+    max(startDate: string, endDate: string): string {
+        return !endDate || endDate < startDate ? startDate : endDate;
     }
 
     constructor() {
