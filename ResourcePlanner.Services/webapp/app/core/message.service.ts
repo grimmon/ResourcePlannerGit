@@ -4,6 +4,16 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class MessageService {
 
+    // error request
+    private errorRequested = new Subject<any>();
+
+    onErrorRequested(handler: (value: any) => void) {
+        this.errorRequested.subscribe(handler)
+    }
+    errorRequest(value: any) {
+        this.errorRequested.next(value);
+    }
+
     // modal mode toggle request
     private modalToggled = new Subject<boolean>();
 

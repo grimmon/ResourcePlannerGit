@@ -1,0 +1,23 @@
+<div style="position:absolute;left:0px;top:0px;height:100%;width:100%;background-color:rgba(0, 0, 0, 0.5);z-index:99999;" [style.display]="visible ? 'block' : 'none'">
+    <div style="position:absolute;left:50%;top:100px;margin-left:-300px;margin-right:300px;width:600px;background-color:white;border:solid 1px navy;border-radius:5px">
+        <h3 style="text-align:center">{{errorInfo.title || 'Error'}}</h3>
+        <h4 style="text-align:center">
+            <label style="">{{errorInfo.message}}</label>
+        </h4>
+        <ul *ngIf="errorInfo.messages">
+            <li *ngFor="let message of errorInfo.messages">
+                {{message}}
+            </li>
+        </ul>
+        <div style="overflow-y:auto; width:500px;border: 1px navy;margin-left:50px;margin-top:20px;margin-bottom:20px;max-height:100px;">
+            <div>
+                {{errorInfo.description}}
+            </div>
+        </div>
+        <div style="width:100%">
+            <div style="height:50px;text-align:right">
+                <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:10px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

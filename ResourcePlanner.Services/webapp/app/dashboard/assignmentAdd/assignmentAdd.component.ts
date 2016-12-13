@@ -151,7 +151,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     save() {
         var errors = this.validate();
         if (errors) {
-            this.exceptionService.reportErrors(errors);
+            this.messageService.errorRequest({
+                message: 'Save cannot be done because of the following:',
+                messages: errors
+            });
             return;
         }
 
@@ -233,6 +236,11 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     addProject() {
+        this.messageService.errorRequest({
+            title: 'Error!',
+            message: 'This is message text',
+            description: 'fasdfasdfasd asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa sdfa sdfa sdf asdf asdf asdf rqrewt ertqr t4ihsodhoiu dhUSHD UEUIH 2  fasdfasdfasd asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa sdfa sdfa sdf asdf asdf asdf rqrewt ertqr t4ihsodhoiu dhUSHD UEUIH 2   IUR2    IU3 2 3UIRG  IU3GRjjjj kkkk'
+        });
     }
 
     private getPractices() {

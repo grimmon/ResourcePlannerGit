@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class ExceptionService {
-    constructor() { }
+    constructor(
+    private messageService: MessageService) { }
 
     catchBadResponse: (errorResponse: any) => Observable<any> = (errorResponse: any) => {
         let res = <Response>errorResponse;
         let err = res.json();
         let emsg = err ?
-            (err.error ? err.error : JSON.stringify(err)) :
+            (err.error ? err.error : (err.Message ? err.Message : JSON.stringify(err))) :
             (res.statusText || 'unknown error');
-        console.log(emsg);
+        this.messageService.errorRequest({
+            title: 'Exception',
+            message: emsg
+        })
+
         return Observable.of(false);
-    }
-
-    reportError(emsg: string) {
-        console.log(emsg);
-    }
-
-    reportErrors(emsg: any[]) {
-        console.log(emsg);
     }
 }

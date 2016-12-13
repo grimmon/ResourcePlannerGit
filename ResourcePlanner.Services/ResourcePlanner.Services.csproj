@@ -223,6 +223,8 @@
     <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.html" />
     <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.css" />
     <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.html" />
+    <Content Include="webapp\app\error\error.component.html" />
+    <Content Include="webapp\app\error\error.component.css" />
     <Content Include="webapp\app\navigation\nav.component.css" />
     <Content Include="webapp\app\navigation\nav.component.html" />
     <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.css" />
@@ -384,6 +386,7 @@
     <TypeScriptCompile Include="webapp\app\page-not-found.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\projectAdd\projectAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
+    <TypeScriptCompile Include="webapp\app\error\error.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
     <TypeScriptCompile Include="webapp\main.ts" />
   </ItemGroup>

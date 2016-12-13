@@ -12,6 +12,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavComponent } from './navigation/nav.component';
+import { ErrorComponent } from './error/error.component';
 import { TimespanGridComponent } from './shared/timespanGrid/timespanGrid.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -47,6 +48,8 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
     declarations: [
         AppComponent,
         TimespanGridComponent,
+
+        ErrorComponent,
         NavComponent,
         PageNotFoundComponent,
 
