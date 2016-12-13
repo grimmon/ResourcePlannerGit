@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { MessageService, DateService } from '../../core';
+import { ExceptionService, MessageService, DateService } from '../../core';
 import { Option, OptionService, ResourcePage, ResourceRow, ResourceService, AddAssignments, TimeAggregation } from '../../models';
 import { CONFIG } from '../../core';
 
@@ -64,6 +64,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this._showTrigger = v;
         if (this._showTrigger) {
             this.messageService.modalToggle(this.visible = true);
+            this.saving = false;
             this.applyTrigger++;
         }
     }
@@ -73,13 +74,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         private messageService: MessageService,
         private optionService: OptionService,
         private dateService: DateService,
+        private exceptionService: ExceptionService,
         private resourceService: ResourceService) {
 
         this.addAssignments.resourceIds = [];
         this.addAssignments.projectId = 0;
         this.addAssignments.startDate = this.dateService.format(this.currentDate);
         this.addAssignments.endDate = this.dateService.format(this.currentDate);
-        this.addAssignments.daysOfWeek = [1,2,3,4,5];
+        this.addAssignments.daysOfWeek = ['2','3','4','5','6'];
         this.addAssignments.hoursPerDay = 8;
 
         this.projectSource = this.setProjectSource(this);
@@ -118,6 +120,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
         this.daysOfWeekSelector = $("#assignmentDOWSelector");
 
+        this.daysOfWeekSelector.val(this.addAssignments.daysOfWeek);
+
         this.daysOfWeekSelector.select2({
             data: [{ id: 2, text: 'Monday', short: "Mon" }
                 , { id: 3, text: 'Tuesday', short: "Tue" }
@@ -149,18 +153,33 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     save() {
-        this.saving = true;
+        var errors = this.validate();
+        if (errors) {
+            this.exceptionService.reportErrors(errors);
+            return;
+        }
 
         this.addAssignments.projectId = this.selectedProject.Id;
         this.addAssignments.resourceIds = this.gridConfig.selectedIds;
 
-
+        this.saving = true;
         this.resourceService
             .addAssignments(this.addAssignments)
             .subscribe(res => {
                 this.saving = false;
                 //this.close();
             });
+    }
+
+    private validate() {
+        var errors: any[] = [];
+        if (!this.selectedProject) {
+            errors.push('Project must be selected.');
+        }
+        if (!this.gridConfig.selectedIds.length) {
+            errors.push('At least one resource must be selected.');
+        }
+        return errors.length ? errors : null;
     }
 
     positionChanged($event: any) {

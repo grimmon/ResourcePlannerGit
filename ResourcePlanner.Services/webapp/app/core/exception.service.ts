@@ -4,15 +4,23 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ExceptionService {
-  constructor() { }
+    constructor() { }
 
-  catchBadResponse: (errorResponse: any) => Observable<any> = (errorResponse: any) => {
-    let res = <Response>errorResponse;
-    let err = res.json();
-    let emsg = err ?
-      (err.error ? err.error : JSON.stringify(err)) :
-      (res.statusText || 'unknown error');
-    console.log(emsg);
-    return Observable.of(false);
-  };
+    catchBadResponse: (errorResponse: any) => Observable<any> = (errorResponse: any) => {
+        let res = <Response>errorResponse;
+        let err = res.json();
+        let emsg = err ?
+            (err.error ? err.error : JSON.stringify(err)) :
+            (res.statusText || 'unknown error');
+        console.log(emsg);
+        return Observable.of(false);
+    }
+
+    reportError(emsg: string) {
+        console.log(emsg);
+    }
+
+    reportErrors(emsg: any[]) {
+        console.log(emsg);
+    }
 }

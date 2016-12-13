@@ -12,5 +12,5 @@ export class AddAssignments {
     hoursPerDay: number;
     startDate: string;
     endDate: string;
-    daysOfWeek: number[];
+    daysOfWeek: string[];
 }
