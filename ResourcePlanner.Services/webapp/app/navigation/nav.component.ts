@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
     menuItems: MenuItem[];
 
     modal = false;
-
+    
     addAssigmentAllowed: boolean = true;
 
     ngOnInit() {
@@ -32,8 +32,20 @@ export class NavComponent implements OnInit {
         //private adalService: AdalService,
         private messageService: MessageService) {
 
-        this.messageService.onModalToggled(on => this.modal = on);
+        this.messageService.onModalToggled(on => {
+            if (on) {
+                this.modelOnCount++
+            } else {
+                this.modelOnCount--;
+                if (this.modelOnCount < 0) {
+                    this.modelOnCount = 0;
+                }
+            } 
+            this.modal = this.modelOnCount > 0;
+        });
     }
+
+    private modelOnCount = 0;
 
     toggleFilters() {
         this.messageService.filterPanelToggle();
@@ -54,5 +66,4 @@ export class NavComponent implements OnInit {
     getUserInfo() {
         //return this.adalService.userInfo;
     }
-
 }

@@ -3,5 +3,6 @@
     <resource-list></resource-list>
     <resource-details (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
     <project-list-view [projectToView]="projectToView" [showTrigger]="projectShow"></project-list-view>
-    <assignment-add [showTrigger]="assignmentAddShow"></assignment-add>
+    <assignment-add [showTrigger]="assignmentAddShow" (addProjectRequested)="addProjectRequested()"></assignment-add>
+    <project-add [showTrigger]="addProjectShow"></project-add>
 </article>

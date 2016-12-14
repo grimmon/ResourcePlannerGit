@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,6 +16,8 @@ import { CONFIG } from '../../core';
     ]
 })
 export class AssignmentAddComponent implements OnDestroy, OnInit {
+
+    @Output() addProjectRequested: EventEmitter<any>;
 
     set showTrigger(v: any) {
         this._showTrigger = v;
@@ -75,6 +77,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         private dateService: DateService,
         private exceptionService: ExceptionService,
         private resourceService: ResourceService) {
+
+        this.addProjectRequested = new EventEmitter();
 
         this.currentDate = new Date();
 
@@ -204,6 +208,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     addProject() {
+        this.addProjectRequested.emit();
     }
 
     private getPractices() {

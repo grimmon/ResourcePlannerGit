@@ -16,19 +16,22 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
     categoryOptions: Array<CategoryOption> = new Array<CategoryOption>();
 
-    projectToView: any = {};
-    projectShow = 0;
-
     projectResourceViewRequested($event: any) {
         this.projectToView = $event; 
         this.projectShow++;
     }
+    projectShow = 0;
+    projectToView: any = {};
 
-    assignmentAddShow = 0;
-
-    assignmentAddRequested($event: any) {
+    assignmentAddRequested() {
         this.assignmentAddShow++;
     }
+    assignmentAddShow = 0;
+
+    addProjectRequested() {
+        this.addProjectShow++;
+    }
+    addProjectShow = 0;
 
     constructor(
         private messageService: MessageService,
