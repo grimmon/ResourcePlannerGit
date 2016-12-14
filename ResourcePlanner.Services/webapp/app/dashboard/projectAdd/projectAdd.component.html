@@ -1,9 +1,83 @@
 <article class="">
-  <h4>{{title}}</h4>
-  <div>
-    <div class="">
-      <div class="">
-      </div>
+  <h3>Add a Project</h3>
+    <div style="height:80%">
+        <div style="height:100%">
+            <div id="newProjectForm" style="height:100%">
+                <div class="formrow form-group">
+                    <label>Project Name</label><br />
+                    <input type="text" class="form-control" id="projectName" [(ngModel)]="addedProject.ProjectName">
+                </div>
+                <div class="formrow form-group">
+                    <label>Description</label><br />
+                    <input type="text" class="form-control" id="projectDescription" [(ngModel)]="addedProject.Description">
+                </div>
+                <div class="formrow form-group" [style.display]="clientAddVisible ? 'none': 'display'">
+                    <label>Client</label><br />
+                    <input id="clientSelector"
+                           auto-complete
+                           auto-complete-placeholder="Select a client"
+                           value-property-name="Id"
+                           display-property-name="Name"
+                           [(ngModel)]="clientSelected"
+                           max-num-list="16"
+                           min-chars="4"
+                           [source]="clientSource"
+                           [list-formatter]="clientListFormatter"
+                           loading-text="Looking for clients..." />
+                    <a>
+                        <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add Client" (click)="openAddClient()" />
+                    </a>
+                </div>
+                <div class="formrow form-group" id="newClient" [style.display]="clientAddVisible ? 'display': 'none'">
+                    <label for="clientName">Add Cient Name:</label>
+                    <input type="text" class="form-control" id="clientName" [(ngModel)]="clientName" (input)="cientNameChanged($event)">
+                    <a>
+                        <img src="/Images/IRMT_Icons_CloseBtn.png" (click)="clientAddVisible=false" alt="" />
+                    </a>
+                </div>
+                <div class="formrow form-group" style="width:180px">
+                    <label>Start Date</label>
+                    <input type='date' class="form-control" [(ngModel)]="addedProject.StartDate" (input)="startDateChanged($event)" />
+                </div>
+                <div class="formrow form-group" style="width:180px">
+                    <label>End Date</label>
+                    <input type='date' class="form-control" [(ngModel)]="addedProject.EndDate" (input)="endDateChanged($event)" />
+                </div>
+                <div class="formrow form-group">
+                    <label>Project Manager:</label>
+                    <input id="projectManagerSelector"
+                           auto-complete
+                           auto-complete-placeholder="Select a project manager"
+                           value-property-name="Id"
+                           display-property-name="Name"
+                           [(ngModel)]="projectManagerSelected"
+                           max-num-list="16"
+                           min-chars="4"
+                           [source]="projectManagerSource"
+                           [list-formatter]="projectManagerListFormatter"
+                           loading-text="Looking for project managers..." />
+                </div>
+                <div class="formrow form-group">
+                    <label>Opportunity Owner:</label>
+                    <input id="pportunityOwnerSelector"
+                           auto-complete
+                           auto-complete-placeholder="Select an owner"
+                           value-property-name="Id"
+                           display-property-name="Name"
+                           [(ngModel)]="opportunityOwnerSeected"
+                           max-num-list="16"
+                           min-chars="4"
+                           [source]="opportunityOwnerSource"
+                           [list-formatter]="opportunityOwnerListFormatter"
+                           loading-text="Looking for opportunity owners..." />
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div style="position:absolute;bottom:0px;height:10%;width:100%">
+        <div style="height:100%;text-align:right">
+            <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:10px;">Close</button>
+            <button type="button" class="btn btn-primary" id="saverButton" (click)="save()" [disabled]="saving" style="margin-right:40px;">Save Project</button>
+        </div>
+    </div>
 </article>

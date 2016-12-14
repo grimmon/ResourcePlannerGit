@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ExceptionService, MessageService, DateService } from '../../core';
-import { Option, OptionService, ResourcePage, ResourceRow, ResourceService, AddAssignments, TimeAggregation } from '../../models';
+import { OptionType, Option, OptionService, ResourcePage, ResourceRow, ResourceService, AddAssignments, TimeAggregation } from '../../models';
 import { CONFIG } from '../../core';
 
 @Component({
@@ -17,8 +17,21 @@ import { CONFIG } from '../../core';
 })
 export class AssignmentAddComponent implements OnDestroy, OnInit {
 
+    set showTrigger(v: any) {
+        this._showTrigger = v;
+        if (this._showTrigger) {
+            this.messageService.modalToggle(this.visible = true);
+            this.saving = false;
+            this.applyTrigger++;
+        }
+    }
+    _showTrigger = 0;
+
     visible: boolean = false;
+
     saving: boolean = false;
+
+    applyTrigger = 1;
 
     gridConfig: any = {
         getItems: (page: ResourcePage) => page.Resources,
@@ -41,108 +54,63 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     refreshed($event: any) {
     }
 
-    applyTrigger = 1;
+    addAssignments: AddAssignments
 
-    addAssignments: AddAssignments = new AddAssignments();
-
-    selectedProject: any;
+    project: any;
     projectSource: any;
     projectListFormatter: any;
 
-    currentDate: Date = new Date();
+    currentDate: Date;
 
-    selectedPractice: number = -1;
-    selectedSubPractice: number = -1;
-    selectedPositions: any[];
+    practice: number = -1;
+    subPractice: number = -1;
+    positions: any[];
 
-    _showTrigger = 0;
-    set showTrigger(v: any) {
-        this._showTrigger = v;
-        if (this._showTrigger) {
-            this.messageService.modalToggle(this.visible = true);
-            this.saving = false;
-            this.applyTrigger++;
-        }
-    }
+    private positionSelector: JQuery;
+    private daysOfWeekSelector: JQuery;
 
     constructor(
-
         private messageService: MessageService,
         private optionService: OptionService,
         private dateService: DateService,
         private exceptionService: ExceptionService,
         private resourceService: ResourceService) {
 
-        this.addAssignments.resourceIds = [];
-        this.addAssignments.projectId = 0;
-        this.addAssignments.startDate = this.dateService.format(this.currentDate);
-        this.addAssignments.endDate = this.dateService.format(this.currentDate);
-        this.addAssignments.daysOfWeek = ['2','3','4','5','6'];
-        this.addAssignments.hoursPerDay = 8;
+        this.currentDate = new Date();
 
-        this.projectSource = this.setProjectSource(this);
-        this.projectListFormatter = this.setProjectListFormatter();
+        this.addAssignments = new AddAssignments({
+            resourceIds: [],
+            projectId: 0,
+            startDate: this.dateService.format(this.currentDate),
+            endDate: this.dateService.format(this.currentDate),
+            daysOfWeek: ['2', '3', '4', '5', '6'],
+            hoursPerDay: 8
+        });
+
+        this.projectSource = this.optionService.setSource(CONFIG.urls.project);
+        this.projectListFormatter = this.optionService.setListFormatter();
 
         this.createColumns();
     }
 
     ngOnInit() {
-        this.positionSelectorInit();
-        this.daysOfWeekSelectorInit();
-    }
 
-    private positionSelector: JQuery;
-    private positionSelectorInit() {
-        this.positionSelector = $("#assignmentPositionSelector");
-
-        this.optionService.categories.subscribe(categoryOptions => {
-            this.positionSelector.select2({
-                data: this.optionService.positions.map(pos => {
-                    return {
-                        id: pos.Id,
-                        text: pos.Name,
-                    }
-                })
-            });
-            this.positionSelector.on("change", () => {
-                this.selectedPositions = this.positionSelector.select2('val');
+        this.positionSelector = this.optionService.initObservableSelector(
+            "#assignmentPositionSelector",
+            OptionType.Position,
+            value => {
+                this.positions = value;
                 this.reloadGrid();
             });
-        });
+
+        this.daysOfWeekSelector = this.optionService.initSelector(
+            "#assignmentDOWSelector",
+            CONFIG.daysOfWeek,
+            ['2', '3', '4', '5', '6'],
+            value => {
+                this.addAssignments.daysOfWeek = value;
+            });
     }
-
-    private daysOfWeekSelector: JQuery;
-    private daysOfWeekSelectorInit() {
-
-        this.daysOfWeekSelector = $("#assignmentDOWSelector");
-
-        this.daysOfWeekSelector.val(this.addAssignments.daysOfWeek);
-
-        this.daysOfWeekSelector.select2({
-            data: [{ id: 2, text: 'Monday', short: "Mon" }
-                , { id: 3, text: 'Tuesday', short: "Tue" }
-                , { id: 4, text: 'Wednesday', short: "Wed" }
-                , { id: 5, text: 'Thursday', short: "Thu" }
-                , { id: 6, text: 'Friday', short: "Fri" }
-                , { id: 7, text: 'Saturday', short: "Sat" }
-                , { id: 1, text: 'Sunday', short: "Sun" }]
-        });
-    }
-
-    setProjectSource(instance: any) {
-        return function (term: string) {
-            return instance.optionService.getOptions(CONFIG.urls.project, term);
-        }
-    }
-
-    setProjectListFormatter() {
-        return function (data: any) {
-            var html = "";
-            html += data[this.displayPropertyName] ? "<span>" + data[this.displayPropertyName] + "</span>" : data;
-            return html;
-        }
-    };
-    private displayPropertyName: string;
 
     close() {
         this.messageService.modalToggle(this.visible = false);
@@ -158,7 +126,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             return;
         }
 
-        this.addAssignments.projectId = this.selectedProject.Id;
+        this.addAssignments.projectId = this.project.Id;
         this.addAssignments.resourceIds = this.gridConfig.selectedIds;
 
         this.saving = true;
@@ -172,7 +140,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     private validate() {
         var errors: any[] = [];
-        if (!this.selectedProject) {
+        if (!this.project) {
             errors.push('Project must be selected.');
         }
         if (!this.gridConfig.selectedIds.length) {
@@ -182,17 +150,17 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     positionChanged($event: any) {
-        this.selectedPositions = $event.target.value;
+        this.positions = $event.target.value;
         this.reloadGrid();
     }
 
     practiceChanged($event: any) {
-        this.selectedPractice = $event.target.value;
+        this.practice = $event.target.value;
         this.reloadGrid();
     }
 
     subPracticeChanged($event: any) {
-        this.selectedSubPractice = $event.target.value;
+        this.subPractice = $event.target.value;
         this.reloadGrid();
     }
 
@@ -225,10 +193,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     private buildQuery(): string {
         var query = this.getDefaultQuery();
-        query += this.addParam('practice', this.selectedPractice);
-        query += this.addParam('subpractice', this.selectedSubPractice);
-        if (this.selectedPositions) {
-            query += this.addParam('position', this.selectedPositions.join(','));
+        query += this.addParam('practice', this.practice);
+        query += this.addParam('subpractice', this.subPractice);
+        if (this.positions) {
+            query += this.addParam('position', this.positions.join(','));
         }
 
         this.queryConfig.query = query;
@@ -236,11 +204,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     addProject() {
-        this.messageService.errorRequest({
-            title: 'Error!',
-            message: 'This is message text',
-            description: 'fasdfasdfasd asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa sdfa sdfa sdf asdf asdf asdf rqrewt ertqr t4ihsodhoiu dhUSHD UEUIH 2  fasdfasdfasd asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa  asdf asdfasd fasd fasdf asdf asdfa sdfas dfasdf asdf asdf sdfa sdfa sdfa sdf asdf asdf asdf rqrewt ertqr t4ihsodhoiu dhUSHD UEUIH 2   IUR2    IU3 2 3UIRG  IU3GRjjjj kkkk'
-        });
     }
 
     private getPractices() {
@@ -274,7 +237,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
                 pinned: 'left'
             }
         ];
-
     }
 
     ngOnDestroy() {

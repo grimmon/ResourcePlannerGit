@@ -13,4 +13,17 @@ export class AddAssignments {
     startDate: string;
     endDate: string;
     daysOfWeek: string[];
+
+    public constructor(
+        fields?: {
+            resourceIds?: number[],
+            projectId?: number,
+            hoursPerDay?: number,
+            startDate?: string,
+            endDate?: string,
+            daysOfWeek?: string[],
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
+
 }

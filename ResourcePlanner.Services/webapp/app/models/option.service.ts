@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Option, CategoryOption } from './option.model';
+import { Option, CategoryOption, OptionType } from './option.model';
 import { CONFIG, ServerService } from '../core';
 
 @Injectable()
@@ -18,9 +18,81 @@ export class OptionService {
 
     categories: Observable<any>;
 
+    getOptionCategory(optionType: OptionType) {
+        switch (optionType) {
+            case OptionType.Position:
+                return this.positions;
+            case OptionType.OrgUnit:
+                return this.orgUnits;
+            case OptionType.City:
+                return this.cities;
+            case OptionType.Region:
+                return this.regions;
+            case OptionType.Market:
+                return this.markets;
+            case OptionType.Practice:
+                return this.practices;
+            case OptionType.SubPractice:
+                return this.subPractices;
+            case OptionType.agg:
+                return this.aggregations;
+            case OptionType.ResourceManager:
+                return this.resourceManagers;
+        }
+    }
+
     getOptions(url: string, term: string): Observable<Option[]> {
         return this.serverService.get<Option[]>(url, "?searchTerm=" + term);
     }
+
+    initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void): JQuery {
+        var selectorObj: JQuery = $(selector);
+
+        this.categories.subscribe(categoryOptions => {
+            selectorObj.select2({
+                data: this.getOptionCategory(optionType).map(pos => {
+                    return {
+                        id: pos.Id,
+                        text: pos.Name,
+                    }
+                })
+            });
+            selectorObj.on("change", () => {
+                handler(selectorObj.select2('val'));
+            });
+        });
+        return selectorObj;
+    }
+
+
+    initSelector(selector: string, source: any[], initialValue: string[], handler: (value: any) => void): JQuery {
+        console.log('OptionType '+ OptionType[OptionType.Position])
+        var selectorObj: JQuery = $(selector);
+
+        selectorObj
+            .select2({
+                data: source
+            }).on("change", () => {
+                handler(selectorObj.select2('val'));
+            });
+        selectorObj.val(initialValue).trigger('change');
+
+        return selectorObj;
+    }
+
+    setSource(url: string) {
+        var service = this;
+        return function (term: string) {
+            return service.getOptions(url, term);
+        }
+    }
+
+    setListFormatter() {
+        return function (data: any) {
+            return data[this.displayPropertyName] ? "<span>" + data[this.displayPropertyName] + "</span>" : data;
+        }
+    };
+    private displayPropertyName: string; // dummy
 
     constructor(
         private serverService: ServerService) {
@@ -33,15 +105,15 @@ export class OptionService {
 
         this.categories
             .subscribe(categoryOptions => {
-                this.orgUnits = this.createCategory('OrgUnit', categoryOptions);
-                this.cities = this.createCategory('City', categoryOptions);
-                this.regions = this.createCategory('Region', categoryOptions);
-                this.markets = this.createCategory('Market', categoryOptions);
-                this.practices = this.createCategory('Practice', categoryOptions);
-                this.subPractices = this.createCategory('SubPractice', categoryOptions);
-                this.aggregations = this.createCategory('agg', categoryOptions, false);
-                this.resourceManagers = this.createCategory('ResourceManager', categoryOptions);
-                this.positions = this.createCategory('Position', categoryOptions, false);
+                this.orgUnits = this.createCategory(OptionType[OptionType.OrgUnit], categoryOptions);
+                this.cities = this.createCategory(OptionType[OptionType.City], categoryOptions);
+                this.regions = this.createCategory(OptionType[OptionType.Region], categoryOptions);
+                this.markets = this.createCategory(OptionType[OptionType.Market], categoryOptions);
+                this.practices = this.createCategory(OptionType[OptionType.Practice], categoryOptions);
+                this.subPractices = this.createCategory(OptionType[OptionType.SubPractice], categoryOptions);
+                this.aggregations = this.createCategory(OptionType[OptionType.agg], categoryOptions, false);
+                this.resourceManagers = this.createCategory(OptionType[OptionType.ResourceManager], categoryOptions);
+                this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
             });
     }
 

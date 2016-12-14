@@ -22,4 +22,15 @@ export let CONFIG = {
         "&#916;"
     ],
 
+    daysOfWeek: [
+        { id: '2', text: 'Monday', short: "Mon" },
+        { id: '3', text: 'Tuesday', short: "Tue" },
+        { id: '4', text: 'Wednesday', short: "Wed" },
+        { id: '5', text: 'Thursday', short: "Thu" },
+        { id: '6', text: 'Friday', short: "Fri" },
+        { id: '7', text: 'Saturday', short: "Sat" },
+        { id: '1', text: 'Sunday', short: "Sun" }
+    ],
+
+
 };

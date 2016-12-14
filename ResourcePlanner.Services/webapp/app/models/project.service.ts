@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProjectResource } from './project.model';
+import { ProjectResource, AddProject } from './project.model';
 import { CONFIG, ServerService } from '../core';
 
 @Injectable()
@@ -9,13 +9,9 @@ export class ProjectService {
         private serverService: ServerService) {
     }
 
-    addProject(project: ProjectResource) {
-        return this.serverService.post<ProjectResource>(CONFIG.urls.projectAdd, project);
+    addProject(project: AddProject) {
+        return this.serverService.postQuery<AddProject>(CONFIG.urls.projectAdd, project);
     }
-
-    //deleteProject(project: ProjectResource) {
-    //    return this.serverService.delete<ProjectResource>(CONFIG.urls.projects, project.ProjectId);
-    //}
 
     getProjects(queryString: string) {
         return this.serverService.get<ProjectResource[]>(CONFIG.urls.projectView + queryString);
@@ -24,8 +20,4 @@ export class ProjectService {
     getProject(id: number) {
         return this.serverService.get<ProjectResource>(`${CONFIG.urls.project}/${id}`);
     }
-
-    //updateProject(project: ProjectResource) {
-    //    return this.serverService.update<ProjectResource>(CONFIG.urls.projects, project, project.ProjectId);
-    //}
 }

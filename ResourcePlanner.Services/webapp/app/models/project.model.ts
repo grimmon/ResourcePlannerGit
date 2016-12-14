@@ -75,10 +75,24 @@ export class AddProject {
     CustomerId: number;
     CustomerName: string;
     Description: string;
-    StartDate: Date;
-    EndDate: Date;
+    StartDate: string;
+    EndDate: string;
     OpportunityOwnerId: number;
     ProjectManagerId: number;
+
+    public constructor(
+        fields?: {
+            ProjectName?: string,
+            CustomerId?: number,
+            CustomerName?: string,
+            Description?: string,
+            StartDate?: string,
+            EndDate?: string,
+            OpportunityOwnerId?: number,
+            ProjectManagerId?: number,
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
 }
 
 export class ProjectResourceRow {

@@ -10,7 +10,7 @@
                            auto-complete-placeholder="Select a project"
                            value-property-name="Id"
                            display-property-name="Name"
-                           [(ngModel)]="selectedProject" 
+                           [(ngModel)]="project" 
                            max-num-list="16"
                            min-chars="4" 
                            [source]="projectSource" 
@@ -26,13 +26,13 @@
                 </div>
                 <div class="formrow">
                     <label>Practice</label>
-                    <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="selectedPractice" (change)="practiceChanged($event)">
+                    <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="practice" (change)="practiceChanged($event)">
                         <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
                     </select>
                 </div>
                 <div class="formrow">
                     <label>Sub Practice</label>
-                    <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="selectedSubPractice" (change)="subPracticeChanged($event)">
+                    <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="subPractice" (change)="subPracticeChanged($event)">
                         <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
                     </select>
                 </div>

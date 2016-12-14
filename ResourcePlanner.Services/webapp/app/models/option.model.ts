@@ -11,6 +11,18 @@ export class Option {
     }
 }
 
+export enum OptionType {
+    Position,
+    OrgUnit,
+    City,
+    Region,
+    Market,
+    Practice,
+    SubPractice,
+    agg,
+    ResourceManager
+}
+
 export class CategoryOption extends Option {
     Category: string;
 
