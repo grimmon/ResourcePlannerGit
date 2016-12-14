@@ -1,8 +1,15 @@
 <article class="" style="position:absolute;top:108px;bottom:0px;width: calc(100% - 56px)">
-    <resource-filters [categoryOptions]></resource-filters>
-    <resource-list></resource-list>
-    <resource-details (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
-    <project-list-view [projectToView]="projectToView" [showTrigger]="projectShow"></project-list-view>
+    
+    <resource-filters (applyFiltersRequested)="applyFiltersRequested($event)"></resource-filters>
+    
+    <resource-list [filterQuery]="filterQuery" (resourceSelected)="resourceSelected($event)"></resource-list>
+    
+    <resource-details [resource]="resource" (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
+    
+    <project-list-view [showTrigger]="projectShow" [projectToView]="projectToView" ></project-list-view>
+    
     <assignment-add [showTrigger]="assignmentAddShow" (addProjectRequested)="addProjectRequested()"></assignment-add>
+    
     <project-add [showTrigger]="addProjectShow"></project-add>
+
 </article>

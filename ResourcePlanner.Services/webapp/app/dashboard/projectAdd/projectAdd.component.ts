@@ -97,6 +97,9 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
         if (!this.projectManager) {
             errors.push('Project Manager must be selected or added.');
         }
+        if (!this.addedProject.ProjectName.trim()) {
+            errors.push('Project Name must be specified.');
+        }
         return errors.length ? errors : null;
     }
 

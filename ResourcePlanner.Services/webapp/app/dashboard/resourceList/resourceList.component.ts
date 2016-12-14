@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,8 +11,19 @@ import { Resource, ResourcePage, ResourceRow, ResourceService, TimeAggregation }
     selector: 'resource-list',
     templateUrl: 'resourceList.component.html',
     styleUrls: ['resourceList.component.css'],
+    inputs: [
+        'filterQuery'
+    ]
 })
 export class ResourceListComponent implements OnDestroy, OnInit {
+
+    @Output() resourceSelected: EventEmitter<any>;
+
+    set filterQuery(v: string) {
+        this.queryConfig.query = v;
+        this.applyTrigger++;
+        this.resourceSelected.emit(null);
+   }
 
     gridConfig: any = {
         getItems: (page: ResourcePage) => page.Resources,
@@ -37,17 +47,15 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     }
 
     rowSelected($event: any) {
-        this.messageService.resourceSelect($event.rowData); // announce that resource selection done
+        this.resourceSelected.emit($event.rowData)
     }
 
     constructor(
         private messageService: MessageService,
         private dateService: DateService,
-        private resourceService: ResourceService,
-        private route: ActivatedRoute,
-        private router: Router) {
+        private resourceService: ResourceService) {
 
-        this.messageService.onApplyRequested(filters => this.apply(filters));
+        this.resourceSelected = new EventEmitter<any>();
 
         this.messageService.onExportRequested(filters => this.doExport(filters));
 
@@ -128,11 +136,6 @@ export class ResourceListComponent implements OnDestroy, OnInit {
 
     private doExport(filters: any) {
         //this.resourceService.export(filters + this.getDateQuery());
-    }
-
-    private apply(filters: any) {
-        this.queryConfig.query = filters;
-        this.applyTrigger++;
     }
 
     ngOnDestroy() {

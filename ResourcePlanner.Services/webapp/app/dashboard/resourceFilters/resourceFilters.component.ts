@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,13 +10,12 @@ import { Option, CategoryOption, OptionService, TimeAggregation } from '../../mo
     selector: 'resource-filters',
     templateUrl: 'resourceFilters.component.html',
     styleUrls: ['resourceFilters.component.css'],
-    inputs: ['categoryOptions']
 })
 export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
-    visible: boolean = true;
+    @Output() applyFiltersRequested: EventEmitter<any>;
 
-    categoryOptions: Array<CategoryOption> = new Array<CategoryOption>();
+    visible: boolean = true;
 
     selectedCity: number;
     selectedOrgUnit: number;
@@ -72,7 +71,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedSubPractice = -1;
         this.selectedAggregation = TimeAggregation.Weekly;
         this.selectedResourceManager = -1;
-        this.tags.tagit("removeAll");
+        this.tags.clear();
 
         this.messageService.resourceFilterChange('cleared', {
             aggregation: this.selectedAggregation
@@ -80,12 +79,15 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     apply() {
-        this.callFiltered("apply");
+        this.buildFilters();
+        this.applyFiltersRequested.emit(this.filterQuery);
     }
 
     constructor(
         private messageService: MessageService,
         private optionService: OptionService) {
+
+        this.applyFiltersRequested = new EventEmitter<any>();
 
         this.messageService.onFilterPanelToggled(state => {
             this.visible = !this.visible
@@ -96,24 +98,12 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit() {
-        this.tags = $("#myTags");
-
-        this.tags.tagit({
-            fieldName: "searchbar",
-            caseSensitive: false,
-            readOnly: false,
-            tagLimit: 3,
-            placeholderText: "Search",
-            afterTagAdded: function (event: any, ui: any) { this.placeholderText = null },
-            onTagLimitExceeded: function (event: any, ui: any) {
-                this.readOnly = true;
-            }
-        });
+        this.tags = this.optionService.initTags("#myTags", 3);
 
         this.clear();
     }
 
-    private tags: JQuery;
+    private tags: any;
 
     private filterQuery: string;
 
@@ -134,14 +124,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     private buildFilters() {
-        this.filterQuery = '';
-        var myTags = this.tags.tagit("assignedTags") as Array<string>;
-        for (var i = 1; i <= myTags.length; i++) {
-            var searchTerm = myTags[i - 1];
-            if (searchTerm) {
-                this.add("searchterm" + i, searchTerm);
-            }
-        }
+        this.filterQuery = this.tags.query();
         this.addOption("city", this.selectedCity);
         this.addOption("orgUnit", this.selectedOrgUnit);
         this.addOption("region", this.selectedRegion);
@@ -157,9 +140,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         switch (operation) {
             case "export":
                 this.messageService.exportRequest(this.filterQuery);
-                break;
-            case "apply":
-                this.messageService.applyRequest(this.filterQuery);
                 break;
         }
     }

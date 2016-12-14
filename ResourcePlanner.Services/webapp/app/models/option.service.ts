@@ -94,6 +94,29 @@ export class OptionService {
     };
     private displayPropertyName: string; // dummy
 
+
+    initTags(selector: string, tagLimit?: number) {
+        var tags: JQuery = $(selector);
+
+        tags.tagit({
+            fieldName: "searchbar",
+            caseSensitive: false,
+            readOnly: false,
+            tagLimit: tagLimit || 3,
+            placeholderText: "Search",
+            afterTagAdded: function (event: any, ui: any) { this.placeholderText = null },
+            onTagLimitExceeded: function (event: any, ui: any) {
+                this.readOnly = true;
+            }
+        });
+
+        return {
+            tags: tags,
+            clear: function () { tags.tagit("removeAll"); },
+            query: function () { return tags.tagit("assignedTags").filter((tag:string) => tag ? true : false).map((tag: string, i: number) => "searchterm" + (i + 1) + "=" + tag).join('&'); }   
+        }
+    }
+
     constructor(
         private serverService: ServerService) {
 

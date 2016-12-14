@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { MessageService } from '../core';
@@ -14,34 +13,38 @@ import { CategoryOption } from '../models';
 })
 export class DashboardComponent implements OnDestroy, OnInit {
 
-    categoryOptions: Array<CategoryOption> = new Array<CategoryOption>();
+    filterQuery = ''
+    applyFiltersRequested($event: any) {
+        this.filterQuery = $event;
+    }
 
+    resource: any
+    resourceSelected($event: any) {
+        this.resource = $event;
+    }
+
+    projectShow = 0;
+    projectToView: any = {};
     projectResourceViewRequested($event: any) {
         this.projectToView = $event; 
         this.projectShow++;
     }
-    projectShow = 0;
-    projectToView: any = {};
 
+    assignmentAddShow = 0;
     assignmentAddRequested() {
         this.assignmentAddShow++;
     }
-    assignmentAddShow = 0;
 
+    addProjectShow = 0;
     addProjectRequested() {
         this.addProjectShow++;
     }
-    addProjectShow = 0;
 
     constructor(
-        private messageService: MessageService,
-        private route: ActivatedRoute,
-        private router: Router) {
-
-        this.categoryOptions.push(new CategoryOption({ Id: 8, Name: 'xxx', Category: 'zzz' }));
+        private messageService: MessageService) {
 
         this.messageService.onAddAssignmentRequested(state => {
-            this.assignmentAddShow++;
+            this.assignmentAddRequested();
         });
     }
 

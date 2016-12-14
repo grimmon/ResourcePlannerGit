@@ -24,7 +24,7 @@ export class MessageService {
         this.modalToggled.next(value);
     }
 
-    // add assignment request
+    // add assignment request (from Navigation to dashboard)
     private addAssignmentRequested = new Subject<boolean>();
 
     onAddAssignmentRequested(handler: (value: boolean) => void) {
@@ -75,28 +75,6 @@ export class MessageService {
     }
     exportRequest(filters: any) {
         this.exportRequested.next(filters);
-    }
-
-    // apply filters request
-
-    private applyRequested = new Subject<any>();
-
-    onApplyRequested(handler: (value: any) => void) {
-        this.applyRequested.subscribe(handler)
-    }
-    applyRequest(filters: any) {
-        this.applyRequested.next(filters);
-    }
-
-    // resource selection
-
-    private resourceSelected = new Subject<any>();
-
-    onResourceSelected(handler: (resourceRow: any) => void) {
-        this.resourceSelected.subscribe(handler)
-    }
-    resourceSelect(resourceRow: any) {
-        this.resourceSelected.next(resourceRow);
     }
 
     // resource period scroll
