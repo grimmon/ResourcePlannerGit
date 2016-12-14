@@ -30,9 +30,18 @@ namespace ResourcePlanner.Services.DataAccess
                 @"rpdb.InternalAssignmentInsert",
                 CommandType.StoredProcedure,
                 _timeout,
-                AssignmentParameters(asgn));
+                AddAssignmentParameters(asgn));
         }
+        public void UpdateAssignment(UpdateAssignment asgn)
+        {
 
+            AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
+                _connectionString,
+                @"rpdb.InternalAssignmentInsert",
+                CommandType.StoredProcedure,
+                _timeout,
+                AAssignmentParameters(asgn));
+        }
         public List<IdNameGeneric> GetProjects(string searchTerm)
         {
 
@@ -61,11 +70,28 @@ namespace ResourcePlanner.Services.DataAccess
             return returnValue;
         }
 
-        private SqlParameter[] AssignmentParameters(AddAssignments asgn)
+        private SqlParameter[] AddAssignmentParameters(AddAssignments asgn)
         {
             var parameterList = new List<SqlParameter>();
 
             parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("ResourceIds", "rpdb.typeIntTable", SqlDbType.Structured, asgn.ResourceIds));
+            parameterList.Add(AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, asgn.ProjectId));
+            parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.Hours));
+            parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
+            parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
+            if (asgn.DaysOfWeek > 0)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
+            }
+
+            return parameterList.ToArray();
+        }
+
+        private SqlParameter[] UpdateAssignmentParameters(UpdateAssignment asgn)
+        {
+            var parameterList = new List<SqlParameter>();
+
+            parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, asgn.ProjectId));
             parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));

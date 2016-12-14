@@ -221,7 +221,7 @@ function buildAssignmentInsertQuery() {
         }
     }
 
-    var query = 'api/addassignment' + filters;
+    var query = 'api/assignment/add' + filters;
 
     return query;
 }

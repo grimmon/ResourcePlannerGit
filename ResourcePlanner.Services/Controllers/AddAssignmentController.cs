@@ -14,29 +14,30 @@ using static ResourcePlanner.Services.Enums.Enums;
 
 namespace ResourcePlanner.Services.Controllers
 {
+    [RoutePrefix("api/Assignment")]
     public class AddAssignmentController : ApiController
     {
         [Authorize]
         [HttpPost]
         [AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
-
-        public async Task<IHttpActionResult> Post(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        [Route("add")]
+        public async Task<IHttpActionResult> Add(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
 #if Mock
             return Ok();
 #endif
-            var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
-                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
-            var CurrentUser = User.Identity as ClaimsIdentity;
-            var EmailClaim = CurrentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Upn);
-            if (EmailClaim == null)
-            {
-                return Unauthorized();
-            }
-            if (!authAccess.CheckAuth(EmailClaim.Value,"RM"))
-            {
-                return Unauthorized();
-            }
+            //var authAccess = new AuthDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            //                                    Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            //var CurrentUser = User.Identity as ClaimsIdentity;
+            //var EmailClaim = CurrentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Upn);
+            //if (EmailClaim == null)
+            //{
+            //    return Unauthorized();
+            //}
+            //if (!authAccess.CheckAuth(EmailClaim.Value,"RM"))
+            //{
+            //    return Unauthorized();
+            //}
              
             var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
@@ -73,6 +74,50 @@ namespace ResourcePlanner.Services.Controllers
             try
             {
                 access.AddAssignment(asgn);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+        [Authorize]
+        [HttpPost]
+        [AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
+        [Route("update")]
+        public async Task<IHttpActionResult> Update(int resourceId, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        {
+#if Mock
+            return Ok();
+#endif
+
+            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+
+            int days = 0;
+
+            var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
+
+            if (daysOfWeek.Length > 0)
+            {
+                days = getDaysAsInt(daysOfWeekEnum);
+            }
+
+
+            var asgn = new UpdateAssignment()
+            {
+                ResourceId = resourceId,
+                ProjectId = projectId,
+                Hours = hoursPerDay,
+                StartDate = startdate,
+                EndDate = enddate,
+                DaysOfWeek = days
+            };
+
+            try
+            {
+                access.UpdateAssignment(asgn);
             }
             catch (Exception ex)
             {
