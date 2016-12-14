@@ -35,11 +35,11 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
     client: Option;
     clientSource: any;
     clientListFormatter: any;
-    clientAddVisible = false;
+    clientSelectorVisible = true;
     clientName = '';
 
     openAddClient() {
-        this.clientAddVisible = true;
+        this.clientSelectorVisible = false;
     }
 
     clientNameChanged($event: any) {
