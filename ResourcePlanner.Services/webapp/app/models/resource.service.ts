@@ -45,7 +45,7 @@ export class ResourceService {
         var src = `${CONFIG.urls.resourceExport}${query.substr(0, 1) != '?' ? '?' : ''}${query}`,
             iframe = $('#exportIFrame');
         if (iframe.length == 0) {
-            iframe = $(`<iframe frameborder="0" style="display:none" scrolling="no" src="blank" id="exportIFrame"></iframe>`);
+            iframe = $(`<iframe frameborder="0" style="display:none" scrolling="no" src="about:blank" id="exportIFrame"></iframe>`);
             iframe.appendTo('body');
         }
         iframe.attr('src', src);

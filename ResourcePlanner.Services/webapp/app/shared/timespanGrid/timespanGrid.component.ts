@@ -91,6 +91,11 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         };  // we pass gridOptions in, so we can grab the api out
 
         this.resetCurrentDate();
+
+        this.periodScrolled.emit({
+            direction: 0,
+            query: this.getDateQuery()
+        });
     }
 
     private resetCurrentDate() {

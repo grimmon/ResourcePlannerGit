@@ -62,7 +62,11 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
 
         this.projectViewRequested = new EventEmitter<any>();
 
-        this.messageService.onResourcePeriodScrolled(step => this.periodScrollTrigger = { step: step });
+        this.messageService.onResourcePeriodScrolled(step => {
+            if (this._resourceId) {
+                this.periodScrollTrigger = { step: step };
+            }
+        });
 
         this.messageService.onResourceFilterChanged(filterInfo => {
             switch (filterInfo.type) {
