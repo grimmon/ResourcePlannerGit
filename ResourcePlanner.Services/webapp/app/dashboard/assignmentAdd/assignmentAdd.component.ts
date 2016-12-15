@@ -62,7 +62,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     projectSource: any;
     projectListFormatter: any;
 
-    currentDate: Date;
+    currentDate: string;
 
     practice: number = -1;
     subPractice: number = -1;
@@ -80,13 +80,13 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
         this.addProjectRequested = new EventEmitter();
 
-        this.currentDate = new Date();
+        this.currentDate = this.dateService.format(new Date());
 
         this.addAssignments = new AddAssignments({
             resourceIds: [],
             projectId: 0,
-            startDate: this.dateService.format(this.currentDate),
-            endDate: this.dateService.format(this.currentDate),
+            startDate: this.currentDate,
+            endDate: this.currentDate,
             daysOfWeek: ['2', '3', '4', '5', '6'],
             hoursPerDay: 8
         });
@@ -171,14 +171,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     startDateChanged($event: any) {
         this.addAssignments.startDate = $event.target.value;
         this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
-        this.currentDate = new Date(this.addAssignments.startDate);
+        this.currentDate = this.addAssignments.startDate;
         this.reloadGrid();
     }
 
     endDateChanged($event: any) {
         this.addAssignments.endDate = $event.target.value;
         this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
-        this.currentDate = new Date(this.addAssignments.startDate);
+        this.currentDate = this.addAssignments.startDate;
         this.reloadGrid();
     }
 

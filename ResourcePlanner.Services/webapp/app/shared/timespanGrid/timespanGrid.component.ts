@@ -27,9 +27,9 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     queryConfig: any;
 
-    _currentDate: number;
-    set currentDate(v: number) {
-        this.queryConfig.currentDate = new Date(v);
+    _currentDate: string;
+    set currentDate(v: string) {
+        this.queryConfig.currentDate = this.dateService.getDate(v);
         this.resetCurrentDate();
     }
     _applyTrigger: number;
