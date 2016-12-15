@@ -43,8 +43,10 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     }
 
     periodScrolled($event: any) {
-        this.messageService.resourcePeriodScroll($event); // announce that resource selection done
+        this.dateQuery = $event.query;
+        this.messageService.resourcePeriodScroll($event.direction); 
     }
+    dateQuery: string = ''
 
     rowSelected($event: any) {
         this.resourceSelected.emit($event.rowData)
@@ -135,7 +137,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     }
 
     private doExport(filters: any) {
-        //this.resourceService.export(filters + this.getDateQuery());
+        this.resourceService.export(filters + this.dateQuery);
     }
 
     ngOnDestroy() {

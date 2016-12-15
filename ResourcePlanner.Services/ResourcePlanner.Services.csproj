@@ -355,7 +355,6 @@
     <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\core\config.ts" />
     <TypeScriptCompile Include="webapp\app\core\core.module.ts" />
-    <TypeScriptCompile Include="webapp\app\core\grid.service.ts" />
     <TypeScriptCompile Include="webapp\app\core\entity.service.ts" />
     <TypeScriptCompile Include="webapp\app\core\exception.service.ts" />
     <TypeScriptCompile Include="webapp\app\core\index.ts" />

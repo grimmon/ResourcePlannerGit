@@ -105,12 +105,18 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     private gridClicked($event: any) {
         var srcHtml = $event.srcElement.outerHTML;
         if (srcHtml.indexOf('timePeriodBackwardButton') >= 0) {
-            this.periodScrolled.emit(-1);
             this.periodScroll(-1)
+            this.periodScrolled.emit({
+                direction: -1,
+                query: this.getDateQuery()
+            });
         }
         if (srcHtml.indexOf('timePeriodForwardButton') >= 0) {
-            this.periodScrolled.emit(1);
             this.periodScroll(1)
+            this.periodScrolled.emit({
+                direction: 1,
+                query: this.getDateQuery()
+            });
         }
     }
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { CONFIG, ServerService } from '../core';
 import { Resource, ResourcePage, DetailPage } from './resource.model';
 import { AddAssignments } from './assignment.model';
-import { CONFIG, ServerService } from '../core';
 
 @Injectable()
 export class ResourceService {
@@ -42,8 +42,12 @@ export class ResourceService {
     }
 
     export(query: string) {
-        var html = `<iframe frameborder="0" scrolling="no" src="${CONFIG.urls.resourceExport + query}" id="myFrame"></iframe>`;
-        alert('Requested to do export. ResourceList' + html);
-        $(html).appendTo('body');
+        var src = `${CONFIG.urls.resourceExport}${query.substr(0, 1) != '?' ? '?' : ''}${query}`,
+            iframe = $('#exportIFrame');
+        if (iframe.length == 0) {
+            iframe = $(`<iframe frameborder="0" style="display:none" scrolling="no" src="blank" id="exportIFrame"></iframe>`);
+            iframe.appendTo('body');
+        }
+        iframe.attr('src', src);
     }
 }
