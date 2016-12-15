@@ -23,7 +23,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             return page.ProjectResource;
         },
         createRow: ProjectResourceRow,
-        hideTimePeriodScroll: true,
+        //showTimePeriodScroll: true,
         height: "100%",
     };
 

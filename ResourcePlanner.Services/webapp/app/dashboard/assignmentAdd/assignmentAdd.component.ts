@@ -39,7 +39,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         getItems: (page: ResourcePage) => page.Resources,
         createRow: ResourceRow,
         rowSelection: 'multiple',
-        hideTimePeriodScroll: true,
         height: "100%",
         selectedIds: [],
     };

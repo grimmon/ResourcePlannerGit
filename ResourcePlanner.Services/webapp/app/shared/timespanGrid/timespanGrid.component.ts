@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CONFIG, MessageService, DateService } from '../../core';
-import { TimeDataPage, TimeAggregation } from '../../models';
+import { TimeDataPage, TimeAggregation, AddAssignments } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -20,6 +20,12 @@ import { TimeDataPage, TimeAggregation } from '../../models';
     styles: ['.toolbar button {margin: 2px; padding: 0px;}'],
 })
 export class TimespanGridComponent implements OnDestroy, OnInit {
+
+    @Output() dataRequested: EventEmitter<any>;
+    @Output() rowSelected: EventEmitter<any>;
+    @Output() periodScrolled: EventEmitter<any>;
+    @Output() refreshed: EventEmitter<any>;
+    @Output() dataCellEditorRequested: EventEmitter<any>;
 
     ready: boolean = false;
 
@@ -49,11 +55,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         }
     }
 
-    @Output() dataRequested: EventEmitter<any>;
-    @Output() rowSelected: EventEmitter<any>;
-    @Output() periodScrolled: EventEmitter<any>;
-    @Output() refreshed: EventEmitter<any>;
-
     rowData: any[];
     columnDefs: any[];
     rowCount: string;
@@ -66,6 +67,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.rowSelected = new EventEmitter<any>();
         this.periodScrolled = new EventEmitter<any>();
         this.refreshed = new EventEmitter<any>();
+        this.dataCellEditorRequested = new EventEmitter<any>();
     }
 
     ngOnInit() {
@@ -151,15 +153,26 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private createDateColumn(fieldNameRoot: string, fieldNameSuffix: string, index: number) {
-        return {
+        var colDef: any = {
             headerName: CONFIG.dataHeaders[index],
             width: 45,
-            context: { type: "dataColumn", index: 0 },
+            context: { type: "dataColumn", index: index },
             field: fieldNameRoot + "-" + fieldNameSuffix,
             suppressSorting: true,
             suppressMenu: true,
             cellRenderer: timePeriodCellRenderer,
         };
+        //if (this.gridConfig.allowDataEdit && index == 0) {
+        //    colDef.editable = true;
+        //    colDef.cellEditor = 'popupText';
+        //    colDef.cellEditorParams = {
+        //        maxLength: '300',   // override the editor defaults
+        //        cols: '50',
+        //        rows: '6'
+        //   }
+        //}
+
+        return colDef;
 
         function timePeriodCellRenderer(params: any) {
             if (params.data !== undefined) {
@@ -186,11 +199,11 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         var header = "";
         if (timePeriods) {
             var periodIndex: number = fieldName;
-            if (periodIndex == 0 && !this.gridConfig.hideTimePeriodScroll) {
+            if (periodIndex == 0 && this.gridConfig.showTimePeriodScroll) {
                 header = '<a id="timePeriodBackwardButton" style="float: left;"><img src="/Images/IRMT_Icons_BackAWeek.png" /></a>';
             }
             header += timePeriods[periodIndex];
-            if (++periodIndex == this.periodColumnsCount && !this.gridConfig.hideTimePeriodScroll ) {
+            if (++periodIndex == this.periodColumnsCount && this.gridConfig.showTimePeriodScroll ) {
                 header += '<a id="timePeriodForwardButton" style="float: right;"><img src="/Images/IRMT_Icons_ForwardAWeek.png" /></a>';
             }
         }
@@ -300,7 +313,22 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellClicked($event: any) {
-        this.clickedFirstColumn = $event.colDef.context.index == 0;
+        var context = $event.colDef.context,
+            firstColumn = context.index == 0,
+            dataColumn = context.type == 'dataColumn';
+        this.clickedFirstColumn = firstColumn && !dataColumn;
+        if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
+            // activate editor
+            debugger;
+            this.dataCellEditorRequested.emit(new AddAssignments({
+                resourceIds: [0],
+                projectId: $event.data.Id,
+                hoursPerDay: 8,
+                startDate: '',
+                endDate: '',
+                daysOfWeek: ['2', '3', '4', '5', '6'],
+            }));
+        }
     }
 
     private onRowSelected($event: any) {

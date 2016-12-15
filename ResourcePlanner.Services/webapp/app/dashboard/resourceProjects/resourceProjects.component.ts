@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
-import { DetailPage, ProjectDetailRow, ResourceService, TimeAggregation } from '../../models';
+import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, TimeAggregation } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -17,6 +17,8 @@ import { DetailPage, ProjectDetailRow, ResourceService, TimeAggregation } from '
 })
 export class ResourceProjectsComponent implements OnDestroy, OnInit {
 
+    @Output() projectViewRequested: EventEmitter<any>;
+
     _resourceId: number;
 
     set resourceId(v: number) {
@@ -26,6 +28,9 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
             this.applyTrigger++;
         }
     }
+    get resourceId() {
+        return this._resourceId;
+    }
 
     applyTrigger: number = 0;
 
@@ -34,7 +39,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     gridConfig: any = {
         getItems: (page: DetailPage) => page.Projects,
         createRow: ProjectDetailRow,
-        hideTimePeriodScroll: true,
+        allowDataEdit: true,
         height: "200px"
     };
 
@@ -51,7 +56,11 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
         this.projectViewRequested.emit($event.rowData)
     }
 
-    @Output() projectViewRequested: EventEmitter<any>;
+    dataCellEditorRequested($event: any) {
+        var addAssignments: AddAssignments = $event;
+        addAssignments.resourceIds = [this.resourceId];
+
+    }
 
     constructor(
         private messageService: MessageService,

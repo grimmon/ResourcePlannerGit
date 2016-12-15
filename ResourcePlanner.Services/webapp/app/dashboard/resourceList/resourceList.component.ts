@@ -28,6 +28,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     gridConfig: any = {
         getItems: (page: ResourcePage) => page.Resources,
         createRow: ResourceRow,
+        showTimePeriodScroll: true,
         height: "100%",
     };
 
