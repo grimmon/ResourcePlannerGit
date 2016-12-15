@@ -26,6 +26,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
    }
 
     gridConfig: any = {
+        context: ["resource-list"],
+        refreshContexts: ["resource-projects", "resource-list"],
         getItems: (page: ResourcePage) => page.Resources,
         createRow: ResourceRow,
         showTimePeriodScroll: true,

@@ -72,9 +72,9 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        if (this.gridConfig.context) {
+        if (this.gridConfig.refreshContexts) {
             this.messageService.onTimespanGridRefreshRequested(gridContext => {
-                if (this.gridConfig.context == gridContext) {
+                if (this.gridConfig.refreshContexts.indexOf(gridContext)) {
                     this.refresh();
                 }
             });
