@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { MessageService } from '../../core';
-import { ProjectPage, ProjectResourceRow, ProjectService } from '../../models';
+import { MessageService, DateService } from '../../core';
+import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -16,8 +15,13 @@ import { ProjectPage, ProjectResourceRow, ProjectService } from '../../models';
 export class ProjectListViewComponent implements OnDestroy, OnInit {
     visible: boolean = false;
 
+    projectInfo: ProjectInfo;
+
     gridConfig: any = {
-        getItems: (page: ProjectPage) => page.ProjectResource,
+        getItems: (page: ProjectPage) => {
+            this.projectInfo = page.ProjectInfo;
+            return page.ProjectResource;
+        },
         createRow: ProjectResourceRow,
         hideTimePeriodScroll: true,
         height: "100%",
@@ -60,11 +64,22 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
         $event.dataObservable = this.projectService.getProjects("?projectId=" + this._projectToView.Id);
     }
 
+    getStartDate() {
+        return this.projectInfo ? this.dateService.formatString(this.projectInfo.StartDate) : '';
+    }
+
+    getEndDate() {
+        return this.projectInfo ? this.dateService.formatString(this.projectInfo.EndDate) : '';
+    }
+
+    getDuration() {
+        return this.projectInfo ? this.dateService.getDuration(this.projectInfo.StartDate, this.projectInfo.EndDate) : '';
+    }
+
     constructor(
+        private dateService: DateService,
         private messageService: MessageService,
-        private projectService: ProjectService,
-        private route: ActivatedRoute,
-        private router: Router) {
+        private projectService: ProjectService) {
 
         this.createColumns();
     }
@@ -79,7 +94,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                     type: "resourceColumn",
                     index: 0
                 },
-                headerName: "Resource Name",
+                headerName: "Resource",
                 field: "ResourceName",
                 width: 150,
                 suppressMenu: true,
@@ -87,7 +102,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             },
             {
                 context: { type: "resourceColumn", index: 1 },
-                headerName: "Title",
+                headerName: "Role",
                 field: "Position",
                 width: 150,
                 suppressMenu: true,
@@ -96,7 +111,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             {
                 context:
                 { type: "resourceColumn", index: 2 },
-                headerName: "Cost Rate",
+                headerName: "Rate",
                 field: "CostRate",
                 width: 100,
                 suppressMenu: true,
@@ -104,7 +119,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             },
             {
                 context: { type: "resourceColumn", index: 3 },
-                headerName: "Total Resourced",
+                headerName: "Total Allocated",
                 field: "TotalResourceHours",
                 width: 100,
                 suppressMenu: true,
@@ -112,7 +127,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             },
             {
                 context: { type: "resourceColumn", index: 4 },
-                headerName: "Total Forcasted",
+                headerName: "Total\nScheduled",
                 field: "TotalForecastHours",
                 width: 100,
                 suppressMenu: true,

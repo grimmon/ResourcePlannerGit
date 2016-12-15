@@ -25,8 +25,8 @@ export class ProjectInfo {
     URL: string;
     ProjectManagerFirstName: string;
     ProjectManagerLastName: string;
-    StartDate: Date;
-    EndDate: Date;
+    StartDate: string;
+    EndDate: string;
 }
 
 export class ProjectDetail {

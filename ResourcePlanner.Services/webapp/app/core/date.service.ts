@@ -4,8 +4,28 @@ import { TimeAggregation } from '../models';
 @Injectable()
 export class DateService {
 
+
+    getDate(date: string): Date {//YYYY-MM-DD
+        return new Date(
+            parseInt(date.substr(0, 4), 10),
+            parseInt(date.substr(5, 2), 10) - 1, // Month (0-11)
+            parseInt(date.substr(8, 2), 10));
+    }
+
+    getDuration(start: string, end: string): number {//YYYY-MM-DD return in weeks
+        var s = this.getDate(start).getTime(),
+            e = this.getDate(end).getTime(),
+            d = e - s;
+            
+        return Math.round(d / (1000 * 3600 * 24 * 7));
+    }
+
     format(date: Date) {
         return date.getFullYear() + '-' + (date.getMonth() + 1).toString(10).padStart(2, '0') + '-' + date.getDate().toString(10).padStart(2, '0');
+    }
+
+    formatString(date: string) {
+        return this.format(this.getDate(date));
     }
 
     update(currentDate: Date, currentAggregation: TimeAggregation, pageSize: number, periodOffset: number) {

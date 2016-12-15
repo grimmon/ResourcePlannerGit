@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProjectResource, AddProject } from './project.model';
+import { ProjectResource, ProjectPage, AddProject } from './project.model';
 import { CONFIG, ServerService } from '../core';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProjectService {
     }
 
     getProjects(queryString: string) {
-        return this.serverService.get<ProjectResource[]>(CONFIG.urls.projectView + queryString);
+        return this.serverService.get<ProjectPage>(CONFIG.urls.projectView + queryString);
     }
 
     getProject(id: number) {
