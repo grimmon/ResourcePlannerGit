@@ -286,7 +286,7 @@ function addAssignment(row, assignment, timePeriod) {
     var forecastHoursIndex = timePeriod + "-ForecastHours";
     var actualHoursIndex = timePeriod + "-ActualHours";
     var deltaHoursIndex = timePeriod + "-DeltaHours";
-    var deltaValue = assignment.ResourceHours - assignment.ForecastHours;
+    var deltaValue = assignment.ForecastHours - assignment.ResourceHours;
 
     row[resourceHoursIndex] = assignment.ResourceHours;
     row[forecastHoursIndex] = assignment.ForecastHours;

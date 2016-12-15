@@ -33,9 +33,9 @@ namespace ResourcePlanner.WebJob
 
             //FillStageTables(srcConnString, destConnString, timeout);
             FillStafStageTables(stafConnString, destConnString, timeout);
-            //AddReferenceSets(destConnString, timeout);
-            //UpsertDB(destConnString, timeout);
-            UpsertStafDB(destConnString, timeout);
+            AddReferenceSets(destConnString, timeout);
+            UpsertDB(destConnString, timeout);
+            //UpsertStafDB(destConnString, timeout);
 
             
         }
@@ -55,7 +55,7 @@ namespace ResourcePlanner.WebJob
         public static void FillStafStageTables(string srcConnString, string destConnString, int timeout = 30)
         {
             FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafResource"], "stg.StafResources", timeout);
-            //FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafProject"], "stg.StafProjects", timeout);
+            FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafProject"], "stg.StafProjects", timeout);
             FillStageTable(srcConnString, destConnString, ConfigurationManager.AppSettings["StafHours"], "stg.StafHours", timeout, "where [Week] > '2016-01-01'");
         }
 

@@ -22,4 +22,14 @@ namespace ResourcePlanner.Services.Models
         public DateTime EndDate { get; set; }
         public int DaysOfWeek { get; set; }
     }
+
+    public class UpdateAssignment
+    {
+        public int ResourceId { get; set; }
+        public int ProjectId { get; set; }
+        public double Hours { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int DaysOfWeek { get; set; }
+    }
 }

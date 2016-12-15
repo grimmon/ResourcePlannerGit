@@ -331,7 +331,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                     hoursPerDay: 8,
                     startDate: '',
                     endDate: '',
-                    daysOfWeek: ['2', '3', '4', '5', '6'],
+                    daysOfWeek: ['2','3','4', '5', '6'],
                 })
             });
         }

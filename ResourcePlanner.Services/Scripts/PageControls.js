@@ -168,6 +168,7 @@ $(document).ready(function () {
         afterTagRemoved: function (event, ui) {
             AssignmentApply();
         },
+        allowDuplicates: true,
         onTagLimitExceeded: function (event, ui) {
             this.readOnly = true;
         }

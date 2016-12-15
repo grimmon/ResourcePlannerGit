@@ -318,11 +318,12 @@
     <Content Include="Dockerfile" />
     <Content Include="LICENSE" />
     <Content Include="webapp\package.json" />
-    <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy.pubxml" />
     <Content Include="Scripts\tagit.ui-zendesk.css" />
     <Content Include="README.md" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
