@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { CONFIG, MessageService, DateService } from '../../core';
-import { ResourceService, OptionService, AddAssignments, TimeAggregation } from '../../models';
+import { CONFIG, MessageService } from '../../core';
+import { ResourceService, OptionService, UpdateAssignment, TimeAggregation } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -11,31 +11,24 @@ import { ResourceService, OptionService, AddAssignments, TimeAggregation } from 
     templateUrl: 'hoursEditor.component.html',
     styleUrls: ['hoursEditor.component.css'],
     inputs: [
-        'showTrigger',
-        'assignments'
+        'assignmentInfo'
     ]
 })
-export class AssignmentAddComponent implements OnDestroy, OnInit {
+export class HoursEditorComponent implements OnDestroy, OnInit {
 
-    @Output() assignmentsSaved: EventEmitter<any>;
-
-    set showTrigger(v: any) {
-        this._showTrigger = v;
-        if (this._showTrigger) {
+     set assignmentInfo(v: any) {
+        this._assignmentInfo = v;
+        if (this._assignmentInfo) {
+            this.assignment = this._assignmentInfo.assignment;
             this.messageService.modalToggle(this.visible = true);
-        }
+       }
     }
-    _showTrigger = 0;
+    get assignmentInfo() {
+        return this._assignmentInfo;
+    }
+    _assignmentInfo: any;
 
-    set assignments(v: any) {
-        this._assignments = v;
-        if (this._assignments) {
-        }
-    }
-    get assignments() {
-        return this._assignments;
-    }
-    _assignments: AddAssignments;
+    assignment: UpdateAssignment = new UpdateAssignment();
 
     visible: boolean = false;
 
@@ -44,10 +37,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     constructor(
         private optionService: OptionService,
         private messageService: MessageService,
-        private dateService: DateService,
         private resourceService: ResourceService) {
-
-        this.assignmentsSaved = new EventEmitter();
     }
 
     ngOnInit() {
@@ -57,7 +47,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             CONFIG.daysOfWeek,
             ['2', '3', '4', '5', '6'],
             (value: any) => {
-                this.assignments.daysOfWeek = value;
+                this.assignment.daysOfWeek = value;
             });
     }
 
@@ -67,10 +57,11 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     save() {
         //this.resourceService
-        //    .updateAssignments(this.assignments)
+        //    .updateAssignments(this.assignment)
         //    .subscribe(res => {
-        //        this.assignmentsSaved.emit(this.assignments);
-        //        this.close();
+        //debugger;
+        this.messageService.timespanGridRefreshRequest(this._assignmentInfo.context);
+                this.close();
         //    });
     }
 

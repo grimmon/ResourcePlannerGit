@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
-import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, TimeAggregation } from '../../models';
+import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, UpdateAssignment, TimeAggregation } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -58,13 +58,14 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     }
 
     dataCellEditorRequested($event: any) {
-        var assignments: AddAssignments = $event.assignments,
+        var assignment: UpdateAssignment = $event.assignment,
             periodIndex = $event.periodIndex,
             periodDates = this.getPeriodDates(periodIndex);
-        assignments.resourceIds = [this.resourceId];
-        assignments.startDate = periodDates[0];
-        assignments.endDate = periodDates[1];
+        assignment.resourceId = this.resourceId;
+        assignment.startDate = periodDates[0];
+        assignment.endDate = periodDates[1];
 
+        this.messageService.assignmentEditorRequest($event);
     }
 
     constructor(

@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavComponent } from './navigation/nav.component';
 import { ErrorComponent } from './error/error.component';
 import { TimespanGridComponent } from './shared/timespanGrid/timespanGrid.component';
+import { HoursEditorComponent } from './shared/hoursEditor/hoursEditor.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResourceListComponent } from './dashboard/resourceList/resourceList.component';
@@ -48,6 +49,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
     declarations: [
         AppComponent,
         TimespanGridComponent,
+        HoursEditorComponent,
 
         ErrorComponent,
         NavComponent,

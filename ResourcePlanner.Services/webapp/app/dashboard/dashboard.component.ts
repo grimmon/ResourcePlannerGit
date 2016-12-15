@@ -40,11 +40,17 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.addProjectShow++;
     }
 
+    assignmentInfo: any;
+
     constructor(
         private messageService: MessageService) {
 
         this.messageService.onAddAssignmentRequested(state => {
             this.assignmentAddRequested();
+        });
+
+        this.messageService.onAssignmentEditorRequested(assignmentInfo => {
+            this.assignmentInfo = assignmentInfo;
         });
     }
 

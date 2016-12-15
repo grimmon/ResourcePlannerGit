@@ -1,22 +1,23 @@
-<article class="" style="background-color: white;position:absolute;top:0;width: 100%;height:100%" [style.display]="visible ? 'block' : 'none'">
-    <h3>Editor</h3>
-    <div style="height:80%">
-        <div class="col-sm-3"  style="height:100%">
-            <div class="formrow">
-                <select class="dayofweek-selector assignment-editor-dayofweek" multiple="multiple" [(ngModel)]="assignments.daysOfWeek">
-                </select>
+<div style="position:absolute;left:0px;top:0px;height:100%;width:100%;background-color:rgba(0, 0, 0, 0.02);" [style.display]="visible ? 'block' : 'none'">
+    <div style="position:absolute;left:50%;top:200px;margin-left:-300px;margin-right:300px;width:600px;background-color:white;border:solid 1px navy;border-radius:5px">
+        <h3 style="text-align:center">Editor</h3>
+        <div style="height:120px">
+            <div class="col-sm-10" style="height:100%">
+                <div>
+                    <select style="width:100%"class="dayofweek-selector assignment-editor-dayofweek" multiple="multiple" [(ngModel)]="assignment.daysOfWeek"></select>
+                </div>
+                <div>
+                    <label>Hours per day:</label>
+                    <input type="number" ng-required="required" class="form-control" min="0" max="24" [(ngModel)]="assignment.hoursPerDay" style="width:100px">
+                    <br />
+                </div>
             </div>
-            <div class="formrow">
-                <label>Hours per day:</label>
-                <input type="number" ng-required="required" class="form-control" min="0" max="80" [(ngModel)]="assignments.hoursPerDay" style="width:100px">
-                <br />
+        </div>
+        <div style="position:absolute;bottom:0px;height:40px;width:100%">
+            <div style="height:100%;text-align:right">
+                <button type="button" class="btn btn-primary" (click)="close()" style="margin-right:10px;">Close</button>
+                <button type="button" class="btn btn-primary" (click)="save()" style="margin-right:40px;">Save Changes</button>
             </div>
         </div>
     </div>
-    <div style="position:absolute;bottom:0px;height:10%;width:100%">
-        <div style="height:100%;text-align:right">
-            <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:10px;">Close</button>
-            <button type="button" class="btn btn-primary" id="saverButton" (click)="save()" style="margin-right:40px;">Save Changes</button>
-        </div>
-    </div>
-</article>
+</div>

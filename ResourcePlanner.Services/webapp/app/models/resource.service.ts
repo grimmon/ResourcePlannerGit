@@ -38,7 +38,7 @@ export class ResourceService {
     }
 
     addAssignments(assignment: AddAssignments) {
-        return this.serverService.postQuery<AddAssignments>(CONFIG.urls.assignmentAdd, assignment);
+        return this.serverService.postQuery<AddAssignments>(CONFIG.urls.assignmentUpdate, assignment);
     }
 
     export(query: string) {

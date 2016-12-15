@@ -99,16 +99,15 @@ export class MessageService {
         this.timespanGridRefreshRequested.next(gridContext);
     }
 
-    // request to open assignemt cell editor
+    // request to open assignment cell editor
 
-    //private timespanGridRefreshRequested = new Subject<any>();
+    private assignmentEditorRequested = new Subject<any>();
 
-    //onTimespanGridRefreshRequested(handler: (gridContext: any) => void) {
-    //    this.timespanGridRefreshRequested.subscribe(handler)
-    //}
-    //timespanGridRefreshRequest(gridContext: any) {
-    //    this.timespanGridRefreshRequested.next(gridContext);
-    //}
-
+    onAssignmentEditorRequested(handler: (assignmentInfo: any) => void) {
+        this.assignmentEditorRequested.subscribe(handler)
+    }
+    assignmentEditorRequest(assignmentInfo: any) {
+        this.assignmentEditorRequested.next(assignmentInfo);
+    }
    
 }

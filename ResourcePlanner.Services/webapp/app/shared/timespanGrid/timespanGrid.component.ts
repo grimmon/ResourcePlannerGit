@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CONFIG, MessageService, DateService } from '../../core';
-import { TimeDataPage, TimeAggregation, AddAssignments } from '../../models';
+import { TimeDataPage, TimeAggregation, AddAssignments, UpdateAssignment } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -170,15 +170,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             suppressMenu: true,
             cellRenderer: timePeriodCellRenderer,
         };
-        //if (this.gridConfig.allowDataEdit && index == 0) {
-        //    colDef.editable = true;
-        //    colDef.cellEditor = 'popupText';
-        //    colDef.cellEditorParams = {
-        //        maxLength: '300',   // override the editor defaults
-        //        cols: '50',
-        //        rows: '6'
-        //   }
-        //}
 
         return colDef;
 
@@ -327,15 +318,15 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.clickedFirstColumn = firstColumn && !dataColumn;
         if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
             // activate editor
-            debugger;
+            //debugger;
             var field = $event.colDef.field,
                 periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10));
                     
             this.dataCellEditorRequested.emit({
                 context: this.gridConfig.context,
                 periodIndex: periodIndex,
-                assignments: new AddAssignments({
-                    resourceIds: [0],
+                assignment: new UpdateAssignment({
+                    resourceId: 0,
                     projectId: $event.data.Id,
                     hoursPerDay: 8,
                     startDate: '',
