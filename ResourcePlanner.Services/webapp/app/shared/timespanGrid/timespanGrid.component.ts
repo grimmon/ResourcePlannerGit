@@ -74,7 +74,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
         if (this.gridConfig.refreshContexts) {
             this.messageService.onTimespanGridRefreshRequested(gridContext => {
-                if (this.gridConfig.refreshContexts.indexOf(gridContext)) {
+                if (this.gridConfig.refreshContexts.indexOf(gridContext) >=0 ) {
                     this.refresh();
                 }
             });

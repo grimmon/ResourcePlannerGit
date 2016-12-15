@@ -37,7 +37,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     periodScrollTrigger: {}
 
     gridConfig: any = {
-        context: ["resource-projects"],
+        context: "resource-projects",
         refreshContexts: ["resource-projects", "resource-list"],
         getItems: (page: DetailPage) => page.Projects,
         createRow: ProjectDetailRow,
