@@ -329,7 +329,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             // activate editor
             debugger;
             var field = $event.colDef.field,
-                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10);
+                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10));
                     
             this.dataCellEditorRequested.emit({
                 context: this.gridConfig.context,
