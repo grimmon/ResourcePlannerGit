@@ -37,6 +37,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     periodScrollTrigger: {}
 
     gridConfig: any = {
+        context: "resource-projects",
         getItems: (page: DetailPage) => page.Projects,
         createRow: ProjectDetailRow,
         allowDataEdit: true,
@@ -57,8 +58,12 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     }
 
     dataCellEditorRequested($event: any) {
-        var addAssignments: AddAssignments = $event;
-        addAssignments.resourceIds = [this.resourceId];
+        var assignments: AddAssignments = $event.assignments,
+            periodIndex = $event.periodIndex,
+            periodDates = this.getPeriodDates(periodIndex);
+        assignments.resourceIds = [this.resourceId];
+        assignments.startDate = periodDates[0];
+        assignments.endDate = periodDates[1];
 
     }
 
@@ -159,6 +164,12 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     private apply(filters: any) {
         this.queryConfig.query = filters;
         this.applyTrigger++;
+    }
+
+    private getPeriodDates(periodIndex: number) {
+        var start = '2016-12-15',
+            end = '2016-12-15';
+        return [start, end];
     }
 
     ngOnDestroy() {

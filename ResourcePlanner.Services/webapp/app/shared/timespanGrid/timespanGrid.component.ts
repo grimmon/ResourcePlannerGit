@@ -72,6 +72,14 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
+        if (this.gridConfig.context) {
+            this.messageService.onTimespanGridRefreshRequested(gridContext => {
+                if (this.gridConfig.context == gridContext) {
+                    this.refresh();
+                }
+            });
+        }
+
         this.trimColumns(this.gridConfig.columns);
 
         this.columnDefs = this.createColumnDefs();
@@ -320,14 +328,21 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
             // activate editor
             debugger;
-            this.dataCellEditorRequested.emit(new AddAssignments({
-                resourceIds: [0],
-                projectId: $event.data.Id,
-                hoursPerDay: 8,
-                startDate: '',
-                endDate: '',
-                daysOfWeek: ['2', '3', '4', '5', '6'],
-            }));
+            var field = $event.colDef.field,
+                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10);
+                    
+            this.dataCellEditorRequested.emit({
+                context: this.gridConfig.context,
+                periodIndex: periodIndex,
+                assignments: new AddAssignments({
+                    resourceIds: [0],
+                    projectId: $event.data.Id,
+                    hoursPerDay: 8,
+                    startDate: '',
+                    endDate: '',
+                    daysOfWeek: ['2', '3', '4', '5', '6'],
+                })
+            });
         }
     }
 

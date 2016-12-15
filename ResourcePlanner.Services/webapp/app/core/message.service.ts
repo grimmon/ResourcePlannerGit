@@ -87,4 +87,28 @@ export class MessageService {
     resourcePeriodScroll(step: any) {
         this.resourcePeriodScrolled.next(step);
     }
+
+    // request to refresh some of the timeperiod grids
+
+    private timespanGridRefreshRequested = new Subject<any>();
+
+    onTimespanGridRefreshRequested(handler: (gridContext: any) => void) {
+        this.timespanGridRefreshRequested.subscribe(handler)
+    }
+    timespanGridRefreshRequest(gridContext: any) {
+        this.timespanGridRefreshRequested.next(gridContext);
+    }
+
+    // request to open assignemt cell editor
+
+    //private timespanGridRefreshRequested = new Subject<any>();
+
+    //onTimespanGridRefreshRequested(handler: (gridContext: any) => void) {
+    //    this.timespanGridRefreshRequested.subscribe(handler)
+    //}
+    //timespanGridRefreshRequest(gridContext: any) {
+    //    this.timespanGridRefreshRequested.next(gridContext);
+    //}
+
+   
 }
