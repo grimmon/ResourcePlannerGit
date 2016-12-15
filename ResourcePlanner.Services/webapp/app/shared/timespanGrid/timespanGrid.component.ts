@@ -141,7 +141,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         row[timePeriod + "ResourceHours"] = assignment.ResourceHours;
         row[timePeriod + "ForecastHours"] = assignment.ForecastHours;
         row[timePeriod + "ActualHours"] = assignment.ActualHours;
-        row[timePeriod + "DeltaHours"] = assignment.ResourceHours - assignment.ForecastHours;
+        row[timePeriod + "DeltaHours"] = assignment.ForecastHours - assignment.ResourceHours;
     }
 
     private addAssignments(row: any, assignments: any[]) {

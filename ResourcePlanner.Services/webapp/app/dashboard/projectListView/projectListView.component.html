@@ -25,8 +25,7 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            {{getDuration()}}
-            <span [style.display]="projectInfo ? 'inline' : 'none'"><span style="padding-right:8px;padding-left:8px">week</span><span>Duration</span></span>
+            <span style="padding-left:10px" [style.display]="projectInfo ? 'inline' : 'none'">{{getDuration()}}<span style="padding-right:5px;padding-left:5px">week</span><span>Duration</span></span>
         </div>
     </div>
     <div class="row" [style.display]="projectInfo ? 'block' : 'none'">
