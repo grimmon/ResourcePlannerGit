@@ -17,7 +17,7 @@ export class AddAssignments {
     public constructor(
         fields?: {
             resourceIds?: number[],
-            projectId?: number,
+            projectMasterId?: number,
             hoursPerDay?: number,
             startDate?: string,
             endDate?: string,
@@ -39,7 +39,7 @@ export class UpdateAssignment {
     public constructor(
         fields?: {
             resourceId?: number,
-            projectId?: number,
+            projectMasterId?: number,
             hoursPerDay?: number,
             startDate?: string,
             endDate?: string,

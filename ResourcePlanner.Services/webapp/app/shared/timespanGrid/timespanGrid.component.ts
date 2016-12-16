@@ -328,7 +328,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 context: this.gridConfig.context,
                 assignment: new UpdateAssignment({
                     resourceId: 0,
-                    projectId: $event.data.Id,
+                    projectMasterId: $event.data.Id,
                     hoursPerDay: CONFIG.defaultHoursPerDay,
                     startDate: this.dateService.format(periodStart),
                     endDate: this.dateService.format(periodEnd),

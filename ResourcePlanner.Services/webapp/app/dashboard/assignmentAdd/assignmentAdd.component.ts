@@ -84,7 +84,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
         this.addAssignments = new AddAssignments({
             resourceIds: [],
-            projectId: 0,
+            projectMasterId: 0,
             startDate: this.currentDate,
             endDate: this.currentDate,
             daysOfWeek: CONFIG.defaultDaysOfWeek,

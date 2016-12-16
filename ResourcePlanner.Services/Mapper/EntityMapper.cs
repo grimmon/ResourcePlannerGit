@@ -232,7 +232,7 @@ namespace ResourcePlanner.Services.Mapper
                     var newResource = new ProjectDetail()
                     {
                         
-                        ProjectId                  = curr,
+                        ProjectMasterId            = curr,
                         ProjectName                = reader.GetNullableString("ProjectName"),
                         WBSElement                 = reader.GetNullableString("WBSCode"),
                         Customer                   = reader.GetNullableString("Customer"),
