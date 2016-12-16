@@ -85,7 +85,7 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
             .addProject(this.addedProject)
             .subscribe(res => {
                 this.saving = false;
-                //this.close();
+                this.close();
             });
     }
 

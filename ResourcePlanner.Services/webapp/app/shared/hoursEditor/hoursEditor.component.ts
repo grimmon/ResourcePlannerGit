@@ -55,7 +55,6 @@ export class HoursEditorComponent implements OnDestroy, OnInit {
         this.resourceService
             .updateAssignment(this.assignment)
             .subscribe(res => {
-                debugger;
                 this.messageService.timespanGridRefreshRequest(this._assignmentInfo.context);
                 this.close();
             });

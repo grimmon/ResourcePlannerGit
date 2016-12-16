@@ -57,7 +57,7 @@ export class ProjectDetailRow {
     ProjectMasterId: number;
 
     public constructor(projectDetail: ProjectDetail) {
-        this.Id = projectDetail.ProjectId;
+        this.Id = projectDetail.ProjectMasterId;
         this.ProjectName = projectDetail.ProjectName;
         this.Client = projectDetail.Customer;
         this.Description = projectDetail.Description;

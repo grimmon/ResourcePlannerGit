@@ -87,7 +87,8 @@ export class ServerService {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
-        let body = res.json ? res.json() : null;
+        let r: any = res;
+        let body = res.json && r._body ? res.json() : null;
         return <T>(body || []);
     }
 

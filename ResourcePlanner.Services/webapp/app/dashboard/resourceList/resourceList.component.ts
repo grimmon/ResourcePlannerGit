@@ -19,6 +19,10 @@ export class ResourceListComponent implements OnDestroy, OnInit {
 
     @Output() resourceSelected: EventEmitter<any>;
 
+    panelHeightWithFilters: string = "82%";
+    panelHeight: string = this.panelHeightWithFilters;
+    takeHeightOfFilters = false;
+
     set filterQuery(v: string) {
         this.queryConfig.query = v;
         this.applyTrigger++;
@@ -74,6 +78,11 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                     break;
             }
         });
+
+        this.messageService.onFilterPanelToggled(state => {
+            this.panelHeight = (this.takeHeightOfFilters = !this.takeHeightOfFilters) ? "100%" : this.panelHeightWithFilters;
+        });
+
 
         this.createColumns();
     }
