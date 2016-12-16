@@ -19,7 +19,7 @@ namespace ResourcePlanner.Services.Controllers
     {
         [Authorize]
         [HttpPost]
-        [AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
+        //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("add")]
         public async Task<IHttpActionResult> Add(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
@@ -46,7 +46,7 @@ namespace ResourcePlanner.Services.Controllers
 
             var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
 
-            if (daysOfWeek.Length > 0)
+            if (daysOfWeekEnum.Length > 0)
             {
                 days = getDaysAsInt(daysOfWeekEnum);
             }
@@ -84,7 +84,7 @@ namespace ResourcePlanner.Services.Controllers
         }
         [Authorize]
         [HttpPost]
-        [AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
+        //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("update")]
         public async Task<IHttpActionResult> Update(int resourceId, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
@@ -99,7 +99,7 @@ namespace ResourcePlanner.Services.Controllers
 
             var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
 
-            if (daysOfWeek.Length > 0)
+            if (daysOfWeekEnum.Length > 0)
             {
                 days = getDaysAsInt(daysOfWeekEnum);
             }
