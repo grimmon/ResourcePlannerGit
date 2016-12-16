@@ -94,7 +94,7 @@ namespace ResourcePlanner.Services.DataAccess
 
             parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
-            parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.Hours));
+            parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
             if (asgn.DaysOfWeek > 0)
