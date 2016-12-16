@@ -235,6 +235,7 @@
     <Content Include="webapp\app\dashboard\projectListView\projectListView.component.html" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.css" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.html" />
+    <Content Include="webapp\assets\common.css" />
     <Content Include="webapp\protractor.config.js" />
     <Content Include="Scripts\ag-grid.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -334,7 +335,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="webapp\app\core\errorModal\" />
-    <Folder Include="webapp\assets\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResourcePlanner.Core\ResourcePlanner.Core.csproj">

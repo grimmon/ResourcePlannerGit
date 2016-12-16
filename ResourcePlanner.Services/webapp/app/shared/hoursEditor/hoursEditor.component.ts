@@ -8,9 +8,7 @@ import { ResourceService, OptionService, UpdateAssignment, TimeAggregation } fro
     selector: 'hours-editor',
     templateUrl: 'hoursEditor.component.html',
     styleUrls: ['hoursEditor.component.css'],
-    inputs: [
-        'assignmentInfo'
-    ]
+    inputs: ['assignmentInfo']
 })
 export class HoursEditorComponent implements OnDestroy, OnInit {
 
