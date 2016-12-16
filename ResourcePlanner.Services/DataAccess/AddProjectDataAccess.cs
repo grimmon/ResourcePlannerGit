@@ -26,7 +26,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             IdNameGeneric result = null;
 
-            var results = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectId", "ProjectName"),
+            var results = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectMasterId", "ProjectName"),
                 _connectionString,
                 @"rpdb.InternalProjectInsert",
                 CommandType.StoredProcedure,
