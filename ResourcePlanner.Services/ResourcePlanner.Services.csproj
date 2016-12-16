@@ -185,6 +185,8 @@
     <Content Include="Images\IRMT_NavIcons_Profile.png" />
     <Content Include="Images\IRMT_NavIcons_SearchRefine-Active.png" />
     <Content Include="Images\IRMT_NavIcons_SearchRefine.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\tempxls.png" />
     <Content Include="indexa.html" />
     <Content Include="index.html" />
     <Content Include="karma-test-shim.js" />
