@@ -21,7 +21,7 @@ namespace ResourcePlanner.Services.Controllers
         [HttpPost]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("add")]
-        public async Task<IHttpActionResult> Add(string resourceIds, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        public async Task<IHttpActionResult> Add(string resourceIds, int projectMasterId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
 #if Mock
             return Ok();
@@ -64,7 +64,7 @@ namespace ResourcePlanner.Services.Controllers
             var asgn = new AddAssignments()
             {
                 ResourceIds = resourceIds.Split(',').Select(Int32.Parse).ToArray(),
-                ProjectId = projectId,
+                ProjectMasterId = projectMasterId,
                 Hours = hoursPerDay,
                 StartDate = startdate,
                 EndDate = enddate,
@@ -86,7 +86,7 @@ namespace ResourcePlanner.Services.Controllers
         [HttpPost]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("update")]
-        public async Task<IHttpActionResult> Update(int resourceId, int projectId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        public async Task<IHttpActionResult> Update(int resourceId, int projectMasterId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
         {
 #if Mock
             return Ok();
@@ -108,7 +108,7 @@ namespace ResourcePlanner.Services.Controllers
             var asgn = new UpdateAssignment()
             {
                 ResourceId = resourceId,
-                ProjectId = projectId,
+                ProjectMasterId = projectMasterId,
                 Hours = hoursPerDay,
                 StartDate = startdate,
                 EndDate = enddate,

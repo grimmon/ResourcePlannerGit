@@ -22,10 +22,10 @@ namespace ResourcePlanner.Services.Controllers
             string projectName, 
             DateTime startDate, 
             DateTime endDate, 
-            int? clientId = null,
-            string clientName = "", 
-            int? opportunityOwner = null, 
-            int? projectManager = null,
+            int? customerId = null,
+            string customerName = "", 
+            int? opportunityOwnerId = null, 
+            int? projectManagerId = null,
             string description = "")
         {
 #if Mock
@@ -53,10 +53,10 @@ namespace ResourcePlanner.Services.Controllers
                 ProjectName = projectName,
                 StartDate = startDate,
                 EndDate = endDate,
-                CustomerId = clientId,
-                CustomerName = clientName,
-                OpportunityOwnerId = opportunityOwner,
-                ProjectManagerId = projectManager,
+                CustomerId = customerId,
+                CustomerName = customerName,
+                OpportunityOwnerId = opportunityOwnerId,
+                ProjectManagerId = projectManagerId,
                 Description = description
             };
 

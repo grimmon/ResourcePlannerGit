@@ -16,7 +16,7 @@ namespace ResourcePlanner.Services.Models
     public class AddAssignments
     {
         public int[] ResourceIds { get; set; }
-        public int ProjectId { get; set; }
+        public int ProjectMasterId { get; set; }
         public double Hours { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -26,7 +26,7 @@ namespace ResourcePlanner.Services.Models
     public class UpdateAssignment
     {
         public int ResourceId { get; set; }
-        public int ProjectId { get; set; }
+        public int ProjectMasterId { get; set; }
         public double Hours { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

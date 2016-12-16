@@ -76,7 +76,7 @@ namespace ResourcePlanner.Services.DataAccess
             var parameterList = new List<SqlParameter>();
 
             parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("ResourceIds", "rpdb.typeIntTable", SqlDbType.Structured, asgn.ResourceIds));
-            parameterList.Add(AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, asgn.ProjectId));
+            parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
             parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
@@ -93,7 +93,7 @@ namespace ResourcePlanner.Services.DataAccess
             var parameterList = new List<SqlParameter>();
 
             parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
-            parameterList.Add(AdoUtility.CreateSqlParameter("ProjectId", SqlDbType.Int, asgn.ProjectId));
+            parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
             parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));

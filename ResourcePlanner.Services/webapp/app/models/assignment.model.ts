@@ -8,7 +8,7 @@ export class Assignment {
 
 export class AddAssignments {
     resourceIds: number[];
-    projectId: number;
+    projectMasterId: number;
     hoursPerDay: number;
     startDate: string;
     endDate: string;
@@ -30,7 +30,7 @@ export class AddAssignments {
 
 export class UpdateAssignment {
     resourceId: number;
-    projectId: number;
+    projectMasterId: number;
     hoursPerDay: number;
     startDate: string;
     endDate: string;

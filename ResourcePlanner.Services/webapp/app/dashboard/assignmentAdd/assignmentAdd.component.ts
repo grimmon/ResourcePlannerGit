@@ -130,7 +130,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             return;
         }
 
-        this.addAssignments.projectId = this.project.Id;
+        this.addAssignments.projectMasterId = this.project.Id;
         this.addAssignments.resourceIds = this.gridConfig.selectedIds;
 
         this.saving = true;

@@ -54,6 +54,7 @@ export class ProjectDetailRow {
     OpportunityOwner: string;
     ProjectManager: string;
     Assignments: Assignment[];
+    ProjectMasterId: number;
 
     public constructor(projectDetail: ProjectDetail) {
         this.Id = projectDetail.ProjectId;
@@ -63,6 +64,7 @@ export class ProjectDetailRow {
         this.WBSElement = projectDetail.WBSElement;
         this.OpportunityOwner = this.getName(projectDetail.OpportunityOwnerLastName, projectDetail.OpportunityOwnerFirstName);
         this.ProjectManager = this.getName(projectDetail.ProjectManagerLastName, projectDetail.ProjectManagerFirstName);
+        this.ProjectMasterId = projectDetail.ProjectMasterId;
     }
 
     private getName(last: string, first: string): string {
