@@ -328,10 +328,10 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 assignment: new UpdateAssignment({
                     resourceId: 0,
                     projectId: $event.data.Id,
-                    hoursPerDay: 8,
+                    hoursPerDay: CONFIG.defaultHoursPerDay,
                     startDate: '',
                     endDate: '',
-                    daysOfWeek: ['2','3','4', '5', '6'],
+                    daysOfWeek: CONFIG.defaultDaysOfWeek,
                 })
             });
         }

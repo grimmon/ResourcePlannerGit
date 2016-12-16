@@ -32,6 +32,8 @@ export let CONFIG = {
         { id: '7', text: 'Saturday', short: "Sat" },
         { id: '1', text: 'Sunday', short: "Sun" }
     ],
+    defaultDaysOfWeek: ['2', '3', '4', '5', '6',],
+    defaultHoursPerDay: 8,
 
 
 };

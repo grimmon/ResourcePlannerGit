@@ -65,19 +65,25 @@ export class OptionService {
     }
 
 
-    initSelector(selector: string, source: any[], initialValue: string[], handler: (value: any) => void): JQuery {
-        console.log('OptionType '+ OptionType[OptionType.Position])
-        var selectorObj: JQuery = $(selector);
+    initSelector(selector: string, source: any, initialValue: any, handler: (value: any) => void): any {
+        var selectorObj: JQuery = $(selector),
+            setValue = function (value: any) {
+                selectorObj.val(value).trigger('change');
+            };
 
         selectorObj
             .select2({
                 data: source
-            }).on("change", () => {
-                handler(selectorObj.select2('val'));
-            });
-        selectorObj.val(initialValue).trigger('change');
+            })
+            .on("change", () => {
+                    handler(selectorObj.select2('val'));
+                });
+        setValue(initialValue);
 
-        return selectorObj;
+        return {
+            selector: selectorObj,
+            set: setValue
+        }
     }
 
     setSource(url: string) {

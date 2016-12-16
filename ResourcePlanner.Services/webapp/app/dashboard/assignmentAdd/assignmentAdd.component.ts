@@ -22,6 +22,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     set showTrigger(v: any) {
         this._showTrigger = v;
         if (this._showTrigger) {
+            this.daysOfWeekSelector.set(CONFIG.defaultDaysOfWeek)
             this.messageService.modalToggle(this.visible = true);
             this.saving = false;
             this.applyTrigger++;
@@ -68,7 +69,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     positions: any[];
 
     private positionSelector: JQuery;
-    private daysOfWeekSelector: JQuery;
+    private daysOfWeekSelector: any;
 
     constructor(
         private messageService: MessageService,
@@ -86,8 +87,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             projectId: 0,
             startDate: this.currentDate,
             endDate: this.currentDate,
-            daysOfWeek: ['2', '3', '4', '5', '6'],
-            hoursPerDay: 8
+            daysOfWeek: CONFIG.defaultDaysOfWeek,
+            hoursPerDay: CONFIG.defaultHoursPerDay
         });
 
         this.projectSource = this.optionService.setSource(CONFIG.urls.project);
@@ -109,7 +110,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this.daysOfWeekSelector = this.optionService.initSelector(
             "#assignmentDOWSelector",
             CONFIG.daysOfWeek,
-            ['2', '3', '4', '5', '6'],
+            CONFIG.defaultDaysOfWeek,
             value => {
                 this.addAssignments.daysOfWeek = value;
             });

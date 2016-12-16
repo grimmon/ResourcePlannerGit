@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 import { CONFIG, MessageService } from '../../core';
 import { ResourceService, OptionService, UpdateAssignment, TimeAggregation } from '../../models';
@@ -16,12 +14,12 @@ import { ResourceService, OptionService, UpdateAssignment, TimeAggregation } fro
 })
 export class HoursEditorComponent implements OnDestroy, OnInit {
 
-     set assignmentInfo(v: any) {
-        this._assignmentInfo = v;
-        if (this._assignmentInfo) {
+    set assignmentInfo(v: any) {
+        if (this._assignmentInfo = v) {
             this.assignment = this._assignmentInfo.assignment;
+            this.daysOfWeekSelector.set(this.assignment.daysOfWeek);
             this.messageService.modalToggle(this.visible = true);
-       }
+        }
     }
     get assignmentInfo() {
         return this._assignmentInfo;
@@ -32,20 +30,20 @@ export class HoursEditorComponent implements OnDestroy, OnInit {
 
     visible: boolean = false;
 
-    private daysOfWeekSelector: JQuery;
-
     constructor(
         private optionService: OptionService,
-        private messageService: MessageService,
-        private resourceService: ResourceService) {
+        private resourceService: ResourceService,
+        private messageService: MessageService) {
     }
+
+    daysOfWeekSelector: any;
 
     ngOnInit() {
 
         this.daysOfWeekSelector = this.optionService.initSelector(
             ".assignment-editor-dayofweek",
             CONFIG.daysOfWeek,
-            ['2', '3', '4', '5', '6'],
+            CONFIG.defaultDaysOfWeek,
             (value: any) => {
                 this.assignment.daysOfWeek = value;
             });
@@ -59,9 +57,9 @@ export class HoursEditorComponent implements OnDestroy, OnInit {
         //this.resourceService
         //    .updateAssignments(this.assignment)
         //    .subscribe(res => {
-        //debugger;
+        debugger;
         this.messageService.timespanGridRefreshRequest(this._assignmentInfo.context);
-                this.close();
+        this.close();
         //    });
     }
 

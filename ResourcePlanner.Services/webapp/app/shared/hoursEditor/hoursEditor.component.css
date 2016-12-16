@@ -1,0 +1,50 @@
+.hoursEditor {
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:100%;
+    background-color:rgba(0, 0, 0, 0.07);
+}
+.hoursEditor > div {
+    position: absolute;
+    left: 50%;
+    top: 300px;
+    margin-left: -300px;
+    margin-right: 300px;
+    width: 600px;
+    background-color:white;
+    border:solid 1px #333333;
+    border-radius: 5px;
+}
+.hoursEditor h3 {
+    text-align: center;
+}
+.hoursEditor .controls {
+    height:130px;
+    margin:5px;
+}
+.hoursEditor .assignment-editor-dayofweek {
+    width: 100%;
+}
+.hoursEditor input {
+    width:40px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-left: 8px;
+    padding-left: 4px;
+}
+.hoursEditor .buttons {
+    position:absolute;
+    bottom:0px;
+    height:40px;
+    width:100%;
+}
+.hoursEditor .buttons > div {
+    height:100%;
+    text-align:right;
+    margin-right: 20px;
+}
+.hoursEditor button {
+    margin-right:10px;
+}
