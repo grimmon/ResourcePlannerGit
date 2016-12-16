@@ -1,0 +1,16 @@
+.resourceDetail {
+    height: 200px;
+    position: absolute;
+    bottom: 20px;
+    width:100%;
+}
+    .resourceDetail .title {
+        background: white;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid #333;
+        border-radius: 2px;
+        margin-left: 2px;
+        width: calc(100% - 4px);
+    }
