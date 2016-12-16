@@ -37,7 +37,7 @@ namespace ResourcePlanner.Services.DataAccess
 
             AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
                 _connectionString,
-                @"rpdb.InternalAssignmentInsert",
+                @"rpdb.InternalAssignmentUpdate",
                 CommandType.StoredProcedure,
                 _timeout,
                 UpdateAssignmentParameters(asgn));
