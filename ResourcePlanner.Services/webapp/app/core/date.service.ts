@@ -48,7 +48,22 @@ export class DateService {
         return !endDate || endDate < startDate ? startDate : endDate;
     }
 
-    constructor() {
+    moveDate(currentDate: Date, currentAggregation: TimeAggregation, periodOffset: number): Date {
+        switch (currentAggregation) {
+            case TimeAggregation.Daily:
+                return this.getDay(currentDate, periodOffset);
+            case TimeAggregation.Weekly:
+                return this.getWeek(currentDate, periodOffset);
+            case TimeAggregation.Monthly:
+                return this.getMonth(currentDate, periodOffset);
+            case TimeAggregation.Quarterly:
+                return this.getQuarter(currentDate, periodOffset);
+            default:
+                return currentDate;
+        }
+    }
+
+   constructor() {
     }
 
     private getDay(date: Date, periodOffset: number) {
@@ -65,20 +80,5 @@ export class DateService {
 
     private getQuarter(date: Date, periodOffset: number) {
         return new Date(date.getFullYear(), Math.floor(date.getMonth() / 3) * 3 + periodOffset * 3, 1, 0, 0, 0, 0);
-    }
-
-    private moveDate(currentDate: Date, currentAggregation: TimeAggregation, periodOffset: number): Date {
-        switch (currentAggregation) {
-            case TimeAggregation.Daily:
-                return this.getDay(currentDate, periodOffset);
-            case TimeAggregation.Weekly:
-                return this.getWeek(currentDate, periodOffset);
-            case TimeAggregation.Monthly:
-                return this.getMonth(currentDate, periodOffset);
-            case TimeAggregation.Quarterly:
-                return this.getQuarter(currentDate, periodOffset);
-            default:
-                return currentDate;
-        }
     }
 }

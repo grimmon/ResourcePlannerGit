@@ -242,9 +242,11 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     private periodColumnsCount: number = CONFIG.periodColumnsCount;
 
     private getDateQuery(): string {
-        var start = this.queryConfig.startDate = this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
-        var end = this.queryConfig.endDate = this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount);
-        return `&startDate=${this.dateService.format(start)}&endDate=${this.dateService.format(end)}`;
+        var start = this.queryConfig.startDate = this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount),
+            startFormatted = this.dateService.format(start),
+            end = this.queryConfig.endDate = this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, this.periodColumnsCount),
+            endFormatted = this.dateService.format(end);
+        return `&startDate=${startFormatted}&endDate=${endFormatted}`;
     }
 
     private getSortQuery(params: any): string {
@@ -318,19 +320,18 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.clickedFirstColumn = firstColumn && !dataColumn;
         if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
             // activate editor
-            //debugger;
             var field = $event.colDef.field,
-                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10));
-                    
+                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
+                periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
+                periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
             this.dataCellEditorRequested.emit({
                 context: this.gridConfig.context,
-                periodIndex: periodIndex,
                 assignment: new UpdateAssignment({
                     resourceId: 0,
                     projectId: $event.data.Id,
                     hoursPerDay: CONFIG.defaultHoursPerDay,
-                    startDate: '',
-                    endDate: '',
+                    startDate: this.dateService.format(periodStart),
+                    endDate: this.dateService.format(periodEnd),
                     daysOfWeek: CONFIG.defaultDaysOfWeek,
                 })
             });

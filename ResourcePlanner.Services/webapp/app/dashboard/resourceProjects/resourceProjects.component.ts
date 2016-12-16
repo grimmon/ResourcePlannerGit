@@ -59,13 +59,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     }
 
     dataCellEditorRequested($event: any) {
-        var assignment: UpdateAssignment = $event.assignment,
-            periodIndex = $event.periodIndex,
-            periodDates = this.getPeriodDates(periodIndex);
+        var assignment: UpdateAssignment = $event.assignment
         assignment.resourceId = this.resourceId;
-        assignment.startDate = periodDates[0];
-        assignment.endDate = periodDates[1];
-
         this.messageService.assignmentEditorRequest($event);
     }
 
@@ -166,12 +161,6 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     private apply(filters: any) {
         this.queryConfig.query = filters;
         this.applyTrigger++;
-    }
-
-    private getPeriodDates(periodIndex: number) {
-        var start = '2016-12-15',
-            end = '2016-12-15';
-        return [start, end];
     }
 
     ngOnDestroy() {
