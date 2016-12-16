@@ -46,7 +46,7 @@ namespace ResourcePlanner.Services.DataAccess
         public List<IdNameGeneric> GetProjects(string searchTerm)
         {
 
-            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectId", "ProjectName", "WBSCode"),
+            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectMasterId", "ProjectName", "WBSCode"),
                 _connectionString,
                 @"rpdb.ProjectSelect",
                 CommandType.StoredProcedure,

@@ -15,7 +15,7 @@
   },
   "compileOnSave": true,
   "exclude": [
-    "webapp/node_modules/*",
+    "**/node_modules/*",
     "**/*-aot.ts"
   ]
 }
