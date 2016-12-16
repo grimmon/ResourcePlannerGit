@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CONFIG, ServerService } from '../core';
 import { Resource, ResourcePage, DetailPage } from './resource.model';
-import { AddAssignments } from './assignment.model';
+import { AddAssignments, UpdateAssignment } from './assignment.model';
 
 @Injectable()
 export class ResourceService {
@@ -38,7 +38,11 @@ export class ResourceService {
     }
 
     addAssignments(assignment: AddAssignments) {
-        return this.serverService.postQuery<AddAssignments>(CONFIG.urls.assignmentUpdate, assignment);
+        return this.serverService.postQuery<AddAssignments>(CONFIG.urls.assignmentAdd, assignment);
+    }
+
+    updateAssignment(assignment: UpdateAssignment) {
+        return this.serverService.postQuery<UpdateAssignment>(CONFIG.urls.assignmentUpdate, assignment);
     }
 
     export(query: string) {

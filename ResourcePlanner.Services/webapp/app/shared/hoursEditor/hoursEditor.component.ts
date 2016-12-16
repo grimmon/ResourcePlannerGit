@@ -52,13 +52,13 @@ export class HoursEditorComponent implements OnDestroy, OnInit {
     }
 
     save() {
-        //this.resourceService
-        //    .updateAssignments(this.assignment)
-        //    .subscribe(res => {
-        debugger;
-        this.messageService.timespanGridRefreshRequest(this._assignmentInfo.context);
-        this.close();
-        //    });
+        this.resourceService
+            .updateAssignment(this.assignment)
+            .subscribe(res => {
+                debugger;
+                this.messageService.timespanGridRefreshRequest(this._assignmentInfo.context);
+                this.close();
+            });
     }
 
     ngOnDestroy() {
