@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { MessageService } from '../core';
+import { MessageService, EntityService } from '../core';
 import { CategoryOption } from '../models';
 
 
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
     resource: any
     resourceSelected($event: any) {
-        this.resource = $event;
+        this.resource = $event ? this.entityService.clone($event) : $event;
     }
 
     projectShow = 0;
@@ -43,6 +43,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
     assignmentInfo: any;
 
     constructor(
+        private entityService: EntityService,
         private messageService: MessageService) {
 
         this.messageService.onAddAssignmentRequested(state => {
