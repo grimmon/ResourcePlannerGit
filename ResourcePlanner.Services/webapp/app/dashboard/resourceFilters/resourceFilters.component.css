@@ -1,12 +1,14 @@
 .filterPanel {
     height: 18%;
 }
- 
+    .filterPanel .tags {
+        width: 30%;
+    }
     .filterPanel select {
         width: 100%;
         height: 24px;
-        padding-top:2px;
-        padding-bottom: 2x;
+        padding-top:1px;
+        padding-bottom: 1x;
         padding-left: 4px;
         background-color: #fff;
     }
