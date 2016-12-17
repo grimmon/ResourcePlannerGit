@@ -36,7 +36,7 @@ span.select2-selection__arrow {
     background-image: url('../Images/IRMT_Icons_MagnifyingGlass.png');
     background-repeat:no-repeat;
 }
-.span.select2-selection.select2-selection-multiple {
+span.selection > span.select2-selection {
     background-color: #E5E6E7;
 }
 span.tagit-label {
