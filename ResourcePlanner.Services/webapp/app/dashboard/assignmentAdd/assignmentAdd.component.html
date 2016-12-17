@@ -1,27 +1,27 @@
 <article class="addAssignment" [style.display]="visible ? 'block' : 'none'">
     <h3>Add Assignment</h3>
     <div class="panel">
-        <div class="col-sm-3">
+        <div class="col-sm-2" style="width:22%">
             <div>
                 <label>Project</label><br />
-                <input id="AssignmentProjectSelector" 
-                        auto-complete 
-                        auto-complete-placeholder="Select a project"
-                        value-property-name="Id"
-                        display-property-name="Name"
-                        [(ngModel)]="project" 
-                        max-num-list="16"
-                        min-chars="3" 
-                        [source]="projectSource" 
-                        [list-formatter]="projectListFormatter"
-                        loading-text="Looking for projects..."/>
-                <a id="projectModalLoad">
+                <input class="form-control autocomplete" 
+                    auto-complete 
+                    auto-complete-placeholder="Select a project"
+                    value-property-name="Id"
+                    display-property-name="Name"
+                    [(ngModel)]="project" 
+                    max-num-list="16"
+                    min-chars="3" 
+                    [source]="projectSource" 
+                    [list-formatter]="projectListFormatter"
+                    loading-text="Looking for projects..." />
+                <a>
                     <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
                 </a>
             </div>
             <div>
                 <label>Position</label><br />
-                <select id="assignmentPositionSelector" class="position-selector" multiple="multiple"></select>
+                <select class="position-selector form-control" multiple="multiple"></select>
             </div>
             <div>
                 <label>Practice</label>
@@ -36,7 +36,7 @@
                 </select>
             </div>
             <div>
-                <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple" [(ngModel)]="addAssignments.daysOfWeek">
+                <select class="dayofweek-selector" multiple="multiple" [(ngModel)]="addAssignments.daysOfWeek">
                 </select>
             </div>
             <div>
@@ -52,7 +52,7 @@
                 <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="addAssignments.hoursPerDay">
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10" style="width:78%">
             <timespan-grid id="resource"
                             [applyTrigger]="applyTrigger"
                             [gridConfig]="gridConfig"

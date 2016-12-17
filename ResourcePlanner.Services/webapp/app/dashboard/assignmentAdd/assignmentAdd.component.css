@@ -5,6 +5,10 @@
     width: 100%;
     height: 100%;
 }
+    .addAssignment h3 {
+        margin-top: 10px;
+        margin-left: 40px;
+    }
     .addAssignment .panel {
         height: 80%;
     }
@@ -28,22 +32,15 @@
         .addAssignment .buttons button {
             margin-right: 10px;
         }
-#AssignmentProjectSelector{
-    width: 350px;
-    padding-bottom:10px;
-}
-#assignmentPositionSelector{
-    width: 350px;
-    padding-bottom:10px;
-}
-#assignmentPracticesDropdown{
-    width: 350px;
-    padding-bottom:10px;
-}
-#assignmentSubpracticesDropdown{
-    width: 350px;
-}
-#assignmentDOWSelector {
-    width: 350px;
-    padding-bottom:10px;
-}
+    .addAssignment select {
+        width: 350px;
+        padding-bottom: 10px;
+    }
+    .addAssignment .panel input.autocomplete {
+        width: 350px;
+        padding-bottom: 10px;
+    }
+    /* the following does not work!? */
+    .addAssignment .select2-selection.select2-selection-multiple {
+        background-color: #E5E6E7;
+    }
