@@ -6,95 +6,44 @@
     bottom: 0px;
     overflow: hidden;
 }
-.panel-group {
-    margin-bottom: 0px;
-}
 .ag-fresh .ag-header-group-cell-label {
     text-align: center;
     color:#FFFFFF;
 }
-.panel-body{
-    background-color: #CDCAC6;
-}
-
-ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
-    border-bottom:2px solid black;
-}
-#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
-    font-size:10pt;
-    font-weight:normal;
-    color:#534742;
-}
-
-span.tagit-label {
-    font-size:11pt;
-    font-weight:normal;
-    color:#000000;
-}
-
 .ag-pinned-left-header {
     background-color:#CC0057;
     font-size: 12pt;
     font-weight:bold;
     color:#FFFFFF;
 }
-
 .ag-header-group-cell-label {
    background-color:#534742;
 }
-
 .ag-fresh .ag-row-selected {
     background-color: rgba(204, 0, 87, 0.15);
     font-weight:bold;
 }
-
 .ag-row-selected > ag-cell-value {
     font-weight:bold;
 }
-
-#regionsDropdown{
-    color:#FFFFFF;
-    opacity: 0.5;
-}
-
 .ag-header.group-text{
     font-size:11pt;
     font-weight:normal;
     color:#000000;
 
 }
-.form-control {
-    background-color: #E5E6E7;
-}
-
 span.select2-selection__arrow {
     background-image: url('../Images/IRMT_Icons_MagnifyingGlass.png');
     background-repeat:no-repeat;
 }
-#AssignmentProjectSelector{
-    width: 350px;
-    padding-bottom:10px;
-}
-
-#assignmentPositionSelector{
-    width: 350px;
-    padding-bottom:10px;
-}
-#assignmentPracticesDropdown{
-    width: 350px;
-    padding-bottom:10px;
-}
-#assignmentSubpracticesDropdown{
-    width: 350px;
-}
-#assignmentDOWSelector {
-    width: 350px;
-    padding-bottom:10px;
+span.tagit-label {
+    font-size:11pt;
+    font-weight:normal;
+    color:#000000;
 }
 .tagit input::-webkit-input-placeholder  {
     color: #666666;
 }
-
 .tagit input::placeholder  {
     color: #666666;
 }
@@ -106,6 +55,9 @@ span.select2-selection__arrow {
 }
 .tagit input:-ms-input-placeholder  {
     color: #666666;
+}
+.form-control {
+    background-color: #E5E6E7;
 }
 .formrow {
     margin-top: 8px;

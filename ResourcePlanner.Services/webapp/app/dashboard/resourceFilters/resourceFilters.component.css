@@ -1,3 +1,19 @@
 .filterPanel {
     height: 18%;
 }
+.panel-body{
+    background-color: #C8C8C8;
+}
+ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
+    border-bottom:2px solid black;
+}
+#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
+    font-size:10pt;
+    font-weight:normal;
+    color:#534742;
+}
+#regionsDropdown{
+    color:#FFFFFF;
+    opacity: 0.5;
+}
+

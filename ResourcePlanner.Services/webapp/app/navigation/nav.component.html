@@ -1,26 +1,26 @@
-<div class="nav" style="top:0px;">
+<div class="nav">
     <div class="appLogo">
         <img src="Images/IRMT_Icons_InsightLogo.png" alt="Insight" />
     </div>
     <div class="buttoncontainer" [style.display]="modal ? 'none' : 'block'">
-        <div class="headerbuttonbox">
-            <div class="headerbutton">
-                    <img src="Images/IRMT_NavIcons_Profile.png" alt="User" />
+        <div class="buttonbox">
+            <div class="button">
+                <img src="Images/IRMT_NavIcons_Profile.png" alt="User" />
             </div>
         </div>
-        <div class="headerbuttonbox" [style.display]="addAssigmentAllowed ? 'block' : 'none'">
-            <div class="headerbutton">
-                    <img src="Images/IRMT_NavIcons_AssignNewResource.png" (click)="addAssignment()" alt="Add" />
+        <div class="buttonbox" [style.display]="addAssigmentAllowed ? 'block' : 'none'">
+            <div class="button">
+                <img src="Images/IRMT_NavIcons_AssignNewResource.png" (click)="addAssignment()" alt="Add" />
             </div>
         </div>
-        <div class="headerbuttonbox" style="margin-left: 0px;">
-            <div class="headerbutton">
-                    <img src="Images/IRMT_NavIcons_SearchRefine.png" (click)="toggleFilters()" alt="Filters"/>
+        <div class="buttonbox">
+            <div class="button">
+                <img src="Images/IRMT_NavIcons_SearchRefine.png" (click)="toggleFilters()" alt="Filters"/>
             </div>
         </div>
-        <div class="headerbuttonbox" style="margin-left: 0px;">
-            <div class="headerbutton">
-                    <img src="Images/tempxls.png" (click)="export()" alt="Export to Excel" height="30" />
+        <div class="buttonbox">
+            <div class="button">
+                <img src="Images/tempxls.png" (click)="export()" alt="Export to Excel" height="30" />
             </div>
         </div>
     </div>

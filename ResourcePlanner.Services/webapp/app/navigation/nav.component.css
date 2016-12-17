@@ -19,13 +19,13 @@
         padding-right: 5px;
         width: 390px;
     }
-.headerbuttonbox  {
-    float:right;
-    width: 90px;
-    background-color: #FFF;
-    border-left: 5px #A6A6A6;
-}
-.headerbutton {
-    margin-top: 20px;
-    margin-left: 20px;
-}
+    .nav .buttonbox {
+        float: right;
+        width: 90px;
+        background-color: #FFF;
+        border-left: 5px #A6A6A6;
+    }
+    .nav .button {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
