@@ -256,7 +256,6 @@
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\SinglePageStyle.css" />
     <Content Include="Scripts\tag-it.js" />
-    <Content Include="styles.css" />
     <Content Include="webapp\systemjs.config.js" />
     <Content Include="wallaby.js" />
     <Content Include="Web.config" />
