@@ -6,97 +6,24 @@
     bottom: 0px;
     overflow: hidden;
 }
-
-.flexGrid {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    bottom: 38px;
-    border-collapse: collapse;
-    display: flex;
-    flex-direction: column;
-}
-
-.flexGrid .header {
-    flex: 0 0 108px;
-    position: relative;
-}
-
-.flexGrid .body {
-    flex: 1 1 auto;
-    position: relative;
-}
-
-#myGrid {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    bottom: 0px;
-}
-
 .panel-group {
     margin-bottom: 0px;
 }
-
-.header-nav {
-    height:70px;
-    background:#FFFFFF;
-    width: 100%;
-    margin:0px auto;
-}
-
-.header-buttoncontainer {
-    float:right;
-    padding-top: 0px;
-    position: absolute;
-    right: 0px;
-    padding-right: 5px;
-    width: 390px;
-}
-
-.headerbuttonbox  {
-    float:right;
-    width: 90px;
-    background-color: #FFF;
-    border-left: 5px #A6A6A6;
-}
-.headerbutton {
-    margin-top: 25px;
-    margin-left: 20px;
-}
-
-.appLogo {
-    float: left;
-    position: absolute;
-    left: 0px;
-    padding-top : 25px;
-    padding-left: 25px;
-}
-
 .ag-fresh .ag-header-group-cell-label {
     text-align: center;
     color:#FFFFFF;
 }
-
-.modal.modal-wide .modal-dialog {
-  width: 90%;
-  padding-top: 120px;
-}
-.modal-wide .modal-body {
-  overflow-y: auto;
-}
-
-#tallModal .modal-body p { margin-bottom: 900px }
-
-/* MLD:  11.28.2016 */
 .panel-body{
     background-color: #CDCAC6;
 }
 
 ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
     border-bottom:2px solid black;
+}
+#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
+    font-size:10pt;
+    font-weight:normal;
+    color:#534742;
 }
 
 span.tagit-label {
@@ -110,7 +37,6 @@ span.tagit-label {
     font-size: 12pt;
     font-weight:bold;
     color:#FFFFFF;
-
 }
 
 .ag-header-group-cell-label {
@@ -131,24 +57,12 @@ span.tagit-label {
     opacity: 0.5;
 }
 
-#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
-    font-size:10pt;
-    font-weight:normal;
-    color:#534742;
-}
-
 .ag-header.group-text{
     font-size:11pt;
     font-weight:normal;
     color:#000000;
 
 }
-#ResourceName{
-    font-size:12pt;
-    font-weight:bold;
-    color:#FFFFFF;
-}
-
 .form-control {
     background-color: #E5E6E7;
 }
@@ -156,14 +70,6 @@ span.tagit-label {
 span.select2-selection__arrow {
     background-image: url('../Images/IRMT_Icons_MagnifyingGlass.png');
     background-repeat:no-repeat;
-}
-
-#assignmentModal-body{
-    height:580px;
-
-}
-#AssignmentGrid{
-    height:550px;
 }
 #AssignmentProjectSelector{
     width: 350px;
@@ -202,25 +108,5 @@ span.select2-selection__arrow {
     color: #666666;
 }
 .formrow {
-    margin-top:8px;
-}
-hr.duration { 
-  height: 15px; 
-  border-style: solid; 
-  border-color: #333333; 
-  border-width: 1px 0 0 0; 
-  border-radius: 10px; 
-  margin-top:0px;
-  margin-bottom:0px;
-} 
-hr.duration:before { 
-  display: block; 
-  content: ""; 
-  height: 15px; 
-  margin-top: -16px; 
-  border-style: solid; 
-  border-color: #333333; 
-  border-width: 0 0 1px 0; 
-  border-radius: 10px; 
-  margin-bottom:0px;
+    margin-top: 8px;
 }

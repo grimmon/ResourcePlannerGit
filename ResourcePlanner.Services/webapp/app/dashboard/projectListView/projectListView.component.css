@@ -1,0 +1,20 @@
+hr.duration {
+    height: 15px;
+    border-style: solid;
+    border-color: #333333;
+    border-width: 1px 0 0 0;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+    hr.duration:before {
+        display: block;
+        content: "";
+        height: 15px;
+        margin-top: -16px;
+        border-style: solid;
+        border-color: #333333;
+        border-width: 0 0 1px 0;
+        border-radius: 10px;
+        margin-bottom: 0px;
+    }
