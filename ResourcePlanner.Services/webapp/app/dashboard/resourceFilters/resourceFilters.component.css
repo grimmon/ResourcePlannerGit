@@ -1,19 +1,31 @@
 .filterPanel {
     height: 18%;
 }
-.panel-body{
-    background-color: #C8C8C8;
-}
-ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
-    border-bottom:2px solid black;
-}
-#myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable{
-    font-size:10pt;
-    font-weight:normal;
-    color:#534742;
-}
-#regionsDropdown{
-    color:#FFFFFF;
-    opacity: 0.5;
-}
-
+ 
+    .filterPanel select {
+        width: 100%;
+        height: 24px;
+        padding-top:2px;
+        padding-bottom: 2x;
+        padding-left: 4px;
+        background-color: #fff;
+    }
+    .filterPanel .buttons {
+        margin-top:12px;
+    }
+    .filterPanel .panel-body {
+        background-color: #C8C8C8;
+        padding: 2px;
+        height: 100%;
+    }
+    .filterPanel ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
+        border-bottom: 2px solid black;
+    }
+    .filterPanel #myTags > li.tagit-choice.ui-widget-content.ui-state-default.ui-corner-all.tagit-choice-editable {
+        font-size: 10pt;
+        font-weight: normal;
+        color: #534742;
+    }
+    .filterPanel #regionsDropdown {
+        color: #FFFFFF;
+    }

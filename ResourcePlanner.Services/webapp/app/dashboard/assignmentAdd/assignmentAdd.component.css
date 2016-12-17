@@ -40,7 +40,3 @@
         width: 350px;
         padding-bottom: 10px;
     }
-    /* the following does not work!? */
-    .addAssignment .select2-selection.select2-selection-multiple {
-        background-color: #E5E6E7;
-    }
