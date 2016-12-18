@@ -138,7 +138,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             .addAssignments(this.addAssignments)
             .subscribe(res => {
                 this.saving = false;
-                //this.close();
+                this.close();
             });
     }
 

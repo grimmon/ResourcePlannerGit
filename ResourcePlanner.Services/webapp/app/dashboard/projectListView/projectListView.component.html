@@ -1,51 +1,52 @@
-<article class=""  style="background-color: white;position:absolute;top:0;width: 100%;height:100%" [style.display]="visible ? 'block' : 'none'">
-    <h4 class="modal-title">{{projectToView.Client}}</h4>
-    <h2 class="modal-title">{{projectToView.ProjectName}}</h2>
-    <div class="row">
-        <div class="col-md-2">
-            <div>Project Manager</div>
-            <div>{{projectToView.ProjectManager}}</div>
+<article class="projectView" [style.display]="visible ? 'block' : 'none'">
+    <div class="projectInfo">
+        <h4 class="modal-title">{{projectToView.Client}}</h4>
+        <h2 class="modal-title">{{projectToView.ProjectName}}</h2>
+        <div class="row">
+            <div class="col-md-2">
+                <div>Project Manager</div>
+                <div>{{projectToView.ProjectManager}}</div>
+            </div>
+            <div class="col-md-2">
+                <div>Project#</div>
+                <div>{{projectInfo ? projectInfo.ProjectNumber : ''}}</div>
+            </div>
+            <div class="col-md-2">
+                <div>Offering</div>
+                <div>{{projectInfo && projectInfo.Offering || ''}}</div>
+            </div>
+            <div class="col-md-2">
+                <div>WBS#</div>
+                <div>{{projectToView.WBSElement}}</div>
+            </div>
+            <div class="col-md-4">
+                <div>Description</div>
+                <div>{{projectToView.Description}}</div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <div>Project#</div>
-            <div>{{projectInfo ? projectInfo.ProjectNumber : ''}}</div>
+        <div class="row">
+            <div class="col-md-2">
+                <span style="padding-left:10px" [style.display]="projectInfo ? 'inline' : 'none'">{{getDuration()}}<span style="padding-right:5px;padding-left:5px">week</span><span>Duration</span></span>
+            </div>
         </div>
-        <div class="col-md-2">
-            <div>Offering</div>
-            <div>{{projectInfo && projectInfo.Offering || ''}}</div>
+        <div class="row" [style.display]="projectInfo ? 'block' : 'none'">
+            <div class="col-md-4">
+                <hr class="duration" />
+            </div>
         </div>
-        <div class="col-md-2">
-            <div>WBS#</div>
-            <div>{{projectToView.WBSElement}}</div>
-        </div>
-        <div class="col-md-4">
-            <div>Description</div>
-            <div>{{projectToView.Description}}</div>
+        <div class="row">
+            <div class="col-md-2">
+                <div>StartDate</div>
+                <div>{{getStartDate()}}</div>
+            </div>
+            <div class="col-md-2">
+                <div style="float:right">EndDate</div>
+                <br />
+                <div style="float:right">{{getEndDate()}}</div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            <span style="padding-left:10px" [style.display]="projectInfo ? 'inline' : 'none'">{{getDuration()}}<span style="padding-right:5px;padding-left:5px">week</span><span>Duration</span></span>
-        </div>
-    </div>
-    <div class="row" [style.display]="projectInfo ? 'block' : 'none'">
-        <div class="col-md-4">
-            <hr class="duration" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <div>StartDate</div>
-            <div>{{getStartDate()}}</div>
-        </div>
-        <div class="col-md-2">
-            <div style="float:right">EndDate</div>
-            <br />
-            <div style="float:right">{{getEndDate()}}</div>
-        </div>
-    </div>
-    <div style="height:60%">
+    <div class="grid">
         <timespan-grid id="resource"
                         [applyTrigger]="applyTrigger"
                         [gridConfig]="gridConfig"
@@ -53,9 +54,7 @@
                         (dataRequested)="dataRequested($event)">
         </timespan-grid>
     </div>
-    <div style="position:absolute;bottom:0px;height:10%;width:100%">
-        <div style="height:100%;text-align:right">
-            <button type="button" class="btn btn-primary" id="clearButton" (click)="close()" style="margin-right:40px;">Close</button>
-        </div>
+    <div class="buttons">
+        <button type="button" class="btn btn-primary" id="clearButton" (click)="close()">Back</button>
     </div>
 </article>
