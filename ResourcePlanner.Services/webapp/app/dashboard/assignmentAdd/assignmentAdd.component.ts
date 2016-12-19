@@ -100,7 +100,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     ngOnInit() {
 
         this.positionSelector = this.optionService.initObservableSelector(
-            "#assignmentPositionSelector",
+            ".position-selector",
             OptionType.Position,
             value => {
                 this.positions = value;
@@ -108,7 +108,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             });
 
         this.daysOfWeekSelector = this.optionService.initSelector(
-            "#assignmentDOWSelector",
+            ".dayofweek-selector",
             CONFIG.daysOfWeek,
             CONFIG.defaultDaysOfWeek,
             value => {
@@ -138,7 +138,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             .addAssignments(this.addAssignments)
             .subscribe(res => {
                 this.saving = false;
-                //this.close();
+                this.close();
             });
     }
 

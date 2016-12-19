@@ -1,52 +1,31 @@
-.mdl-layout__header {
-  display: flex;
-  position: fixed;
-  background-color: #222;
-}
-
-.nav-link {
-  padding: 0 1em;
-  width: 100px;
-  color: rgba(255,255,255,.6);
-  text-align: center;
-  text-decoration: none;
-}
-
-.nav-link.router-link-active {
-  color: rgba(255,255,255, 1);
-}
-
-.nav-link.router-link-active::after {
-    height: 3px;
+.nav {
+    height:70px;
+    background:#FFFFFF;
     width: 100%;
-    display: block;
-    content: " ";
-    bottom: 0;
-    left: 0;
-    position: inherit;
-    background: rgb(83,109,254);
-    background: rgb(255,64,129);
+    margin:0px auto;
 }
-
-.md-title-icon > i {
-  /*background-image: url("assets/ng.png");*/
-  background-image: url("assets/ps-icon.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  padding: 1em 2em;
-}
-
-.mdl-layout__header-row {
-  height: 56px;
-  padding: 0 16px 0 72px;
-  padding-left: 8px;
-  background-color: #673AB7;
-  background: #0033FF;
-  background-color: #222;
-}
-
-@media (max-width: 320px) {
-    a.nav-link {
-        font-size: 12px;
+    .nav .appLogo {
+        float: left;
+        position: absolute;
+        left: 0px;
+        padding-top: 20px;
+        padding-left: 25px;
     }
-}
+    .nav .buttoncontainer {
+        float: right;
+        padding-top: 0px;
+        position: absolute;
+        right: 0px;
+        padding-right: 5px;
+        width: 390px;
+    }
+    .nav .buttonbox {
+        float: right;
+        width: 90px;
+        background-color: #FFF;
+        border-left: 5px #A6A6A6;
+    }
+    .nav .button {
+        margin-top: 20px;
+        margin-left: 20px;
+    }

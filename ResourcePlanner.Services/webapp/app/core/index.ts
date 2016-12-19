@@ -5,4 +5,5 @@ export * from './message.service';
 export * from './entity.service';
 export * from './server.service';
 export * from './date.service';
+export * from './adal.service';
 export * from './spinner/spinner.service';

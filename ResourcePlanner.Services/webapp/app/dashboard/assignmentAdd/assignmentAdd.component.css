@@ -1,0 +1,48 @@
+.addAssignment {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+    .addAssignment h3 {
+        margin-top: 10px;
+        margin-left: 40px;
+        margin-bottom: 10px;
+        height: 30px;
+    }
+    .addAssignment .panel {
+        height: calc(100% - 110px); /* 50px h3 + 60px buttons */
+    }
+        .addAssignment .panel > div {
+            height: 100%;
+        }
+            .addAssignment .panel > div > div {
+                margin-top: 8px;
+            }
+        .addAssignment .panel input {
+            width: 180px;
+        }
+        .addAssignment .panel input[type="number"] {
+            width: 60px;
+        }
+    .addAssignment .buttons {
+        position: absolute;
+        bottom: 0px;
+        height: 60px;
+        width: 100%;
+        text-align: right;
+        padding-right: 30px;
+        padding-top: 12px;
+    }
+        .addAssignment .buttons button {
+            margin-right: 10px;
+        }
+    .addAssignment select {
+        width: 350px;
+        padding-bottom: 10px;
+    }
+    .addAssignment .panel input.autocomplete {
+        width: 350px;
+        padding-bottom: 10px;
+    }

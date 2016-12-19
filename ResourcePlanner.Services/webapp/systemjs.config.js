@@ -20,19 +20,21 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
 
-            // ag libraries
+            // 3d party libraries
             'ag-grid-ng2': 'npm:ag-grid-ng2',
             'ag-grid': 'npm:ag-grid',
             'ng2-auto-complete': 'npm:ng2-auto-complete/dist',
-
-            // other libraries
             'rxjs': 'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
-            'app/core': { main: 'index' },
-            'app/models': { main: 'index' },
+            'app/core': {
+                main: 'index'
+            },
+            'app/models': {
+                main: 'index'
+            },
             app: {
                 main: '../main.js',
                 defaultExtension: 'js'
@@ -43,7 +45,10 @@
             'ag-grid': {
                 defaultExtension: "js"
             },
-            'ng2-auto-complete': { main: 'ng2-auto-complete.umd.js', defaultExtension: 'js' },
+            'ng2-auto-complete': {
+                main: 'ng2-auto-complete.umd.js',
+                defaultExtension: 'js'
+            },
             rxjs: {
                 defaultExtension: 'js'
             },

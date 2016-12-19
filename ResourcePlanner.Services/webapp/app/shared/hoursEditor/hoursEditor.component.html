@@ -6,11 +6,11 @@
                 <select class="assignment-editor-dayofweek" multiple="multiple"></select>
             </div>
             <p></p>
-            <div style="float: left">
+            <div class="hoursLabel">
                 <label>Hours per day:</label>
             </div>
             <div>
-                <input type="number" ng-required="required" min="0" max="24" [(ngModel)]="assignment.hoursPerDay">
+                <input type="number" class="form-control" ng-required="required" min="0" max="24" [(ngModel)]="assignment.hoursPerDay">
             </div>
         </div>
         <div class="buttons">

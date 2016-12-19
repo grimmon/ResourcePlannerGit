@@ -30,7 +30,7 @@ import { AssignmentAddComponent } from './dashboard/assignmentAdd/assignmentAdd.
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './page-not-found.component';
 
-import { MessageService, EntityService, ServerService, DateService, ExceptionService } from '../app/core';
+import { MessageService, EntityService, ServerService, DateService, ExceptionService, AdalService } from '../app/core';
 import { OptionService, ResourceService, ProjectService } from '../app/models';
 
 @NgModule({
@@ -65,6 +65,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         ServerService,
         DateService,
         MessageService,
+        AdalService,
 
         OptionService,
         ResourceService,

@@ -10,6 +10,7 @@ import { MessageService } from './message.service';
 import { EntityService } from './entity.service';
 import { ServerService } from './server.service';
 import { DateService } from './date.service';
+import { AdalService } from './adal.service';
 
 import { SpinnerModule } from './spinner/spinner.module';
 
@@ -34,6 +35,7 @@ import { SpinnerModule } from './spinner/spinner.module';
         ServerService,
         DateService,
         EntityService,
+        AdalService,
     ]
 })
 export class CoreModule {

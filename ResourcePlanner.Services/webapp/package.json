@@ -1,7 +1,7 @@
 {
   "name": "resourceplanner",
   "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "description": "package.json from the documentation, supplemented with testing support",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "docker-build": "docker build -t ng2-quickstart .",
@@ -37,7 +37,6 @@
     "ag-grid": "6.3.x",
     "ag-grid-ng2": "6.3.x",
     "angular-in-memory-web-api": "~0.1.13",
-    "angular2-adal": "^0.1.4",
     "angular2-cookie": "^1.2.5",
     "core-js": "^2.4.1",
     "ng2-auto-complete": "^0.8.2",

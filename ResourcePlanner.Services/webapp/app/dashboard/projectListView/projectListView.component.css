@@ -1,0 +1,43 @@
+.projectView {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+    .projectView .projectInfo {
+        height:200px;
+        padding-left:10px;
+    }
+    .projectView hr.duration {
+        height: 15px;
+        border-style: solid;
+        border-color: #333333;
+        border-width: 1px 0 0 0;
+        border-radius: 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+        .projectView hr.duration:before {
+            display: block;
+            content: "";
+            height: 15px;
+            margin-top: -16px;
+            border-style: solid;
+            border-color: #333333;
+            border-width: 0 0 1px 0;
+            border-radius: 10px;
+            margin-bottom: 0px;
+        }
+        .projectView .grid {
+            height: calc(100% - 260px); /* 200px projectInfo + 60px buttons */
+        }
+    .projectView .buttons {
+        position: absolute;
+        bottom: 0px;
+        height: 60px;
+        width: 100%;
+        text-align: right;
+        padding-right: 30px;
+        padding-top: 12px;
+    }

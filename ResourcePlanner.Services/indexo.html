@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.12/js/adal.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="App/app.js"></script>
+    <script src="../Scripts/ag-grid.js"></script>
+    <script src="../Scripts/DateTimeUtility.js"></script>
+    <script src="../Scripts/DropdownJs.js"></script>
+    <script src="../Scripts/ResourceUtilityJs.js"></script>
+    <script src="../Scripts/ResourceGridJs.js"></script>
+    <script src="../Scripts/ResourceDetailGridJs.js"></script>
+    <script src="../Scripts/ResourceAssignmentGrid.js"></script>
+    <script src="../Scripts/ProjectGridJs.js"></script>
+    <script src="../Scripts/tag-it.js"></script>
+    <script src="../Scripts/select2.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Scripts/SinglePageStyle.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="../Scripts/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="../Scripts/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <script src="../Scripts/PageControls.js"></script>
+
+</head>
+<body>
+    <div class="flexGrid">
+        <div class="header">
+            <div class="header-nav">
+                <div class="appLogo">
+                    <img src="../Images/IRMT_Icons_InsightLogo.png" alt="Insight" />
+                </div>
+                <div class="header-buttoncontainer">
+                    <div class="headerbuttonbox">
+                        <div class="headerbutton">
+                            <div>
+                                <img src="/Images/IRMT_NavIcons_Profile.png" alt="User" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="headerbuttonbox" id="addAssignmentGrid" style="display: none;">
+                        <div class="headerbutton">
+                            <a data-toggle="modal" data-target="#assignmentModal" id="assignmentModalLoad">
+                                <div>
+                                    <img src="/Images/IRMT_NavIcons_AssignNewResource.png" alt="Add" />
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="headerbuttonbox" style="margin-left: 0px;">
+                        <div class="headerbutton">
+                            <a id="filterButton">
+                                <div>
+                                    <img src="../Images/IRMT_NavIcons_SearchRefine.png" alt="Filters">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="headerbuttonbox" style="margin-left: 0px;">
+                        <div class="headerbutton">
+                            <a id="exportExcel">
+                                <div>
+                                    <img src="../Images/tempxls.png" alt="Export to Excel" height="50" width="50">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container2" style="padding-top: 100px;">
+                <div class="panel-group" id="filterAccordion">
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Filters</a>
+                            </h4>
+                        </div>-->
+
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="panel-body" style="background: #C8C8C8">
+
+
+                                <div style="width: 500px;">
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $("#myTags").tagit({
+                                                fieldName: "searchbar",
+                                                caseSensitive: false,
+                                                readOnly: false,
+                                                tagLimit: 3,
+                                                placeholderText: "Search",
+                                                afterTagAdded: function (event, ui) { this.placeholderText = null },
+                                                onTagLimitExceeded: function (event, ui) {
+                                                    this.readOnly = true;
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                                    <ul id="myTags"></ul>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Cities</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="citiesDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Org Units</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="orgUnitsDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Regions</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="regionsDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Markets</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="marketsDropdown" style="width:100%"></select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Practices</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="practicesDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Sub-Practices</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="subpracticesDropdown" style="width:100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float: right;">Interval</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="aggregationsDropdown" style="width: 100%"></select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label style="float:right;">Resource Mgr.</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select id="resourceManagerDropdown" style="width: 100%"></select>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary" id="applyButton">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div style="padding-left: 20px; padding-right: 20px; margin-bottom=0">
+                <button id="pageLeftButton">&lt;</button>
+                <button id="pageRightButton" style="right: 0px">&gt;</button>
+            </div>-->
+        </div>
+        <my-app></my-app>
+        <div class="body">
+            <div id="myGrid" class="ag-fresh"></div>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <p id="errorMessage">Error</p>
+        </div>
+    </div>
+    <div class="panel-group" id="detailAccordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a id="selectedUser" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Resource Detail
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
+                        <div id="myGrid2" style="height: 200px;" class="ag-fresh"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="projectViewModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="projPageClientName"></h4>
+                    <h2 class="modal-title" id="projPageProjectName">Project View</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>Project Manager</div>
+                            <div id="projPageManager"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>Project#</div>
+                            <div id="projPageProjectNumber"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>Offering</div>
+                            <div id="projPageOffering"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>WBS#</div>
+                            <div id="ProjPageWBS"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div>Description</div>
+                            <div id="projPageDescription"></div>
+                        </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-md-4">
+                             <div>Duration</div>
+                             <div>
+                                 
+                             </div>
+                         </div>
+                         <div class="col-md-8"></div>
+                     </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>StartDate</div>
+                            <div id="projPageStartDate"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="float:right">EndDate</div>
+                            <br/>
+                            <div style="float:right" id="projPageEndDate"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
+                            <div id="projectGrid" style="height: 400px;" class="ag-fresh"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+   
+    <div id="assignmentModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Assignment</h4>
+                </div>
+                <div id="assignmentModal-body" class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select id="AssignmentProjectSelector" class="project-selector"></select>
+                            <br />
+                            <a id="projectModalLoad">
+                                <div>
+                                    <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" />
+                                </div>
+                            </a>
+                            <select id="assignmentPositionSelector" class="position-selector" multiple="multiple"></select>
+                            <select id="assignmentPracticesDropdown" class="form-control">
+                                <option selected disabled value="-2">Select a practice</option>
+                            </select>
+                            <select id="assignmentSubpracticesDropdown" class="form-control">
+                                <option value="-2" selected disabled>Select a subpractice</option>
+                            </select>
+                            <select id="assignmentDOWSelector" class="dayofweek-selector" multiple="multiple">
+                                <option value="2" selected="selected">Mon</option>
+                                <option value="3" selected="selected">Tue</option>
+                                <option value="4" selected="selected">Wed</option>
+                                <option value="5" selected="selected">Thur</option>
+                                <option value="6" selected="selected">Fri</option>
+                            </select>
+                            <br />
+                            <span>
+                                Start Date:<div class='input-group date' id='startdatepicker' data-date-format="YYYY-MM-DD">
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </span>
+                            <span>
+                                End Date:<div class='input-group date' id='enddatepicker'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </span>
+                            <br />
+                            <div class="form-group">
+                                <label for="hoursPerDay">Hours per day:</label>
+                                <input type="number" ng-required="required" class="form-control" min="0" id="hoursPerDay">
+                            </div>
+                        </div>
+   
+                        <div class="col-md-8">
+                            <div style="width: 500px;">
+                                <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $("#assignmentTextSearch").tagit({
+                                                fieldName: "searchbar",
+                                                caseSensitive: false,
+                                                readOnly: false,
+                                                tagLimit: 5,
+                                                placeholderText: "Search",
+                                                afterTagAdded: function (event, ui) {
+                                                    this.placeholderText = null;
+                                                    AssignmentApply();
+                                                },
+                                                afterTagRemoved: function (event, ui) {
+                                                    AssignmentApply();
+                                                },
+                                                allowDuplicates: true,
+                                                onTagLimitExceeded: function (event, ui) {
+                                                    this.readOnly = true;
+                                                }
+                                            });
+                                        });
+                                </script>
+
+                                <ul id="assignmentTextSearch"></ul>
+                            </div>
+                            <div style="height: 100%; box-sizing: border-box; padding-left: 2px; padding-right: 2px">
+                                <div id="AssignmentGrid" class="ag-fresh"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveAssignment" disabled="disabled">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+   
+    <div id="projectModal" class="modal modal-wide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a Project</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectName">Name:</label>
+                        <input type="text" class="form-control" id="projectName">
+                        <label for="projectDescription">Description:</label>
+                        <input type="text" class="form-control" id="projectDescription">
+                    </div>
+                    <div id="clientSelector">
+                        <select class="client-selector"></select>
+                        <a id="addClient">
+                            <div>
+                                <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="" />
+                            </div>
+                        </a>
+                    </div>
+   
+                    <div class="form-group" id="newClient" style="display: none">
+                        <label for="clientName">Add client name:</label>
+                        <input type="text" class="form-control" id="clientName">
+                        <a id="closeClient">
+                            <div>
+                                <img src="/Images/IRMT_Icons_CloseBtn.png" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class='input-group date' id='projectstartdatepicker' data-date-format="YYYY-MM-DD">
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <div class='input-group date' id='projectenddatepicker'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <select class="pm-selector"></select>
+                    <select class="oo-selector"></select>
+   
+   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="projectModalBack">Back</button>
+                    <button type="button" class="btn btn-primary" id="saveProject" disabled="disabled">Save Project</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+   
+  </body>
+
+</html>

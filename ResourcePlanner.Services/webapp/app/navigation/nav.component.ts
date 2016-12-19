@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { AdalService } from 'angular2-adal/core';
 import { MessageService } from '../core';
-
-class MenuItem {
-  constructor(public caption: string, public link: any[]) { }
-}
+import { AdalService } from '../core';
 
 @Component({
     moduleId: module.id,
@@ -13,24 +9,23 @@ class MenuItem {
     styleUrls: ['nav.component.css'],
 })
 export class NavComponent implements OnInit {
-    menuItems: MenuItem[];
 
     modal = false;
     
     addAssigmentAllowed: boolean = true;
 
-    ngOnInit() {
-        this.menuItems = [
-            { caption: 'Dashboard', link: ['/dashboard'] },
-            { caption: 'Assignments', link: ['/assignments'] },
-            { caption: 'Admin', link: ['/admin'] },
-            { caption: 'Login', link: ['/login'] },
-        ];
-    }
-
     constructor(
-        //private adalService: AdalService,
+        private adalService: AdalService,
         private messageService: MessageService) {
+
+        this.adalService.init(
+            {
+                redirectUri: window.location.origin + '/',
+                postLogoutRedirectUri: window.location.origin + '/',
+                tenant: 'bluemetal.com',
+                clientId: '55324854-cfd5-4d16-bf63-556abddbdf83',  //for localhost testing
+                //clientId: 'e36e4a47-114e-41a6-abb0-160b8ead8098',
+            });
 
         this.messageService.onModalToggled(on => {
             if (on) {
@@ -59,11 +54,6 @@ export class NavComponent implements OnInit {
         this.messageService.addAssignmentRequest(true);
     }
 
-    logout() {
-        //this.adalService.logOut();
-    }
-
-    getUserInfo() {
-        //return this.adalService.userInfo;
+    ngOnInit() {
     }
 }

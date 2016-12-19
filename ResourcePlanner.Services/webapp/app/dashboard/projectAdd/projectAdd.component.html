@@ -1,93 +1,87 @@
-<article class="" style="background-color:rgba(0, 0, 0, 0.02);position:absolute;top:0;width: 100%;height:100%" [style.display]="visible ? 'block' : 'none'">
-    <div style="position:absolute;left:50%;top:50px;margin-left:-350px;margin-right:350px;width:700px;height:550px;background-color:white;border:solid 1px navy;border-radius:5px; padding-left:12px;padding-right:12px;">
+<article class="projectAdd" [style.display]="visible ? 'block' : 'none'">
+    <div>
         <h3>Add a Project</h3>
-        <div style="height:80%">
-            <div style="height:100%">
-                <div id="newProjectForm" style="height:100%">
-                    <div class="form-group">
-                        <label>Project Name:</label><br />
-                        <input type="text" class="form-control" [(ngModel)]="addedProject.ProjectName">
+        <div class="panel">
+            <div class="form-group">
+                <label>Project Name:</label><br />
+                <input type="text" class="form-control" [(ngModel)]="addedProject.ProjectName">
+            </div>
+            <div class="form-group">
+                <label>Description:</label><br />
+                <input type="text" class="form-control" [(ngModel)]="addedProject.Description">
+            </div>
+            <div class="form-group" [style.display]="clientSelectorVisible ? 'block' : 'none'">
+                <label>Client:</label><br />
+                <input class="form-control autocomplete"
+                        auto-complete
+                        auto-complete-placeholder="Select a client"
+                        value-property-name="Id"
+                        display-property-name="Name"
+                        [(ngModel)]="client"
+                        max-num-list="16"
+                        min-chars="3"
+                        [source]="clientSource"
+                        [list-formatter]="clientListFormatter"
+                        loading-text="Looking for clients..." />
+                <a>
+                    <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Open Add Client" (click)="openAddClient()" />
+                </a>
+            </div>
+            <div class="form-group" [style.display]="clientSelectorVisible ? 'none' : 'block'">
+                <label>Add Cient Name:</label>
+                <div class="row">
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" [(ngModel)]="clientName" (input)="cientNameChanged($event)">
                     </div>
-                    <div class="form-group">
-                        <label>Description:</label><br />
-                        <input type="text" class="form-control" [(ngModel)]="addedProject.Description">
-                    </div>
-                    <div class="form-group" [style.display]="clientSelectorVisible ? 'block' : 'none'">
-                        <label>Client:</label><br />
-                        <input style="width:450px"
-                               auto-complete
-                               auto-complete-placeholder="Select a client"
-                               value-property-name="Id"
-                               display-property-name="Name"
-                               [(ngModel)]="client"
-                               max-num-list="16"
-                               min-chars="3"
-                               [source]="clientSource"
-                               [list-formatter]="clientListFormatter"
-                               loading-text="Looking for clients..." />
+                    <div class="col-sm-1">
                         <a>
-                            <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Open Add Client" (click)="openAddClient()" />
+                            <img src="/Images/IRMT_Icons_CloseBtn.png" width="16" style="padding-left:0" (click)="clientSelectorVisible = true" alt="Close Add Client" />
                         </a>
-                    </div>
-                    <div class="form-group" [style.display]="clientSelectorVisible ? 'none' : 'block'">
-                        <label>Add Cient Name:</label>
-                        <div class="row">
-                            <div class="col-sm-11">
-                                <input type="text" class="form-control" [(ngModel)]="clientName" (input)="cientNameChanged($event)">
-                            </div>
-                            <div class="col-sm-1">
-                                <a>
-                                    <img src="/Images/IRMT_Icons_CloseBtn.png" width="16" style="padding-left:0" (click)="clientSelectorVisible = true" alt="Close Add Client" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label>Start Date:</label>
-                            <input type='date' class="form-control" [(ngModel)]="addedProject.StartDate" (input)="startDateChanged($event)" />
-                        </div>
-                        <div class="col-sm-4">
-                            <label>End Date:</label>
-                            <input type='date' class="form-control" [(ngModel)]="addedProject.EndDate" (input)="endDateChanged($event)" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Project Manager:</label><br />
-                        <input style="width:450px"
-                               auto-complete
-                               auto-complete-placeholder="Select a project manager"
-                               value-property-name="Id"
-                               display-property-name="Name"
-                               [(ngModel)]="projectManager"
-                               max-num-list="16"
-                               min-chars="2"
-                               [source]="projectManagerSource"
-                               [list-formatter]="projectManagerListFormatter"
-                               loading-text="Looking for project managers..." />
-                    </div>
-                    <div class="form-group">
-                        <label>Opportunity Owner:</label><br />
-                        <input style="width:450px"
-                               auto-complete
-                               auto-complete-placeholder="Select an owner"
-                               value-property-name="Id"
-                               display-property-name="Name"
-                               [(ngModel)]="opportunityOwner"
-                               max-num-list="16"
-                               min-chars="4"
-                               [source]="opportunityOwnerSource"
-                               [list-formatter]="opportunityOwnerListFormatter"
-                               loading-text="Looking for opportunity owners..." />
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="position:absolute;bottom:0px;height:10%;width:100%">
-            <div style="height:100%;text-align:right">
-                <button type="button" class="btn btn-primary" (click)="close()" style="margin-right:10px;">Close</button>
-                <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saving" style="margin-right:40px;">Save Project</button>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label>Start Date:</label>
+                    <input type='date' class="form-control" [(ngModel)]="addedProject.StartDate" (input)="startDateChanged($event)" />
+                </div>
+                <div class="col-sm-4">
+                    <label>End Date:</label>
+                    <input type='date' class="form-control" [(ngModel)]="addedProject.EndDate" (input)="endDateChanged($event)" />
+                </div>
             </div>
+            <div class="form-group">
+                <label>Project Manager:</label><br />
+                <input class="form-control autocomplete"
+                        auto-complete
+                        auto-complete-placeholder="Select a project manager"
+                        value-property-name="Id"
+                        display-property-name="Name"
+                        [(ngModel)]="projectManager"
+                        max-num-list="16"
+                        min-chars="2"
+                        [source]="projectManagerSource"
+                        [list-formatter]="projectManagerListFormatter"
+                        loading-text="Looking for project managers..." />
+            </div>
+            <div class="form-group">
+                <label>Opportunity Owner:</label><br />
+                <input class="form-control autocomplete"
+                        auto-complete
+                        auto-complete-placeholder="Select an owner"
+                        value-property-name="Id"
+                        display-property-name="Name"
+                        [(ngModel)]="opportunityOwner"
+                        max-num-list="16"
+                        min-chars="2"
+                        [source]="opportunityOwnerSource"
+                        [list-formatter]="opportunityOwnerListFormatter"
+                        loading-text="Looking for opportunity owners..." />
+            </div>
+    </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" (click)="close()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saving">Save Project</button>
         </div>
     </div>
 </article>
