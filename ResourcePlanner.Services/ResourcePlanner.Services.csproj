@@ -346,6 +346,7 @@
     <TypeScriptCompile Include="webapp\app\app-routing.module.ts" />
     <TypeScriptCompile Include="webapp\app\app.component.ts" />
     <TypeScriptCompile Include="webapp\app\app.module.ts" />
+    <TypeScriptCompile Include="webapp\app\core\adal.service.ts" />
     <TypeScriptCompile Include="webapp\app\shared\hoursEditor\hoursEditor.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\core\config.ts" />
