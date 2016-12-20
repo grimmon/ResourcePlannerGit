@@ -34,6 +34,16 @@ export class MessageService {
         this.addAssignmentRequested.next(value);
     }
 
+    // request resource request (from Navigation to dashboard)
+    private resourceRequestRequested = new Subject<boolean>();
+
+    onResourceRequestRequested(handler: (value: boolean) => void) {
+        this.resourceRequestRequested.subscribe(handler)
+    }
+    resourceRequestRequest(value: boolean) {
+        this.resourceRequestRequested.next(value);
+    }
+
     // filter panel toggle request
     private filterPanelToggled = new Subject<string>();
 

@@ -77,13 +77,17 @@ namespace ResourcePlanner.Services.DataAccess
 
             parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("ResourceIds", "rpdb.typeIntTable", SqlDbType.Structured, asgn.ResourceIds));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
-            parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
-            if (asgn.DaysOfWeek > 0)
+            if (asgn.TotalHours.HasValue)
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
+                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.TotalHours));
             }
+            else
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.HoursPerDay.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
+            }   
 
             return parameterList.ToArray();
         }
@@ -94,14 +98,17 @@ namespace ResourcePlanner.Services.DataAccess
 
             parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
-            parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.Hours));
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
-            if (asgn.DaysOfWeek > 0)
+            if (asgn.TotalHours.HasValue)
             {
+                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.TotalHours));
+            }
+            else
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.HoursPerDay.Value));
                 parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
             }
-
             return parameterList.ToArray();
         }
     }

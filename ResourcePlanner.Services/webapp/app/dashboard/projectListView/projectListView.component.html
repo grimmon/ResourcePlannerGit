@@ -4,23 +4,23 @@
         <h2 class="modal-title">{{projectToView.ProjectName}}</h2>
         <div class="row">
             <div class="col-md-2">
-                <div>Project Manager</div>
+                <div class="pvlabel">Project Manager</div>
                 <div>{{projectToView.ProjectManager}}</div>
             </div>
             <div class="col-md-2">
-                <div>Project#</div>
+                <div class="pvlabel">Project#</div>
                 <div>{{projectInfo ? projectInfo.ProjectNumber : ''}}</div>
             </div>
             <div class="col-md-2">
-                <div>Offering</div>
+                <div class="pvlabel">Offering</div>
                 <div>{{projectInfo && projectInfo.Offering || ''}}</div>
             </div>
             <div class="col-md-2">
-                <div>WBS#</div>
+                <div class="pvlabel">WBS#</div>
                 <div>{{projectToView.WBSElement}}</div>
             </div>
             <div class="col-md-4">
-                <div>Description</div>
+                <div class="pvlabel">Description</div>
                 <div>{{projectToView.Description}}</div>
             </div>
         </div>
@@ -36,11 +36,11 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <div>StartDate</div>
+                <div class="pvlabel">StartDate</div>
                 <div>{{getStartDate()}}</div>
             </div>
             <div class="col-md-2">
-                <div style="float:right">EndDate</div>
+                <div class="pvlabel" style="float:right">EndDate</div>
                 <br />
                 <div style="float:right">{{getEndDate()}}</div>
             </div>

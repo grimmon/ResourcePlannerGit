@@ -23,6 +23,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.resource = $event ? this.entityService.clone($event) : $event;
     }
 
+    resourceRequestShow = 0;
+    resourceRequestRequested() {
+        this.resourceRequestShow++;
+    }
+
     projectShow = 0;
     projectToView: any = {};
     projectResourceViewRequested($event: any) {
@@ -53,6 +58,10 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.messageService.onAssignmentEditorRequested(assignmentInfo => {
             this.assignmentInfo = assignmentInfo;
         });
+
+        this.messageService.onResourceRequestRequested(state => {
+            this.resourceRequestRequested();
+        })
     }
 
     ngOnInit() {

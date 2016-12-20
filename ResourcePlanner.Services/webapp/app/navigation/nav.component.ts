@@ -54,6 +54,10 @@ export class NavComponent implements OnInit {
         this.messageService.addAssignmentRequest(true);
     }
 
+    requestResource() {
+        this.messageService.resourceRequestRequest(true);
+    }
+
     ngOnInit() {
     }
 }

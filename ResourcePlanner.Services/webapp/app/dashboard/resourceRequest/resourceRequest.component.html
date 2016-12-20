@@ -1,0 +1,55 @@
+<article class="resourceRequest" [style.display]="visible ? 'block' : 'none'">
+    <div>
+        <h3>Request a Resource</h3>
+        <div class="panel">
+           
+            <div class="form-group">
+                <label>Resource:</label><br />
+                <input class="form-control autocomplete"
+                        auto-complete
+                        auto-complete-placeholder="Select a resource"
+                        value-property-name="Id"
+                        display-property-name="Name"
+                        [(ngModel)]="requestResource"
+                        max-num-list="16"
+                        min-chars="2"
+                        [source]="requestResourceSource"
+                        [list-formatter]="projectManagerListFormatter"
+                        loading-text="Looking for resources..." />
+            </div>
+            <div class="form-group">
+                <label>Project</label><br />
+                <input class="form-control autocomplete"
+                       auto-complete
+                       auto-complete-placeholder="Select a project"
+                       value-property-name="Id"
+                       display-property-name="Name"
+                       [(ngModel)]="requestResourceProject"
+                       max-num-list="16"
+                       min-chars="3"
+                       [source]="requestResourceProjectSource"
+                       [list-formatter]="projectListFormatter"
+                       loading-text="Looking for projects..." />
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label>Start Date:</label>
+                    <input type='date' class="form-control" [(ngModel)]="resourceRequest.StartDate" (input)="startDateChanged($event)" />
+                </div>
+                <div class="col-sm-4">
+                    <label>End Date:</label>
+                    <input type='date' class="form-control" [(ngModel)]="resourceRequest.EndDate" (input)="endDateChanged($event)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Request Text:</label><br />
+                <textarea class="form-control" rows="10" [(ngModel)]="resourceRequest.Comments"></textarea>
+            </div>
+            
+    </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" (click)="close()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saving">Save Project</button>
+        </div>
+    </div>
+</article>

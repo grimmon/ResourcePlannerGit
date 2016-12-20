@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -205,6 +205,8 @@
     <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.html" />
     <Content Include="webapp\app\app.component.css" />
     <Content Include="webapp\app\app.component.html" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.css" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.html" />
     <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.css" />
     <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.html" />
     <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.css" />
@@ -347,6 +349,7 @@
     <TypeScriptCompile Include="webapp\app\app.component.ts" />
     <TypeScriptCompile Include="webapp\app\app.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\adal.service.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\hoursEditor\hoursEditor.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\core\config.ts" />
@@ -382,6 +385,7 @@
     <TypeScriptCompile Include="webapp\app\dashboard\projectAdd\projectAdd.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
     <TypeScriptCompile Include="webapp\app\error\error.component.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\numericCellEditor\numericCellEditor.ts" />
     <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
     <TypeScriptCompile Include="webapp\main.ts" />
   </ItemGroup>

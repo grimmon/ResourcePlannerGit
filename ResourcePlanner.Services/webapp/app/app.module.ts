@@ -26,6 +26,7 @@ import { ResourceViewsComponent } from './dashboard/resourceViews/resourceViews.
 import { ProjectListViewComponent } from './dashboard/projectListView/projectListView.component';
 import { ProjectAddComponent } from './dashboard/projectAdd/projectAdd.component';
 import { AssignmentAddComponent } from './dashboard/assignmentAdd/assignmentAdd.component';
+import { ResourceRequestComponent } from './dashboard/resourceRequest/resourceRequest.component';
 
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -57,7 +58,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
 
         DashboardComponent,
         ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
-        ProjectListViewComponent, ProjectAddComponent, AssignmentAddComponent,
+        ProjectListViewComponent, ProjectAddComponent, AssignmentAddComponent, ResourceRequestComponent
     ],
     providers: [
         EntityService,

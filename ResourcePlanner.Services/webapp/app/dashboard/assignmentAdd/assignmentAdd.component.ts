@@ -71,6 +71,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     private positionSelector: JQuery;
     private daysOfWeekSelector: any;
 
+    hoursPerWeekVisible = true;
+
+    openHoursPerDay() {
+        this.hoursPerWeekVisible = false;
+    }
+
+    clientNameChanged($event: any) {
+    }
     constructor(
         private messageService: MessageService,
         private optionService: OptionService,

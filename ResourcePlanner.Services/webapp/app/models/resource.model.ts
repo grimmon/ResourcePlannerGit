@@ -63,6 +63,27 @@ export class Resource {
     Assignments: Assignment[];
 }
 
+export class ResourceRequest {
+    ResourceId:      number;
+    ProjectMasterId: number;
+    StartDate:       string;
+    EndDate:         string;
+    Hours:           number;
+    Comments:        string;
+
+    public constructor(
+        fields?: {
+            ResourceId?: number,
+            ProjectMasterId?: number,
+            StartDate?: string,
+            EndDate?: string,
+            Hours?: number,
+            Comments?: string
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
+}
+
 export class ResourceRow {
     Id: number;
     ResourceName: string;

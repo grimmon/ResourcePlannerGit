@@ -21,7 +21,14 @@ namespace ResourcePlanner.Services.Controllers
         [HttpPost]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("add")]
-        public async Task<IHttpActionResult> Add(string resourceIds, int projectMasterId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        public async Task<IHttpActionResult> Add(
+            string resourceIds, 
+            int projectMasterId, 
+            DateTime startdate, 
+            DateTime enddate, 
+            double? hoursPerWeek = null, 
+            double? hoursPerDay = null, 
+            string daysOfWeek = "")
         {
 #if Mock
             return Ok();
@@ -42,34 +49,34 @@ namespace ResourcePlanner.Services.Controllers
             var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
-            int days = 0;
-
-            var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
-
-            if (daysOfWeekEnum.Length > 0)
-            {
-                days = getDaysAsInt(daysOfWeekEnum);
-            }
-
-
-            var daysOfWeekIds = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek) i).ToArray();
-           
-
-            foreach(var id in daysOfWeekIds)
-            {
-
-            }
-            
-
             var asgn = new AddAssignments()
             {
                 ResourceIds = resourceIds.Split(',').Select(Int32.Parse).ToArray(),
                 ProjectMasterId = projectMasterId,
-                Hours = hoursPerDay,
                 StartDate = startdate,
                 EndDate = enddate,
-                DaysOfWeek = days
-        };
+            };
+
+            if (hoursPerWeek.HasValue)
+            {
+                asgn.TotalHours = hoursPerWeek.Value;
+                asgn.HoursPerDay = null;
+            }
+            else if (hoursPerDay.HasValue)
+            {
+                int days = 0;
+
+                var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
+
+                if (daysOfWeekEnum.Length > 0)
+                {
+                    days = getDaysAsInt(daysOfWeekEnum);
+                }
+
+                asgn.HoursPerDay = hoursPerDay.Value;
+                asgn.DaysOfWeek = days;
+                asgn.TotalHours = null;
+            }
 
             try
             {
@@ -86,7 +93,14 @@ namespace ResourcePlanner.Services.Controllers
         [HttpPost]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("update")]
-        public async Task<IHttpActionResult> Update(int resourceId, int projectMasterId, double hoursPerDay, DateTime startdate, DateTime enddate, string daysOfWeek)
+        public async Task<IHttpActionResult> Update(
+            int resourceId, 
+            int projectMasterId, 
+            DateTime startdate, 
+            DateTime enddate, 
+            double? hoursPerWeek = null, 
+            double? hoursPerDay = null, 
+            string daysOfWeek = "")
         {
 #if Mock
             return Ok();
@@ -95,25 +109,38 @@ namespace ResourcePlanner.Services.Controllers
             var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
-            int days = 0;
-
-            var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
-
-            if (daysOfWeekEnum.Length > 0)
-            {
-                days = getDaysAsInt(daysOfWeekEnum);
-            }
-
-
             var asgn = new UpdateAssignment()
             {
                 ResourceId = resourceId,
                 ProjectMasterId = projectMasterId,
-                Hours = hoursPerDay,
                 StartDate = startdate,
                 EndDate = enddate,
-                DaysOfWeek = days
             };
+
+            if (hoursPerWeek.HasValue)
+            {
+                asgn.TotalHours = hoursPerWeek.Value;
+                asgn.HoursPerDay = null;
+            }
+            else if (hoursPerDay.HasValue)
+            {
+                int days = 0;
+
+                var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
+
+                if (daysOfWeekEnum.Length > 0)
+                {
+                    days = getDaysAsInt(daysOfWeekEnum);
+                }
+
+                asgn.HoursPerDay = hoursPerDay.Value;
+                asgn.DaysOfWeek = days;
+                asgn.TotalHours = null;
+            }
+            else
+            {
+                throw new Exception("No hours provided");
+            }
 
             try
             {

@@ -169,7 +169,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             suppressSorting: true,
             suppressMenu: true,
             cellRenderer: timePeriodCellRenderer,
+            editable: (fieldNameSuffix == "ResourceHours" && this.queryConfig.aggregation == TimeAggregation.Weekly) ? true : false
         };
+        if (colDef.editable) {
+            colDef.cellEditor = 'text';
+            //colDef.cellEditor = NumericCellEditor;
+        }
 
         return colDef;
 
@@ -303,6 +308,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         });
     }
 
+
     private onModelUpdated() {
         //console.log('onModelUpdated' + this.gridOptions.api);
         this.calculateRowCount();
@@ -314,6 +320,30 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellClicked($event: any) {
+        var context = $event.colDef.context,
+            firstColumn = context.index == 0,
+            dataColumn = context.type == 'dataColumn';
+        this.clickedFirstColumn = firstColumn && !dataColumn;
+    }
+
+    private onRowSelected($event: any) {
+        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridConfig.selectedIds = selectedNodes.map(node => node.id);
+    }
+
+    private onRowClicked($event: any) {
+        if (this.clickedFirstColumn) {
+            this.rowSelected.emit({
+                rowData: $event.node.data,
+            });
+        }
+    }
+
+    private onCellValueChanged($event: any) {
+        //console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
+    }
+
+    private onCellDoubleClicked($event: any) {
         var context = $event.colDef.context,
             firstColumn = context.index == 0,
             dataColumn = context.type == 'dataColumn';
@@ -336,27 +366,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 })
             });
         }
-    }
-
-    private onRowSelected($event: any) {
-        var selectedNodes = this.gridOptions.api.getSelectedNodes();
-        this.gridConfig.selectedIds = selectedNodes.map(node => node.id);
-    }
-
-    private onRowClicked($event: any) {
-        if (this.clickedFirstColumn) {
-            this.rowSelected.emit({
-                rowData: $event.node.data,
-            });
-        }
-    }
-
-    private onCellValueChanged($event: any) {
-        //console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
-    }
-
-    private onCellDoubleClicked($event: any) {
-        //console.log('onCellDoubleClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
     private onCellContextMenu($event: any) {
