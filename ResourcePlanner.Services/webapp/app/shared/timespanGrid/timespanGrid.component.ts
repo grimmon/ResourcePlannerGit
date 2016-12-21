@@ -151,9 +151,9 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     private addAssignment(row: any, assignment: any, timePeriod: any) {
         timePeriod += "-";
-        row[timePeriod + "ResourceHours"] = assignment.ResourceHours;
-        row[timePeriod + "ForecastHours"] = assignment.ForecastHours;
-        row[timePeriod + "ActualHours"] = assignment.ActualHours;
+        row[timePeriod + "ResourceHours"] = assignment.ResourceHours == 0 ? "-" : assignment.ResourceHours;
+        row[timePeriod + "ForecastHours"] = assignment.ForecastHours == 0 ? "-" : assignment.ForecastHours;
+        row[timePeriod + "ActualHours"] = assignment.ActualHours == 0 ? "-" : assignment.ActualHours;
         row[timePeriod + "DeltaHours"] = assignment.ForecastHours - assignment.ResourceHours;
     }
 
@@ -322,7 +322,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellClicked($event: any) {
-        var
         var context = $event.colDef.context,
             firstColumn = context.index == 0,
             dataColumn = context.type == 'dataColumn';
@@ -385,6 +384,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                     })
                 });
             }
+            else {
+                $event.data[$event.colDef.field] = $event.oldValue;
+            }
+        }
+        else {
+            $event.data[$event.colDef.field] = $event.oldValue;
         }
     }
 
