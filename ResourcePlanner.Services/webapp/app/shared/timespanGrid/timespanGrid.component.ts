@@ -26,6 +26,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     @Output() periodScrolled: EventEmitter<any>;
     @Output() refreshed: EventEmitter<any>;
     @Output() dataCellEditorRequested: EventEmitter<any>;
+    @Output() dataCellEditRequested: EventEmitter<any>;
 
     ready: boolean = false;
 
@@ -68,6 +69,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.periodScrolled = new EventEmitter<any>();
         this.refreshed = new EventEmitter<any>();
         this.dataCellEditorRequested = new EventEmitter<any>();
+        this.dataCellEditRequested = new EventEmitter<any>();
     }
 
     ngOnInit() {
@@ -96,6 +98,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             paginationOverflowSize: 2,
             maxConcurrentDatasourceRequests: 2,
             paginationInitialRowCount: 1,
+            singleClickEdit: true,
             maxPagesInCache: 6,
             getRowNodeId: item => item.Id,
         };  // we pass gridOptions in, so we can grab the api out
@@ -173,7 +176,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         };
         if (colDef.editable) {
             colDef.cellEditor = 'text';
-            //colDef.cellEditor = NumericCellEditor;
         }
 
         return colDef;
@@ -320,10 +322,33 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellClicked($event: any) {
+        var
         var context = $event.colDef.context,
             firstColumn = context.index == 0,
             dataColumn = context.type == 'dataColumn';
         this.clickedFirstColumn = firstColumn && !dataColumn;
+       
+    }
+
+    private callPopupEditor($event: any) {
+        //if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
+        //    // activate editor
+        //    var field = $event.colDef.field,
+        //        periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
+        //        periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
+        //        periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
+        //    this.dataCellEditorRequested.emit({
+        //        context: this.gridConfig.context,
+        //        assignment: new UpdateAssignment({
+        //            resourceId: 0,
+        //            projectMasterId: $event.data.Id,
+        //            hoursPerDay: CONFIG.defaultHoursPerDay,
+        //            startDate: this.dateService.format(periodStart),
+        //            endDate: this.dateService.format(periodEnd),
+        //            daysOfWeek: CONFIG.defaultDaysOfWeek,
+        //        })
+        //    });
+        //}
     }
 
     private onRowSelected($event: any) {
@@ -340,10 +365,31 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellValueChanged($event: any) {
-        //console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
+        var numbers = new RegExp(/^[0-9]+$/);
+        if (numbers.test($event.newValue)){
+            var newVal = +$event.newValue;
+            if (newVal >= 0 && newVal <= 168) {
+                var field = $event.colDef.field,
+                    periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
+                    periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
+                    periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
+                this.gridConfig.saveEditedCell({
+                    context: this.gridConfig.context,
+                    assignment: new UpdateAssignment({
+                        resourceId: 0,
+                        projectMasterId: $event.data.Id,
+                        hoursPerWeek: newVal,
+                        startDate: this.dateService.format(periodStart),
+                        endDate: this.dateService.format(periodEnd)
+
+                    })
+                });
+            }
+        }
     }
 
     private onCellDoubleClicked($event: any) {
+        this.gridOptions.api.stopEditing();
         var context = $event.colDef.context,
             firstColumn = context.index == 0,
             dataColumn = context.type == 'dataColumn';

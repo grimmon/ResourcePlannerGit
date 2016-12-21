@@ -34,6 +34,7 @@ export class UpdateAssignment {
     resourceId: number;
     projectMasterId: number;
     hoursPerDay: number;
+    hoursPerWeek: number;
     startDate: string;
     endDate: string;
     daysOfWeek: string[];
@@ -43,6 +44,7 @@ export class UpdateAssignment {
             resourceId?: number,
             projectMasterId?: number,
             hoursPerDay?: number,
+            hoursPerWeek?: number,
             startDate?: string,
             endDate?: string,
             daysOfWeek?: string[],

@@ -25,7 +25,7 @@ namespace ResourcePlanner.Services.DataAccess
         public void AddAssignment(AddAssignments asgn)
         {
 
-            AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
+            AdoUtility.ExecuteQuery(null,
                 _connectionString,
                 @"rpdb.InternalAssignmentInsert",
                 CommandType.StoredProcedure,
@@ -35,7 +35,7 @@ namespace ResourcePlanner.Services.DataAccess
         public void UpdateAssignment(UpdateAssignment asgn)
         {
 
-            AdoUtility.ExecuteQuery(reader => EntityMapper.MapToDropdown(reader),
+            AdoUtility.ExecuteQuery(null,
                 _connectionString,
                 @"rpdb.InternalAssignmentUpdate",
                 CommandType.StoredProcedure,
@@ -81,7 +81,7 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
             if (asgn.TotalHours.HasValue)
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.TotalHours));
+                parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.TotalHours));
             }
             else
             {
@@ -102,7 +102,7 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
             if (asgn.TotalHours.HasValue)
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.TotalHours));
+                parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.TotalHours));
             }
             else
             {

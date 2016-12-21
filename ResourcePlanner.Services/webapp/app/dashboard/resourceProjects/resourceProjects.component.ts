@@ -42,7 +42,16 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
         getItems: (page: DetailPage) => page.Projects,
         createRow: ProjectDetailRow,
         allowDataEdit: true,
-        height: "200px"
+        height: "200px",
+        saveEditedCell: (params: any) => {
+            var assignment = params.assignment;
+            assignment.resourceId = this.resourceId;
+            this.resourceService
+                .updateAssignment(assignment)
+                .subscribe(res => {
+                    this.messageService.timespanGridRefreshRequest(params.context);
+                });
+        }
     };
 
     queryConfig: any = {
@@ -62,6 +71,11 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
         var assignment: UpdateAssignment = $event.assignment
         assignment.resourceId = this.resourceId;
         this.messageService.assignmentEditorRequest($event);
+    }
+
+    dataCellEditRequested($event: any) {
+        var assignment: UpdateAssignment = $event.assignment
+        assignment.resourceId = this.resourceId;
     }
 
     constructor(
