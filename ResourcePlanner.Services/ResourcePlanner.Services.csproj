@@ -316,6 +316,7 @@
     <Content Include="Scripts\tagit.ui-zendesk.css" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

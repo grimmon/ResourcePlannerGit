@@ -151,9 +151,9 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     private addAssignment(row: any, assignment: any, timePeriod: any) {
         timePeriod += "-";
-        row[timePeriod + "ResourceHours"] = assignment.ResourceHours == 0 ? "-" : assignment.ResourceHours;
-        row[timePeriod + "ForecastHours"] = assignment.ForecastHours == 0 ? "-" : assignment.ForecastHours;
-        row[timePeriod + "ActualHours"] = assignment.ActualHours == 0 ? "-" : assignment.ActualHours;
+        row[timePeriod + "ResourceHours"] = assignment.ResourceHours;
+        row[timePeriod + "ForecastHours"] = assignment.ForecastHours;
+        row[timePeriod + "ActualHours"] = assignment.ActualHours;
         row[timePeriod + "DeltaHours"] = assignment.ForecastHours - assignment.ResourceHours;
     }
 
@@ -185,7 +185,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 var floatValue = parseFloat(params.value);
                 if (!isNaN(floatValue) && floatValue != null) {
                     var colName = params.column.colId;
-                    var value = floatValue.toFixed(0);
+                    var value = floatValue == 0 ? "-" : floatValue.toFixed(0);
                     if (colName.includes('Delta')) {
                         if (floatValue > 0) {
                             return "<img src='Images/IRMT_Icons_GreenUpArrow.png'/> " + value;
@@ -365,9 +365,12 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     private onCellValueChanged($event: any) {
         var numbers = new RegExp(/^[0-9]+$/);
-        if (numbers.test($event.newValue)){
+        if (numbers.test($event.newValue)) {
             var newVal = +$event.newValue;
-            if (newVal >= 0 && newVal <= 168) {
+            if (newVal == $event.oldValue) {
+                //no save needed
+            } 
+            else if (newVal >= 0 && newVal <= 168) {
                 var field = $event.colDef.field,
                     periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
                     periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
