@@ -172,11 +172,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             suppressSorting: true,
             suppressMenu: true,
             cellRenderer: timePeriodCellRenderer,
-            editable: (fieldNameSuffix == "ResourceHours" && this.queryConfig.aggregation == TimeAggregation.Weekly) ? true : false
+            editable: false
         };
-        if (colDef.editable) {
-            colDef.cellEditor = 'text';
-        }
 
         return colDef;
 
@@ -326,6 +323,10 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             firstColumn = context.index == 0,
             dataColumn = context.type == 'dataColumn';
         this.clickedFirstColumn = firstColumn && !dataColumn;
+        if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
+            $event.colDef.editable = true;
+            $event.colDef.cellEditor = 'text';
+        }
        
     }
 
