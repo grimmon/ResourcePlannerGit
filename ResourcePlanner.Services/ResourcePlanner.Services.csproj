@@ -274,6 +274,7 @@
     <Compile Include="Controllers\ProjectViewController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceDetailController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="DataAccess\AddAssignmentDataAccess.cs" />
     <Compile Include="DataAccess\AddProjectDataAccess.cs" />
     <Compile Include="DataAccess\AuthDataAccess.cs" />

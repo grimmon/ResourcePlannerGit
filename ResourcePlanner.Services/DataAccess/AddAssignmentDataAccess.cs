@@ -71,6 +71,19 @@ namespace ResourcePlanner.Services.DataAccess
             return returnValue;
         }
 
+        public List<IdNameGeneric> GetTasks()
+        {
+
+            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectMasterId", "TaskName"),
+                _connectionString,
+                @"rpdb.TaskSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                 new SqlParameter[] { });
+
+            return returnValue;
+        }
+
         private SqlParameter[] AddAssignmentParameters(AddAssignments asgn)
         {
             var parameterList = new List<SqlParameter>();

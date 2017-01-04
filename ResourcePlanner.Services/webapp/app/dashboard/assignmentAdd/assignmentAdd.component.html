@@ -2,23 +2,34 @@
     <h3>Add Assignment</h3>
     <div class="panel">
         <div class="col-sm-2" style="width:22%">
-            <div>
+            <label [style.color]="tasksVisible ? '#000' : '#534742'">Project </label>
+            <ui-switch [(ngModel)]="tasksVisible" color="#CC0057" size="small"></ui-switch>
+            <label [style.display]="tasksVisible ? '#534742' : '#000'"> Task </label>
+            
+            <div [style.display]="tasksVisible ? 'none' : 'block'">
                 <label>Project</label><br />
-                <input class="form-control autocomplete" 
-                    auto-complete 
-                    auto-complete-placeholder="Select a project"
-                    value-property-name="Id"
-                    display-property-name="Name"
-                    [(ngModel)]="project" 
-                    max-num-list="16"
-                    min-chars="3" 
-                    [source]="projectSource" 
-                    [list-formatter]="projectListFormatter"
-                    loading-text="Looking for projects..." />
+                <input class="form-control autocomplete"
+                       auto-complete
+                       auto-complete-placeholder="Select a project"
+                       value-property-name="Id"
+                       display-property-name="Name"
+                       [(ngModel)]="project"
+                       max-num-list="16"
+                       min-chars="3"
+                       [source]="projectSource"
+                       [list-formatter]="projectListFormatter"
+                       loading-text="Looking for projects..." />
                 <a>
                     <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Add project" (click)="addProject()" />
                 </a>
             </div>
+            <div [style.display]="tasksVisible ? 'block' : 'none'">
+                <label>Task</label>
+                <select id="assignmentTaskDropdown" class="form-control" [(ngModel)]="task">
+                    <option *ngFor="let option of getTasks()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+
             <div>
                 <label>Position</label><br />
                 <select class="position-selector form-control" multiple="multiple"></select>
@@ -41,46 +52,47 @@
             </div>
             <div>
                 <label>End Date</label>
-                <input type='date' class="form-control" [(ngModel)]="addAssignments.endDate" (input)="endDateChanged($event)"/>
+                <input type='date' class="form-control" [(ngModel)]="addAssignments.endDate" (input)="endDateChanged($event)" />
             </div>
             <div>
+                <div>
+                    <label [style.display]="hoursPerDayVisible ? '#534742' : '#000'"> Hours per week </label>
+                    <ui-switch [(ngModel)]="hoursPerDayVisible" color="#CC0057" size="small"></ui-switch>
+                    <label [style.color]="hoursPerDayVisible ? '#000' : '#534742'">Hours per day </label>
+ 
 
-
-
-                <div class="form-group" [style.display]="hoursPerWeekVisible ? 'block' : 'none'">
-                    <label>Hours per week:</label>
-                    <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="addAssignments.hoursPerWeek">
-                    <a>
-                        <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Open Add Client" (click)="openHoursPerDay()" />
-                    </a>
                 </div>
-                <div class="form-group" [style.display]="hoursPerWeekVisible ? 'none' : 'block'">
-                    <label>Hours per day: </label>
+                <div class="form-group" [style.display]="hoursPerDayVisible ?'none' : 'block'" >
+                    <input type="number" ng-required="required" class="form-control" min="0" max="168" [(ngModel)]="addAssignments.hoursPerWeek">
+                    <!--<a>
+                        <img src="/Images/IRMT_Icons_NewProjectBtn.png" alt="Open Add Client" (click)="openHoursPerDay()" />
+                    </a>-->
+                </div>
+                <div class="form-group" [style.display]="hoursPerDayVisible ? 'block' : 'none'">
                     <div>
                         <input type="number" ng-required="required" class="form-control" min="0" max="16" [(ngModel)]="addAssignments.hoursPerDay">
                     </div>
                     <div class="row">
-                        <div class="col-sm-11">
-                            <select class="dayofweek-selector" multiple="multiple" [(ngModel)]="addAssignments.daysOfWeek"></select>
-                        </div>
-                        <div class="col-sm-1">
+                        <select class="dayofweek-selector" multiple="multiple" [(ngModel)]="addAssignments.daysOfWeek"></select>
+
+                        <!--<div class="col-sm-1">
                             <a>
-                                <img src="/Images/IRMT_Icons_CloseBtn.png" width="16" style="padding-left:0" (click)="hoursPerWeekVisible = true" alt="Return to Hours Per Week " />
+                                <img src="/Images/IRMT_Icons_CloseBtn.png" width="16" style="padding-left:0" (click)="hoursPerDayVisible = true" alt="Return to Hours Per Week " />
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="col-sm-10" style="width:78%">
             <timespan-grid id="resource"
-                            [applyTrigger]="applyTrigger"
-                            [gridConfig]="gridConfig"
-                            [queryConfig]="queryConfig"
-                            [currentDate]="currentDate"
-                            (refreshed)="refreshed($event)"
-                            (dataRequested)="dataRequested($event)">
+                           [applyTrigger]="applyTrigger"
+                           [gridConfig]="gridConfig"
+                           [queryConfig]="queryConfig"
+                           [currentDate]="currentDate"
+                           (refreshed)="refreshed($event)"
+                           (dataRequested)="dataRequested($event)">
             </timespan-grid>
         </div>
     </div>

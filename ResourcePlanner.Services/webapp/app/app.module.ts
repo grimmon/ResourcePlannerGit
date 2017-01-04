@@ -8,6 +8,7 @@ import './core/rxjs-extensions';
 
 import { AgGridModule } from 'ag-grid-ng2/main';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { UiSwitchModule } from 'angular2-ui-switch';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +41,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         HttpModule,
         FormsModule,
         CommonModule,
+        UiSwitchModule,
 
         AgGridModule.forRoot(),
         Ng2AutoCompleteModule,

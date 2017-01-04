@@ -15,6 +15,7 @@ export class OptionService {
     aggregations: Option[] = [];
     resourceManagers: Option[] = [];
     positions: Option[] = [];
+    tasks: Option[] = [];
 
     categories: Observable<any>;
 
@@ -38,6 +39,8 @@ export class OptionService {
                 return this.aggregations;
             case OptionType.ResourceManager:
                 return this.resourceManagers;
+            case OptionType.Task:
+                return this.tasks;
         }
     }
 
@@ -143,6 +146,7 @@ export class OptionService {
                 this.aggregations = this.createCategory(OptionType[OptionType.agg], categoryOptions, false);
                 this.resourceManagers = this.createCategory(OptionType[OptionType.ResourceManager], categoryOptions);
                 this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
+                this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions, false);
             });
     }
 

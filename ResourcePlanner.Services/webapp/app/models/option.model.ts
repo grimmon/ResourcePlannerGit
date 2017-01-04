@@ -20,7 +20,8 @@ export enum OptionType {
     Practice,
     SubPractice,
     agg,
-    ResourceManager
+    ResourceManager,
+    Task
 }
 
 export class CategoryOption extends Option {

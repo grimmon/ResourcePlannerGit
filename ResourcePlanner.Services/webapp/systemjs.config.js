@@ -24,6 +24,7 @@
             'ag-grid-ng2': 'npm:ag-grid-ng2',
             'ag-grid': 'npm:ag-grid',
             'ng2-auto-complete': 'npm:ng2-auto-complete/dist',
+            'angular2-ui-switch': 'npm:angular2-ui-switch/dist',
             'rxjs': 'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
         },
@@ -43,6 +44,10 @@
                 defaultExtension: "js"
             },
             'ag-grid': {
+                defaultExtension: "js"
+            },
+            'angular2-ui-switch': {
+                main: 'index',
                 defaultExtension: "js"
             },
             'ng2-auto-complete': {

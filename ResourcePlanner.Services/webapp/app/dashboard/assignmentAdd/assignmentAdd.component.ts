@@ -66,16 +66,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     practice: number = -1;
     subPractice: number = -1;
+    task: number = -1;
     positions: any[];
 
     private positionSelector: JQuery;
     private daysOfWeekSelector: any;
 
-    hoursPerWeekVisible = true;
-
-    openHoursPerDay() {
-        this.hoursPerWeekVisible = false;
-    }
+    hoursPerDayVisible = false;
+    tasksVisible = false;
 
     clientNameChanged($event: any) {
     }
@@ -137,10 +135,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             });
             return;
         }
-
-        this.addAssignments.projectMasterId = this.project.Id;
+        if (this.tasksVisible) {
+            this.addAssignments.projectMasterId = this.task;
+        }
+        else {
+            this.addAssignments.projectMasterId = this.project.Id;
+        }
         this.addAssignments.resourceIds = this.gridConfig.selectedIds;
-        if (this.hoursPerWeekVisible) {
+        if (this.hoursPerDayVisible) {
             this.addAssignments.hoursPerDay = null;
         }
         else {
@@ -158,8 +160,15 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     private validate() {
         var errors: any[] = [];
-        if (!this.project) {
-            errors.push('Project must be selected.');
+        if (this.tasksVisible) {
+            if (!this.task) {
+                errors.push('Project or task must be selected')
+            }
+        }
+        else {
+            if (!this.project) {
+                errors.push('Project must be selected.');
+            }
         }
         if (!this.gridConfig.selectedIds.length) {
             errors.push('At least one resource must be selected.');
@@ -181,6 +190,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this.subPractice = $event.target.value;
         this.reloadGrid();
     }
+
+    //taskChanged($event: any) {
+    //    this.ProjectMasterId = $event.target.value;
+    //}
 
     startDateChanged($event: any) {
         this.addAssignments.startDate = $event.target.value;
@@ -231,6 +244,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     private getSubPractices() {
         return this.optionService.subPractices;
+    }
+
+    private getTasks() {
+        return this.optionService.tasks;
     }
 
     private createColumns() {
