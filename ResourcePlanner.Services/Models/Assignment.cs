@@ -12,6 +12,7 @@ namespace ResourcePlanner.Services.Models
         public double ForecastHours { get; set; }
         public double ActualHours { get; set; }
         public double ResourceHours { get; set; }
+        public double SoftResourceHours { get; set; }
     }
     public class AddAssignments
     {

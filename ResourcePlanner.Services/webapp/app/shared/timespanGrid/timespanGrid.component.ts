@@ -152,6 +152,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     private addAssignment(row: any, assignment: any, timePeriod: any) {
         timePeriod += "-";
         row[timePeriod + "ResourceHours"] = assignment.ResourceHours;
+        row[timePeriod + "ResourceHoursSoft"] = assignment.SoftResourceHours;
         row[timePeriod + "ForecastHours"] = assignment.ForecastHours;
         row[timePeriod + "ActualHours"] = assignment.ActualHours;
         row[timePeriod + "DeltaHours"] = assignment.ForecastHours - assignment.ResourceHours;
@@ -177,6 +178,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
         return colDef;
 
+
         function timePeriodCellRenderer(params: any) {
             if (params.data !== undefined) {
                 var floatValue = parseFloat(params.value);
@@ -189,6 +191,13 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                         }
                         if (floatValue < 0) {
                             return "<img src='Images/IRMT_Icons_RedDownArrow.png'/> " + value;
+                        }
+                    }
+                    if (colName.includes('Resource')) {
+                        var softCol = colName + "Soft";
+                        var softColVal = parseFloat(params.data[softCol]);
+                        if (softColVal > 0) {
+                            return '<div style="background-color:lightgrey;">' + value + '</div>';
                         }
                     }
                     return value;

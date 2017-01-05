@@ -59,12 +59,14 @@ namespace ResourcePlanner.Services.Mapper
                     assignment.ForecastHours = WeekWorkHours - reader.GetDouble("ForecastHours");
                     assignment.ActualHours = WeekWorkHours - reader.GetDouble("ActualHours");
                     assignment.ResourceHours = WeekWorkHours - reader.GetDouble("ResourceHours");
+                    assignment.SoftResourceHours = WeekWorkHours - reader.GetDouble("SoftResourceHours");
                 }
                 else
                 {
                     assignment.ForecastHours = reader.GetDouble("ForecastHours");
                     assignment.ActualHours = reader.GetDouble("ActualHours");
                     assignment.ResourceHours = reader.GetDouble("ResourceHours");
+                    assignment.SoftResourceHours = reader.GetDouble("SoftResourceHours");
                 }
                 resources[curr].Assignments.Add(assignment);
 

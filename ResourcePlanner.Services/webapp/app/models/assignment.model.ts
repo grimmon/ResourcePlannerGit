@@ -4,6 +4,7 @@ export class Assignment {
     ForecastHours: number;
     ActualHours: number;
     ResourceHours: number;
+    SoftResourceHours: number;
 }
 
 export class AddAssignments {

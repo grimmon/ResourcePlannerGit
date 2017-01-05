@@ -2,3 +2,7 @@
   position: absolute;
   left: 46%;top: 12%
 }
+
+.softBooked {
+    background-color: lightpink;
+}
