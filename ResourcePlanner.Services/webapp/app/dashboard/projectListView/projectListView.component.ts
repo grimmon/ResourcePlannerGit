@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { MessageService, DateService } from '../../core';
-import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService } from '../../models';
+import { MessageService, DateService, CONFIG } from '../../core';
+import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService, OptionService, UpdateProject } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -14,6 +14,17 @@ import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService } from '..
 })
 export class ProjectListViewComponent implements OnDestroy, OnInit {
     visible: boolean = false;
+
+    saving: boolean = false;
+
+    editWBSVisible: boolean = false; 
+    wbsProjectSelectorVisible: boolean = false;
+
+    wbsProject: any;
+    wbsProjectSource: any;
+    wbsProjectListFormatter: any;
+
+    updateProject: UpdateProject;
 
     projectInfo: ProjectInfo;
 
@@ -30,6 +41,12 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
     queryConfig: any = {
         query: "projectId=0",
     };
+
+    refreshed($event: any) {
+        if (this.projectInfo.WBSCode.indexOf("TEMP") >= 0) {
+            this.editWBSVisible = true;
+        }
+    }
 
     _showTrigger: any;
     _projectTrigged = 0;
@@ -59,6 +76,9 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
         this.messageService.modalToggle(this.visible = false);
     }
 
+    editWbs() {
+        this.wbsProjectSelectorVisible = true;
+    }
 
     dataRequested($event: any) {
         $event.dataObservable = this.projectService.getProjects("?projectId=" + this._projectToView.Id);
@@ -79,9 +99,19 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
     constructor(
         private dateService: DateService,
         private messageService: MessageService,
+        private optionService: OptionService,
         private projectService: ProjectService) {
+        
 
         this.createColumns();
+
+        this.updateProject = new UpdateProject({
+            OldWBSCode: '',
+            NewProjectMasterId: 0
+        });
+
+        this.wbsProjectSource = this.optionService.setSource(CONFIG.urls.wbsProjects);
+        this.wbsProjectListFormatter = this.optionService.setListFormatter();
     }
 
     ngOnInit() {
@@ -137,6 +167,42 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
 
     }
 
+    saveWbs() {
+
+        var errors = this.validate();
+        if (errors) {
+            this.messageService.errorRequest({
+                message: 'Save cannot be done because of the following:',
+                messages: errors
+            });
+            return;
+        }
+        
+        this.updateProject.OldWBSCode = this.projectInfo.WBSCode;
+
+        this.updateProject.NewProjectMasterId = this.wbsProject.Id;
+
+        this.saving = true;
+        this.projectService
+            .updateWBS(this.updateProject)
+            .subscribe(res => {
+                this.saving = false;
+                this.wbsProjectSelectorVisible = false;
+                this.editWBSVisible = false;
+            });
+    }
+    private validate() {
+        var errors: any[] = [];
+        
+        if (!this.wbsProject) {
+            errors.push('Project must be selected.');
+        }
+        
+        
+        
+        
+        return errors.length ? errors : null;
+    }
     ngOnDestroy() {
     }
 }

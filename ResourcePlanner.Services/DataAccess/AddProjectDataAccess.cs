@@ -41,6 +41,25 @@ namespace ResourcePlanner.Services.DataAccess
             
         }
 
+        public IdNameGeneric UpdateProject(string oldWBSCode, int newProjectMasterId)
+        {
+            IdNameGeneric result = null;
+
+            var results = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectMasterId", "WBSCode"),
+                _connectionString,
+                @"rpdb.InternalProjectUpdate",
+                CommandType.StoredProcedure,
+                _timeout,
+                new SqlParameter[] { AdoUtility.CreateSqlParameter("OldWBSCode", 50, SqlDbType.VarChar, oldWBSCode),
+                                     AdoUtility.CreateSqlParameter("NewProjectMasterId", SqlDbType.Int, newProjectMasterId)} );
+            if (results.Count > 0)
+            {
+                result = results[0];
+            }
+            return result;
+
+        }
+
         public List<IdNameGeneric> GetCustomers(string searchTerm)
         {
 

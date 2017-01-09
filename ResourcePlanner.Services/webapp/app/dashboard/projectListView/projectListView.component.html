@@ -17,7 +17,31 @@
             </div>
             <div class="col-md-2">
                 <div class="pvlabel">WBS#</div>
-                <div>{{projectToView.WBSElement}}</div>
+                <div [style.display]="editWBSVisible ? 'block': 'none' ">
+                    <div [style.display]="wbsProjectSelectorVisible ? 'block' : 'none'">
+                        <input class="form-control autocomplete"
+                               auto-complete
+                               auto-complete-placeholder="Select a project to link to"
+                               value-property-name="Id"
+                               display-property-name="Name"
+                               [(ngModel)]="wbsProject"
+                               max-num-list="16"
+                               min-chars="3"
+                               [source]="wbsProjectSource"
+                               [list-formatter]="wbsProjectListFormatter"
+                               loading-text="Looking for projects..." />
+                        
+                        <button type="button" class="btn btn-primary" id="saveWBS" (click)="saveWbs()">Save</button>
+                        
+                    </div>
+                    <div [style.display]="wbsProjectSelectorVisible ? 'none' : 'block'" >
+                        <button type="button" class="btn btn-primary" id="editWBS" (click)="editWbs()">Edit</button>
+                    </div>
+                </div>
+                <div [style.display]="editWBSVisible ? 'none' : 'block'">
+                    <div>{{projectInfo ? projectInfo.WBSCode : ''}}</div>
+                </div>
+                
             </div>
             <div class="col-md-4">
                 <div class="pvlabel">Description</div>
@@ -48,10 +72,11 @@
     </div>
     <div class="grid">
         <timespan-grid id="resource"
-                        [applyTrigger]="applyTrigger"
-                        [gridConfig]="gridConfig"
-                        [queryConfig]="queryConfig"
-                        (dataRequested)="dataRequested($event)">
+                       [applyTrigger]="applyTrigger"
+                       [gridConfig]="gridConfig"
+                       [queryConfig]="queryConfig"
+                       (refreshed)="refreshed($event)"
+                       (dataRequested)="dataRequested($event)">
         </timespan-grid>
     </div>
     <div class="buttons">

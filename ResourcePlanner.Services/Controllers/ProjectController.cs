@@ -11,11 +11,12 @@ using System.Web.Http;
 
 namespace ResourcePlanner.Services.Controllers
 {
+    [RoutePrefix("api/project")]
     public class ProjectController : ApiController
     {
         [HttpGet]
         //[Authorize]
-
+        [Route("get")]
         public async Task<IHttpActionResult> Get(string searchTerm = "")
         {
 
@@ -38,6 +39,83 @@ namespace ResourcePlanner.Services.Controllers
             }
 
             return Ok(values);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("add")]
+        public async Task<IHttpActionResult> Add(
+            string projectName,
+            DateTime startDate,
+            DateTime endDate,
+            int? customerId = null,
+            string customerName = "",
+            int? opportunityOwnerId = null,
+            int? projectManagerId = null,
+            string description = "")
+        {
+#if Mock
+            return Ok();
+#endif
+
+
+            var access = new AddProjectDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+
+
+            var project = new AddProject()
+            {
+                ProjectName = projectName,
+                StartDate = startDate,
+                EndDate = endDate,
+                CustomerId = customerId,
+                CustomerName = customerName,
+                OpportunityOwnerId = opportunityOwnerId,
+                ProjectManagerId = projectManagerId,
+                Description = description
+            };
+
+            try
+            {
+                var projectReturn = access.AddProject(project);
+                if (projectReturn == null)
+                {
+                    return Content(HttpStatusCode.InternalServerError, "Error retrieving added ProjectId");
+                }
+                return Ok(projectReturn);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("update")]
+        public async Task<IHttpActionResult> Update(string OldWBSCode, int newProjectMasterId)
+        {
+#if Mock
+            return Ok();
+#endif
+
+
+            var access = new AddProjectDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            try
+            {
+                var projectReturn = access.UpdateProject(OldWBSCode, newProjectMasterId);
+                if (projectReturn == null)
+                {
+                    return Content(HttpStatusCode.InternalServerError, "Error updating WBS Code");
+                }
+                return Ok(projectReturn);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

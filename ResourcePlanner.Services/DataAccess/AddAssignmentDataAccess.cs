@@ -57,6 +57,20 @@ namespace ResourcePlanner.Services.DataAccess
             return returnValue;
         }
 
+        public List<IdNameGeneric> GetWBSProjects(string searchTerm)
+        {
+
+            var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToIdNameGeneric(reader, "ProjectMasterId", "ProjectName", "WBSCode"),
+                _connectionString,
+                @"rpdb.WBSProjectSelect",
+                CommandType.StoredProcedure,
+                _timeout,
+                 searchTerm == "" ? new SqlParameter[] { }
+                              : new SqlParameter[] { AdoUtility.CreateSqlParameter("SearchTerm", 50, SqlDbType.VarChar, searchTerm) });
+
+            return returnValue;
+        }
+
         public List<IdNameGeneric> GetPositions(string searchTerm)
         {
 

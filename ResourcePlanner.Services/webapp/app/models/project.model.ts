@@ -97,6 +97,19 @@ export class AddProject {
     }
 }
 
+export class UpdateProject {
+    OldWBSCode: string; 
+    NewProjectMasterId: number;
+
+    public constructor(
+        fields?: {
+            OldWBSCode?: string,
+            NewProjectMasterId?: number,
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
+}
+
 export class ProjectResourceRow {
     Id: number;
     ResourceName: string;
