@@ -143,10 +143,12 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         }
         this.addAssignments.resourceIds = this.gridConfig.selectedIds;
         if (this.hoursPerDayVisible) {
-            this.addAssignments.hoursPerDay = null;
+            this.addAssignments.hoursPerWeek = null;
+            
         }
         else {
-            this.addAssignments.hoursPerWeek = null;
+            this.addAssignments.hoursPerDay = null;
+            this.addAssignments.daysOfWeek = null;
         }
 
         this.saving = true;

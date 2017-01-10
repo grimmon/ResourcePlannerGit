@@ -12,7 +12,7 @@ export let CONFIG = {
         projectView: 'api/ProjectView',
         projectAdd: 'api/project/add',
         projectUpdate: 'api/project/update',
-        project: 'api/project',
+        project: 'api/project/get',
         customer: 'api/customer',
         manager: 'api/manager',
         position: 'api/position',

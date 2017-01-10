@@ -41,6 +41,33 @@ namespace ResourcePlanner.Services.Controllers
             return Ok(values);
         }
 
+        [HttpGet]
+        //[Authorize]
+        [Route("wbs")]
+        public async Task<IHttpActionResult> GetWbs(string searchTerm = "")
+        {
+
+#if Mock
+            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+#else
+            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+#endif
+            List<IdNameGeneric> values;
+
+            try
+            {
+                values = access.GetWBSProjects(searchTerm);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Ok(values);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("add")]

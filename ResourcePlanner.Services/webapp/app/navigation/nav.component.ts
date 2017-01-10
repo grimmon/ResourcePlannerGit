@@ -23,8 +23,8 @@ export class NavComponent implements OnInit {
                 redirectUri: window.location.origin + '/',
                 postLogoutRedirectUri: window.location.origin + '/',
                 tenant: 'bluemetal.com',
-                //clientId: '55324854-cfd5-4d16-bf63-556abddbdf83',  //for localhost testing
-                clientId: 'e36e4a47-114e-41a6-abb0-160b8ead8098',
+                clientId: '55324854-cfd5-4d16-bf63-556abddbdf83',  //for localhost testing
+                //clientId: 'e36e4a47-114e-41a6-abb0-160b8ead8098',
             });
 
         this.messageService.onModalToggled(on => {
@@ -56,6 +56,10 @@ export class NavComponent implements OnInit {
 
     requestResource() {
         this.messageService.resourceRequestRequest(true);
+    }
+
+    editColumns() {
+        this.messageService.editColumnRequest(true);
     }
 
     ngOnInit() {
