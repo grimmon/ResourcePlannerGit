@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Option, CategoryOption, OptionType } from './option.model';
+import { Option, CategoryOption, OptionType, ColumnOption,  ResourcePageColumnType, DetailPageColumnType } from './option.model';
 import { CONFIG, ServerService } from '../core';
 
 @Injectable()
@@ -16,6 +16,10 @@ export class OptionService {
     resourceManagers: Option[] = [];
     positions: Option[] = [];
     tasks: Option[] = [];
+    resourcePageColumnOptions: ColumnOption[];
+    detailPageColumnOptions: ColumnOption[];
+
+
 
     categories: Observable<any>;
 
@@ -46,6 +50,28 @@ export class OptionService {
 
     getOptions(url: string, term: string): Observable<Option[]> {
         return this.serverService.get<Option[]>(url, "?searchTerm=" + term);
+    }
+
+    getResourceColumnOption(columnName: string) {
+        return this.resourcePageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
+    }
+    getResourceColumnOptionByField(fieldName: string) {
+        return this.resourcePageColumnOptions.find(myObj => myObj.FieldName == fieldName).Hidden;
+    }
+
+    setResourceColumnOption(columnName: string) {
+        this.resourcePageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden = !this.resourcePageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
+    }
+
+    getDetailColumnOption(columnName: string) {
+        return this.detailPageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
+    }
+    getDetailColumnOptionByField(fieldName: string) {
+        return this.detailPageColumnOptions.find(myObj => myObj.FieldName == fieldName).Hidden;
+    }
+
+    setDetailColumnOption(columnName: string) {
+        this.detailPageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden = !this.detailPageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
     }
 
     initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void): JQuery {
@@ -148,6 +174,76 @@ export class OptionService {
                 this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
                 this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions, false);
             });
+        this.resourcePageColumnOptions = [
+            new ColumnOption({
+                FieldName: 'ResourceName',
+                ColumnName: 'Resource Name',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'Position',
+                ColumnName: 'Position',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'City',
+                ColumnName: 'City',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'Practice',
+                ColumnName: 'Practice',
+                Hidden: true
+            }),
+            new ColumnOption({
+                FieldName:'SubPractice',
+                ColumnName: 'Sub-practice',
+                Hidden: true
+            }),
+            new ColumnOption({
+                FieldName: 'ResourceManager',
+                ColumnName: 'Resource Mgr',
+                Hidden: false
+            })
+        ];
+        this.detailPageColumnOptions = [
+            new ColumnOption({
+                FieldName: 'ProjectName',
+                ColumnName: 'Project Name',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'ProjectNumber',
+                ColumnName: 'Project Number',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'WBSElement',
+                ColumnName: 'WBS Element',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'Client',
+                ColumnName: 'Client',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'OpportunityOwner',
+                ColumnName: 'Opportunity Owner',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'ProjectManager',
+                ColumnName: 'Project Manager',
+                Hidden: false
+            }),
+            new ColumnOption({
+                FieldName: 'Description',
+                ColumnName: 'Description',
+                Hidden: false
+            })
+        ];
+
     }
 
     private createCategory(categoryName: string, categoryOptions: CategoryOption[], useNone: boolean = true): Option[] {

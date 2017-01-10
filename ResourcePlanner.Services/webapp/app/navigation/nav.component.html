@@ -3,11 +3,11 @@
         <img src="Images/IRMT_Icons_InsightLogo.png" alt="Insight" />
     </div>
     <div class="buttoncontainer" [style.display]="modal ? 'none' : 'block'">
-        <div class="buttonbox">
+        <!--<div class="buttonbox">
             <div class="button">
                 <img src="Images/IRMT_NavIcons_Profile.png" alt="User" />
             </div>
-        </div>
+        </div>-->
         <div class="buttonbox" [style.display]="addAssigmentAllowed ? 'block' : 'none'">
             <div class="button">
                 <img src="Images/IRMT_NavIcons_AssignNewResource.png" (click)="addAssignment()" alt="Add" />
@@ -26,6 +26,11 @@
         <div class="buttonbox">
             <div class="button">
                 <img src="Images/Email-icon.png" (click)="requestResource()" alt="Request a Resource" height="30" />
+            </div>
+        </div>
+        <div class="buttonbox">
+            <div class="button">
+                <img src="Images/Columns-icon.png" (click)="editColumns()" alt="Edit Columns" height="30" />
             </div>
         </div>
     </div>

@@ -34,6 +34,15 @@ export class MessageService {
         this.addAssignmentRequested.next(value);
     }
 
+    private editColumnRequested = new Subject<boolean>();
+
+    onEditColumnRequested(handler: (value: boolean) => void) {
+        this.editColumnRequested.subscribe(handler)
+    }
+    editColumnRequest(value: boolean) {
+        this.editColumnRequested.next(value);
+    }
+
     // request resource request (from Navigation to dashboard)
     private resourceRequestRequested = new Subject<boolean>();
 

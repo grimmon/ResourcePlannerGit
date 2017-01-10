@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CONFIG, MessageService, DateService } from '../../core';
-import { TimeDataPage, TimeAggregation, AddAssignments, UpdateAssignment } from '../../models';
+import { TimeDataPage, TimeAggregation, AddAssignments, UpdateAssignment, OptionService } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -62,7 +62,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
     constructor(
         private messageService: MessageService,
-        private dateService: DateService) {
+        private dateService: DateService,
+        private optionService: OptionService) {
 
         this.dataRequested = new EventEmitter<any>();
         this.rowSelected = new EventEmitter<any>();
@@ -222,6 +223,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         return {
             suppressMenu: true,
             headerName: header,
+            marryChildren: true,
             context: { type: groupType, index: fieldName },
             children: [
                 this.createDateColumn(fieldName, "ResourceHours", 0),
@@ -281,6 +283,18 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         return `?pageSize=${pageSize}&pageNum=${pageNum}${this.getDateQuery()}${this.getSortQuery(params)}${this.queryConfig.query ? '&' + this.queryConfig.query : ''}`;
     }
 
+    private hideColumns() {
+        var myService = this.optionService;
+        this.gridConfig.columns.forEach(function (element: any) {
+            if (element.context.type == 'resourceColumn') {
+                element.hide = myService.getResourceColumnOptionByField(element.field) || false;
+            }
+            if (element.context.type == 'resourceDetailColumn') {
+                element.hide = myService.getDetailColumnOptionByField(element.field) || false;
+            }
+        });
+    }
+
     private refresh() {
         var api = this.gridOptions.api;
         api.showLoadingOverlay();
@@ -295,6 +309,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 (<Observable<any>>request.dataObservable).subscribe((page: TimeDataPage) => {
                     api.hideOverlay();
                     var rows = this.createRowData(page);
+                    this.hideColumns();
                     if (page.TimePeriods) {
                         this.gridOptions.api.setColumnDefs(this.createColumnDefs(page.TimePeriods));
                     }
@@ -337,27 +352,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             $event.colDef.cellEditor = 'text';
         }
        
-    }
-
-    private callPopupEditor($event: any) {
-        //if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
-        //    // activate editor
-        //    var field = $event.colDef.field,
-        //        periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
-        //        periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
-        //        periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
-        //    this.dataCellEditorRequested.emit({
-        //        context: this.gridConfig.context,
-        //        assignment: new UpdateAssignment({
-        //            resourceId: 0,
-        //            projectMasterId: $event.data.Id,
-        //            hoursPerDay: CONFIG.defaultHoursPerDay,
-        //            startDate: this.dateService.format(periodStart),
-        //            endDate: this.dateService.format(periodEnd),
-        //            daysOfWeek: CONFIG.defaultDaysOfWeek,
-        //        })
-        //    });
-        //}
     }
 
     private onRowSelected($event: any) {

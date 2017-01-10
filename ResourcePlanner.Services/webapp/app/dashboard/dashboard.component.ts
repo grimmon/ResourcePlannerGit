@@ -40,6 +40,15 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.assignmentAddShow++;
     }
 
+    editColumnShow = 0;
+    editColumnRequested() {
+        this.editColumnShow++;
+    }
+
+    columnEdited() {
+
+    }
+
     addProjectShow = 0;
     addProjectRequested() {
         this.addProjectShow++;
@@ -53,6 +62,10 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
         this.messageService.onAddAssignmentRequested(state => {
             this.assignmentAddRequested();
+        });
+
+        this.messageService.onEditColumnRequested(state => {
+            this.editColumnRequested();
         });
 
         this.messageService.onAssignmentEditorRequested(assignmentInfo => {

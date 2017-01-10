@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
-import { Resource, ResourcePage, ResourceRow, ResourceService, TimeAggregation } from '../../models';
+import { Resource, ResourcePage, ResourceRow, ResourceService, TimeAggregation, OptionService } from '../../models';
 
 
 @Component({
@@ -62,7 +62,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     constructor(
         private messageService: MessageService,
         private dateService: DateService,
-        private resourceService: ResourceService) {
+        private resourceService: ResourceService,
+        private optionService: OptionService    ) {
 
         this.resourceSelected = new EventEmitter<any>();
 
@@ -102,6 +103,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 width: 150,
                 suppressMenu: true,
                 pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Resource Name") || false
             },
             {
                 context: { type: "resourceColumn", index: 1 },
@@ -109,7 +111,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 field: "Position",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Position") || false
             },
             {
                 context:
@@ -118,7 +121,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 field: "City",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("City") || false
             },
             {
                 context: { type: "resourceColumn", index: 3 },
@@ -126,7 +130,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 field: "Practice",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Practice") || false
             },
             {
                 context: { type: "resourceColumn", index: 4 },
@@ -134,7 +139,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 field: "SubPractice",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Sub-practice") || false
             },
             {
                 context: { type: "resourceColumn", index: 5 },
@@ -142,7 +148,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 field: "ResourceManager",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Resource Mgr") || false
             },
         ];
 

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
-import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, UpdateAssignment, TimeAggregation } from '../../models';
+import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, UpdateAssignment, TimeAggregation, OptionService } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -83,7 +83,9 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
         private dateService: DateService,
         private resourceService: ResourceService,
         private route: ActivatedRoute,
-        private router: Router) {
+        private router: Router,
+        private optionService: OptionService
+            ) {
 
         this.projectViewRequested = new EventEmitter<any>();
 
@@ -119,6 +121,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 width: 150,
                 suppressMenu: true,
                 pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Project Name") || false
             },
             {
                 context: { type: "resourceDetailColumn", index: 1 },
@@ -126,7 +129,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "ProjectNumber",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Project Number") || false
             },
             {
                 context:  { type: "resourceDetailColumn", index: 2 },
@@ -134,7 +138,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "WBSElement",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("WBS Element") || false
             },
             {
                 context: { type: "resourceDetailColumn", index: 3 },
@@ -142,7 +147,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "Client",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Client") || false
             },
             {
                 context: { type: "resourceDetailColumn", index: 4 },
@@ -150,7 +156,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "OpportunityOwner",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Opportunity Owner") || false
             },
             {
                 context: { type: "resourceDetailColumn", index: 5 },
@@ -158,7 +165,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "ProjectManager",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Project Manager") || false
             },
             {
                 context: { type: "resourceDetailColumn", index: 6 },
@@ -166,7 +174,8 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
                 field: "Description",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
+                pinned: 'left',
+                hide: this.optionService.getDetailColumnOption("Description") || false
             },
         ];
 

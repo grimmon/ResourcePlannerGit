@@ -37,3 +37,65 @@ export class CategoryOption extends Option {
         this.Category = fields.Category || this.Category;
     }
 }
+
+export enum ResourcePageColumnType {
+    ResourceName,
+    Position,
+    City,
+    Practice,
+    SubPractice,
+    ResourceMgr
+}
+
+export enum DetailPageColumnType {
+    ProjectName,
+    ProjectNumber,
+    WBSElement,
+    Client,
+    OpportunityOwner,
+    ProjectManager,
+    Description
+}
+
+export class ColumnOption {
+    ColumnName: string;
+    FieldName: string;
+    Hidden: boolean;
+    public constructor(
+        fields?: {
+            ColumnName?: string,
+            FieldName?: string,
+            Hidden?: boolean
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
+
+
+}
+
+export class ResourcePageColumnOption extends ColumnOption {
+    ColumnType: ResourcePageColumnType;
+    public constructor(
+        fields?: {
+            ColumnName?: string,
+            Hidden?: boolean,
+            ColumnType?: ResourcePageColumnType
+        }) {
+        super(fields);
+        this.ColumnType = fields.ColumnType || this.ColumnType;
+    }
+}
+
+export class DetailPageColumnOption extends ColumnOption {
+    ColumnType: DetailPageColumnType;
+    public constructor(
+        fields?: {
+            ColumnName?: string,
+            Hidden?: boolean,
+            ColumnType?: DetailPageColumnType,
+            
+        }) {
+        super(fields);
+        this.ColumnType = fields.ColumnType || this.ColumnType;
+    }
+}

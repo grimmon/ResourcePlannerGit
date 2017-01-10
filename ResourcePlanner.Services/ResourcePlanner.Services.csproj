@@ -205,6 +205,8 @@
     <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.html" />
     <Content Include="webapp\app\app.component.css" />
     <Content Include="webapp\app\app.component.html" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.css" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.html" />
     <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.css" />
     <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.html" />
     <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.css" />
@@ -263,7 +265,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\AuthorizationAttribute.cs" />
     <Compile Include="Controllers\AddAssignmentController.cs" />
-    <Compile Include="Controllers\AddProjectController.cs" />
     <Compile Include="Controllers\AuthorizedController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
@@ -352,6 +353,7 @@
     <TypeScriptCompile Include="webapp\app\app.component.ts" />
     <TypeScriptCompile Include="webapp\app\app.module.ts" />
     <TypeScriptCompile Include="webapp\app\core\adal.service.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\EditColumns\editColumns.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\hoursEditor\hoursEditor.component.ts" />
     <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
