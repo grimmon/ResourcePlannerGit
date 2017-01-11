@@ -17,7 +17,7 @@ import { CONFIG } from '../../core';
 })
 export class EditColumnsComponent implements OnDestroy, OnInit {
 
-    @Output() editColumnsRequested: EventEmitter<any>;
+    @Output() columnsEdited: EventEmitter<any>;
 
     set showTrigger(v: any) {
         this._showTrigger = v;
@@ -47,12 +47,14 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
         private dateService: DateService,
         private exceptionService: ExceptionService ) {
 
+        this.columnsEdited = new EventEmitter<any>();
     }
 
     ngOnInit() {
     }
 
     close() {
+        this.messageService.timespanGridRefreshRequest('resource-list');
         this.messageService.modalToggle(this.visible = false);
     }
 

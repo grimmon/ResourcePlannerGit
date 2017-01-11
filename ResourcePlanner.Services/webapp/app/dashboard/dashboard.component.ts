@@ -45,8 +45,9 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.editColumnShow++;
     }
 
+    columnEdit = 0
     columnEdited() {
-
+        this.columnEdit++;
     }
 
     addProjectShow = 0;

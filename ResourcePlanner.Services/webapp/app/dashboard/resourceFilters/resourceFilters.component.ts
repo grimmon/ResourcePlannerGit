@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-
+import { LocalStorageService } from 'angular-2-local-storage';
 import { MessageService } from '../../core';
 import { Option, CategoryOption, OptionService, TimeAggregation } from '../../models';
 
@@ -80,12 +80,14 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     apply() {
         this.buildFilters();
+        this.saveFilters();
         this.applyFiltersRequested.emit(this.filterQuery);
     }
 
     constructor(
         private messageService: MessageService,
-        private optionService: OptionService) {
+        private optionService: OptionService,
+        private localStorageService: LocalStorageService    ) {
 
         this.applyFiltersRequested = new EventEmitter<any>();
 
@@ -97,10 +99,47 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     }
 
+    getPreviousFilters() {
+        var previousSelectedCity = this.localStorageService.get('previousSelectedCity') as number;
+        var previousSelectedOrgUnit = this.localStorageService.get('previousSelectedOrgUnit') as number;
+        var previousSelectedRegion = this.localStorageService.get('previousSelectedRegion') as number;
+        var previousSelectedMarket = this.localStorageService.get('previousSelectedMarket')as number;
+        var previousSelectedPractice = this.localStorageService.get('previousSelectedPractice') as number;
+        var previousSelectedSubPractice = this.localStorageService.get('previousSelectedSubPractice') as number;
+        var previousSelectedAggregation = this.localStorageService.get('previousSelectedAggregation') as number;
+        var previousSelectedResourceManager = this.localStorageService.get('previousSelectedResourceManager')as number;
+
+        if (!(previousSelectedCity === null)) {
+            this.selectedCity = previousSelectedCity;
+        }
+        if (!(previousSelectedOrgUnit === null)) {
+            this.selectedOrgUnit = previousSelectedOrgUnit;
+        }
+        if (!(previousSelectedRegion === null)) {
+            this.selectedRegion = previousSelectedRegion;
+        }
+        if (!(previousSelectedMarket === null)) {
+            this.selectedMarket = previousSelectedMarket;
+        }
+        if (!(previousSelectedPractice === null)) {
+            this.selectedPractice = previousSelectedPractice;
+        }
+        if (!(previousSelectedSubPractice === null)) {
+            this.selectedSubPractice = previousSelectedSubPractice;
+        }
+        if (!(previousSelectedAggregation === null)) {
+            this.selectedAggregation = previousSelectedAggregation;
+        }
+        if (!(previousSelectedResourceManager === null)) {
+            this.selectedResourceManager = previousSelectedResourceManager;
+        } 
+    }
+
     ngOnInit() {
         this.tags = this.optionService.initTags("#myTags", 3);
 
         this.clear();
+        this.getPreviousFilters();
     }
 
     private tags: any;
@@ -133,6 +172,17 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.addOption("subpractice", this.selectedSubPractice);
         this.addOption("agg", this.selectedAggregation);
         this.addOption("resourcemanager", this.selectedResourceManager);
+    }
+
+    private saveFilters() {
+        this.localStorageService.set("previousSelectedCity", this.selectedCity);
+        this.localStorageService.set("previousSelectedOrgUnit", this.selectedOrgUnit);
+        this.localStorageService.set("previousSelectedRegion", this.selectedRegion);
+        this.localStorageService.set("previousSelectedMarket", this.selectedMarket);
+        this.localStorageService.set("previousSelectedPractice", this.selectedPractice);
+        this.localStorageService.set("previousSelectedSubPractice", this.selectedSubPractice);
+        this.localStorageService.set("previousSelectedAgg", this.selectedAggregation);
+        this.localStorageService.set("previousSelectedResourceManager", this.selectedResourceManager);
     }
 
     private callFiltered(operation: string) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Option, CategoryOption, OptionType, ColumnOption,  ResourcePageColumnType, DetailPageColumnType } from './option.model';
 import { CONFIG, ServerService } from '../core';
 
@@ -61,6 +62,7 @@ export class OptionService {
 
     setResourceColumnOption(columnName: string) {
         this.resourcePageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden = !this.resourcePageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
+        this.localStorageService.set('previousResourceColumns', this.resourcePageColumnOptions);
     }
 
     getDetailColumnOption(columnName: string) {
@@ -72,6 +74,7 @@ export class OptionService {
 
     setDetailColumnOption(columnName: string) {
         this.detailPageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden = !this.detailPageColumnOptions.find(myObj => myObj.ColumnName == columnName).Hidden;
+        this.localStorageService.set('previousDetailColumns', this.detailPageColumnOptions);
     }
 
     initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void): JQuery {
@@ -153,9 +156,10 @@ export class OptionService {
     }
 
     constructor(
-        private serverService: ServerService) {
-
+        private serverService: ServerService,
+        private localStorageService: LocalStorageService   ) {
         this.createCategories();
+        this.createColumnOptions();
     }
 
     private createCategories() {
@@ -174,76 +178,99 @@ export class OptionService {
                 this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
                 this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions, false);
             });
+       
+
+    }
+
+    private createColumnOptions() {
+        let previousResourceColumns: ColumnOption[] = this.localStorageService.get('previousResourceColumns') as ColumnOption[];
+        let previousDetailColumns: ColumnOption[] = this.localStorageService.get('previousDetailColumns') as ColumnOption[];
+
+        var previousResourceColumnsExist = !(previousResourceColumns === null);
+        var previousDetailColumnsExist = !(previousDetailColumns === null);
+
         this.resourcePageColumnOptions = [
             new ColumnOption({
                 FieldName: 'ResourceName',
                 ColumnName: 'Resource Name',
-                Hidden: false
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Resource Name').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'Position',
                 ColumnName: 'Position',
-                Hidden: false
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Position').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'City',
                 ColumnName: 'City',
-                Hidden: false
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'City').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'Practice',
                 ColumnName: 'Practice',
-                Hidden: true
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Practice').Hidden : false
             }),
             new ColumnOption({
-                FieldName:'SubPractice',
+                FieldName: 'SubPractice',
                 ColumnName: 'Sub-practice',
-                Hidden: true
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Sub-practice').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'ResourceManager',
                 ColumnName: 'Resource Mgr',
-                Hidden: false
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Resource Mgr').Hidden : false
             })
         ];
         this.detailPageColumnOptions = [
             new ColumnOption({
                 FieldName: 'ProjectName',
                 ColumnName: 'Project Name',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Project Name').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'ProjectNumber',
                 ColumnName: 'Project Number',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Project Number').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'WBSElement',
                 ColumnName: 'WBS Element',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'WBS Element').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'Client',
                 ColumnName: 'Client',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Client').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'OpportunityOwner',
                 ColumnName: 'Opportunity Owner',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Opportunity Owner').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'ProjectManager',
                 ColumnName: 'Project Manager',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Project Manager').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'Description',
                 ColumnName: 'Description',
-                Hidden: false
+                Hidden: previousDetailColumnsExist ?
+                    previousDetailColumns.find(myObj => myObj.ColumnName == 'Description').Hidden : false
             })
         ];
-
     }
 
     private createCategory(categoryName: string, categoryOptions: CategoryOption[], useNone: boolean = true): Option[] {
