@@ -270,6 +270,34 @@ namespace ResourcePlanner.Services.Mapper
             return detailPage;
         }
 
+        public static ResourceBreakdown MapToResourceBreakdown(SqlDataReader reader)
+        {
+            
+
+            reader.Read();
+
+            var totalHours = reader.GetDouble("TotalHours");
+            var projectHours = reader.GetDouble("ProjectHours");
+            var ptoHours = reader.GetDouble("PtoHours");
+            var trainingHours = reader.GetDouble("TrainingHours");
+            var internalProjectHours = reader.GetDouble("InternalProjectHours");
+            var otherHours = reader.GetDouble("OtherHours");
+
+           
+
+            var breakdown = new ResourceBreakdown()
+            {
+                TotalHours = totalHours, 
+                ProjectHours = projectHours,
+                PtoHours = ptoHours,
+                TrainingHours = trainingHours,
+                InternalProjectHours = internalProjectHours,
+                OtherHours = otherHours
+            };
+
+            return breakdown;
+        }
+
         public static List<IdNameGeneric> MapToIdNameGeneric(SqlDataReader reader, string sourceId, string sourceName, string sourceKey = "")
         {
             var values = new List<IdNameGeneric>();

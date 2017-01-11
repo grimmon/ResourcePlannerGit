@@ -123,6 +123,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         }
         if (!(previousSelectedPractice === null)) {
             this.selectedPractice = previousSelectedPractice;
+
         }
         if (!(previousSelectedSubPractice === null)) {
             this.selectedSubPractice = previousSelectedSubPractice;

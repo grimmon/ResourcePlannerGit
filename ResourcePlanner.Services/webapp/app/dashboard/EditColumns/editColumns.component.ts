@@ -54,7 +54,7 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
     }
 
     close() {
-        this.messageService.timespanGridRefreshRequest('resource-list');
+        //this.messageService.timespanGridRefreshRequest('resource-list');
         this.messageService.modalToggle(this.visible = false);
     }
 

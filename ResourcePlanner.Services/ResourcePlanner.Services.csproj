@@ -273,6 +273,7 @@
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ProjectViewController.cs" />
+    <Compile Include="Controllers\ResourceBreakdownController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceDetailController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="DataAccess\MockDataAccess.cs" />
     <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
     <Compile Include="DataAccess\ProjectPageDataAccess.cs" />
+    <Compile Include="DataAccess\ResourceBreakdownDataAccess.cs" />
     <Compile Include="DataAccess\ResourceDataAccess.cs" />
     <Compile Include="DataAccess\ResourceDetailDataAccess.cs" />
     <Compile Include="Enums\Enums.cs" />

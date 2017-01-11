@@ -16,6 +16,15 @@ namespace ResourcePlanner.Services.Models
         public int TotalRowCount { get; set; }
     }
 
+    public class ResourceBreakdown
+    {
+        public double TotalHours { get; set; }
+        public double ProjectHours { get; set; }
+        public double PtoHours { get; set; }
+        public double TrainingHours { get; set; }
+        public double InternalProjectHours { get; set; }
+        public double OtherHours { get; set; }
+    }
     
     public class ResourcePageExcelData
     {
