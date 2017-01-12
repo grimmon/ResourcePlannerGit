@@ -27,6 +27,7 @@ namespace ResourcePlanner.Services.Controllers
             SortOrder sortOrder = SortOrder.LastName, 
             SortDirection sortDirection = SortDirection.Asc, 
             int? city = null, 
+            int? homecity = null,
             int? market = null, 
             int? region = null, 
             int? orgUnit = null, 
@@ -63,6 +64,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.PageNum = pageNum;
             pageParams.Availability = availability;
             pageParams.City = city;
+            pageParams.HomeCity = homecity;
             pageParams.OrgUnit = orgUnit;
             pageParams.Market = market;
             pageParams.Region = region;

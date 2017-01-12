@@ -15,6 +15,7 @@ export enum OptionType {
     Position,
     OrgUnit,
     City,
+    HomeCity,
     Region,
     Market,
     Practice,

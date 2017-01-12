@@ -107,3 +107,23 @@ export class ResourceRow {
         return (last ? last + ", " : last) + first;
     }
 }
+
+export class ResourceBreakdown {
+    TotalHours: number;
+    ProjectHours: number;
+    PtoHours: number;
+    TrainingHours: number;
+    InternalProjectHours: number;
+    OtherHours: number;
+    public constructor(
+        fields?: {
+            TotalHours?: number,
+            ProjectHours?: number,
+            PtoHours?: number,
+            TrainingHours?: number,
+            InternalProjectHours?: number,
+            OtherHours?: number
+        }) {
+        if (fields) Object.assign(this, fields);
+    }
+}

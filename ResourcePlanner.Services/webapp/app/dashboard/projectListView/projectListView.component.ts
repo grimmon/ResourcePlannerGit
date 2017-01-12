@@ -121,7 +121,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
         this.gridConfig.columns = [
             {
                 context: {
-                    type: "resourceColumn",
+                    type: "projectColumn",
                     index: 0
                 },
                 headerName: "Resource",
@@ -131,7 +131,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                 pinned: 'left',
             },
             {
-                context: { type: "resourceColumn", index: 1 },
+                context: { type: "projectColumn", index: 1 },
                 headerName: "Role",
                 field: "Position",
                 width: 150,
@@ -140,7 +140,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             },
             {
                 context:
-                { type: "resourceColumn", index: 2 },
+                { type: "projectColumn", index: 2 },
                 headerName: "Rate",
                 field: "CostRate",
                 width: 100,
@@ -148,7 +148,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                 pinned: 'left'
             },
             {
-                context: { type: "resourceColumn", index: 3 },
+                context: { type: "projectColumn", index: 3 },
                 headerName: "Total Allocated",
                 field: "TotalResourceHours",
                 width: 100,
@@ -156,7 +156,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                 pinned: 'left'
             },
             {
-                context: { type: "resourceColumn", index: 4 },
+                context: { type: "projectColumn", index: 4 },
                 headerName: "Total\nScheduled",
                 field: "TotalForecastHours",
                 width: 100,

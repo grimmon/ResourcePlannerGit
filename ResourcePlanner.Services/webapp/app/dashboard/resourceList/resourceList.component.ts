@@ -119,34 +119,45 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 { type: "resourceColumn", index: 2 },
                 headerName: "City",
                 field: "City",
-                width: 150,
+                width: 100,
                 suppressMenu: true,
                 pinned: 'left',
                 hide: this.optionService.getResourceColumnOption("City") || false
             },
             {
-                context: { type: "resourceColumn", index: 3 },
+                context:
+                { type: "resourceColumn", index: 3 },
+                headerName: "Home City",
+                field: "HomeCity",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Home City") || false
+            }, 
+            {
+                context: { type: "resourceColumn", index: 4 },
                 headerName: "Practice",
                 field: "Practice",
-                width: 150,
+                width: 100,
                 suppressMenu: true,
                 pinned: 'left',
                 hide: this.optionService.getResourceColumnOption("Practice") || false
             },
+
             {
-                context: { type: "resourceColumn", index: 4 },
+                context: { type: "resourceColumn", index: 5 },
                 headerName: "Sub-Practice",
                 field: "SubPractice",
-                width: 150,
+                width: 100,
                 suppressMenu: true,
                 pinned: 'left',
                 hide: this.optionService.getResourceColumnOption("Sub-practice") || false
             },
             {
-                context: { type: "resourceColumn", index: 5 },
+                context: { type: "resourceColumn", index: 6 },
                 headerName: "Resource Mgr.",
                 field: "ResourceManager",
-                width: 150,
+                width: 100,
                 suppressMenu: true,
                 pinned: 'left',
                 hide: this.optionService.getResourceColumnOption("Resource Mgr") || false

@@ -39,6 +39,7 @@ namespace ResourcePlanner.Services.Mapper
                         FirstName = reader.GetNullableString("FirstName"),
                         LastName = reader.GetNullableString("LastName"),
                         City = reader.GetNullableString("City"),
+                        HomeCity = reader.GetNullableString("HomeCity"),
                         Position = reader.GetNullableString("Position"),
                         Practice = reader.GetNullableString("Practice"),
                         SubPractice = reader.GetNullableString("SubPractice"),

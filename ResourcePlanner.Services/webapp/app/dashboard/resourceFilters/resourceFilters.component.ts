@@ -18,6 +18,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     visible: boolean = true;
 
     selectedCity: number;
+    selectedHomeCity: number;
     selectedOrgUnit: number;
     selectedRegion: number;
     selectedMarket: number;
@@ -32,6 +33,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     getCities() {
         return this.optionService.cities;
+    }
+    getHomeCities() {
+        return this.optionService.homeCities;
     }
 
     getOrgUnits() {
@@ -101,6 +105,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     getPreviousFilters() {
         var previousSelectedCity = this.localStorageService.get('previousSelectedCity') as number;
+        var previousSelectedHomeCity = this.localStorageService.get('previousSelectedHomeCity') as number;
         var previousSelectedOrgUnit = this.localStorageService.get('previousSelectedOrgUnit') as number;
         var previousSelectedRegion = this.localStorageService.get('previousSelectedRegion') as number;
         var previousSelectedMarket = this.localStorageService.get('previousSelectedMarket')as number;
@@ -111,6 +116,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
         if (!(previousSelectedCity === null)) {
             this.selectedCity = previousSelectedCity;
+        }
+        if (!(previousSelectedHomeCity === null)) {
+            this.selectedHomeCity = previousSelectedHomeCity;
         }
         if (!(previousSelectedOrgUnit === null)) {
             this.selectedOrgUnit = previousSelectedOrgUnit;

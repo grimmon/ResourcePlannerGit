@@ -72,6 +72,14 @@
             </div>
         </div>
         <div class="buttons row">
+            <div class="col-sm-1">
+                <label style="float:right;">Home City</label>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="selectedHomeCity">
+                    <option *ngFor="let option of getHomeCities()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary" id="applyButton" (click)="apply()">Apply</button>

@@ -29,18 +29,18 @@ namespace ResourcePlanner.Services.Controllers
             var access = new ResourceBreakdownDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 #endif
-            DetailPage detailPage;
+            ResourceBreakdown breakdown;
 
             try
             {
-                detailPage = access.GetResourceBreakdown(ResourceId, StartDate, EndDate);
+                breakdown = access.GetResourceBreakdown(ResourceId, StartDate, EndDate);
             }
             catch (Exception ex)
             {
                 throw;
             }
 
-            return Ok(detailPage);
+            return Ok(breakdown);
         }
     }
 }

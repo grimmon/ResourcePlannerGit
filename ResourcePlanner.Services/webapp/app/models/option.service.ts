@@ -9,6 +9,7 @@ export class OptionService {
 
     orgUnits: Option[] = [];
     cities: Option[] = [];
+    homeCities: Option[] = [];
     regions: Option[] = [];
     markets: Option[] = [];
     practices: Option[] = [];
@@ -32,6 +33,8 @@ export class OptionService {
                 return this.orgUnits;
             case OptionType.City:
                 return this.cities;
+            case OptionType.HomeCity:
+                return this.homeCities;
             case OptionType.Region:
                 return this.regions;
             case OptionType.Market:
@@ -169,6 +172,7 @@ export class OptionService {
             .subscribe(categoryOptions => {
                 this.orgUnits = this.createCategory(OptionType[OptionType.OrgUnit], categoryOptions);
                 this.cities = this.createCategory(OptionType[OptionType.City], categoryOptions);
+                this.homeCities = this.createCategory(OptionType[OptionType.HomeCity], categoryOptions);
                 this.regions = this.createCategory(OptionType[OptionType.Region], categoryOptions);
                 this.markets = this.createCategory(OptionType[OptionType.Market], categoryOptions);
                 this.practices = this.createCategory(OptionType[OptionType.Practice], categoryOptions);
@@ -207,6 +211,12 @@ export class OptionService {
                 ColumnName: 'City',
                 Hidden: previousResourceColumnsExist ?
                     previousResourceColumns.find(myObj => myObj.ColumnName == 'City').Hidden : false
+            }),
+            new ColumnOption({
+                FieldName: 'HomeCity',
+                ColumnName: 'Home City',
+                Hidden: previousResourceColumnsExist ?
+                    previousResourceColumns.find(myObj => myObj.ColumnName == 'Home City').Hidden : false
             }),
             new ColumnOption({
                 FieldName: 'Practice',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CONFIG, ServerService } from '../core';
-import { Resource, ResourcePage, DetailPage, ResourceRequest } from './resource.model';
+import { Resource, ResourcePage, DetailPage, ResourceRequest, ResourceBreakdown } from './resource.model';
 import { AddAssignments, UpdateAssignment } from './assignment.model';
 
 @Injectable()
@@ -27,6 +27,11 @@ export class ResourceService {
     getResourceDetailPage(queryString: string) {
         var res = this.serverService.get<DetailPage>(CONFIG.urls.resourceDetail + queryString);
         return res || Observable.of(new DetailPage());
+    }
+
+    getResourceBreakdown(queryString: string) {
+        var res = this.serverService.get<ResourceBreakdown>(CONFIG.urls.resourceBreakdown + queryString);
+        return res || Observable.of(new ResourceBreakdown());
     }
 
     requestResource(resourceRequest: ResourceRequest) {

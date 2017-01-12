@@ -46,6 +46,7 @@ namespace ResourcePlanner.Services.Models
         public string LastName { get; set; }
         public string Position { get; set; }
         public string City { get; set; }
+        public string HomeCity { get; set; }
         public string Practice { get; set; }
         public string SubPractice { get; set; }
         public string ResourceManagerFirstName { get; set; }
@@ -62,6 +63,7 @@ namespace ResourcePlanner.Services.Models
         public int PageSize { get; set; }
         public int PageNum { get; set; }
         public int? City { get; set; }
+        public int? HomeCity { get; set; }
         public int? OrgUnit { get; set; }
         public int? Region { get; set; }
         public int? Market { get; set; }

@@ -199,7 +199,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                         var softCol = colName + "Soft";
                         var softColVal = parseFloat(params.data[softCol]);
                         if (softColVal > 0) {
-                            return '<div style="background-color:lightgrey;">' + value + '</div>';
+                            value = '<div style="background-color:lightgrey;">' + value + '</div>';
                         }
                     }
                     return value;
@@ -351,6 +351,10 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         if (this.gridConfig.allowDataEdit && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
             $event.colDef.editable = true;
             $event.colDef.cellEditor = 'text';
+        }
+        if (this.gridConfig.context == 'resource-list' && firstColumn && dataColumn && this.queryConfig.aggregation == TimeAggregation.Weekly) {
+            //var templateWithTooltip = '<div><a tooltip="What am I doing wrong with the tooltip?" tooltip-append-to-body="true" tooltip-placement="right" >' + 'saggin dags' + '</a></div>';
+            //$event.data[$event.colDef.field] = templateWithTooltip;
         }
        
     }

@@ -3,6 +3,7 @@ export let CONFIG = {
         authorized: 'api/authorized',
         resources: 'api/resource',
         resourceDetail: 'api/resourcedetail',
+        resourceBreakdown: 'api/resourcebreakdown',
         resourceExport: 'api/resource/excelexport',
         requestResource: 'api/email',
         assignmentAdd: 'api/assignment/add',

@@ -35,7 +35,7 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
 
     applyTrigger = 1;
 
-    resourcePageColumns: string[] = ['Resource Name', 'Position', 'City', 'Practice', 'Sub-practice', 'Resource Mgr'];
+    resourcePageColumns: string[] = ['Resource Name', 'Position', 'City', 'Home City', 'Practice', 'Sub-practice', 'Resource Mgr'];
     detailPageColumns: string[] = ['Project Name', 'Project Number', 'WBS Element', 'Client', 'Opportunity Owner', 'Project Manager', 'Description'];
 
     resourcePageColumnOption: any[];

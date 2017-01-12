@@ -119,6 +119,10 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("CityParam", SqlDbType.Int, pageParams.City.Value));
             }
+            if (pageParams.HomeCity.HasValue)
+            {
+                parameterList.Add(AdoUtility.CreateSqlParameter("HomeCityParam", SqlDbType.Int, pageParams.HomeCity.Value));
+            }
             if (pageParams.OrgUnit.HasValue)
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("OrgUnitParam", SqlDbType.Int, pageParams.OrgUnit.Value));
