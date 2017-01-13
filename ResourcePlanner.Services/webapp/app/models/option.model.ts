@@ -43,6 +43,7 @@ export enum ResourcePageColumnType {
     ResourceName,
     Position,
     City,
+    HomeCity,
     Practice,
     SubPractice,
     ResourceMgr

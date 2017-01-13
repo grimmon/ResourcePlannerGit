@@ -54,6 +54,7 @@ export class Resource {
     LastName: string;
     Position: string;
     City: string;
+    HomeCity: string;
     Practice: string;
     SubPractice: string;
 
@@ -88,6 +89,7 @@ export class ResourceRow {
     Id: number;
     ResourceName: string;
     City: string;
+    HomeCity: string;
     Position: string;
     Practice: string;
     SubPractice: string;
@@ -97,6 +99,7 @@ export class ResourceRow {
         this.Id = resource.ResourceId;
         this.ResourceName = this.getName(resource.LastName, resource.FirstName);
         this.City = resource.City;
+        this.HomeCity = resource.HomeCity;
         this.Position = resource.Position;
         this.Practice = resource.Practice;
         this.SubPractice = resource.SubPractice;

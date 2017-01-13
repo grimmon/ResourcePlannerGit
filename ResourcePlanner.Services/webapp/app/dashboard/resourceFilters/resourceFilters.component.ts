@@ -68,6 +68,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     clear() {
         this.selectedCity = -1;
+        this.selectedHomeCity = -1;
         this.selectedOrgUnit = -1;
         this.selectedRegion = -1;
         this.selectedMarket = -1;
@@ -174,6 +175,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     private buildFilters() {
         this.filterQuery = this.tags.query();
         this.addOption("city", this.selectedCity);
+        this.addOption("homeCity", this.selectedHomeCity);
         this.addOption("orgUnit", this.selectedOrgUnit);
         this.addOption("region", this.selectedRegion);
         this.addOption("market", this.selectedMarket);
@@ -185,6 +187,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     private saveFilters() {
         this.localStorageService.set("previousSelectedCity", this.selectedCity);
+        this.localStorageService.set("previousSelectedHomeCity", this.selectedHomeCity);
         this.localStorageService.set("previousSelectedOrgUnit", this.selectedOrgUnit);
         this.localStorageService.set("previousSelectedRegion", this.selectedRegion);
         this.localStorageService.set("previousSelectedMarket", this.selectedMarket);
