@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="Scripts/jquery.tagit.css" type="text/css" />
     <link rel="stylesheet" href="Scripts/tagit.ui-zendesk.css" type="text/css" />
 
-    <link rel="stylesheet" href="webapp/node_modules/ag-grid/dist/styles/ag-grid.css" />
-    <link rel="stylesheet" href="webapp/node_modules/ag-grid/dist/styles/theme-fresh.css" />
+    <link rel="stylesheet" href="src/assets/css/ag-grid.css" />
+    <link rel="stylesheet" href="src/assets/css/theme-fresh.css" />
 
     <link rel="stylesheet" href="webapp/assets/common.css" type="text/css" />
 
@@ -21,17 +21,10 @@
 
     <script src="Scripts/tag-it.js"></script>
     <script src="Scripts/select2.min.js"></script>
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="webapp/node_modules/core-js/client/shim.min.js"></script>
-    <script src="webapp/node_modules/zone.js/dist/zone.js"></script>
-    <script src="webapp/node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="webapp/node_modules/systemjs/dist/system.src.js"></script>
-
-    <script src="webapp/systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
+	
+	<script type="text/javascript" src="dist/polyfills.bundle.js" defer></script>
+	<script type="text/javascript" src="dist/main.bundle.js" defer></script>
+	
 </head>
 <body>
     <resource-planner-app>Loading Resource Planner ...</resource-planner-app>
