@@ -32,26 +32,26 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 
-import { NavComponent } from './navigation';
-import { ErrorComponent } from './error';
-import { TimespanGridComponent } from './shared/timespanGrid';
-import { HoursEditorComponent } from './shared/hoursEditor';
+import { NavComponent } from './navigation/nav.component';
+import { ErrorComponent } from './error/error.component';
+import { TimespanGridComponent } from './shared/timespanGrid/timespanGrid.component';
+import { HoursEditorComponent } from './shared/hoursEditor/hoursEditor.component';
 
-import { DashboardComponent} from './dashboard'
-import { ResourceListComponent } from './dashboard/resourceList';
-import { ResourceDetailsComponent } from './dashboard/resourceDetails';
-import { ResourceFiltersComponent } from './dashboard/resourceFilters';
-import { ResourceProfileComponent } from './dashboard/resourceProfile';
-import { ResourceProjectsComponent } from './dashboard/resourceProjects';
-import { ResourceViewsComponent } from './dashboard/resourceViews';
-import { ProjectListViewComponent } from './dashboard/projectListView';
-import { ProjectAddComponent } from './dashboard/projectAdd';
-import { AssignmentAddComponent } from './dashboard/assignmentAdd';
-import { ResourceRequestComponent } from './dashboard/resourceRequest';
-import { EditColumnsComponent } from './dashboard/EditColumns';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { CoreModule } from './core';
-import { PageNotFoundComponent } from './page-not-found.component';
+import { ResourceListComponent } from './dashboard/resourceList/resourceList.component';
+import { ResourceDetailsComponent } from './dashboard/resourceDetails/resourceDetails.component';
+import { ResourceFiltersComponent } from './dashboard/resourceFilters/resourceFilters.component';
+import { ResourceProfileComponent } from './dashboard/resourceProfile/resourceProfile.component';
+import { ResourceProjectsComponent } from './dashboard/resourceProjects/resourceProjects.component';
+import { ResourceViewsComponent } from './dashboard/resourceViews/resourceViews.component';
+import { ProjectListViewComponent } from './dashboard/projectListView/projectListView.component';
+import { ProjectAddComponent } from './dashboard/projectAdd/projectAdd.component';
+import { AssignmentAddComponent } from './dashboard/assignmentAdd/assignmentAdd.component';
+import { ResourceRequestComponent } from './dashboard/resourceRequest/resourceRequest.component';
+import { EditColumnsComponent } from './dashboard/EditColumns/EditColumns.component';
+
+import { CoreModule } from './core/core.module';
 
 import { MessageService, EntityService, ServerService, DateService, ExceptionService, AdalService } from './core';
 import { OptionService, ResourceService, ProjectService } from '../app/models';
@@ -87,7 +87,6 @@ type StoreType = {
 
     ErrorComponent,
     NavComponent,
-    PageNotFoundComponent,
 	DashboardComponent,
     ResourceListComponent, ResourceDetailsComponent, ResourceFiltersComponent, ResourceProfileComponent, ResourceProjectsComponent, ResourceViewsComponent,
     ProjectListViewComponent, ProjectAddComponent, AssignmentAddComponent, ResourceRequestComponent, EditColumnsComponent,
@@ -98,8 +97,8 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-	//CoreModule,
-	AgGridModule.forRoot(),
+	AgGridModule.withComponents([]),
+    CoreModule,
     Ng2AutoCompleteModule,
     LocalStorageModule.withConfig({
         prefix: 'my-app',

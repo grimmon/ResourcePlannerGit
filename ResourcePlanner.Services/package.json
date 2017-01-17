@@ -85,6 +85,13 @@
     "ie-shim": "^0.1.0",
     "jasmine-core": "^2.5.2",
     "reflect-metadata": "^0.1.9",
+    "angular-in-memory-web-api": "~0.1.13",
+    "angular2-cookie": "^1.2.5",
+    "angular2-ui-switch": "^1.2.0",
+    "angular-2-local-storage": "^1.0.0",
+    "ag-grid": "7.1.x",
+    "ag-grid-ng2": "7.1.x",
+    "ng2-auto-complete": "^0.8.2",
     "rxjs": "~5.0.2",
     "zone.js": "~0.7.4"
   },

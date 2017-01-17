@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard'
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NoContentComponent } from './no-content';
 
 import { DataResolver } from './app.resolver';
