@@ -17,7 +17,7 @@ import { TimeDataPage, TimeAggregation, AddAssignments, UpdateAssignment, Option
         'queryConfig',
         'currentDate',
         'gridConfig'],
-    styles: ['.toolbar button {margin: 2px; padding: 0px;}'],
+    //styles: ['.toolbar button {margin: 2px; padding: 0px;}'],
 })
 export class TimespanGridComponent implements OnDestroy, OnInit {
 

@@ -21,7 +21,14 @@ export class DateService {
     }
 
     format(date: Date) {
-        return date.getFullYear() + '-' + (date.getMonth() + 1).toString(10).padStart(2, '0') + '-' + date.getDate().toString(10).padStart(2, '0');
+        return date.getFullYear() + '-' + this.padStart((date.getMonth() + 1).toString(10)) + '-' + this.padStart(date.getDate().toString(10));
+    }
+
+    padStart(num: string) {
+        if (num.length == 1) {
+            return '0' + num;
+        }
+        return num;
     }
 
     formatString(date: string) {
