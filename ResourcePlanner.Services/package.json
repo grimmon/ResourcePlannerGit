@@ -98,6 +98,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "~2.4.3",
+    "@types/adal": "^1.0.25",
     "@types/hammerjs": "^2.0.33",
     "@types/jasmine": "^2.2.34",
     "@types/node": "^7.0.0",
@@ -105,7 +106,6 @@
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.0.27",
     "@types/webpack": "^2.0.0",
-    "@types/adal": "^1.0.22",
     "add-asset-html-webpack-plugin": "^1.0.2",
     "angular2-template-loader": "^0.6.0",
     "assets-webpack-plugin": "^3.4.0",
