@@ -233,8 +233,6 @@
     <Content Include="src\app\dashboard\resourceViews\resourceViews.component.html" />
     <Content Include="src\app\error\error.component.css" />
     <Content Include="src\app\error\error.component.html" />
-    <Content Include="src\app\home\home.component.css" />
-    <Content Include="src\app\home\home.component.html" />
     <Content Include="src\app\navigation\nav.component.css" />
     <Content Include="src\app\navigation\nav.component.html" />
     <Content Include="src\app\shared\hoursEditor\hoursEditor.component.css" />
@@ -403,16 +401,6 @@
     <TypeScriptCompile Include="src\app\dashboard\resourceViews\resourceViews.component.ts" />
     <TypeScriptCompile Include="src\app\environment.ts" />
     <TypeScriptCompile Include="src\app\error\error.component.ts" />
-    <TypeScriptCompile Include="src\app\home\home.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\home\home.component.ts" />
-    <TypeScriptCompile Include="src\app\home\home.e2e.ts" />
-    <TypeScriptCompile Include="src\app\home\index.ts" />
-    <TypeScriptCompile Include="src\app\home\title\index.ts" />
-    <TypeScriptCompile Include="src\app\home\title\title.service.spec.ts" />
-    <TypeScriptCompile Include="src\app\home\title\title.service.ts" />
-    <TypeScriptCompile Include="src\app\home\x-large\index.ts" />
-    <TypeScriptCompile Include="src\app\home\x-large\x-large.directive.spec.ts" />
-    <TypeScriptCompile Include="src\app\home\x-large\x-large.directive.ts" />
     <TypeScriptCompile Include="src\app\index.ts" />
     <TypeScriptCompile Include="src\app\models\assignment.model.ts" />
     <TypeScriptCompile Include="src\app\models\index.ts" />

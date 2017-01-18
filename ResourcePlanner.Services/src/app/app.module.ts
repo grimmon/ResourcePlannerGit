@@ -30,7 +30,6 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
 
 import { NavComponent } from './navigation/nav.component';
 import { ErrorComponent } from './error/error.component';
@@ -57,7 +56,6 @@ import { MessageService, EntityService, ServerService, DateService, ExceptionSer
 import { OptionService, ResourceService, ProjectService } from '../app/models';
 
 import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -81,7 +79,6 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    HomeComponent,
 	TimespanGridComponent,
     HoursEditorComponent,
 
