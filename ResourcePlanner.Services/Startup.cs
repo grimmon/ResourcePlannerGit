@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.ActiveDirectory;
 using System.Configuration;
-
+using System.IdentityModel.Tokens;
 
 [assembly: OwinStartup(typeof(ResourcePlanner.Services.Startup))]
 namespace ResourcePlanner.Services
@@ -18,15 +13,21 @@ namespace ResourcePlanner.Services
         {
             ConfigureAuth(app);
         }
-
+ 
         public void ConfigureAuth(IAppBuilder app)
         {
             app.UseWindowsAzureActiveDirectoryBearerAuthentication(
-                new WindowsAzureActiveDirectoryBearerAuthenticationOptions
+            new WindowsAzureActiveDirectoryBearerAuthenticationOptions
+            {
+                Tenant = ConfigurationManager.AppSettings["ida:Tenant"],
+                TokenValidationParameters = new TokenValidationParameters
                 {
-                    Audience = ConfigurationManager.AppSettings["ida:Audience"],
-                    Tenant = ConfigurationManager.AppSettings["ida:Tenant"]
-                });
+                    SaveSigninToken = true,
+                    ValidAudience = ConfigurationManager.AppSettings["ida:Audience"],
+                    ValidateIssuer = false
+                }
+            });
         }
+
     }
 }

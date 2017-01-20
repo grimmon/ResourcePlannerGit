@@ -21,7 +21,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     selectedHomeCity: number;
     selectedOrgUnit: number;
     selectedRegion: number;
-    selectedMarket: number;
     selectedPractice: number;
     selectedSubPractice: number;
     selectedAggregation: TimeAggregation;
@@ -46,10 +45,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         return this.optionService.regions;
     }
 
-    getMarkets() {
-        return this.optionService.markets;
-    }
-
+   
     getAggregations() {
         return this.optionService.aggregations;
     }
@@ -71,7 +67,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedHomeCity = -1;
         this.selectedOrgUnit = -1;
         this.selectedRegion = -1;
-        this.selectedMarket = -1;
         this.selectedPractice = -1;
         this.selectedSubPractice = -1;
         this.selectedAggregation = TimeAggregation.Weekly;
@@ -109,7 +104,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         var previousSelectedHomeCity = this.localStorageService.get('previousSelectedHomeCity') as number;
         var previousSelectedOrgUnit = this.localStorageService.get('previousSelectedOrgUnit') as number;
         var previousSelectedRegion = this.localStorageService.get('previousSelectedRegion') as number;
-        var previousSelectedMarket = this.localStorageService.get('previousSelectedMarket')as number;
         var previousSelectedPractice = this.localStorageService.get('previousSelectedPractice') as number;
         var previousSelectedSubPractice = this.localStorageService.get('previousSelectedSubPractice') as number;
         var previousSelectedAggregation = this.localStorageService.get('previousSelectedAggregation') as number;
@@ -126,9 +120,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         }
         if (!(previousSelectedRegion === null)) {
             this.selectedRegion = previousSelectedRegion;
-        }
-        if (!(previousSelectedMarket === null)) {
-            this.selectedMarket = previousSelectedMarket;
         }
         if (!(previousSelectedPractice === null)) {
             this.selectedPractice = previousSelectedPractice;
@@ -178,7 +169,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.addOption("homeCity", this.selectedHomeCity);
         this.addOption("orgUnit", this.selectedOrgUnit);
         this.addOption("region", this.selectedRegion);
-        this.addOption("market", this.selectedMarket);
         this.addOption("practice", this.selectedPractice);
         this.addOption("subpractice", this.selectedSubPractice);
         this.addOption("agg", this.selectedAggregation);
@@ -190,7 +180,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.localStorageService.set("previousSelectedHomeCity", this.selectedHomeCity);
         this.localStorageService.set("previousSelectedOrgUnit", this.selectedOrgUnit);
         this.localStorageService.set("previousSelectedRegion", this.selectedRegion);
-        this.localStorageService.set("previousSelectedMarket", this.selectedMarket);
         this.localStorageService.set("previousSelectedPractice", this.selectedPractice);
         this.localStorageService.set("previousSelectedSubPractice", this.selectedSubPractice);
         this.localStorageService.set("previousSelectedAgg", this.selectedAggregation);

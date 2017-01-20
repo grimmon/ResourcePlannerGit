@@ -1,0 +1,67 @@
+﻿body {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.ag-fresh .ag-header-group-cell-label {
+    text-align: center;
+    color:#FFFFFF;
+}
+.ag-pinned-left-header {
+    background-color:#CC0057;
+    font-size: 12pt;
+    font-weight:bold;
+    color:#FFFFFF;
+}
+.ag-header-group-cell-label {
+   background-color:#534742;
+}
+.ag-fresh .ag-row-selected {
+    background-color: rgba(204, 0, 87, 0.15);
+    font-weight:bold;
+}
+.ag-row-selected > ag-cell-value {
+    font-weight:bold;
+}
+.ag-header.group-text{
+    font-size:11pt;
+    font-weight:normal;
+    color:#000000;
+
+}
+span.select2-selection__arrow {
+    background-image: url('../Images/IRMT_Icons_MagnifyingGlass.png');
+    background-repeat:no-repeat;
+}
+span.selection > span.select2-selection {
+    background-color: #E5E6E7;
+}
+span.tagit-label {
+    font-size:11pt;
+    font-weight:normal;
+    color:#000000;
+}
+.tagit input::-webkit-input-placeholder  {
+    color: #666666;
+}
+.tagit input::placeholder  {
+    color: #666666;
+}
+.tagit input:-moz-placeholder  {
+    color: purple !important;
+}
+.tagit input::-moz-placeholder {
+    color: #666666;
+}
+.tagit input:-ms-input-placeholder  {
+    color: #666666;
+}
+.form-control {
+    background-color: #E5E6E7;
+}
+.formrow {
+    margin-top: 8px;
+}

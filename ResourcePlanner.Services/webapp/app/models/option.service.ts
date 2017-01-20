@@ -289,7 +289,7 @@ export class OptionService {
             return r < 0 ? -1 : (r ? 1 : 0);
         });
         if (useNone) {
-            var res: Option[] = [{ Id: -1, Name: 'None' }];
+            var res: Option[] = [{ Id: -1, Name: 'Any' }];
             Array.prototype.push.apply(res, options);
             return res;
         }

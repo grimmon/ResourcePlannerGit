@@ -117,7 +117,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
             {
                 context:
                 { type: "resourceColumn", index: 2 },
-                headerName: "City",
+                headerName: "Delivery City",
                 field: "City",
                 width: 100,
                 suppressMenu: true,

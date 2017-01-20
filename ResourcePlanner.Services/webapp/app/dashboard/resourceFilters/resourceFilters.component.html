@@ -5,11 +5,19 @@
         </div>
         <div class="row">
             <div class="col-sm-1">
-                <label style="float: right;">Cities</label>
+                <label style="float: right;">Delivery City</label>
             </div>
             <div class="col-sm-2">
                 <select class="form-control" [(ngModel)]="selectedCity">
                     <option *ngFor="let option of getCities()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <label style="float: right;">Practices</label>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="selectedPractice">
+                    <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>
             <div class="col-sm-1">
@@ -19,31 +27,25 @@
                 <select class="form-control" [(ngModel)]="selectedOrgUnit">
                     <option *ngFor="let option of getOrgUnits()" [value]="option.Id">{{option.Name}}</option>
                 </select>
-            </div>
+
+            </div>     
             <div class="col-sm-1">
-                <label style="float: right;">Regions</label>
+                <label style="float:right;">Resource Mgr.</label>
             </div>
             <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedRegion">
-                    <option *ngFor="let option of getRegions()" [value]="option.Id">{{option.Name}}</option>
-                </select>
-           </div>
-            <div class="col-sm-1">
-                <label style="float: right;">Markets</label>
-            </div>
-            <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedMarket">
-                    <option *ngFor="let option of getMarkets()" [value]="option.Id">{{option.Name}}</option>
+                <select class="form-control" [(ngModel)]="selectedResourceManager">
+                    <option *ngFor="let option of getResourceManagers()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>
+            
         </div>
         <div class="row">
             <div class="col-sm-1">
-                <label style="float: right;">Practices</label>
+                <label style="float:right;">Home City</label>
             </div>
             <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedPractice">
-                    <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
+                <select class="form-control" [(ngModel)]="selectedHomeCity">
+                    <option *ngFor="let option of getHomeCities()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>
             <div class="col-sm-1">
@@ -55,6 +57,14 @@
                 </select>
             </div>
             <div class="col-sm-1">
+                <label style="float: right;">Regions</label>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="selectedRegion">
+                    <option *ngFor="let option of getRegions()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
                 <label style="float: right;">Interval</label>
             </div>
             <div class="col-sm-2">
@@ -62,24 +72,9 @@
                     <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>
-            <div class="col-sm-1">
-                <label style="float:right;">Resource Mgr.</label>
-            </div>
-            <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedResourceManager">
-                    <option *ngFor="let option of getResourceManagers()" [value]="option.Id">{{option.Name}}</option>
-                </select>
-            </div>
         </div>
         <div class="buttons row">
-            <div class="col-sm-1">
-                <label style="float:right;">Home City</label>
-            </div>
-            <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedHomeCity">
-                    <option *ngFor="let option of getHomeCities()" [value]="option.Id">{{option.Name}}</option>
-                </select>
-            </div>
+            
             <div class="col-sm-1"></div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary" id="applyButton" (click)="apply()">Apply</button>
