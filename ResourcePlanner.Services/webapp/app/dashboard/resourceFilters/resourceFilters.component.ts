@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { MessageService } from '../../core';
-import { Option, CategoryOption, OptionService, TimeAggregation } from '../../models';
+import { Option, CategoryOption, OptionService, OptionType, TimeAggregation } from '../../models';
 
 @Component({
     moduleId: module.id,
@@ -17,14 +17,22 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     visible: boolean = true;
 
-    selectedCity: number;
-    selectedHomeCity: number;
-    selectedOrgUnit: number;
-    selectedRegion: number;
-    selectedPractice: number;
-    selectedSubPractice: number;
+    selectedCity: number[];
+    selectedHomeCity: number[];
+    selectedOrgUnit: number[];
+    selectedRegion: number[];
+    selectedPractice: number[];
+    selectedSubPractice: number[];
     selectedAggregation: TimeAggregation;
-    selectedResourceManager: number;
+    selectedResourceManager: number[];
+
+    citySelector: any;
+    homeCitySelector: any;
+    orgUnitSelector: any;
+    regionSelector: any;
+    practiceSelector: any;
+    subPracticeSelector: any;
+    resourceManagerSelector: any;
 
     aggregationChange(newAggregation: any) {
         this.messageService.resourceFilterChange('aggregation', parseInt(newAggregation));
@@ -63,14 +71,14 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     clear() {
-        this.selectedCity = -1;
-        this.selectedHomeCity = -1;
-        this.selectedOrgUnit = -1;
-        this.selectedRegion = -1;
-        this.selectedPractice = -1;
-        this.selectedSubPractice = -1;
+        this.selectedCity = [-1] ;
+        this.selectedHomeCity = [-1];
+        this.selectedOrgUnit = [-1];
+        this.selectedRegion = [-1];
+        this.selectedPractice = [-1];
+        this.selectedSubPractice = [-1];
         this.selectedAggregation = TimeAggregation.Weekly;
-        this.selectedResourceManager = -1;
+        this.selectedResourceManager = [-1];
         this.tags.clear();
 
         this.messageService.resourceFilterChange('cleared', {
@@ -100,55 +108,134 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     getPreviousFilters() {
-        var previousSelectedCity = this.localStorageService.get('previousSelectedCity') as number;
-        var previousSelectedHomeCity = this.localStorageService.get('previousSelectedHomeCity') as number;
-        var previousSelectedOrgUnit = this.localStorageService.get('previousSelectedOrgUnit') as number;
-        var previousSelectedRegion = this.localStorageService.get('previousSelectedRegion') as number;
-        var previousSelectedPractice = this.localStorageService.get('previousSelectedPractice') as number;
-        var previousSelectedSubPractice = this.localStorageService.get('previousSelectedSubPractice') as number;
+        var previousSelectedCity     = this.localStorageService.get('previousSelectedCity') as number[];
+        var previousSelectedHomeCity = this.localStorageService.get('previousSelectedHomeCity') as number[];
+        var previousSelectedOrgUnit  = this.localStorageService.get('previousSelectedOrgUnit') as number[];
+        var previousSelectedRegion   = this.localStorageService.get('previousSelectedRegion') as number[];
+        var previousSelectedPractice = this.localStorageService.get('previousSelectedPractice') as number[];
+        var previousSelectedSubPractice = this.localStorageService.get('previousSelectedSubPractice') as number[];
         var previousSelectedAggregation = this.localStorageService.get('previousSelectedAggregation') as number;
-        var previousSelectedResourceManager = this.localStorageService.get('previousSelectedResourceManager')as number;
+        var previousSelectedResourceManager = this.localStorageService.get('previousSelectedResourceManager')as number[];
 
         if (!(previousSelectedCity === null)) {
-            this.selectedCity = previousSelectedCity;
+            //this.citySelector.select2('val', previousSelectedCity).trigger('change');
         }
         if (!(previousSelectedHomeCity === null)) {
-            this.selectedHomeCity = previousSelectedHomeCity;
+            //this.homeCitySelector.select2('val', previousSelectedHomeCity);
         }
         if (!(previousSelectedOrgUnit === null)) {
-            this.selectedOrgUnit = previousSelectedOrgUnit;
+            //this.orgUnitSelector.select2('val', previousSelectedOrgUnit);
         }
         if (!(previousSelectedRegion === null)) {
-            this.selectedRegion = previousSelectedRegion;
+            //this.regionSelector.select2('val', previousSelectedRegion);
         }
         if (!(previousSelectedPractice === null)) {
-            this.selectedPractice = previousSelectedPractice;
+            //this.practiceSelector.select2('val', previousSelectedPractice);
 
         }
         if (!(previousSelectedSubPractice === null)) {
-            this.selectedSubPractice = previousSelectedSubPractice;
+            //this.subPracticeSelector.select2('val', previousSelectedSubPractice);
         }
         if (!(previousSelectedAggregation === null)) {
             this.selectedAggregation = previousSelectedAggregation;
         }
         if (!(previousSelectedResourceManager === null)) {
-            this.selectedResourceManager = previousSelectedResourceManager;
+            //this.resourceManagerSelector.select2('val', previousSelectedResourceManager);
         } 
     }
 
     ngOnInit() {
-        this.tags = this.optionService.initTags("#myTags", 3);
 
+        this.tags = this.optionService.initTags("#myTags", 3);    
+
+        this.citySelector = this.optionService.initObservableSelector(
+            ".city-selector",
+            OptionType.City,
+            value => {
+                this.selectedCity = value;
+                ;
+            }
+            //,'previousSelectedCity'
+        );
+        this.homeCitySelector = this.optionService.initObservableSelector(
+            ".homeCity-selector",
+            OptionType.HomeCity,
+            value => {
+                this.selectedHomeCity = value;
+                ;
+            }
+            //, 'previousSelectedHomeCity'
+        );
+        this.orgUnitSelector = this.optionService.initObservableSelector(
+            ".orgUnit-selector",
+            OptionType.OrgUnit,
+            value => {
+                this.selectedOrgUnit = value;
+                ;
+            }
+            //, 'previousSelectedOrgUnit'
+        );
+        this.regionSelector = this.optionService.initObservableSelector(
+            ".region-selector",
+            OptionType.Region,
+            value => {
+                this.selectedRegion = value;
+                ;
+            }
+            //, 'previousSelectedRegion'
+        );
+        this.practiceSelector = this.optionService.initObservableSelector(
+            ".practice-selector",
+            OptionType.Practice,
+            value => {
+                this.selectedPractice = value;
+                ;
+            }
+            //, 'previousSelectedPractice'
+        );
+        this.subPracticeSelector = this.optionService.initObservableSelector(
+            ".subPractice-selector",
+            OptionType.SubPractice,
+            value => {
+                this.selectedSubPractice = value;
+                ;
+            }
+            //, 'previousSelectedSubPractice'
+        );
+        this.resourceManagerSelector = this.optionService.initObservableSelector(
+            ".resourceManager-selector",
+            OptionType.ResourceManager,
+            value => {
+                this.selectedResourceManager = value;
+                ;
+            }
+            //, 'previousSelectedResourceManager'
+        );
         this.clear();
         this.getPreviousFilters();
+        
+
+       
     }
 
     private tags: any;
 
     private filterQuery: string;
 
-    private addFilter(key: string, value: any) {
-        this.filterQuery += (this.filterQuery ? "&" : "") + key + "=" + value;
+    private addFilter(key: string, values: any) {
+
+        var iteratedValues = "";
+        var iterator = 0;
+        for (let value of values) {
+            if (iterator > 0) {
+                iteratedValues += ',' + value;
+            }
+            else {
+                iteratedValues += value;
+            }
+            iterator++;
+        }
+        this.filterQuery += (this.filterQuery ? "&" : "") + key + "=" + iteratedValues;
     }
 
     private add(key: string, value: string) {
@@ -157,10 +244,14 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         }
     }
 
-    private addOption(key: string, option: number) {
-        if (option > -1) {
+    private addOption(key: string, option: number[]) {
+        if (!(option.some(x => x==-1))) {
             this.addFilter(key, option);
         }
+    }
+
+    private addAggOption(value: TimeAggregation) {
+        this.filterQuery += (this.filterQuery ? "&agg=" : "agg=") + value;
     }
 
     private buildFilters() {
@@ -171,7 +262,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.addOption("region", this.selectedRegion);
         this.addOption("practice", this.selectedPractice);
         this.addOption("subpractice", this.selectedSubPractice);
-        this.addOption("agg", this.selectedAggregation);
+        this.addAggOption(this.selectedAggregation);
         this.addOption("resourcemanager", this.selectedResourceManager);
     }
 

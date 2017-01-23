@@ -233,31 +233,31 @@ namespace ResourcePlanner.Services.DataAccess
                 ).ToList();
             }
 
-            if (pageParams.City.HasValue)
+            if (pageParams.Cities != "")
             {
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.CityId == pageParams.City.Value).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.CityId == int.Parse(pageParams.Cities)).ToList();
             }
 
-            if (pageParams.Market.HasValue)
+            if (pageParams.Markets != "")
             {
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.MarketId == pageParams.Market.Value).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.MarketId == int.Parse(pageParams.Markets)).ToList();
             }
 
-            if (pageParams.OrgUnit.HasValue)
+            if (pageParams.OrgUnits != "")
             {
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.OrgUnitId == pageParams.OrgUnit.Value).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.OrgUnitId == int.Parse(pageParams.OrgUnits)).ToList();
             }
 
             //position is a string? position skipped for now
 
-            if (pageParams.Practice.HasValue)
+            if (pageParams.Practices != "")
             {
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.PracticeId == pageParams.Practice.Value).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.PracticeId == int.Parse(pageParams.Practices)).ToList();
             }
 
-            if (pageParams.Region.HasValue)
+            if (pageParams.Regions != "")
             {
-                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.RegionId == pageParams.Region.Value).ToList();
+                resourceInfos = resourceInfos.Where(resourceInfo => resourceInfo.RegionId == int.Parse(pageParams.Regions)).ToList();
             }
 
             return resourceInfos;

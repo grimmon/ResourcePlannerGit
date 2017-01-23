@@ -62,15 +62,15 @@ namespace ResourcePlanner.Services.Models
         public SortDirection SortDirection { get; set; }
         public int PageSize { get; set; }
         public int PageNum { get; set; }
-        public int? City { get; set; }
-        public int? HomeCity { get; set; }
-        public int? OrgUnit { get; set; }
-        public int? Region { get; set; }
-        public int? Market { get; set; }
-        public int? Practice { get; set; }
-        public int? SubPractice { get; set; }
-        public int? ResourceManager { get; set; }
-        public int[] Positions { get; set; }
+        public string Cities { get; set; }
+        public string HomeCities { get; set; }
+        public string OrgUnits { get; set; }
+        public string Regions { get; set; }
+        public string Markets { get; set; }
+        public string Practices { get; set; }
+        public string SubPractices { get; set; }
+        public string ResourceManagers { get; set; }
+        public string Positions { get; set; }
         public string SearchTerm1 { get; set; }
         public string SearchTerm2 { get; set; }
         public string SearchTerm3 { get; set; }

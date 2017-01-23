@@ -115,37 +115,37 @@ namespace ResourcePlanner.Services.DataAccess
             parameterList.Add(AdoUtility.CreateSqlParameter("PageSize", SqlDbType.Int, pageParams.PageSize));
             parameterList.Add(AdoUtility.CreateSqlParameter("login", 100, SqlDbType.VarChar, pageParams.Login));
 
-            if (pageParams.City.HasValue)
+            if (pageParams.Cities != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("CityParam", SqlDbType.Int, pageParams.City.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("CityParam", SqlDbType.VarChar, pageParams.Cities));
             }
-            if (pageParams.HomeCity.HasValue)
+            if (pageParams.HomeCities != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("HomeCityParam", SqlDbType.Int, pageParams.HomeCity.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("HomeCityParam", SqlDbType.VarChar, pageParams.HomeCities));
             }
-            if (pageParams.OrgUnit.HasValue)
+            if (pageParams.OrgUnits != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("OrgUnitParam", SqlDbType.Int, pageParams.OrgUnit.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("OrgUnitParam", SqlDbType.VarChar, pageParams.OrgUnits));
             }
-            if (pageParams.Region.HasValue)
+            if (pageParams.Regions != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("RegionParam", SqlDbType.Int, pageParams.Region.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("RegionParam", SqlDbType.VarChar, pageParams.Regions));
             }
-            if (pageParams.Market.HasValue)
+            if (pageParams.Markets != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("MarketParam", SqlDbType.Int, pageParams.Market.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("MarketParam", SqlDbType.VarChar, pageParams.Markets));
             }
-            if (pageParams.Practice.HasValue)
+            if (pageParams.Practices != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("PracticeParam", SqlDbType.Int, pageParams.Practice.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("PracticeParam", SqlDbType.VarChar, pageParams.Practices));
             }
-            if (pageParams.SubPractice.HasValue)
+            if (pageParams.SubPractices != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.Int, pageParams.SubPractice.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SubPracticeParam", SqlDbType.VarChar, pageParams.SubPractices));
             }
-            if (pageParams.ResourceManager.HasValue)
+            if (pageParams.ResourceManagers != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("ResourceManagerParam", SqlDbType.Int, pageParams.ResourceManager.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("ResourceManagerParam", SqlDbType.VarChar, pageParams.ResourceManagers));
             }
             if (pageParams.SearchTerm1 != "")
             {
@@ -167,9 +167,9 @@ namespace ResourcePlanner.Services.DataAccess
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("SearchTerm5Param", 50, SqlDbType.VarChar, pageParams.SearchTerm5));
             }
-            if (pageParams.Positions != null)
+            if (pageParams.Positions != "")
             {
-                parameterList.Add(AdoUtility.CreateSqlTableValuedParameter("PositionParam", "rpdb.typeIntTable", SqlDbType.Structured, pageParams.Positions));
+                parameterList.Add(AdoUtility.CreateSqlParameter("PositionParam", SqlDbType.VarChar, pageParams.Positions));
             }
             return parameterList.ToArray();
         }

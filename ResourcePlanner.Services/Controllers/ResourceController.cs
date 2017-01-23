@@ -26,14 +26,14 @@ namespace ResourcePlanner.Services.Controllers
             TimeAggregation agg= TimeAggregation.Weekly, 
             SortOrder sortOrder = SortOrder.LastName, 
             SortDirection sortDirection = SortDirection.Asc, 
-            int? city = null, 
-            int? homecity = null,
-            int? market = null, 
-            int? region = null, 
-            int? orgUnit = null, 
-            int? practice = null, 
-            int? subpractice = null,
-            int? resourcemanager = null, 
+            string city = "", 
+            string homecity = "",
+            string market = "", 
+            string region = "", 
+            string orgUnit = "", 
+            string practice = "", 
+            string subpractice = "",
+            string resourcemanager = "", 
             string title = "",
             string searchterm1 = "", 
             string searchterm2 = "", 
@@ -63,27 +63,26 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.PageSize = pageSize;
             pageParams.PageNum = pageNum;
             pageParams.Availability = availability;
-            pageParams.City = city;
-            pageParams.HomeCity = homecity;
-            pageParams.OrgUnit = orgUnit;
-            pageParams.Market = market;
-            pageParams.Region = region;
+            pageParams.Cities = city.Replace(',', ';');
+            pageParams.HomeCities = homecity.Replace(',', ';');
+            pageParams.OrgUnits = orgUnit.Replace(',', ';');
+            pageParams.Markets = market.Replace(',', ';');
+            pageParams.Regions = region.Replace(',', ';');
             pageParams.SearchTerm1 = searchterm1;
             pageParams.SearchTerm2 = searchterm2;
             pageParams.SearchTerm3 = searchterm3;
             pageParams.SearchTerm4 = searchterm4;
             pageParams.SearchTerm5 = searchterm5;
-            pageParams.Practice = practice;
-            pageParams.SubPractice = subpractice;
-            pageParams.ResourceManager = resourcemanager;
+            pageParams.Practices = practice.Replace(',', ';');
+            pageParams.SubPractices = subpractice.Replace(',', ';');
+            pageParams.ResourceManagers = resourcemanager.Replace(',', ';');
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
             pageParams.Login = HttpContext.Current.User.Identity.Name;
 
-            if (title != "")
-            {
-                pageParams.Positions = title.Split(',').Select(Int32.Parse).ToArray();
-            }
+            
+            pageParams.Positions = title.Replace(',',';');
+            
             
 #if Mock
             var access = new MockDataAccess();
@@ -108,12 +107,12 @@ namespace ResourcePlanner.Services.Controllers
 
         [Route("excelexport")]
         public async Task<HttpResponseMessage> GetExcel(TimeAggregation agg = TimeAggregation.Weekly,
-            int? city = null,
-            int? market = null,
-            int? region = null,
-            int? orgUnit = null,
-            int? practice = null,
-            int? subpractice = null,
+            string city = null,
+            string market = null,
+            string region = null,
+            string orgUnit = null,
+            string practice = null,
+            string subpractice = null,
             string title = "",
             string searchterm1 = "",
             string searchterm2 = "",
@@ -129,17 +128,17 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.Aggregation = agg;
             pageParams.Sort = Enums.Enums.SortOrder.LastName;
             pageParams.SortDirection = Enums.Enums.SortDirection.Asc;
-            pageParams.City = city;
-            pageParams.OrgUnit = orgUnit;
-            pageParams.Market = market;
-            pageParams.Region = region;
+            pageParams.Cities = city.Replace(',', ';');
+            pageParams.OrgUnits = orgUnit.Replace(',', ';');
+            pageParams.Markets = market.Replace(',', ';');
+            pageParams.Regions = region.Replace(',', ';');
             pageParams.SearchTerm1 = searchterm1;
             pageParams.SearchTerm2 = searchterm2;
             pageParams.SearchTerm3 = searchterm3;
             pageParams.SearchTerm4 = searchterm4;
             pageParams.SearchTerm5 = searchterm5;
-            pageParams.Practice = practice;
-            pageParams.SubPractice = subpractice;
+            pageParams.Practices = practice.Replace(',', ';');
+            pageParams.SubPractices = subpractice.Replace(',', ';');
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
             pageParams.PageNum = 0;

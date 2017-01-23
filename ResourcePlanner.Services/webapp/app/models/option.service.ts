@@ -82,6 +82,9 @@ export class OptionService {
 
     initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void): JQuery {
         var selectorObj: JQuery = $(selector);
+        //if (previousValue !== null || previousValue != ""){
+        //    var prevOptions = this.localStorageService.get(previousValue);
+        //}
 
         this.categories.subscribe(categoryOptions => {
             selectorObj.select2({
@@ -91,6 +94,7 @@ export class OptionService {
                         text: pos.Name,
                     }
                 })
+
             });
             selectorObj.on("change", () => {
                 handler(selectorObj.select2('val'));
@@ -108,7 +112,7 @@ export class OptionService {
 
         selectorObj
             .select2({
-                data: source
+                data: source,
             })
             .on("change", () => {
                     handler(selectorObj.select2('val'));
