@@ -6,32 +6,33 @@
             <div class="container">
                 <h2>Main Resource Grid</h2>
                 <br>
-                <div *ngFor="let col of resourcePageColumns">
+                <div *ngFor="let option of resourcePageColumnOptions">
                     <span>
-                        <ui-switch [checked]="!optionService.getResourceColumnOption(col)"
-                                   (change)="optionService.setResourceColumnOption(col)" 
+                        <ui-switch [checked]="!option.Hidden"
+                                   (change)="option.Hidden = !option.Hidden" 
                                     color="#CC0057" size="small"></ui-switch>
                     </span>
-                    <span>{{col}}</span>
+                    <span>{{option.ColumnName}}</span>
                     <br>
                 </div>
             </div>
             <div class="container">
                 <h2>Resource Detail Grid</h2>
                 <br>
-                <div *ngFor="let col of detailPageColumns">
+                <div *ngFor="let option of detailPageColumnOptions">
                     <span>
-                        <ui-switch [checked]="!optionService.getDetailColumnOption(col)"
-                                   (change)="optionService.setDetailColumnOption(col)"
+                        <ui-switch [checked]="!option.Hidden"
+                                   (change)="option.Hidden = !option.Hidden"
                                    color="#CC0057" size="small"></ui-switch>
                     </span>
-                    <span>{{col}}</span>
+                    <span>{{option.ColumnName}}</span>
                     <br>
                 </div>
             </div>
         </div>
-                <div class="buttons">
-                    <button type="button" class="btn btn-primary" (click)="close()">Back</button>
-                </div>
-            </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+            <button type="button" class="btn btn-primary" (click)="close()">Back</button>
+        </div>
+    </div>
 </article>

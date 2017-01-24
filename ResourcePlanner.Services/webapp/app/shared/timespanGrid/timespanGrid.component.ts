@@ -78,7 +78,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         if (this.gridConfig.refreshContexts) {
             this.messageService.onTimespanGridRefreshRequested(gridContext => {
                 if (this.gridConfig.refreshContexts.indexOf(gridContext) >=0 ) {
-                    if(gridContext == 'resource-projects')
                     this.refresh();
                 }
             });
@@ -432,7 +431,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellContextMenu($event: any) {
-        //console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        console.log($event);
     }
 
     private onCellFocused($event: any) {

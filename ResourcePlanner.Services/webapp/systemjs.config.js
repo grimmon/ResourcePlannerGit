@@ -21,6 +21,7 @@
             '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
 
             // 3d party libraries
+            //'@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
             'ag-grid-ng2': 'npm:ag-grid-ng2',
             'ag-grid': 'npm:ag-grid',
             'ng2-auto-complete': 'npm:ng2-auto-complete/dist',
