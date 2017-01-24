@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Option, CategoryOption, OptionType, ColumnOption,  ResourcePageColumnType, DetailPageColumnType } from './option.model';
-import { CONFIG, ServerService } from '../core';
+import { CONFIG, ServerService, MessageService } from '../core';
 
 @Injectable()
 export class OptionService {
@@ -80,29 +80,39 @@ export class OptionService {
         this.localStorageService.set('previousDetailColumns', this.detailPageColumnOptions);
     }
 
-    initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void): JQuery {
-        var selectorObj: JQuery = $(selector);
-        //if (previousValue !== null || previousValue != ""){
-        //    var prevOptions = this.localStorageService.get(previousValue);
-        //}
-
-        this.categories.subscribe(categoryOptions => {
-            selectorObj.select2({
-                data: this.getOptionCategory(optionType).map(pos => {
-                    return {
-                        id: pos.Id,
-                        text: pos.Name,
-                    }
-                })
-
-            });
-            selectorObj.on("change", () => {
+    initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void, localStorageKey: string): JQuery {
+        var prevSelected: string[] = localStorageKey ? this.localStorageService.get(localStorageKey) as string[] : null,
+            options = this.getOptionCategory(optionType).map(option => {
+                return {
+                    id: option.Id,
+                    text: option.Name,
+                }
+            }),
+            selectorObj: JQuery = $(selector),
+            setValue = function (value: any) {
+                selectorObj.val(value).trigger('change');
+            };
+        selectorObj
+            .select2({
+                data: options
+            })
+            .on("change", () => {
                 handler(selectorObj.select2('val'));
             });
-        });
+        if (prevSelected) {
+            for (var i = 0; i < prevSelected.length; i++) {
+                var id = parseFloat(prevSelected[i]),
+                    found = options.filter(option => {
+                        return id == option.id;
+                    });
+                if (found.length > 0) {
+                    setValue(found[0]);
+                }
+            }
+        }
+
         return selectorObj;
     }
-
 
     initSelector(selector: string, source: any, initialValue: any, handler: (value: any) => void): any {
         var selectorObj: JQuery = $(selector),
@@ -163,6 +173,7 @@ export class OptionService {
     }
 
     constructor(
+        private messageService: MessageService,
         private serverService: ServerService,
         private localStorageService: LocalStorageService   ) {
         this.createCategories();
@@ -170,9 +181,8 @@ export class OptionService {
     }
 
     private createCategories() {
-        this.categories = this.serverService.get<CategoryOption[]>(CONFIG.urls.categoryOptions);
-
-        this.categories
+        this.serverService
+            .get<CategoryOption[]>(CONFIG.urls.categoryOptions)
             .subscribe(categoryOptions => {
                 this.orgUnits = this.createCategory(OptionType[OptionType.OrgUnit], categoryOptions);
                 this.cities = this.createCategory(OptionType[OptionType.City], categoryOptions);
@@ -185,9 +195,9 @@ export class OptionService {
                 this.resourceManagers = this.createCategory(OptionType[OptionType.ResourceManager], categoryOptions);
                 this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
                 this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions, false);
-            });
-       
 
+                this.messageService.categoriesLoad(true); // signal that categories loaded
+            });
     }
 
     private createColumnOptions() {

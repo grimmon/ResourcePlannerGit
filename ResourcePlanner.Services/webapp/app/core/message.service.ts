@@ -14,6 +14,16 @@ export class MessageService {
         this.errorRequested.next(value);
     }
 
+    // categories loaded
+    private categoriesLoaded = new Subject<any>();
+
+    onCategoriesLoaded(handler: (value: any) => void) {
+        this.categoriesLoaded.subscribe(handler)
+    }
+    categoriesLoad(value: any) {
+        this.categoriesLoaded.next(value);
+    }
+
     // modal mode toggle request
     private modalToggled = new Subject<boolean>();
 

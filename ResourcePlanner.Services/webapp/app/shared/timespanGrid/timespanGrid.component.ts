@@ -89,7 +89,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         this.columnDefs = this.createColumnDefs();
 
         this.gridOptions = <GridOptions>{
-            debug: true,
+            //debug: true,
             enableServerSideSorting: true,
             enableServerSideFilter: true,
             enableColResize: true,

@@ -105,13 +105,17 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.positionSelector = this.optionService.initObservableSelector(
-            ".position-selector",
-            OptionType.Position,
-            value => {
-                this.positions = value;
-                this.reloadGrid();
-            });
+        this.messageService.onCategoriesLoaded(() => {
+            this.positionSelector = this.optionService.initObservableSelector(
+                ".position-selector",
+                OptionType.Position,
+                value => {
+                    this.positions = value;
+                    this.reloadGrid();
+                },
+                ''
+            );
+        });
 
         this.daysOfWeekSelector = this.optionService.initSelector(
             ".dayofweek-selector",
