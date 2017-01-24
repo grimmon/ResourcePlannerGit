@@ -71,14 +71,14 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     clear() {
-        this.selectedCity = [-1] ;
-        this.selectedHomeCity = [-1];
-        this.selectedOrgUnit = [-1];
-        this.selectedRegion = [-1];
-        this.selectedPractice = [-1];
-        this.selectedSubPractice = [-1];
+        this.selectedCity = null ;
+        this.selectedHomeCity = null;
+        this.selectedOrgUnit = null;
+        this.selectedRegion = null;
+        this.selectedPractice = null;
+        this.selectedSubPractice = null;
         this.selectedAggregation = TimeAggregation.Weekly;
-        this.selectedResourceManager = [-1];
+        this.selectedResourceManager = null;
         this.tags.clear();
 
         this.messageService.resourceFilterChange('cleared', {
@@ -172,7 +172,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
             );
         });
 
-        this.clear();
     }
 
     private tags: any;

@@ -100,14 +100,18 @@ export class OptionService {
                 handler(selectorObj.select2('val'));
             });
         if (prevSelected) {
+            var values: number[] = [];
             for (var i = 0; i < prevSelected.length; i++) {
                 var id = parseFloat(prevSelected[i]),
                     found = options.filter(option => {
                         return id == option.id;
                     });
                 if (found.length > 0) {
-                    setValue(found[0]);
+                    values.push(found[0].id)
                 }
+            }
+            if (values.length) {
+                setValue(values);
             }
         }
 
