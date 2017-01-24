@@ -36,28 +36,32 @@ namespace ResourcePlanner.Services.Mapper
             document.CreateNewSheet("Data");
 
             document.SetCellValue(ExcelUtility.GetExcelAddress(1, 1), "Resource Name", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(2, 1), "Date Period", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(3, 1), "Position", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(4, 1), "City", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(2, 1), "Position", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(3, 1), "Delivery City", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(4, 1), "Home City", ExcelStyleFormat.Bold);
             document.SetCellValue(ExcelUtility.GetExcelAddress(5, 1), "Practice", ExcelStyleFormat.Bold);
             document.SetCellValue(ExcelUtility.GetExcelAddress(6, 1), "SubPractice", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(7, 1), "Resource Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(8, 1), "Forecast Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(9, 1), "Actual Hours", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(7, 1), "Resource Manager", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(8, 1), "Date Period", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(9, 1), "Resource Hours", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(10, 1), "Forecast Hours", ExcelStyleFormat.Bold);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(11, 1), "Actual Hours", ExcelStyleFormat.Bold);
 
             int rowNumber = 2;
 
             while (reader.Read())
             {                                                                     
                 document.SetCellValue(ExcelUtility.GetExcelAddress(1, rowNumber), reader.GetNullableString("LastName") + ", " + reader.GetNullableString("FirstName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(2, rowNumber), reader.GetNullableString("City"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(3, rowNumber), reader.GetNullableString("Position"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(4, rowNumber), reader.GetNullableString("Practice"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(5, rowNumber), reader.GetNullableString("SubPractice"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(6, rowNumber), reader.GetString("PeriodName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(7, rowNumber), reader.GetDouble("ForecastHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(8, rowNumber), reader.GetDouble("ActualHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(9, rowNumber), reader.GetDouble("ResourceHours").ToString());
+                document.SetCellValue(ExcelUtility.GetExcelAddress(2, rowNumber), reader.GetNullableString("Position"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(3, rowNumber), reader.GetNullableString("City"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(4, rowNumber), reader.GetNullableString("HomeCity"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(5, rowNumber), reader.GetNullableString("Practice"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(6, rowNumber), reader.GetNullableString("SubPractice"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(7, rowNumber), reader.GetNullableString("ResourceManagerLastName") + ", " + reader.GetNullableString("ResourceManagerFirstName"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(8, rowNumber), reader.GetString("PeriodName"));
+                document.SetCellValue(ExcelUtility.GetExcelAddress(9, rowNumber), reader.GetDouble("ForecastHours").ToString());
+                document.SetCellValue(ExcelUtility.GetExcelAddress(10, rowNumber), reader.GetDouble("ActualHours").ToString());
+                document.SetCellValue(ExcelUtility.GetExcelAddress(11, rowNumber), reader.GetDouble("ResourceHours").ToString());
                 rowNumber++;
             }
 

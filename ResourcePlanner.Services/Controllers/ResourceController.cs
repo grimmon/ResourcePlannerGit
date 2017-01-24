@@ -107,12 +107,13 @@ namespace ResourcePlanner.Services.Controllers
 
         [Route("excelexport")]
         public async Task<HttpResponseMessage> GetExcel(TimeAggregation agg = TimeAggregation.Weekly,
-            string city = null,
-            string market = null,
-            string region = null,
-            string orgUnit = null,
-            string practice = null,
-            string subpractice = null,
+            string city = "",
+            string homecity = "",
+            string market = "",
+            string region = "",
+            string orgUnit = "",
+            string practice = "",
+            string subpractice = "",
             string title = "",
             string searchterm1 = "",
             string searchterm2 = "",
@@ -129,6 +130,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.Sort = Enums.Enums.SortOrder.LastName;
             pageParams.SortDirection = Enums.Enums.SortDirection.Asc;
             pageParams.Cities = city.Replace(',', ';');
+            pageParams.HomeCities = homecity.Replace(',', ';');
             pageParams.OrgUnits = orgUnit.Replace(',', ';');
             pageParams.Markets = market.Replace(',', ';');
             pageParams.Regions = region.Replace(',', ';');
