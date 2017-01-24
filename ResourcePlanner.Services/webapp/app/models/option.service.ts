@@ -195,10 +195,10 @@ export class OptionService {
                 this.markets = this.createCategory(OptionType[OptionType.Market], categoryOptions);
                 this.practices = this.createCategory(OptionType[OptionType.Practice], categoryOptions);
                 this.subPractices = this.createCategory(OptionType[OptionType.SubPractice], categoryOptions);
-                this.aggregations = this.createCategory(OptionType[OptionType.agg], categoryOptions, false);
+                this.aggregations = this.createCategory(OptionType[OptionType.agg], categoryOptions);
                 this.resourceManagers = this.createCategory(OptionType[OptionType.ResourceManager], categoryOptions);
-                this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions, false);
-                this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions, false);
+                this.positions = this.createCategory(OptionType[OptionType.Position], categoryOptions);
+                this.tasks = this.createCategory(OptionType[OptionType.Task], categoryOptions);
 
                 this.messageService.categoriesLoad(true); // signal that categories loaded
             });
@@ -301,16 +301,11 @@ export class OptionService {
         ];
     }
 
-    private createCategory(categoryName: string, categoryOptions: CategoryOption[], useNone: boolean = true): Option[] {
+    private createCategory(categoryName: string, categoryOptions: CategoryOption[]): Option[] {
         var options = categoryOptions.filter(option => option.Category == categoryName).map(x => new Option({ Id: x.Id, Name: x.Name })).sort((a, b) => {
             var r = a.Name.localeCompare(b.Name);
             return r < 0 ? -1 : (r ? 1 : 0);
         });
-        if (useNone) {
-            var res: Option[] = [{ Id: -1, Name: 'Any' }];
-            Array.prototype.push.apply(res, options);
-            return res;
-        }
         return options;
     }
 }

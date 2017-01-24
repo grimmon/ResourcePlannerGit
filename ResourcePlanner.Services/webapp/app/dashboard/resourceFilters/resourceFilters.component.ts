@@ -71,7 +71,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     clear() {
-        this.selectedCity = null ;
+        this.selectedCity = null;
         this.selectedHomeCity = null;
         this.selectedOrgUnit = null;
         this.selectedRegion = null;
@@ -170,7 +170,13 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
                 },
                 'previousSelectedResourceManager'
             );
+            if (this.selectedCity || this.selectedHomeCity || this.selectedOrgUnit || this.selectedRegion ||
+                this.selectedPractice || this.selectedSubPractice || this.selectedResourceManager) {
+                this.apply();
+            }
         });
+
+       
 
     }
 
@@ -201,7 +207,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     private addOption(key: string, option: number[]) {
-        if (option && !(option.some(x => x==-1))) {
+        if (option) {
             this.addFilter(key, option);
         }
     }
