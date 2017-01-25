@@ -31,7 +31,7 @@ namespace ResourcePlanner.Services.DataAccess
         {
             var returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceBreakdown(reader),
                   _connectionString,
-                  @"rpdb.ResourceBreakDownPageSelect",
+                  @"rpdb.ResourceBreakDownSelect",
                   CommandType.StoredProcedure,
                   _timeout,
                   CreateResourceBreakdownParamArray(ResourceId,StartDate, EndDate));

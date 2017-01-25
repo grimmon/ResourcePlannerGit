@@ -1,7 +1,21 @@
 <div class="filterPanel" [style.display]="visible ? 'block' : 'none'">
     <div class="panel-body">
-        <div class="tags">
-            <ul id="myTags"></ul>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="tags">
+                    <ul id="myTags"></ul>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-1">
+                <label style="float: right;">Interval</label>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)">
+                    <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
+                </select>
+            </div>
+           
         </div>
         <div class="row">
             <div class="col-sm-1">
@@ -11,25 +25,25 @@
                 <select multiple="multiple" class="city-selector form-control"></select>
             </div>
             <div class="col-sm-1">
-                <label style="float: right;">Practices</label>
+                <label style="float: right;">Practice</label>
             </div>
             <div class="col-sm-2">
                 <select multiple="multiple" class="practice-selector form-control"></select>
             </div>
             <div class="col-sm-1">
-                <label style="float: right;">Org Units</label>
+                <label style="float: right;">Org Unit</label>
             </div>
             <div class="col-sm-2">
                 <select multiple="multiple" class="orgUnit-selector form-control"></select>
 
-            </div>     
+            </div>
             <div class="col-sm-1">
                 <label style="float:right;">Resource Mgr.</label>
             </div>
             <div class="col-sm-2">
                 <select multiple="multiple" class="resourceManager-selector form-control"></select>
             </div>
-            
+
         </div>
         <div class="row">
             <div class="col-sm-1">
@@ -39,33 +53,32 @@
                 <select multiple="multiple" class="homeCity-selector form-control"></select>
             </div>
             <div class="col-sm-1">
-                <label style="float: right;">Sub-Practices</label>
+                <label style="float: right;">Sub-Practice</label>
             </div>
             <div class="col-sm-2">
                 <select multiple="multiple" class="subPractice-selector form-control"></select>
             </div>
             <div class="col-sm-1">
-                <label style="float: right;">Regions</label>
+                <label style="float: right;">Region</label>
             </div>
             <div class="col-sm-2">
                 <select multiple="multiple" class="region-selector form-control"></select>
             </div>
             <div class="col-sm-1">
-                <label style="float: right;">Interval</label>
+                <label style="float: right;">Position</label>
             </div>
             <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)"> 
-                    <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
-                </select>
+                <select multiple="multiple" class="position-selector form-control"></select>
             </div>
+            
         </div>
         <div class="buttons row">
-            
+
             <div class="col-sm-1"></div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary" id="applyButton" (click)="apply()">Apply</button>
                 <button type="button" class="btn btn-primary" id="clearButton" (click)="clear()">Clear</button>
             </div>
-       </div>
+        </div>
     </div>
 </div>

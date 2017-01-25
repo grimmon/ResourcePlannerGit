@@ -25,6 +25,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     selectedSubPractice: number[];
     selectedAggregation: TimeAggregation;
     selectedResourceManager: number[];
+    selectedPosition: number[];
 
     citySelector: any;
     homeCitySelector: any;
@@ -33,6 +34,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     practiceSelector: any;
     subPracticeSelector: any;
     resourceManagerSelector: any;
+    positionSelector: any;
 
     aggregationChange(newAggregation: any) {
         this.messageService.resourceFilterChange('aggregation', parseInt(newAggregation));
@@ -79,6 +81,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedSubPractice = null;
         this.selectedAggregation = TimeAggregation.Weekly;
         this.selectedResourceManager = null;
+        this.selectedPosition = null;
         this.tags.clear();
 
         this.messageService.resourceFilterChange('cleared', {
@@ -170,8 +173,16 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
                 },
                 'previousSelectedResourceManager'
             );
+            this.positionSelector = this.optionService.initObservableSelector(
+                ".position-selector",
+                OptionType.ResourceManager,
+                value => {
+                    this.selectedPosition = value;
+                },
+                'previousSelectedPosition'
+            );
             if (this.selectedCity || this.selectedHomeCity || this.selectedOrgUnit || this.selectedRegion ||
-                this.selectedPractice || this.selectedSubPractice || this.selectedResourceManager) {
+                this.selectedPractice || this.selectedSubPractice || this.selectedResourceManager || this.selectedPosition) {
                 this.apply();
             }
         });
@@ -226,6 +237,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.addOption("subpractice", this.selectedSubPractice);
         this.addAggOption(this.selectedAggregation);
         this.addOption("resourcemanager", this.selectedResourceManager);
+        this.addOption("title", this.selectedPosition);
     }
 
     private saveFilters() {
@@ -237,6 +249,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.localStorageService.set("previousSelectedSubPractice", this.selectedSubPractice);
         this.localStorageService.set("previousSelectedAgg", this.selectedAggregation);
         this.localStorageService.set("previousSelectedResourceManager", this.selectedResourceManager);
+        this.localStorageService.set("previousSelectedPosition", this.selectedPosition)
     }
 
     private callFiltered(operation: string) {

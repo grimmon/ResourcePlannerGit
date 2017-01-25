@@ -79,8 +79,6 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
             pageParams.Login = HttpContext.Current.User.Identity.Name;
-
-            
             pageParams.Positions = title.Replace(',',';');
             
             
@@ -147,6 +145,7 @@ namespace ResourcePlanner.Services.Controllers
             pageParams.PageSize = int.MaxValue;
             pageParams.Excel = true;
             pageParams.Login = HttpContext.Current.User.Identity.Name;
+            pageParams.Positions = title.Replace(',', ';');
 
 #if Mock
             var access = new MockDataAccess();
