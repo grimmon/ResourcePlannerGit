@@ -18,6 +18,7 @@ import { Resource, ResourcePage, ResourceRow, ResourceService, TimeAggregation, 
 export class ResourceListComponent implements OnDestroy, OnInit {
 
     @Output() resourceSelected: EventEmitter<any>;
+    @Output() popupRequested: EventEmitter<any>;
 
     panelHeightWithFilters: string = "82%";
     panelHeight: string = this.panelHeightWithFilters;
@@ -36,6 +37,17 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         createRow: ResourceRow,
         showTimePeriodScroll: true,
         height: "100%",
+        handleContext: (event: any) => {
+            var resourceId = event.data.id,
+                srcElement = event.event.target,
+                field = event.colDef.field,
+                value = event.value;
+            this.popupRequested.emit({
+                event: event.event,
+            });
+
+            console.log(event);
+        } 
     };
 
     queryConfig: any = {
@@ -66,6 +78,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         private optionService: OptionService    ) {
 
         this.resourceSelected = new EventEmitter<any>();
+        this.popupRequested = new EventEmitter<any>();
 
         this.messageService.onExportRequested(filters => this.doExport(filters));
 

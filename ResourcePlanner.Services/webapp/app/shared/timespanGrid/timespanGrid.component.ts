@@ -431,8 +431,10 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private onCellContextMenu($event: any) {
-        console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
-        console.log($event);
+        $event.event.preventDefault();
+        if (this.gridConfig.handleContext) {
+            this.gridConfig.handleContext($event);
+        }
     }
 
     private onCellFocused($event: any) {
