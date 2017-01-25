@@ -44,6 +44,11 @@ span.tagit-label {
     font-weight:normal;
     color:#000000;
 }
+span.select2-selection--multiple {
+    overflow-y: auto;
+    height: 34px;
+    cursor: pointer;
+}
 .tagit input::-webkit-input-placeholder  {
     color: #666666;
 }
