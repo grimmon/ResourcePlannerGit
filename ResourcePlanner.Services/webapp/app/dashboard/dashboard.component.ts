@@ -23,6 +23,12 @@ export class DashboardComponent implements OnDestroy, OnInit {
         this.resource = $event ? this.entityService.clone($event) : $event;
     }
 
+    popupRequested($event: any) {
+        this.popupConfig = {
+            event: $event
+        };
+    }
+
     resourceRequestShow = 0;
     resourceRequestRequested() {
         this.resourceRequestShow++;
@@ -56,6 +62,8 @@ export class DashboardComponent implements OnDestroy, OnInit {
     }
 
     assignmentInfo: any;
+
+    popupConfig: any;
 
     constructor(
         private entityService: EntityService,

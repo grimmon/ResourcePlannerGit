@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/cor
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ExceptionService, MessageService, DateService } from '../../core';
-import { OptionType, Option, OptionService, DetailPageColumnOption, ResourcePageColumnOption, ResourcePageColumnType, DetailPageColumnType, ResourcePage, ResourceRow, ResourceService, AddAssignments, TimeAggregation, } from '../../models';
+import { MessageService, EntityService } from '../../core';
+import { ColumnOption, Option, OptionService } from '../../models';
 import { CONFIG } from '../../core';
 
 @Component({
@@ -25,6 +25,9 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
             this.messageService.modalToggle(this.visible = true);
             this.saving = false;
             this.applyTrigger++;
+
+            this.resourcePageColumnOptions = this.copy(this.optionService.resourcePageColumnOptions); 
+            this.detailPageColumnOptions = this.copy(this.optionService.detailPageColumnOptions); 
         }
     }
     _showTrigger = 0;
@@ -35,17 +38,13 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
 
     applyTrigger = 1;
 
-    resourcePageColumns: string[] = ['Resource Name', 'Position', 'City', 'Home City', 'Practice', 'Sub-practice', 'Resource Mgr'];
-    detailPageColumns: string[] = ['Project Name', 'Project Number', 'WBS Element', 'Client', 'Opportunity Owner', 'Project Manager', 'Description'];
-
-    resourcePageColumnOption: any[];
-    detailPageColumnOption: any[];
+    resourcePageColumnOptions: ColumnOption[];
+    detailPageColumnOptions: ColumnOption[];
 
     constructor(
         private messageService: MessageService,
         private optionService: OptionService,
-        private dateService: DateService,
-        private exceptionService: ExceptionService ) {
+        private entityService: EntityService) {
 
         this.columnsEdited = new EventEmitter<any>();
     }
@@ -53,11 +52,24 @@ export class EditColumnsComponent implements OnDestroy, OnInit {
     ngOnInit() {
     }
 
-    close() {
-        //this.messageService.timespanGridRefreshRequest('resource-list');
-        this.messageService.modalToggle(this.visible = false);
+    copy(source: ColumnOption[]): ColumnOption[] {
+        return source.map(option => {
+            return this.entityService.clone(option);
+        });
     }
 
+    save() {
+        this.optionService.resourcePageColumnOptions = this.copy(this.resourcePageColumnOptions);
+        this.optionService.detailPageColumnOptions = this.copy(this.detailPageColumnOptions); 
+        this.optionService.saveAllColumnOptions();
+
+        this.messageService.timespanGridRefreshRequest('resource-list');
+        this.close();
+    }
+
+    close() {
+        this.messageService.modalToggle(this.visible = false);
+    }
 
     ngOnDestroy() {
     }

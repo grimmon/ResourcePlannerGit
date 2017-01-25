@@ -10,6 +10,7 @@ import { AgGridModule } from 'ag-grid-ng2/main';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { UiSwitchModule } from 'angular2-ui-switch';
 import { LocalStorageModule } from 'angular-2-local-storage';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { NavComponent } from './navigation/nav.component';
 import { ErrorComponent } from './error/error.component';
 import { TimespanGridComponent } from './shared/timespanGrid/timespanGrid.component';
 import { HoursEditorComponent } from './shared/hoursEditor/hoursEditor.component';
+import { PopupComponent } from './shared/popup/popup.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResourceListComponent } from './dashboard/resourceList/resourceList.component';
@@ -45,6 +47,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         CommonModule,
         UiSwitchModule,
 
+        //NgbModule.forRoot(),
         AgGridModule.forRoot(),
         Ng2AutoCompleteModule,
         LocalStorageModule.withConfig({
@@ -58,6 +61,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         AppComponent,
         TimespanGridComponent,
         HoursEditorComponent,
+        PopupComponent,
 
         ErrorComponent,
         NavComponent,

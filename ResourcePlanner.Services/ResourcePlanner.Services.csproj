@@ -241,6 +241,8 @@
     <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.html" />
     <Content Include="webapp\app\dashboard\projectListView\projectListView.component.css" />
     <Content Include="webapp\app\dashboard\projectListView\projectListView.component.html" />
+    <Content Include="webapp\app\shared\popup\popup.component.css" />
+    <Content Include="webapp\app\shared\popup\popup.component.html" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.css" />
     <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.html" />
     <Content Include="webapp\assets\common.css" />
@@ -3879,6 +3881,7 @@
     <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
     <TypeScriptCompile Include="webapp\app\error\error.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\numericCellEditor\numericCellEditor.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\popup\popup.component.ts" />
     <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
     <TypeScriptCompile Include="webapp\main.ts" />
     <TypeScriptCompile Include="webapp\node_modules\%40angular\common\index.d.ts" />

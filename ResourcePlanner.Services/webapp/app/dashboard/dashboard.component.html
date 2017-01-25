@@ -2,7 +2,7 @@
 
     <resource-filters (applyFiltersRequested)="applyFiltersRequested($event)"></resource-filters>
 
-    <resource-list [filterQuery]="filterQuery" (resourceSelected)="resourceSelected($event)"></resource-list>
+    <resource-list [filterQuery]="filterQuery" (resourceSelected)="resourceSelected($event)" (popupRequested)="popupRequested($event)"></resource-list>
 
     <resource-details [resource]="resource" (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
 
@@ -18,4 +18,5 @@
 
     <hours-editor [assignmentInfo]="assignmentInfo"></hours-editor>
 
+    <resource-popup [config]="popupConfig"></resource-popup>
 </article>
