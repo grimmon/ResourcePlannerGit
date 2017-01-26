@@ -30,6 +30,8 @@ export class PopupComponent implements OnDestroy, OnInit {
 
     visible: boolean = false;
 
+    loading: boolean = false;
+
     chart: any;
 
     constructor(
@@ -41,7 +43,7 @@ export class PopupComponent implements OnDestroy, OnInit {
     ngOnInit() {
         this.popupElement = document.getElementById('resourcePopup');
         this.chart = c3.generate({
-            bindto: '#resourcePopup',
+            bindto: '#resourcePopup .pieContainer',
             data: {
                 columns: [
                     ["Project", 0],
@@ -59,6 +61,14 @@ export class PopupComponent implements OnDestroy, OnInit {
                 height: 150,
                 width: 150
             },
+            tooltip: {
+                format: {
+                    value: function (value: any, ratio: any, id: any) {
+                        console.log(`value:${value} ratio:${ratio} id${id}`)
+                        return value + ' hours';
+                    }
+                }
+            }
         });
     }
 
@@ -75,6 +85,7 @@ export class PopupComponent implements OnDestroy, OnInit {
         this.popupElement.style.top = clientY + 'px';
         this.popupElement.style.left = clientX + 'px';
         this.chart.unload();
+        this.loading = true;
         this.visible = true;
         this.resourceService.getResourceBreakdown(`?ResourceId=${resourceId}&StartDate=${from}&EndDate=${to}`).subscribe((breakdown: any) => {
             this.chart.load({
@@ -86,7 +97,8 @@ export class PopupComponent implements OnDestroy, OnInit {
                     ["Other", breakdown.OtherHours],
                 ]
             });
-        });
+            this.loading = false;
+       });
     }
 
     ngOnDestroy() {

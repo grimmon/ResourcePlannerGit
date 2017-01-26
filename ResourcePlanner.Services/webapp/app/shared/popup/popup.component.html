@@ -1,4 +1,8 @@
 <div class="popupCover" [style.display]="visible ? 'block' : 'none'" (click)="visible=false">
     <div id="resourcePopup" class="popup">
+        <div class="pieContainer" [style.display]="loading ? 'none' : 'block'"></div>
+        <div class="loading" [style.display]="loading ? 'block' : 'none'">
+            <h4>Loading resource breakdown...</h4>
+        </div>
     </div>
 </div>
