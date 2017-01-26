@@ -28,7 +28,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             setTimeout(() => {
                 this.applyTrigger++;
                 this.applyFiltersTrigger++;
-            }, 500);
+            }, 100);
         }
     }
     _showTrigger = 0;
