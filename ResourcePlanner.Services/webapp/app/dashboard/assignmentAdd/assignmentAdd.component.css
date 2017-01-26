@@ -16,7 +16,16 @@
     }
         .addAssignment .panel > div {
             height: 100%;
+            float: left;
         }
+            .addAssignment .panel > div:nth-child(1) {
+                width: 22%;
+                padding-top:16px;
+                padding-left:16px;
+            }
+            .addAssignment .panel > div:nth-child(2) {
+                width: 78%;
+            }
             .addAssignment .panel > div > div {
                 margin-top: 8px;
             }

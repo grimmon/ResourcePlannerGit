@@ -95,7 +95,8 @@ export class OptionService {
     }
 
     initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void, localStorageKey: string): JQuery {
-        var prevSelected: string[] = localStorageKey ? this.localStorageService.get(localStorageKey) as string[] : null,
+        var prevSelected: string[] = localStorageKey ? this.localStorageService.get(localStorageKey) as string[] : [],
+            prevSelected = prevSelected || [],
             options = this.getOptionCategory(optionType).map(option => {
                 return {
                     id: option.Id,
@@ -113,22 +114,18 @@ export class OptionService {
             .on("change", () => {
                 handler(selectorObj.select2('val'));
             });
-        if (prevSelected) {
-            var values: number[] = [];
-            for (var i = 0; i < prevSelected.length; i++) {
-                var id = parseFloat(prevSelected[i]),
-                    found = options.filter(option => {
-                        return id == option.id;
-                    });
-                if (found.length > 0) {
-                    values.push(found[0].id)
-                }
-            }
-            if (values.length) {
-                setValue(values);
+        var values: number[] = [];
+        for (var i = 0; i < prevSelected.length; i++) {
+            var id = parseFloat(prevSelected[i]),
+                found = options.filter(option => {
+                    return id == option.id;
+                });
+            if (found.length > 0) {
+                values.push(found[0].id)
             }
         }
-
+        setValue(values);
+ 
         return selectorObj;
     }
 

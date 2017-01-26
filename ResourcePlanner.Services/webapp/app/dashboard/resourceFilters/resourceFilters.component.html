@@ -7,10 +7,10 @@
                 </div>
             </div>
             <div class="col-sm-3"></div>
-            <div class="col-sm-1">
-                <label style="float: right;" [style.display]="basicMode ? 'block' : 'none'">Interval</label>
+            <div class="col-sm-1 interval">
+                <label [style.display]="basicMode ? 'block' : 'none'">Interval</label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 interval">
                 <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)"  [style.display]="basicMode ? 'block' : 'none'">
                     <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
                 </select>

@@ -3,7 +3,7 @@
     <resource-filters [mode]="'assignment'" (applyFiltersRequested)="applyFiltersRequested($event)" [applyTrigger]="applyFiltersTrigger"></resource-filters>
 
     <div class="panel">
-        <div class="col-sm-2" style="width:22%">
+        <div>
             <label [style.color]="tasksVisible ? '#000' : '#534742'">Project </label>
             <ui-switch [(ngModel)]="tasksVisible" color="#CC0057" size="small"></ui-switch>
             <label [style.display]="tasksVisible ? '#534742' : '#000'"> Task </label>
@@ -71,7 +71,7 @@
 
             </div>
         </div>
-        <div class="col-sm-10" style="width:78%">
+        <div>
             <timespan-grid id="resource"
                            [applyTrigger]="applyTrigger"
                            [gridConfig]="gridConfig"

@@ -7,8 +7,12 @@
     .flatPanel .firstRow {
         padding-bottom:2px;
     }
-    .filterPanel .col-sm-2 {
+    .filterPanel .interval {
+        padding-top: 16px;
     }
+        .filterPanel .interval label{
+            float: right;
+        }
     .filterPanel select {
         width: 100%;
         height: 24px;
