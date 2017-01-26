@@ -281,7 +281,7 @@ namespace ResourcePlanner.Services.Mapper
             var projectHours = reader.GetDouble("ProjectHours");
             var ptoHours = reader.GetDouble("PtoHours");
             var trainingHours = reader.GetDouble("TrainingHours");
-            var internalProjectHours = reader.GetDouble("InternalProjectHours");
+            var internalProjectHours = reader.GetDouble("InternalSupportHours");
             var otherHours = reader.GetDouble("OtherHours");
 
            
