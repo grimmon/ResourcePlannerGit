@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -25,7 +25,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             this.daysOfWeekSelector.set(CONFIG.defaultDaysOfWeek)
             this.messageService.modalToggle(this.visible = true);
             this.saving = false;
-            this.applyTrigger++;
+            setTimeout(() => {
+                this.applyTrigger++;
+                this.applyFiltersTrigger++;
+            }, 500);
         }
     }
     _showTrigger = 0;
@@ -35,6 +38,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     saving: boolean = false;
 
     applyTrigger = 1;
+
+    applyFiltersTrigger = 0;
 
     gridConfig: any = {
         getItems: (page: ResourcePage) => page.Resources,
@@ -55,6 +60,12 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     refreshed($event: any) {
     }
+
+    applyFiltersRequested($event: any) {
+        this.filterQuery = $event;
+        this.reloadGrid();
+    }
+    filterQuery: string = '';
 
     addAssignments: AddAssignments
 
@@ -78,6 +89,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     clientNameChanged($event: any) {
     }
     constructor(
+        private zone: NgZone,
         private messageService: MessageService,
         private optionService: OptionService,
         private dateService: DateService,
@@ -182,21 +194,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         return errors.length ? errors : null;
     }
 
-    positionChanged($event: any) {
-        this.positions = $event.target.value;
-        this.reloadGrid();
-    }
-
-    practiceChanged($event: any) {
-        this.practice = $event.target.value;
-        this.reloadGrid();
-    }
-
-    subPracticeChanged($event: any) {
-        this.subPractice = $event.target.value;
-        this.reloadGrid();
-    }
-
     //taskChanged($event: any) {
     //    this.ProjectMasterId = $event.target.value;
     //}
@@ -230,12 +227,9 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     private buildQuery(): string {
         var query = this.getDefaultQuery();
-        query += this.addParam('practice', this.practice);
-        query += this.addParam('subpractice', this.subPractice);
-        if (this.positions) {
-            query += this.addParam('position', this.positions.join(','));
+        if (this.filterQuery) {
+            query += '&' + this.filterQuery
         }
-
         this.queryConfig.query = query;
         return query
     }

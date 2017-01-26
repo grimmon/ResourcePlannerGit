@@ -1,5 +1,7 @@
 <article class="addAssignment" [style.display]="visible ? 'block' : 'none'">
     <h3>Add Assignment</h3>
+    <resource-filters [mode]="'assignment'" (applyFiltersRequested)="applyFiltersRequested($event)" [applyTrigger]="applyFiltersTrigger"></resource-filters>
+
     <div class="panel">
         <div class="col-sm-2" style="width:22%">
             <label [style.color]="tasksVisible ? '#000' : '#534742'">Project </label>
@@ -30,22 +32,6 @@
                 </select>
             </div>
 
-            <div>
-                <label>Position</label><br />
-                <select class="position-selector form-control" multiple="multiple"></select>
-            </div>
-            <div>
-                <label>Practice</label>
-                <select id="assignmentPracticesDropdown" class="form-control" [(ngModel)]="practice" (change)="practiceChanged($event)">
-                    <option *ngFor="let option of getPractices()" [value]="option.Id">{{option.Name}}</option>
-                </select>
-            </div>
-            <div>
-                <label>Sub Practice</label>
-                <select id="assignmentSubpracticesDropdown" class="form-control" [(ngModel)]="subPractice" (change)="subPracticeChanged($event)">
-                    <option *ngFor="let option of getSubPractices()" [value]="option.Id">{{option.Name}}</option>
-                </select>
-            </div>
             <div>
                 <label>Start Date</label>
                 <input type='date' class="form-control" [(ngModel)]="addAssignments.startDate" (input)="startDateChanged($event)" />

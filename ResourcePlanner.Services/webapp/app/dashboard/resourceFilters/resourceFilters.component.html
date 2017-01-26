@@ -1,17 +1,17 @@
-<div class="filterPanel" [style.display]="visible ? 'block' : 'none'">
+<div class="filterPanel" [ngClass]="mode" [style.display]="visible ? 'block' : 'none'">
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-6">
                 <div class="tags">
-                    <ul id="myTags"></ul>
+                    <ul id="myTags" class="myTags"></ul>
                 </div>
             </div>
             <div class="col-sm-3"></div>
             <div class="col-sm-1">
-                <label style="float: right;">Interval</label>
+                <label style="float: right;" [style.display]="basicMode ? 'block' : 'none'">Interval</label>
             </div>
             <div class="col-sm-2">
-                <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)">
+                <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)"  [style.display]="basicMode ? 'block' : 'none'">
                     <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>

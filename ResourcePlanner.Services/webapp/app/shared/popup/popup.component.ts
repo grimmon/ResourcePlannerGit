@@ -64,7 +64,7 @@ export class PopupComponent implements OnDestroy, OnInit {
             tooltip: {
                 format: {
                     value: function (value: any, ratio: any, id: any) {
-                        console.log(`value:${value} ratio:${ratio} id${id}`)
+                        //console.log(`value:${value} ratio:${ratio} id${id}`)
                         return value + ' hours';
                     }
                 }
