@@ -24,9 +24,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
     }
 
     popupRequested($event: any) {
-        this.popupConfig = {
-            event: $event
-        };
+        this.popupConfig = $event
     }
 
     resourceRequestShow = 0;

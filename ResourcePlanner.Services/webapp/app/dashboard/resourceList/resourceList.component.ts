@@ -38,15 +38,18 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         showTimePeriodScroll: true,
         height: "100%",
         handleContext: (event: any) => {
-            var resourceId = event.data.id,
-                srcElement = event.event.target,
-                field = event.colDef.field,
+            var field = event.colDef.field,
+                periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
+                periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
                 value = event.value;
-            this.popupRequested.emit({
-                event: event.event,
-            });
-
-            console.log(event);
+            if (field.indexOf('ResourceHours') > 0 && value) {
+                this.popupRequested.emit({
+                    event: event.event,
+                    resourceId: event.data.Id,
+                    periodStart: periodStart,
+                    periodEnd: this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6)
+                });
+            }
         } 
     };
 
