@@ -30,7 +30,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             this.messageService.modalToggle(this.visible = true);
             this.saving = false;
             setTimeout(() => {
-                this.applyTrigger++;
                 this.applyFiltersTrigger++;
             }, 100);
         }
@@ -55,7 +54,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     queryConfig: any = {
         aggregation: TimeAggregation.Weekly,
-        query: this.getDefaultQuery(),
+        query: '',
     };
 
     dataRequested($event: any) {
@@ -192,8 +191,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         if (this.filterQuery) {
             query += '&' + this.filterQuery
         }
-        this.queryConfig.query = query;
-        this.applyTrigger++;
+        if (this.queryConfig.query != query) {
+            this.queryConfig.query = query;
+            this.applyTrigger++;
+        }
     }
 
     private getDefaultQuery() {
