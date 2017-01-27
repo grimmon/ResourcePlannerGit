@@ -69,7 +69,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     save() {
-        if (!this.validate()) {
+        if (this.validate()) {
             this.addAssignments.projectMasterId = this.tasksVisible ? this.task : this.project.Id;
             this.addAssignments.resourceIds = this.gridConfig.selectedIds;
             if (this.hoursPerDayVisible) {

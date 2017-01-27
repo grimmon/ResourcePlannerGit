@@ -6,13 +6,12 @@
     height: 100%;
 }
     .addAssignment h3 {
-        margin-top: 10px;
-        margin-left: 40px;
-        margin-bottom: 10px;
-        height: 30px;
+        position:absolute;
+        top: -65px;
+        left:300px;
     }
     .addAssignment .panel {
-        height: calc(82% - 110px); /* 50px h3 + 60px buttons */
+        height: calc(82% - 60px); /* 60px buttons */
     }
         .addAssignment .panel > div {
             height: 100%;
