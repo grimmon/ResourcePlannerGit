@@ -12,6 +12,7 @@
     }
     .addAssignment .panel {
         height: calc(82% - 60px); /* 60px buttons */
+        clear: both;
     }
         .addAssignment .panel > div {
             height: 100%;
