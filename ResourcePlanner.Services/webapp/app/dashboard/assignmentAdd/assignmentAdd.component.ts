@@ -75,19 +75,13 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     currentDate: string;
 
-    practice: number = -1;
-    subPractice: number = -1;
     task: number = -1;
-    positions: any[];
 
-    private positionSelector: JQuery;
     private daysOfWeekSelector: any;
 
     hoursPerDayVisible = false;
     tasksVisible = false;
 
-    clientNameChanged($event: any) {
-    }
     constructor(
         private zone: NgZone,
         private messageService: MessageService,
@@ -116,19 +110,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit() {
-
-        this.messageService.onCategoriesLoaded(() => {
-            this.positionSelector = this.optionService.initObservableSelector(
-                ".position-selector",
-                OptionType.Position,
-                value => {
-                    this.positions = value;
-                    this.reloadGrid();
-                },
-                ''
-            );
-        });
-
         this.daysOfWeekSelector = this.optionService.initSelector(
             ".dayofweek-selector",
             CONFIG.daysOfWeek,
@@ -194,10 +175,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         return errors.length ? errors : null;
     }
 
-    //taskChanged($event: any) {
-    //    this.ProjectMasterId = $event.target.value;
-    //}
-
     startDateChanged($event: any) {
         this.addAssignments.startDate = $event.target.value;
         this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
@@ -217,10 +194,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this.applyTrigger++;
     }
 
-    private addParam(keyword: string, value: any) {
-        return value == -1 || value == '' ? '' : '&' + keyword + '=' + value;
-    }
-
     private getDefaultQuery() {
         return 'availability=true';
     }
@@ -236,14 +209,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     addProject() {
         this.addProjectRequested.emit();
-    }
-
-    private getPractices() {
-        return this.optionService.practices;
-    }
-
-    private getSubPractices() {
-        return this.optionService.subPractices;
     }
 
     private getTasks() {

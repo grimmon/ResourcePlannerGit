@@ -64,38 +64,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.messageService.resourceFilterChange('aggregation', parseInt(newAggregation));
     }
 
-    getCities() {
-        return this.optionService.cities;
-    }
-    getHomeCities() {
-        return this.optionService.homeCities;
-    }
-
-    getOrgUnits() {
-        return this.optionService.orgUnits;
-    }
-
-    getRegions() {
-        return this.optionService.regions;
-    }
-
-   
-    getAggregations() {
-        return this.optionService.aggregations;
-    }
-
-    getResourceManagers() {
-        return this.optionService.resourceManagers;
-    }
-
-    getPractices() {
-        return this.optionService.practices;
-    }
-
-    getSubPractices() {
-        return this.optionService.subPractices;
-    }
-
     clearFilters() {
         this.selectedCity = null;
         this.selectedHomeCity = null;
@@ -111,7 +79,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     clear() {
         this.clearFilters();
         this.tags.clear();
-
         this.messageService.resourceFilterChange('cleared', {
             aggregation: this.selectedAggregation
         })
@@ -123,8 +90,11 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.messageService.resourceFilterChange('applied', {
             aggregation: this.selectedAggregation
         })
-
         this.applyFiltersRequested.emit(this.filterQuery);
+    }
+
+    getAggregations() {
+        return this.optionService.aggregations;
     }
 
     constructor(
@@ -151,14 +121,10 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
                 }
             }
         });
-
-
     }
 
     setFilters() {
-
         this.clearFilters();
-
         this.citySelector = this.optionService.initObservableSelector(
             `.${this._mode} .city-selector`,
             OptionType.City,
@@ -246,7 +212,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     private filterQuery: string;
 
     private addFilter(key: string, values: any) {
-
         var iteratedValues = "";
         var iterator = 0;
         for (let value of values) {
