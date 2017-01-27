@@ -129,10 +129,15 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.messageService.onFilteredRequested(operation => this.callFiltered(operation));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
-            if (!filterInfo.value.basicMode && !this.selectorsInitialized) {
+            if (!filterInfo.value.basicMode) {
                 switch (filterInfo.type) {
                     case 'applied':
-                        this.setFilters();
+                        if (this.selectorsInitialized) {
+                            this.loadFilters();
+                            this.setFilterValues();
+                        } else {
+                            this.setFilters();
+                        }
                         this.selectorsInitialized = true;
                         break;
                 }
@@ -294,6 +299,17 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.localStorageService.set("previousSelectedAgg", this.selectedAggregation);
         this.localStorageService.set("previousSelectedResourceManager", this.selectedResourceManager);
         this.localStorageService.set("previousSelectedPosition", this.selectedPosition)
+    }
+
+    private loadFilters() {
+        this.selectedCity = this.optionService.getInitialValues("previousSelectedCity");
+        this.selectedHomeCity = this.optionService.getInitialValues("previousSelectedHomeCity");
+        this.selectedOrgUnit = this.optionService.getInitialValues("previousSelectedOrgUnit");
+        this.selectedRegion = this.optionService.getInitialValues("previousSelectedRegion");
+        this.selectedPractice = this.optionService.getInitialValues("previousSelectedPractice");
+        this.selectedSubPractice = this.optionService.getInitialValues("previousSelectedSubPractice");
+        this.selectedResourceManager = this.optionService.getInitialValues("previousSelectedResourceManager");
+        this.selectedPosition = this.optionService.getInitialValues("previousSelectedPosition");
     }
 
     private callFiltered(operation: string) {

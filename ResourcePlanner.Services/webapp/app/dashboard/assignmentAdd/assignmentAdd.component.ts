@@ -85,6 +85,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
                 .subscribe(res => {
                     this.saving = false;
                     this.close();
+                    this.messageService.timespanGridRefreshRequest('resource-list');
                 });
         }
     }

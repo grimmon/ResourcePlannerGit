@@ -95,9 +95,7 @@ export class OptionService {
     }
 
     initObservableSelector(selector: string, optionType: OptionType, handler: (value: any) => void, localStorageKey: string): JQuery {
-        var prevSelected: string[] = localStorageKey ? this.localStorageService.get(localStorageKey) as string[] : [],
-            prevSelected = prevSelected || [],
-            options = this.getOptionCategory(optionType).map(option => {
+        var options = this.getOptionCategory(optionType).map(option => {
                 return {
                     id: option.Id,
                     text: option.Name,
@@ -106,7 +104,8 @@ export class OptionService {
             selectorObj: JQuery = $(selector),
             setValue = function (value: any) {
                 selectorObj.val(value).trigger('change');
-            };
+            },
+            values = this.getInitialValues(localStorageKey, options);
         selectorObj
             .select2({
                 data: options
@@ -114,19 +113,29 @@ export class OptionService {
             .on("change", () => {
                 handler(selectorObj.select2('val'));
             });
-        var values: number[] = [];
-        for (var i = 0; i < prevSelected.length; i++) {
-            var id = parseFloat(prevSelected[i]),
-                found = options.filter(option => {
-                    return id == option.id;
-                });
-            if (found.length > 0) {
-                values.push(found[0].id)
-            }
-        }
         setValue(values);
  
         return selectorObj;
+    }
+
+    getInitialValues(localStorageKey: string, options: any[] = null) {
+        var values: string[] = localStorageKey ? this.localStorageService.get(localStorageKey) as string[] : [],
+            values = values || [],
+            numValues: number[] = [];
+        for (var i = 0; i < values.length; i++) {
+            var id = parseFloat(values[i]);
+            if (options) {
+                var found = options.filter(option => {
+                    return id == option.id;
+                });
+                if (found.length > 0) {
+                    numValues.push(id);
+                }
+            } else {
+                numValues.push(id);
+            }
+        }
+        return numValues;
     }
 
     initSelector(selector: string, source: any, initialValue: any, handler: (value: any) => void): any {

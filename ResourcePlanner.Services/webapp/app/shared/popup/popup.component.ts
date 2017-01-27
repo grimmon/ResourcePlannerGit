@@ -65,7 +65,7 @@ export class PopupComponent implements OnDestroy, OnInit {
                 format: {
                     value: function (value: any, ratio: any, id: any) {
                         //console.log(`value:${value} ratio:${ratio} id${id}`)
-                        return value + ' hours';
+                        return value.toFixed(1) + ' hours';
                     }
                 }
             }
