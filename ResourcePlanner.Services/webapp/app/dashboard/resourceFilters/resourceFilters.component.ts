@@ -50,7 +50,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     selectedAggregation: TimeAggregation;
     selectedResourceManager: number[];
     selectedPosition: number[];
-
+    
     citySelector: any;
     homeCitySelector: any;
     orgUnitSelector: any;
@@ -59,6 +59,8 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     subPracticeSelector: any;
     resourceManagerSelector: any;
     positionSelector: any;
+
+    selectorsInitialized: boolean = false;
 
     aggregationChange(newAggregation: any) {
         this.messageService.resourceFilterChange('aggregation', parseInt(newAggregation));
@@ -127,10 +129,11 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.messageService.onFilteredRequested(operation => this.callFiltered(operation));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
-            if (!this.basicMode) {
+            if (!filterInfo.value.basicMode && !this.selectorsInitialized) {
                 switch (filterInfo.type) {
                     case 'applied':
                         this.setFilters();
+                        this.selectorsInitialized = true;
                         break;
                 }
             }
