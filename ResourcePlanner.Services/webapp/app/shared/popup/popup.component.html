@@ -1,4 +1,4 @@
-<div class="popupCover" [style.display]="visible ? 'block' : 'none'" (click)="visible=false">
+<div class="popupCover" [style.display]="visible ? 'block' : 'none'" (click)="close()" (contextmenu)="close($event)">
     <div id="resourcePopup" class="popup">
         <div class="pieContainer" [style.display]="loading ? 'none' : 'block'"></div>
         <div class="loading" [style.display]="loading ? 'block' : 'none'">

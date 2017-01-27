@@ -34,6 +34,13 @@ export class PopupComponent implements OnDestroy, OnInit {
 
     chart: any;
 
+    close(event: any = null) {
+        if (event) {
+            event.preventDefault();
+        }
+        this.visible = false;
+    }
+
     constructor(
         private resourceService: ResourceService,
         private dateService: DateService,
@@ -73,7 +80,6 @@ export class PopupComponent implements OnDestroy, OnInit {
     }
 
     setPosition() {
-        console.log(this._config)
         var config = this._config,
             event = config.event,
             target = event.target,
