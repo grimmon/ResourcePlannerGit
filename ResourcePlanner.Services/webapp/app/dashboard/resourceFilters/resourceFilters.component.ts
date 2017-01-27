@@ -129,17 +129,17 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.messageService.onFilteredRequested(operation => this.callFiltered(operation));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
-            if (!filterInfo.value.basicMode) {
-                switch (filterInfo.type) {
-                    case 'applied':
-                        if (this.selectorsInitialized) {
-                            this.loadFilters();
-                            this.setFilterValues();
-                        } else {
-                            this.setFilters();
-                        }
+            if (!this.basicMode && filterInfo.type == 'applied') {
+                if (this.selectorsInitialized) {
+                    if (filterInfo.value.basicMode) {
+                        this.loadFilters();
+                        this.setFilterValues();
+                   }
+                } else {
+                    if (!filterInfo.value.basicMode) {
+                        this.setFilters();
                         this.selectorsInitialized = true;
-                        break;
+                    }
                 }
             }
         });
