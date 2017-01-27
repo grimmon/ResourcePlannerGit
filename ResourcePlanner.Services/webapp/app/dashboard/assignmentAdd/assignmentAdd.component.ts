@@ -19,6 +19,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     @Output() addProjectRequested: EventEmitter<any>;
 
+    addProject() {
+        this.addProjectRequested.emit();
+    }
+
     set showTrigger(v: any) {
         this._showTrigger = v;
         if (this._showTrigger) {
@@ -61,6 +65,31 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     refreshed($event: any) {
     }
 
+    close() {
+        this.messageService.modalToggle(this.visible = false);
+    }
+
+    save() {
+        if (!this.validate()) {
+            this.addAssignments.projectMasterId = this.tasksVisible ? this.task : this.project.Id;
+            this.addAssignments.resourceIds = this.gridConfig.selectedIds;
+            if (this.hoursPerDayVisible) {
+                this.addAssignments.hoursPerWeek = null;
+            }
+            else {
+                this.addAssignments.hoursPerDay = null;
+                this.addAssignments.daysOfWeek = null;
+            }
+            this.saving = true;
+            this.resourceService
+                .addAssignments(this.addAssignments)
+                .subscribe(res => {
+                    this.saving = false;
+                    this.close();
+                });
+        }
+    }
+
     applyFiltersRequested($event: any) {
         this.filterQuery = $event;
         this.reloadGrid();
@@ -75,12 +104,26 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     currentDate: string;
 
+    startDateChanged($event: any) {
+        this.addAssignments.startDate = $event.target.value;
+        this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
+        this.currentDate = this.addAssignments.startDate;
+        this.reloadGrid();
+    }
+
+    endDateChanged($event: any) {
+        this.addAssignments.endDate = $event.target.value;
+        this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
+        this.currentDate = this.addAssignments.startDate;
+        this.reloadGrid();
+    }
+
     task: number = -1;
+    tasksVisible = false;
 
     private daysOfWeekSelector: any;
 
     hoursPerDayVisible = false;
-    tasksVisible = false;
 
     constructor(
         private zone: NgZone,
@@ -119,44 +162,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             });
     }
 
-    close() {
-        this.messageService.modalToggle(this.visible = false);
-    }
-
-    save() {
-        var errors = this.validate();
-        if (errors) {
-            this.messageService.errorRequest({
-                message: 'Save cannot be done because of the following:',
-                messages: errors
-            });
-            return;
-        }
-        if (this.tasksVisible) {
-            this.addAssignments.projectMasterId = this.task;
-        }
-        else {
-            this.addAssignments.projectMasterId = this.project.Id;
-        }
-        this.addAssignments.resourceIds = this.gridConfig.selectedIds;
-        if (this.hoursPerDayVisible) {
-            this.addAssignments.hoursPerWeek = null;
-            
-        }
-        else {
-            this.addAssignments.hoursPerDay = null;
-            this.addAssignments.daysOfWeek = null;
-        }
-
-        this.saving = true;
-        this.resourceService
-            .addAssignments(this.addAssignments)
-            .subscribe(res => {
-                this.saving = false;
-                this.close();
-            });
-    }
-
     private validate() {
         var errors: any[] = [];
         if (this.tasksVisible) {
@@ -172,43 +177,27 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         if (!this.gridConfig.selectedIds.length) {
             errors.push('At least one resource must be selected.');
         }
-        return errors.length ? errors : null;
-    }
-
-    startDateChanged($event: any) {
-        this.addAssignments.startDate = $event.target.value;
-        this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
-        this.currentDate = this.addAssignments.startDate;
-        this.reloadGrid();
-    }
-
-    endDateChanged($event: any) {
-        this.addAssignments.endDate = $event.target.value;
-        this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
-        this.currentDate = this.addAssignments.startDate;
-        this.reloadGrid();
+        if (errors.length) {
+            this.messageService.errorRequest({
+                message: 'Save cannot be done because of the following:',
+                messages: errors
+            });
+            return false;
+        }
+        return true;
     }
 
     private reloadGrid() {
-        this.buildQuery();
-        this.applyTrigger++;
-    }
-
-    private getDefaultQuery() {
-        return 'availability=true';
-    }
-
-    private buildQuery(): string {
         var query = this.getDefaultQuery();
         if (this.filterQuery) {
             query += '&' + this.filterQuery
         }
         this.queryConfig.query = query;
-        return query
+        this.applyTrigger++;
     }
 
-    addProject() {
-        this.addProjectRequested.emit();
+    private getDefaultQuery() {
+        return 'availability=true';
     }
 
     private getTasks() {

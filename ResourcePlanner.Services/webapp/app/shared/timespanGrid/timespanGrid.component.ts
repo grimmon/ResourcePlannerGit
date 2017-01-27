@@ -277,7 +277,6 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private buildQuery(params: any) {
-        console.log('asking for ' + params.startRow + ' to ' + params.endRow);
         var pageSize = params.endRow - params.startRow;
         var pageNum = params.startRow / pageSize;
         return `?pageSize=${pageSize}&pageNum=${pageNum}${this.getDateQuery()}${this.getSortQuery(params)}${this.queryConfig.query ? '&' + this.queryConfig.query : ''}`;

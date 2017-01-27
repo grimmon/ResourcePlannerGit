@@ -192,7 +192,6 @@
     <Content Include="Images\loading.gif" />
     <Content Include="Images\tempxls.png" />
     <Content Include="index.html" />
-    <Content Include="indexo.html" />
     <Content Include="webapp\app\admin\admin.component.css" />
     <Content Include="webapp\app\admin\admin.component.html" />
     <Content Include="webapp\app\admin\roles\roles.component.css" />
@@ -2598,16 +2597,8 @@
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
-    <Content Include="Scripts\DateTimeUtility.js" />
-    <Content Include="Scripts\DropdownJs.js" />
     <Content Include="Scripts\jquery.tagit.css" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\PageControls.js" />
-    <Content Include="Scripts\ProjectGridJs.js" />
-    <Content Include="Scripts\ResourceAssignmentGrid.js" />
-    <Content Include="Scripts\ResourceDetailGridJs.js" />
-    <Content Include="Scripts\ResourceGridJs.js" />
-    <Content Include="Scripts\ResourceUtilityJs.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\SinglePageStyle.css" />
     <Content Include="Scripts\tag-it.js" />
