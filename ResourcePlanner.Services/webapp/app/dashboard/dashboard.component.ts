@@ -13,7 +13,7 @@ import { CategoryOption } from '../models';
 })
 export class DashboardComponent implements OnDestroy, OnInit {
 
-    filterQuery = ''
+    filterQuery: any = {}
     applyFiltersRequested($event: any) {
         this.filterQuery = $event;
     }

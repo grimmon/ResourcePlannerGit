@@ -26,7 +26,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
             this._mode = v;
         }
         this.basicMode = v && v == 'basic' || !v;
-    } 
+    }
     get mode() {
         return this._mode;
     }
@@ -36,7 +36,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     set applyTrigger(v: number) {
         this._applyTrigger = v;
         if (!this.basicMode && v) {
-            this.apply();
+            this.apply(false);
         }
     }
     _applyTrigger: number;
@@ -71,26 +71,40 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedRegion = null;
         this.selectedPractice = null;
         this.selectedSubPractice = null;
-        this.selectedAggregation = TimeAggregation.Weekly;
         this.selectedResourceManager = null;
         this.selectedPosition = null;
+
+        this.selectedAggregation = TimeAggregation.Weekly;
+    }
+
+    setFilterValues() {
+        this.setSelectorValue(this.citySelector, this.selectedCity);
+        this.setSelectorValue(this.homeCitySelector, this.selectedHomeCity);
+        this.setSelectorValue(this.orgUnitSelector, this.selectedOrgUnit);
+        this.setSelectorValue(this.regionSelector, this.selectedRegion);
+        this.setSelectorValue(this.practiceSelector, this.selectedPractice);
+        this.setSelectorValue(this.subPracticeSelector, this.selectedSubPractice);
+        this.setSelectorValue(this.resourceManagerSelector, this.selectedResourceManager);
+        this.setSelectorValue(this.positionSelector, this.selectedPosition);
     }
 
     clear() {
         this.clearFilters();
         this.tags.clear();
-        this.messageService.resourceFilterChange('cleared', {
-            aggregation: this.selectedAggregation
-        })
+        this.setFilterValues();
+        this.reportFilterChange('cleared');
     }
 
-    apply() {
+    apply(force: boolean = true) {
         this.buildFilters();
-        this.saveFilters();
-        this.messageService.resourceFilterChange('applied', {
-            aggregation: this.selectedAggregation
-        })
-        this.applyFiltersRequested.emit(this.filterQuery);
+        if (this.basicMode) {
+            this.saveFilters();
+        }
+        this.reportFilterChange('applied');
+        this.applyFiltersRequested.emit({
+            filterQuery: this.filterQuery,
+            force: force
+        });
     }
 
     getAggregations() {
@@ -100,7 +114,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     constructor(
         private messageService: MessageService,
         private optionService: OptionService,
-        private localStorageService: LocalStorageService    ) {
+        private localStorageService: LocalStorageService) {
 
         this.applyFiltersRequested = new EventEmitter<any>();
 
@@ -121,6 +135,18 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
                 }
             }
         });
+    }
+
+    reportFilterChange(type: string) {
+        this.messageService.resourceFilterChange(type, {
+            aggregation: this.selectedAggregation,
+            mode: this.mode,
+            basicMode: this.basicMode,
+        });
+    }
+
+    setSelectorValue = function (selectorObj: any, value: any) {
+        selectorObj.val(value || []).trigger('change');
     }
 
     setFilters() {

@@ -24,8 +24,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     panelHeight: string = this.panelHeightWithFilters;
     takeHeightOfFilters = false;
 
-    set filterQuery(v: string) {
-        this.queryConfig.query = v;
+    set filterQuery(v: any) {
+        this.queryConfig.query = v.filterQuery;
         this.applyTrigger++;
         this.resourceSelected.emit(null);
    }
@@ -86,6 +86,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         this.messageService.onExportRequested(filters => this.doExport(filters));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
+            if (filterInfo.value.mode)
             switch (filterInfo.type) {
                 case 'cleared':
                     this.queryConfig.aggregation = filterInfo.value.aggregation;

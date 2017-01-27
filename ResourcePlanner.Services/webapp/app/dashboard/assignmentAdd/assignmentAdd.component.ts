@@ -90,8 +90,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     applyFiltersRequested($event: any) {
-        this.filterQuery = $event;
-        this.reloadGrid();
+        this.filterQuery = $event.filterQuery;
+        this.reloadGrid($event.force);
     }
     filterQuery: string = '';
 
@@ -107,14 +107,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this.addAssignments.startDate = $event.target.value;
         this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
         this.currentDate = this.addAssignments.startDate;
-        this.reloadGrid();
+        this.reloadGrid(true);
     }
 
     endDateChanged($event: any) {
         this.addAssignments.endDate = $event.target.value;
         this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
         this.currentDate = this.addAssignments.startDate;
-        this.reloadGrid();
+        this.reloadGrid(true);
     }
 
     task: number = -1;
@@ -186,12 +186,12 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         return true;
     }
 
-    private reloadGrid() {
+    private reloadGrid(force: boolean) {
         var query = this.getDefaultQuery();
         if (this.filterQuery) {
             query += '&' + this.filterQuery
         }
-        if (this.queryConfig.query != query) {
+        if (force || this.queryConfig.query != query) {
             this.queryConfig.query = query;
             this.applyTrigger++;
         }
