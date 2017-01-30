@@ -1,81 +1,75 @@
 <div class="filterPanel" [ngClass]="mode" [style.display]="visible ? 'block' : 'none'">
     <div class="panel-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="tags">
-                    <ul id="myTags" class="myTags"></ul>
-                </div>
+        <div class="tagsRow">
+            <div class="tags">
+                <ul id="myTags" class="myTags"></ul>
             </div>
-            <div class="col-sm-3"></div>
-            <div class="col-sm-1 interval">
+            <div class="interval">
                 <label [style.display]="basicMode ? 'block' : 'none'">Interval</label>
             </div>
-            <div class="col-sm-2 interval">
+            <div class="interval">
                 <select class="form-control" [(ngModel)]="selectedAggregation" (change)="aggregationChange($event.target.value)"  [style.display]="basicMode ? 'block' : 'none'">
                     <option *ngFor="let option of getAggregations()" [value]="option.Id">{{option.Name}}</option>
                 </select>
             </div>
-           
         </div>
-        <div class="row firstRow">
-            <div class="col-sm-1">
+        <div class="firstRow">
+            <div>
                 <label style="float: right;">Delivery City</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="city-selector form-control"></select>
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float: right;">Practice</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="practice-selector form-control"></select>
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float: right;">Org Unit</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="orgUnit-selector form-control"></select>
 
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float:right;">Resource Mgr.</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="resourceManager-selector form-control"></select>
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-sm-1">
+        <div class="secondRow">
+            <div>
                 <label style="float:right;">Home City</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="homeCity-selector form-control"></select>
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float: right;">Sub-Practice</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="subPractice-selector form-control"></select>
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float: right;">Region</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="region-selector form-control"></select>
             </div>
-            <div class="col-sm-1">
+            <div>
                 <label style="float: right;">Position</label>
             </div>
-            <div class="col-sm-2">
+            <div>
                 <select multiple="multiple" class="position-selector form-control"></select>
             </div>
-            
         </div>
-        <div class="buttons row">
-
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
+        <div class="buttons">
+            <div></div>
+            <div>
                 <button type="button" class="btn btn-primary" id="applyButton" (click)="apply()">Apply</button>
                 <button type="button" class="btn btn-primary" id="clearButton" (click)="clear()">Clear</button>
             </div>

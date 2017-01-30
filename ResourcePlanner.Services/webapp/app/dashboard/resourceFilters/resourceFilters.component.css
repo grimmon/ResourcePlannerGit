@@ -1,17 +1,46 @@
 .filterPanel {
     height: 24%;
 }
-    .filterPanel .tags {
-        width: 60%;
+    .filterPanel .tagsRow{
+        height: 40px;
     }
-    .flatPanel .firstRow {
-        padding-bottom:2px;
+    .filterPanel .tagsRow > div:first-child{
+        width: 52%;
+    }
+   .filterPanel .tagsRow > div:last-child{
+        width: 16%;
+    }
+    .filterPanel .tags {
+    }
+   .filterPanel .tags ul {
+        padding-bottom:0px;
+        margin-bottom:0px;
+    }
+    .filterPanel .firstRow {
+    }
+   .filterPanel .firstRow > div:nth-child(2n+1){
+        width: 9%;
+        vertical-align: bottom;
+        padding-right: 4px;
+    }
+   .filterPanel .firstRow > div:nth-child(2n){
+        width: 16%;
+    }
+   .filterPanel .secondRow > div:nth-child(2n+1){
+        width: 9%;
+        vertical-align: bottom;
+        padding-right: 4px;
+    }
+   .filterPanel .secondRow > div:nth-child(2n){
+        width: 16%;
     }
     .filterPanel .interval {
-        padding-top: 16px;
+        vertical-align: middle;
     }
         .filterPanel .interval label{
             float: right;
+            padding-right:4px;
+            margin-bottom:0px;
         }
     .filterPanel select {
         width: 100%;
@@ -22,7 +51,10 @@
         background-color: #fff;
     }
     .filterPanel .buttons {
-        margin-top:5px;
+        margin-top:2px;
+    }
+       .filterPanel .buttons > div:first-child {
+        width:9%;
     }
     .filterPanel .buttons button.btn.btn-primary {
         padding-top: 4px;
@@ -32,6 +64,14 @@
         background-color: #C8C8C8;
         padding: 2px;
         height: 100%;
+    }
+   .filterPanel .panel-body > div {
+       clear:both;
+       display: table;
+       width:100%;
+    }
+   .filterPanel .panel-body > div > div {
+       display: table-cell;
     }
     .filterPanel ul#myTags.tagit.ui-widget.ui-widget-content.ui-corner-all {
         border-bottom: 2px solid black;
