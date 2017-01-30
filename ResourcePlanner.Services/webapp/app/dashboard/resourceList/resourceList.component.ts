@@ -20,7 +20,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
     @Output() resourceSelected: EventEmitter<any>;
     @Output() popupRequested: EventEmitter<any>;
 
-    panelHeightWithFilters: string = "82%";
+    panelHeightWithFilters: string = "76%";
     panelHeight: string = this.panelHeightWithFilters;
     takeHeightOfFilters = false;
 
