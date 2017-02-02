@@ -159,6 +159,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
     setFilters() {
         this.clearFilters();
+
+        this.tags = this.optionService.initTags(`.${this._mode} .myTags`, 3);
+
         this.citySelector = this.optionService.initObservableSelector(
             `.${this._mode} .city-selector`,
             OptionType.City,
@@ -227,8 +230,6 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit() {
-
-        this.tags = this.optionService.initTags(".myTags", 3);
 
         this.messageService.onCategoriesLoaded(() => {
 
