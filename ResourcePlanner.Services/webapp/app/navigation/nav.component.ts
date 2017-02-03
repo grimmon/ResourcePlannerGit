@@ -14,6 +14,11 @@ export class NavComponent implements OnInit {
     
     addAssigmentAllowed: boolean = true;
 
+    conextmenu(event: any) {
+        event.preventDefault();
+        this.adalService.logout();
+    }
+
     constructor(
         private adalService: AdalService,
         private messageService: MessageService) {

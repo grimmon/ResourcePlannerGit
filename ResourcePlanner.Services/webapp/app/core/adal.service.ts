@@ -6,7 +6,7 @@ export class AdalService {
     private authContext: any;
 
     init = (config: adal.Config) => {
-        var authContext: any = new AuthenticationContext(config);
+        var authContext: any = this.authContext = new AuthenticationContext(config);
 
         // Check For & Handle Redirect From AAD After Login
         var isCallback = authContext.isCallback(window.location.hash);
