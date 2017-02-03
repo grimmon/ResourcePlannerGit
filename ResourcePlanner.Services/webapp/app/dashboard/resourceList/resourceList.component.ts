@@ -86,7 +86,6 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         this.messageService.onExportRequested(filters => this.doExport(filters));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
-            if (filterInfo.value.mode)
             switch (filterInfo.type) {
                 case 'cleared':
                     this.queryConfig.aggregation = filterInfo.value.aggregation;
