@@ -35,8 +35,10 @@ namespace ResourcePlanner.Services.Enums
             Practice,
             [Description("SubPractice")]
             SubPractice,
-            [Description("City")]
-            HomeCity
+            [Description("HomeCity")]
+            HomeCity,
+            [Description("ResourceManager")]
+            ResourceManager
         }
 
         public enum SortDirection

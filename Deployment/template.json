@@ -1,0 +1,193 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "servers_resourceplanner_name": {
+      "type": "String"
+    },
+    "servers_resourceplanner_login": {
+      "type": "String"
+    },
+    "servers_resourceplanner_password": {
+      "type": "String"
+    },
+    "serverfarms_ResourcePlanner_name": {
+      "type": "String" 
+    },
+    "sites_ResourcePlannerWebJob_name": {
+      "type": "String"
+    },
+    "sites_ResourcePlannerWeb_name": {
+      "type": "String"
+    },
+    "databases_master_name": {
+      "type": "String"
+    },
+    "databases_ResourcePlanner_name": {
+      "type": "String"
+    }
+  },
+      "variables": { },
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "kind": "v12.0",
+      "name": "[parameters('servers_resourceplanner_name')]",
+      "apiVersion": "2014-04-01-preview",
+      "location": "East US",
+      "properties": {
+        "administratorLogin": "[parameters('servers_resourceplanner_login')]",
+        "administratorLoginPassword": "[parameters('servers_resourceplanner_password')]",
+        "version": "12.0"
+      },
+      "resources": [ ],
+      "dependsOn": [ ]
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "B1",
+        "tier": "Basic",
+        "size": "B1",
+        "family": "B",
+        "capacity": 1
+      },
+      "kind": "app",
+      "name": "[parameters('serverfarms_ResourcePlanner_name')]",
+      "apiVersion": "2015-08-01",
+      "location": "East US",
+      "properties": {
+        "name": "[parameters('serverfarms_ResourcePlanner_name')]",
+        "numberOfWorkers": 1
+      },
+      "resources": [ ],
+      "dependsOn": [ ]
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('sites_ResourcePlannerWebJob_name')]",
+      "apiVersion": "2015-08-01",
+      "location": "East US",
+      "tags": {
+      },
+      "properties": {
+        "name": "[parameters('sites_ResourcePlannerWebJob_name')]",
+        "hostNames": [
+          "[concat(parameters('sites_ResourcePlannerWebJob_name'),'.azurewebsites.net')]"
+        ],
+        "enabledHostNames": [
+          "[concat(parameters('sites_ResourcePlannerWebJob_name'),'.azurewebsites.net')]",
+          "[concat(parameters('sites_ResourcePlannerWebJob_name'),'.scm.azurewebsites.net')]"
+        ],
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_ResourcePlannerWebJob_name'),'resourceplannerwebjobuat.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          },
+          {
+            "name": "[concat(parameters('sites_ResourcePlannerWebJob_name'),'resourceplannerwebjobuat.scm.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ResourcePlanner_name'))]"
+      },
+      "resources": [ ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ResourcePlanner_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('sites_ResourcePlannerWeb_name')]",
+      "apiVersion": "2015-08-01",
+      "location": "East US",
+      "tags": {
+
+      },
+      "properties": {
+        "name": "[parameters('sites_ResourcePlannerWeb_name')]",
+        "hostNames": [
+          "[concat(parameters('sites_ResourcePlannerWeb_name'),'.azurewebsites.net')]"
+        ],
+        "enabledHostNames": [
+          "[concat(parameters('sites_ResourcePlannerWeb_name'),'.azurewebsites.net')]",
+          "[concat(parameters('sites_ResourcePlannerWeb_name'),'.scm.azurewebsites.net')]"
+        ],
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_ResourcePlannerWeb_name'),'.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          },
+          {
+            "name": "[concat(parameters('sites_ResourcePlannerWeb_name'),'.scm.azurewebsites.net')]",
+            "sslState": 0,
+            "thumbprint": null,
+            "ipBasedSslState": 0
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ResourcePlanner_name'))]"
+      },
+      "resources": [ ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ResourcePlanner_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/databases",
+      "kind": "v12.0,system",
+      "name": "[parameters('databases_master_name')]",
+      "apiVersion": "2014-04-01-preview",
+      "location": "East US",
+      "properties": {
+        "edition": "System",
+        "status": "Online",
+        "serviceLevelObjective": "System2",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": "32212254720",
+        "requestedServiceObjectiveName": "System2",
+        "sampleName": null,
+        "defaultSecondaryLocation": "West US",
+        "earliestRestoreDate": null,
+        "elasticPoolName": null,
+        "containmentState": 2,
+        "readScale": "Disabled"
+      },
+      "resources": [ ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', parameters('servers_resourceplanner_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/databases",
+      "kind": "v12.0,user",
+      "name": "[parameters('databases_ResourcePlanner_name')]",
+      "apiVersion": "2014-04-01-preview",
+      "location": "East US",
+      "properties": {
+        "edition": "Standard",
+        "status": "Online",
+        "serviceLevelObjective": "S3",
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": "268435456000",
+        "requestedServiceObjectiveName": "S3",
+        "sampleName": null,
+        "defaultSecondaryLocation": "West US",
+        "elasticPoolName": null,
+        "containmentState": 2,
+        "readScale": "Disabled"
+      },
+      "resources": [ ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', parameters('servers_resourceplanner_name'))]"
+      ]
+    }
+  ]
+    }

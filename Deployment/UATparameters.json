@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "servers_resourceplanner_name": {
+      "value": "resourceplanneruat"
+    },
+    "servers_resourceplanner_login": {
+      "value": "rpdbadmin"
+    },
+    "servers_resourceplanner_password": {
+      "value": "Insight123"
+    },
+    "serverfarms_ResourcePlanner_name": {
+      "value": "resourceplanneruat"
+    },
+    "sites_ResourcePlannerWebJob_name": {
+      "value": "ResourcePlannerWebJobUAT"
+    },
+    "sites_ResourcePlannerWeb_name": {
+      "value": "ResourcePlannerWebUAT"
+    },
+    "databases_master_name": {
+      "value": "resourceplanneruat/master"
+    },
+    "databases_ResourcePlanner_name": {
+      "value": "resourceplanneruat/ResourcePlanner"
+    },
+    "sites_ResourcePlannerWebJob_serverFarmId": {
+      "value": "/subscriptions/eaf749d7-3ee4-4615-b4c1-865ee8928d05/resourceGroups/ResourcePlanner_Dev/providers/Microsoft.Web/serverfarms/ResourcePlannerDev"
+    },
+    "sites_ResourcePlannerWeb_serverFarmId": {
+      "value": "/subscriptions/eaf749d7-3ee4-4615-b4c1-865ee8928d05/resourceGroups/ResourcePlanner_Dev/providers/Microsoft.Web/serverfarms/ResourcePlannerDev"
+    }
+  }
+}
