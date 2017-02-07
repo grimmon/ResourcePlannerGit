@@ -191,6 +191,46 @@ namespace ResourcePlanner.Services.Mapper
                         return input.OrderBy(r => r.Position).ToList();
                     }
                     break;
+                case Enums.Enums.SortOrder.Practice:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.Practice).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.Practice).ToList();
+                    }
+                    break;
+                case Enums.Enums.SortOrder.SubPractice:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.SubPractice).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.SubPractice).ToList();
+                    }
+                    break;
+                case Enums.Enums.SortOrder.HomeCity:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.HomeCity).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.HomeCity).ToList();
+                    }
+                    break;
+                case Enums.Enums.SortOrder.ResourceManager:
+                    if (direction == Enums.Enums.SortDirection.Desc)
+                    {
+                        return input.OrderByDescending(r => r.ResourceManagerLastName).ToList();
+                    }
+                    else
+                    {
+                        return input.OrderBy(r => r.ResourceManagerLastName).ToList();
+                    }
+                    break;
                 default:
                     if (direction == Enums.Enums.SortDirection.Desc)
                     {

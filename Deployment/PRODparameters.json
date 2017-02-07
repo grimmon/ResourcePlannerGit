@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "servers_resourceplanner_name": {
+      "value": "resourceplannerprod"
+    },
+    "servers_resourceplanner_login": {
+      "value": "rpdbadmin"
+    },
+    "servers_resourceplanner_password": {
+      "value": "Insight123"
+    },
+    "serverfarms_ResourcePlanner_name": {
+      "value": "resourceplannerprod"
+    },
+    "sites_ResourcePlannerWebJob_name": {
+      "value": "ResourcePlannerWebJobPROD"
+    },
+    "sites_ResourcePlannerWeb_name": {
+      "value": "ResourcePlannerWebPROD"
+    },
+    "databases_master_name": {
+      "value": "resourceplannerprod/master"
+    },
+    "databases_ResourcePlanner_name": {
+      "value": "resourceplannerprod/ResourcePlanner"
+    }
+
+  }
+}
