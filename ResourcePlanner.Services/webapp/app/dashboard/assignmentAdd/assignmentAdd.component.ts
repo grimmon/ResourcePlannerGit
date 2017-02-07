@@ -118,6 +118,11 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         this.reloadGrid(true);
     }
 
+    addProjectToList(project: any) {
+        this.project = project;
+        this.addAssignments.projectMasterId = project.Id;
+    }
+
     task: number = -1;
     tasksVisible = false;
 
@@ -134,6 +139,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
         private resourceService: ResourceService) {
 
         this.addProjectRequested = new EventEmitter();
+
+        this.messageService.onProjectAdded(project => this.addProjectToList(project));
 
         this.currentDate = this.dateService.format(new Date());
 

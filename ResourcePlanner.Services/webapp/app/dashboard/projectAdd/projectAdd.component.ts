@@ -86,6 +86,7 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
             .subscribe(res => {
                 this.saving = false;
                 this.close();
+                this.messageService.addProjectToList(res);
             });
     }
 

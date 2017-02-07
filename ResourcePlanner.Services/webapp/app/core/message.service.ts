@@ -138,5 +138,15 @@ export class MessageService {
     assignmentEditorRequest(assignmentInfo: any) {
         this.assignmentEditorRequested.next(assignmentInfo);
     }
-   
+
+    // project successfully added and needs to be added to the list
+
+    private projectAdded = new Subject<any>();
+
+    onProjectAdded(handler: (addedProject: any) => void) {
+        this.projectAdded.subscribe(handler)
+    }
+    addProjectToList(addedProject: any) {
+        this.projectAdded.next(addedProject);
+    }
 }
