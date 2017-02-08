@@ -19,7 +19,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
 
     @Output() projectViewRequested: EventEmitter<any>;
 
-    _resourceId: number;
+    _resourceId: number = 0;
 
     set resourceId(v: number) {
         this._resourceId = v;
@@ -89,9 +89,12 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
 
         this.projectViewRequested = new EventEmitter<any>();
 
-        this.messageService.onResourcePeriodScrolled(step => {
+        this.messageService.onResourcePeriodScrolled(periodInfo => {
             if (this._resourceId) {
-                this.periodScrollTrigger = { step: step };
+                this.periodScrollTrigger = { step: periodInfo.step };
+            }
+            else {
+                this.queryConfig.currentDate = periodInfo.newDate;
             }
         });
 

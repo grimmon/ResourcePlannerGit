@@ -108,7 +108,8 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
         this.periodScrolled.emit({
             direction: 0,
-            query: this.getDateQuery()
+            query: this.getDateQuery(),
+            newDate: this.queryConfig.currentDate
         });
     }
 
@@ -127,14 +128,16 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             this.periodScroll(-1)
             this.periodScrolled.emit({
                 direction: -1,
-                query: this.getDateQuery()
+                query: this.getDateQuery(),
+                newDate: this.queryConfig.currentDate
             });
         }
         if (srcHtml.indexOf('timePeriodForwardButton') >= 0) {
             this.periodScroll(1)
             this.periodScrolled.emit({
                 direction: 1,
-                query: this.getDateQuery()
+                query: this.getDateQuery(),
+                newDate: this.queryConfig.currentDate
             });
         }
     }

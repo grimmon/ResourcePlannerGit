@@ -110,11 +110,11 @@ export class MessageService {
 
     private resourcePeriodScrolled = new Subject<any>();
 
-    onResourcePeriodScrolled(handler: (step: any) => void) {
+    onResourcePeriodScrolled(handler: (periodInfo: any) => void) {
         this.resourcePeriodScrolled.subscribe(handler)
     }
-    resourcePeriodScroll(step: any) {
-        this.resourcePeriodScrolled.next(step);
+    resourcePeriodScroll(periodInfo: any) {
+        this.resourcePeriodScrolled.next(periodInfo);
     }
 
     // request to refresh some of the timeperiod grids
