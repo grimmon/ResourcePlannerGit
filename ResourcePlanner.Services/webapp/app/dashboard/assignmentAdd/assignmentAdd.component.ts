@@ -106,14 +106,14 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     startDateChanged($event: any) {
         this.addAssignments.startDate = $event.target.value;
-        this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
+        //this.addAssignments.endDate = this.dateService.max(this.addAssignments.startDate, this.addAssignments.endDate);
         this.currentDate = this.addAssignments.startDate;
         this.reloadGrid(true);
     }
 
     endDateChanged($event: any) {
         this.addAssignments.endDate = $event.target.value;
-        this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
+        //this.addAssignments.startDate = this.dateService.min(this.addAssignments.endDate, this.addAssignments.startDate);
         this.currentDate = this.addAssignments.startDate;
         this.reloadGrid(true);
     }
@@ -180,6 +180,9 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             if (!this.project) {
                 errors.push('Project must be selected.');
             }
+        }
+        if (this.addAssignments.endDate < this.addAssignments.startDate) {
+            errors.push('Start date must come before end date.')
         }
         if (!this.gridConfig.selectedIds.length) {
             errors.push('At least one resource must be selected.');
