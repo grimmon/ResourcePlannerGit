@@ -66,7 +66,11 @@ export class ResourceListComponent implements OnDestroy, OnInit {
 
     periodScrolled($event: any) {
         this.dateQuery = $event.query;
-        this.messageService.resourcePeriodScroll({ step: $event.direction, newDate: $event.newDate }); 
+        var event = {
+            step: $event.direction,
+            newDate: $event.newDate
+        };
+        this.messageService.resourcePeriodScroll(event); 
     }
     dateQuery: string = ''
 
