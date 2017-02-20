@@ -26,10 +26,10 @@ namespace ResourcePlanner.Services.Mapper
             document.SetCellValue("A1", "Insight Resource Assignments", ExcelStyleFormat.Bold);
 
             document.SetCellValue("A3", "Start date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B3", queryParameters.StartDate.ToString("MM-DD-YYYY"));
+            document.SetCellValue("B3", queryParameters.StartDate.ToString("MM-dd-yyyy"));
 
             document.SetCellValue("A5", "End Date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B5", queryParameters.EndDate.ToString("MM-DD-YYYY"));
+            document.SetCellValue("B5", queryParameters.EndDate.ToString("MM-dd-yyyy"));
 
 
 
@@ -84,10 +84,10 @@ namespace ResourcePlanner.Services.Mapper
             document.SetCellValue("A1", "Insight Resource Assignments for " + reader.GetNullableString("LastName") + ", " + reader.GetNullableString("FirstName"), ExcelStyleFormat.Bold);
 
             document.SetCellValue("A3", "Start date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B3", StartDate.ToString("MM-DD-YYYY"));
+            document.SetCellValue("B3", StartDate.ToString("MM-dd-yyyy"));
 
             document.SetCellValue("A5", "End Date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B5", EndDate.ToString("MM-DD-YYYY"));
+            document.SetCellValue("B5", EndDate.ToString("MM-dd-yyyy"));
 
             document.SetCellValue("A7", "Practice: ", ExcelStyleFormat.Bold);
             document.SetCellValue("B7", reader.GetNullableString("Practice"));
@@ -155,10 +155,10 @@ namespace ResourcePlanner.Services.Mapper
             document.SetCellValue("A1", "Insight Resource Assignments for " + reader.GetNullableString("ProjectName"), ExcelStyleFormat.Bold);
 
             document.SetCellValue("A3", "Start date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B3", reader.GetDateTime("StartDate").ToString("YYYY-MM-dd"));
+            document.SetCellValue("B3", reader.GetDateTime("StartDate").ToString("yyyy-MM-dd"));
 
             document.SetCellValue("A5", "End Date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B5", reader.GetDateTime("EndDate").ToString("YYYY-MM-dd"));
+            document.SetCellValue("B5", reader.GetDateTime("EndDate").ToString("yyyy-MM-dd"));
 
             document.SetCellValue("A7", "Project Number: ", ExcelStyleFormat.Bold);
             document.SetCellValue("B7", reader.GetNullableString("Practice"));
