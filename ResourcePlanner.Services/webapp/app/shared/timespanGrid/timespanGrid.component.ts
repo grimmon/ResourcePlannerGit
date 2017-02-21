@@ -123,24 +123,23 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
     }
 
     private gridClicked($event: any) {
-        var srcHtml = $event.srcElement.outerHTML;
-        if (srcHtml.indexOf('timePeriodBackwardButton') >= 0 || srcHtml.indexOf('Icons_Back') >= 0) {
-            this.periodScroll(-1)
-            this.periodScrolled.emit({
-                direction: -1,
-                query: this.getDateQuery(),
-                newDate: this.queryConfig.currentDate
-            });
-        }
-        if (srcHtml.indexOf('timePeriodForwardButton') >= 0 || srcHtml.indexOf('Icons_Forward') >= 0) {
-            this.periodScroll(1)
-            this.periodScrolled.emit({
-                direction: 1,
-                query: this.getDateQuery(),
-                newDate: this.queryConfig.currentDate
-            });
-        }
-    }
+        var grid = this,
+            srcHtml = $event.srcElement.outerHTML;
+        console.log(srcHtml);
+        function checkArrowClick(step: number, buttonId: string, iconText: string) {
+            if (srcHtml.indexOf(buttonId) >= 0 || srcHtml.indexOf(iconText) >= 0) {
+                grid.periodScroll(step)
+                grid.periodScrolled.emit({
+                    direction: step,
+                    query: grid.getDateQuery(),
+                    newDate: grid.queryConfig.currentDate
+                });
+            }
+
+        }    
+        checkArrowClick(-1, 'timePeriodBackwardButton', 'Icons_Back');
+        checkArrowClick(1, 'timePeriodBackwardButton', 'Icons_Forward');
+     }
 
     private gridOptions: GridOptions;
 
