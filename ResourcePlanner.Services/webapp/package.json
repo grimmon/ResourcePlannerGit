@@ -32,7 +32,6 @@
     "@angular/platform-browser-dynamic": "~2.1.2",
     "@angular/router": "~3.1.2",
     "@angular/upgrade": "~2.1.2",
-    //"@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.18",
     "ag-grid": "6.3.x",
     "ag-grid-ng2": "6.3.x",
     "angular-2-local-storage": "^1.0.0",

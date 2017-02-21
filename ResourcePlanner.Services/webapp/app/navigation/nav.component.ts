@@ -19,6 +19,8 @@ export class NavComponent implements OnInit {
         this.adalService.logout();
     }
 
+    exporting: boolean = false;
+
     constructor(
         private adalService: AdalService,
         private messageService: MessageService) {
@@ -52,7 +54,11 @@ export class NavComponent implements OnInit {
     }
 
     export() {
-        this.messageService.filteredRequest("export");
+        this.exporting = true;
+        this.messageService.filteredRequest({
+            type: "export",
+            callback: () => { this.exporting = false; },
+        });
     }
 
     addAssignment() {

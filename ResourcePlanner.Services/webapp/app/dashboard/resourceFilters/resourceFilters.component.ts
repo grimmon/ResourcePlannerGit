@@ -126,7 +126,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
             }
         });
 
-        this.messageService.onFilteredRequested(operation => this.callFiltered(operation));
+        this.messageService.onFilteredRequested(operation => {
+            this.callFiltered(operation)
+        });
 
         this.messageService.onResourceFilterChanged(filterInfo => {
             if (!this.basicMode && filterInfo.type == 'applied') {
@@ -313,11 +315,17 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedPosition = this.optionService.getInitialValues("previousSelectedPosition");
     }
 
-    private callFiltered(operation: string) {
+    private callFiltered(operation: any) {
         this.buildFilters();
-        switch (operation) {
+        switch (operation.type) {
             case "export":
-                this.messageService.exportRequest(this.filterQuery);
+                if (this.basicMode) {
+                    var exportInfo = {
+                        query: this.filterQuery,
+                        callback: operation.callback,
+                    }
+                    this.messageService.exportRequest(exportInfo);
+                }
                 break;
         }
     }

@@ -54,13 +54,19 @@ export class ResourceService {
         return this.serverService.postQuery<UpdateAssignment>(CONFIG.urls.assignmentUpdate, assignment);
     }
 
-    export(query: string) {
-        var src = `${CONFIG.urls.resourceExport}${query.substr(0, 1) != '?' ? '?' : ''}${query}`,
-            iframe = $('#exportIFrame');
-        if (iframe.length == 0) {
-            iframe = $(`<iframe frameborder="0" style="display:none" scrolling="no" src="about:blank" id="exportIFrame"></iframe>`);
-            iframe.appendTo('body');
-        }
-        iframe.attr('src', src);
+    export(query: string, callback: any) {
+        var url = `${CONFIG.urls.resourceExport}${query.substr(0, 1) != '?' ? '?' : ''}${query}`;
+        this.serverService.export(url).subscribe((response: any) => {
+            if (response.byteLength > 0) {
+                var win: any = window,
+                    blob = new Blob([response], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+                win.saveAs(blob, `ResPlannerExport${(new Date()).toUTCString()}.xlsx`);
+                callback();
+                console.log('blob done ' + response.byteLength)
+            } else {
+                callback();
+                console.log('blob failed ')
+            }
+        });
     }
 }

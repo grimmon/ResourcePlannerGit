@@ -87,7 +87,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         this.resourceSelected = new EventEmitter<any>();
         this.popupRequested = new EventEmitter<any>();
 
-        this.messageService.onExportRequested(filters => this.doExport(filters));
+        this.messageService.onExportRequested(exportInfo => this.doExport(exportInfo));
 
         this.messageService.onResourceFilterChanged(filterInfo => {
             switch (filterInfo.type) {
@@ -186,8 +186,8 @@ export class ResourceListComponent implements OnDestroy, OnInit {
 
     }
 
-    private doExport(filters: any) {
-        this.resourceService.export(filters + this.dateQuery);
+    private doExport(exportInfo: any) {
+        this.resourceService.export(exportInfo.query + this.dateQuery, exportInfo.callback);
     }
 
     ngOnDestroy() {

@@ -21,6 +21,7 @@
         <div class="buttonbox">
             <div class="button">
                 <img src="Images/tempxls.png" (click)="export()" alt="Export to Excel" height="30" />
+                <img class="loading" src="Images/loading.gif" [style.display]="exporting? 'block' : 'none'" height="20" />
             </div>
         </div>
         <div class="buttonbox">

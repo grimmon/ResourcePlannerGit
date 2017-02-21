@@ -1,10 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { ExceptionService, SpinnerService } from '../core';
 
 @Injectable()
 export class ServerService {
+
+    export(url: string) {
+        this.showProcess(true);
+        var headers = this.getAuth();
+        headers.append('Content-type', "application/json");
+        headers.append('Accept', "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        var res = this.http
+            .get(url, {
+                headers: headers,
+                responseType: ResponseContentType.ArrayBuffer,
+            })
+            .map(res => {
+                if (res.status < 200 || res.status >= 300) {
+                    throw new Error('Bad response status: ' + res.status);
+                }
+                var r: any = res;
+                return r._body;
+            })
+            .finally(() => this.showProcess(false));
+        return res;
+    };
 
     get<T>(url: string, query?: string) {
         this.showProcess(true);

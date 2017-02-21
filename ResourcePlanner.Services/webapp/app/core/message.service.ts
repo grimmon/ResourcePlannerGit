@@ -87,23 +87,23 @@ export class MessageService {
     }
 
     // request to call filtered operation
-    private filteredRequested = new Subject<string>();
+    private filteredRequested = new Subject<any>();
 
-    onFilteredRequested(handler: (value: string) => void) {
+    onFilteredRequested(handler: (operation: any) => void) {
         this.filteredRequested.subscribe(handler)
     }
-    filteredRequest(operationType: string) {
-        this.filteredRequested.next(operationType);
+    filteredRequest(operation: any) {
+        this.filteredRequested.next(operation);
     }
 
     // request to export to excel
-   private exportRequested = new Subject<string>();
+   private exportRequested = new Subject<any>();
 
-    onExportRequested(handler: (value: string) => void) {
+    onExportRequested(handler: (exportInfo: any) => void) {
         this.exportRequested.subscribe(handler)
     }
-    exportRequest(filters: any) {
-        this.exportRequested.next(filters);
+    exportRequest(exportInfo: any) {
+        this.exportRequested.next(exportInfo);
     }
 
     // resource period scroll
