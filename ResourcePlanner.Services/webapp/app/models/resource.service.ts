@@ -63,10 +63,9 @@ export class ResourceService {
                     blob = new Blob([response], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
                 win.saveAs(blob, `ResPlannerExport${(new Date()).toUTCString()}.xlsx`);
                 callback();
-                console.log('blob done ' + response.byteLength)
             } else {
                 callback();
-                console.log('blob failed ')
+                console.log('export get blob failed ')
             }
         });
     }

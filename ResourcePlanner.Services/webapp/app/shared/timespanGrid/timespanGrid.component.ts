@@ -307,17 +307,19 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                     dataObservable: {}
                 }
                 this.dataRequested.emit(request);
-                (<Observable<any>>request.dataObservable).subscribe((page: TimeDataPage) => {
-                    api.hideOverlay();
-                    var rows = this.createRowData(page);
-                    this.hideColumns();
-                    if (page.TimePeriods) {
-                        this.gridOptions.api.setColumnDefs(this.createColumnDefs(page.TimePeriods));
-                    }
-                    params.successCallback(rows, page.TotalRowCount);
-                    api.refreshHeader();
-                    this.refreshed.emit(page);
-                });
+                if (request.dataObservable) {
+                    (<Observable<any>>request.dataObservable).subscribe((page: TimeDataPage) => {
+                        api.hideOverlay();
+                        var rows = this.createRowData(page);
+                        this.hideColumns();
+                        if (page.TimePeriods) {
+                            this.gridOptions.api.setColumnDefs(this.createColumnDefs(page.TimePeriods));
+                        }
+                        params.successCallback(rows, page.TotalRowCount);
+                        api.refreshHeader();
+                        this.refreshed.emit(page);
+                    });
+                }
             }
         });
     }

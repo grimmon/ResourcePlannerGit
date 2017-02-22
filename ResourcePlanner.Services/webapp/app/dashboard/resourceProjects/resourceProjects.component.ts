@@ -60,7 +60,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     };
 
     dataRequested($event: any) {
-        $event.dataObservable = this.resourceService.getResourceDetailPage($event.query + '&agg=' + this.queryConfig.aggregation);
+        $event.dataObservable = this.resourceId ? this.resourceService.getResourceDetailPage($event.query + '&agg=' + this.queryConfig.aggregation) : null;
     }
 
     rowSelected($event: any) {
