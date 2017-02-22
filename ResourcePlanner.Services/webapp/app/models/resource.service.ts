@@ -55,6 +55,7 @@ export class ResourceService {
     }
 
     export(query: string, callback: any) {
+        console.log(query)
         var url = `${CONFIG.urls.resourceExport}${query.substr(0, 1) != '?' ? '?' : ''}${query}`;
         this.serverService.export(url).subscribe((response: any) => {
             if (response.byteLength > 0) {

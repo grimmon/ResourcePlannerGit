@@ -279,7 +279,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.filterQuery += (this.filterQuery ? "&agg=" : "agg=") + value;
     }
 
-    private buildFilters() {
+    private buildFilters(useAggregation: boolean = true) {
         this.filterQuery = this.tags.query();
         this.addOption("city", this.selectedCity);
         this.addOption("homeCity", this.selectedHomeCity);
@@ -287,7 +287,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.addOption("region", this.selectedRegion);
         this.addOption("practice", this.selectedPractice);
         this.addOption("subpractice", this.selectedSubPractice);
-        this.addAggOption(this.selectedAggregation);
+        if (useAggregation) {
+            this.addAggOption(this.selectedAggregation);
+        }
         this.addOption("resourcemanager", this.selectedResourceManager);
         this.addOption("title", this.selectedPosition);
     }
@@ -316,10 +318,10 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
     }
 
     private callFiltered(operation: any) {
-        this.buildFilters();
         switch (operation.type) {
             case "export":
                 if (this.basicMode) {
+                    this.buildFilters(false);
                     var exportInfo = {
                         query: this.filterQuery,
                         callback: operation.callback,

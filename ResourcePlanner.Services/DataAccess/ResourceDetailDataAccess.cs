@@ -25,8 +25,6 @@ namespace ResourcePlanner.Services.DataAccess
             _timeout = timeout;
         }
 
-        
-
         public DetailPage GetResourceDetail(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {
             var returnValue =  AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceDetail(reader),
@@ -41,81 +39,6 @@ namespace ResourcePlanner.Services.DataAccess
                 : new List<string>();
             return returnValue;
         }
-
-        public IExcelBuilder GetResourceDetailExcelData(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
-        {
-
-            var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapResourceDetailPageToExcel(reader, Aggregation, StartDate, EndDate),
-                 _connectionString,
-                 @"rpdb.ResourcePageSelect",
-                 CommandType.StoredProcedure,
-                 _timeout,
-                 CreateResourceDetailParamArray(ResourceId, Aggregation, StartDate, EndDate, login));
-            return returnValue;
-        }
-        public async Task<Stream> GetExcelStream(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
-        {
-            var resourceTask = Task.Factory.StartNew(() => GetResourceDetailExcelData(ResourceId, Aggregation, StartDate, EndDate, login));
-
-            try
-            {
-                var delay = Task.Delay(300000);
-                await Task.WhenAny(Task.WhenAll(new Task[] { resourceTask }), delay);
-
-                if (delay.Status == TaskStatus.RanToCompletion)
-                {
-                    throw new TimeoutException("At least one task exceeded timeout");
-                }
-
-                var excelData = resourceTask.Result;
-
-                return excelData.ConvertToStream();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        //public ResourcePageExcelData[] GetResourceExcelData(ResourceQuery pageParams)
-        //{
-
-
-        //    ResourcePageExcelData[] returnValue = AdoUtility.ExecuteQuery(reader => EntityMapper.MapToResourceCSV(reader, pageParams),
-        //         _connectionString,
-        //         @"rpdb.ResourcePageDailySelect",
-        //         CommandType.StoredProcedure,
-        //         _timeout,
-        //         CreateResourcePageParamArray(pageParams));
-
-        //    return returnValue;
-
-        //}
-        //public async Task<Stream> GetExcelStream(ResourceQuery param)
-        //{
-        //    var excelMapper = new ExcelMapper();
-        //    var resourceTask = Task.Factory.StartNew(() => GetResourceExcelData(param));
-
-        //    try
-        //    {
-        //        var delay = Task.Delay(300000);
-        //        await Task.WhenAny(Task.WhenAll(new Task[] { resourceTask }), delay);
-
-        //        if (delay.Status == TaskStatus.RanToCompletion)
-        //        {
-        //            throw new TimeoutException("At least one task exceeded timeout");
-        //        }
-
-        //        var page = resourceTask.Result;
-        //        var excelData = excelMapper.MapResourcePageToExcel(param, page);
-
-        //        return excelData.ConvertToStream();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
 
         private SqlParameter[] CreateResourceDetailParamArray(int ResourceId, TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate, string login)
         {

@@ -104,7 +104,7 @@ namespace ResourcePlanner.Services.Controllers
         }
 
         [Route("excelexport")]
-        public async Task<HttpResponseMessage> GetExcel(TimeAggregation agg = TimeAggregation.Weekly,
+        public async Task<HttpResponseMessage> GetExcel(
             string city = "",
             string homecity = "",
             string market = "",
@@ -124,28 +124,27 @@ namespace ResourcePlanner.Services.Controllers
 
             var pageParams = new ResourceQuery();
 
-            pageParams.Aggregation = agg;
             pageParams.Sort = Enums.Enums.SortOrder.LastName;
             pageParams.SortDirection = Enums.Enums.SortDirection.Asc;
-            pageParams.Cities = city.Replace(',', ';');
-            pageParams.HomeCities = homecity.Replace(',', ';');
-            pageParams.OrgUnits = orgUnit.Replace(',', ';');
-            pageParams.Markets = market.Replace(',', ';');
-            pageParams.Regions = region.Replace(',', ';');
+            pageParams.Cities = Trim(city);
+            pageParams.HomeCities = Trim(homecity);
+            pageParams.OrgUnits = Trim(orgUnit);
+            pageParams.Markets = Trim(market);
+            pageParams.Regions = Trim(region);
             pageParams.SearchTerm1 = searchterm1;
             pageParams.SearchTerm2 = searchterm2;
             pageParams.SearchTerm3 = searchterm3;
             pageParams.SearchTerm4 = searchterm4;
             pageParams.SearchTerm5 = searchterm5;
-            pageParams.Practices = practice.Replace(',', ';');
-            pageParams.SubPractices = subpractice.Replace(',', ';');
+            pageParams.Practices = Trim(practice);
+            pageParams.SubPractices = Trim(subpractice);
             pageParams.StartDate = StartDate.Value;
             pageParams.EndDate = EndDate.Value;
             pageParams.PageNum = 0;
             pageParams.PageSize = int.MaxValue;
             pageParams.Excel = true;
             pageParams.Login = HttpContext.Current.User.Identity.Name;
-            pageParams.Positions = title.Replace(',', ';');
+            pageParams.Positions = Trim(title);
 
 #if Mock
             var access = new MockDataAccess();
@@ -166,6 +165,11 @@ namespace ResourcePlanner.Services.Controllers
             {
                 throw ex;
             }
+        }
+
+        private string Trim(string param)
+        {
+            return string.IsNullOrWhiteSpace(param) ? "" : param.Replace(',', ';');
         }
 
         public HttpResponseMessage BuildHttpResponseMessage(Stream stream, string name)

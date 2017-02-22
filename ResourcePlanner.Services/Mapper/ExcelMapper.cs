@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,17 +12,83 @@ namespace ResourcePlanner.Services.Mapper
 {
     public static class ExcelMapper
     {
+        private static IExcelBuilder document;
+        private static int colNumber;
+        private static uint rowNumber;
+        private static string[] days = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+        private static string defaultDays = days[1] + "-" + days[5];
+
+
+        private static void SetCell(uint col, int width)
+        {
+            document.SetColumnWidth(col, width);
+        }
+
+        private static void SetCell(string header, int width = 18)
+        {
+            document.SetColumnWidth((uint)colNumber, width);
+            document.SetCellValue(ExcelUtility.GetExcelAddress(colNumber++, 1), header, ExcelStyleFormat.Bold);
+        }
+
+        private static void SetCell(SqlDataReader reader, string fieldName, string fieldName2 = null)
+        {
+            var value = reader.GetNullableString(fieldName);
+            if (fieldName2 != null)
+            {
+                value += ", " + reader.GetNullableString(fieldName2);
+            }
+            document.AddCell(colNumber++, value);
+        }
+
+        private static void SetCellDate(SqlDataReader reader, string fieldName)
+        {
+            var dateTime = reader.GetNullableDateTime(fieldName);
+            document.AddCell(colNumber++, dateTime == null ? "" : ((DateTime)dateTime).ToString("d", CultureInfo.InvariantCulture));
+        }
+
+        private static void SetCellDaysOfWeek(SqlDataReader reader, string fieldName)
+        {
+            var value = "";
+            if (!reader.IsDBNull(fieldName))
+            {
+                var mask = reader.GetInt32(fieldName);
+                if (mask == 62)
+                {
+                    value = defaultDays;
+                }
+                else
+                {
+                    for (var i = 0; i < 7; i++)
+                    {
+                        if ((mask & (1 << i)) > 0)
+                        {
+                            if (value != "")
+                            {
+                                value += ",";
+                            }
+                            value += days[i];
+                        }
+                    }
+                }
+            }
+            document.AddCell(colNumber++, value);
+        }
+
+        private static void SetCellDouble(SqlDataReader reader, string fieldName)
+        {
+            document.AddCell(colNumber++, reader.GetNullableDouble(fieldName));
+        }
 
         public static IExcelBuilder MapResourcePageToExcel(ResourceQuery queryParameters, SqlDataReader reader)
         {
 
-            var document = ExceldocFactory.Create();
+            document = ExceldocFactory.Create();
 
             document.CreateNewSheet("Cover Sheet");
 
-            document.SetColumnWidth(1, 27);
-            document.SetColumnWidth(2, 27);
-            document.SetColumnWidth(3, 27);
+            SetCell(1, 27);
+            SetCell(2, 27);
+            SetCell(3, 27);
 
             document.SetCellValue("A1", "Insight Resource Assignments", ExcelStyleFormat.Bold);
 
@@ -31,109 +98,57 @@ namespace ResourcePlanner.Services.Mapper
             document.SetCellValue("A5", "End Date: ", ExcelStyleFormat.Bold);
             document.SetCellValue("B5", queryParameters.EndDate.ToString("MM-dd-yyyy"));
 
-
-
             document.CreateNewSheet("Data");
 
-            document.SetCellValue(ExcelUtility.GetExcelAddress(1, 1), "Resource Name", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(2, 1), "Position", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(3, 1), "Delivery City", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(4, 1), "Home City", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(5, 1), "Practice", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(6, 1), "SubPractice", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(7, 1), "Resource Manager", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(8, 1), "Date Period", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(9, 1), "Resource Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(10, 1), "Forecast Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(11, 1), "Actual Hours", ExcelStyleFormat.Bold);
+            rowNumber = 1;
+            colNumber = 1;
 
-            int rowNumber = 2;
-
-            while (reader.Read())
-            {                                                                     
-                document.SetCellValue(ExcelUtility.GetExcelAddress(1, rowNumber), reader.GetNullableString("LastName") + ", " + reader.GetNullableString("FirstName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(2, rowNumber), reader.GetNullableString("Position"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(3, rowNumber), reader.GetNullableString("City"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(4, rowNumber), reader.GetNullableString("HomeCity"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(5, rowNumber), reader.GetNullableString("Practice"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(6, rowNumber), reader.GetNullableString("SubPractice"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(7, rowNumber), reader.GetNullableString("ResourceManagerLastName") + ", " + reader.GetNullableString("ResourceManagerFirstName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(8, rowNumber), reader.GetString("PeriodName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(9, rowNumber), reader.GetDouble("ForecastHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(10, rowNumber), reader.GetDouble("ActualHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(11, rowNumber), reader.GetDouble("ResourceHours").ToString());
-                rowNumber++;
-            }
-
-            return document;
-        }
-
-        public static IExcelBuilder MapResourceDetailPageToExcel(SqlDataReader reader, Enums.Enums.TimeAggregation Aggregation, DateTime StartDate, DateTime EndDate)
-        {
-
-            var document = ExceldocFactory.Create();
-
-            document.CreateNewSheet("Cover Sheet");
-
-            document.SetColumnWidth(1, 27);
-            document.SetColumnWidth(2, 27);
-            document.SetColumnWidth(3, 27);
-
-            reader.Read();
-
-            document.SetCellValue("A1", "Insight Resource Assignments for " + reader.GetNullableString("LastName") + ", " + reader.GetNullableString("FirstName"), ExcelStyleFormat.Bold);
-
-            document.SetCellValue("A3", "Start date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B3", StartDate.ToString("MM-dd-yyyy"));
-
-            document.SetCellValue("A5", "End Date: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B5", EndDate.ToString("MM-dd-yyyy"));
-
-            document.SetCellValue("A7", "Practice: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B7", reader.GetNullableString("Practice"));
-            document.SetCellValue("A9", "Sub-practice: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B9", reader.GetNullableString("SubPractice"));
-            document.SetCellValue("A11", "Org Unit: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B11", reader.GetNullableString("OrgUnit"));
-            document.SetCellValue("A13", "Market: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("B13", reader.GetNullableString("Market"));
-            document.SetCellValue("D7", "City: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("E7", reader.GetNullableString("City"));
-            document.SetCellValue("D9", "Position: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("E9", reader.GetNullableString("Position"));
-            document.SetCellValue("D11", "Manager: ", ExcelStyleFormat.Bold);
-            document.SetCellValue("E11", reader.GetNullableString("ResourceManagerLastName") + "," + reader.GetNullableString("ResourceManagerFirstName"));
-
-            reader.NextResult();
-            document.CreateNewSheet("Data");       
-
-            document.SetCellValue(ExcelUtility.GetExcelAddress(1, 1), "Project Name", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(2, 1), "WBS Element", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(3, 1), "Descritpion", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(4, 1), "Customer", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(5, 1), "Opportunity Owner", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(6, 1), "Project Manager", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(7, 1), "Period Start", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(8, 1), "Period End", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(9, 1), "Resource Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(10, 1), "Forecast Hours", ExcelStyleFormat.Bold);
-            document.SetCellValue(ExcelUtility.GetExcelAddress(11, 1), "Actual Hours", ExcelStyleFormat.Bold); 
-            int rowNumber = 2;
+            SetCell("Resource Name", 20);
+            SetCell("Position");
+            SetCell("Delivery City", 12);
+            SetCell("Home City");
+            SetCell("Practice");
+            SetCell("SubPractice", 12);
+            SetCell("Resource Manager");
+            SetCell("Project Name");
+            SetCell("Total Hours", 10);
+            SetCell("HoursPerDay", 10);
+            SetCell("Days of Week", 16);
+            SetCell("Start Date", 11);
+            SetCell("End Date", 11);
+            SetCell("Customer", 12);
+            SetCell("WBS Code", 15);
+            SetCell("Offering");
+            SetCell("Description");
+            SetCell("Hour Type", 10);
+            SetCell("Assignment Type", 10);
+            SetCell("Record Source",10);
 
             while (reader.Read())
             {
-                document.SetCellValue(ExcelUtility.GetExcelAddress(1, rowNumber),  reader.GetNullableString("ProjectName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(2, rowNumber),  reader.GetNullableString("WBSCode"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(3, rowNumber),  reader.GetNullableString("Description"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(4, rowNumber),  reader.GetNullableString("Customer"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(5, rowNumber),  reader.GetNullableString("OpportunityOwnerLastName") + ", " + reader.GetNullableString("OpportunityOwnerFirstName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(6, rowNumber),  reader.GetNullableString("ProjectManagerLastName") + ", " + reader.GetNullableString("ProjectManagerFirstName"));
-                document.SetCellValue(ExcelUtility.GetExcelAddress(7, rowNumber),  reader.GetDateTime("PeriodStart").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(8, rowNumber),  reader.GetDateTime("PeriodEnd").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(9, rowNumber),  reader.GetDouble("ResoureHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(10, rowNumber), reader.GetDouble("ForecastHours").ToString());
-                document.SetCellValue(ExcelUtility.GetExcelAddress(11, rowNumber), reader.GetDouble("ActualHours").ToString());
-                rowNumber++;
+                document.AddRow(++rowNumber);
+                colNumber = 1;
+
+                SetCell(reader, "LastName", "FirstName");
+                SetCell(reader, "Position");
+                SetCell(reader, "City");
+                SetCell(reader, "HomeCity");
+                SetCell(reader, "Practice");
+                SetCell(reader, "SubPractice");
+                SetCell(reader, "ResourceManagerLastName", "ResourceManagerFirstName");
+                SetCell(reader, "ProjectName");
+                SetCellDouble(reader, "Totalhours");
+                SetCellDouble(reader, "HoursPerDay");
+                SetCellDaysOfWeek(reader, "DaysOfWeek");
+                SetCellDate(reader, "StartDate");
+                SetCellDate(reader, "EndDate");
+                SetCell(reader, "Customer");
+                SetCell(reader, "WBSCode");
+                SetCell(reader, "Offering");
+                SetCell(reader, "Description");
+                SetCell(reader, "HourType");
+                SetCell(reader, "AssignmentType");
+                SetCell(reader, "RecordSource");
             }
 
             return document;

@@ -21,5 +21,11 @@ namespace ResourcePlanner.Services.Excel
         void SetCellValue(int column, int row, double value, ExcelNumberFormat numberFormat, ExcelStyleFormat styleFormat);
 
         void SetColumnWidth(uint column, double width);
+
+        void AddRow(uint rowIndex);
+
+        void AddCell(int columnNumber, string value);
+
+        void AddCell(int columnNumber, double? value);
     }
 }

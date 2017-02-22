@@ -27,6 +27,7 @@ namespace ResourcePlanner.Services.Excel
         private Columns _columns;
         private Sheet _sheet;
         private uint _sheetId = 1;
+        private Row nextRow;
 
         private UInt32Value _defaultStyle = 0;
         private UInt32Value _bold         = 1;
@@ -449,6 +450,35 @@ namespace ResourcePlanner.Services.Excel
             pageSetup.HorizontalDpi = 200;
             pageSetup.VerticalDpi = 200;
             _worksheetPart.Worksheet.AppendChild(pageSetup);
+        }
+
+        public void AddRow(uint rowIndex)
+        {
+            nextRow = new Row();
+            nextRow.RowIndex = rowIndex;
+            _sheetData.Append(nextRow);
+
+        }
+
+        public void AddCell(int columnNumber, string value)
+        {
+            nextRow.AppendChild(new Cell()
+            {
+                CellReference = Convert.ToChar(65 + (columnNumber - 1) % 26).ToString(),
+                DataType = CellValues.String,
+                CellValue = new CellValue(value)
+            });
+        }
+
+        public void AddCell(int columnNumber, double? value)
+        {
+            nextRow.AppendChild(new Cell()
+            {
+                StyleIndex = _number,
+                CellReference = Convert.ToChar(65 + (columnNumber - 1) % 26).ToString(),
+                DataType = CellValues.Number,
+                CellValue = new CellValue(value == null ? "" : value.ToString())
+            });
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ResourcePlanner.Services.DataAccess
                   @"rpdb.ResourcePageSelect",
                   CommandType.StoredProcedure,
                   _timeout,
-                  CreateResourcePageParamArray(pageParams));
+                  CreateResourcePageParamArray(pageParams, false));
 
 
             returnValue.PageNum = pageParams.PageNum;
@@ -55,10 +55,10 @@ namespace ResourcePlanner.Services.DataAccess
 
             var returnValue = AdoUtility.ExecuteQuery(reader => ExcelMapper.MapResourcePageToExcel(pageParams, reader),
                  _connectionString,
-                 @"rpdb.ResourcePageSelect",
+                 @"rpdb.ResourceExportSelect", 
                  CommandType.StoredProcedure,
                  _timeout,
-                 CreateResourcePageParamArray(pageParams));
+                 CreateResourcePageParamArray(pageParams, true));
             return returnValue;
         }
 
@@ -86,33 +86,36 @@ namespace ResourcePlanner.Services.DataAccess
             }
         }
 
-        private SqlParameter[] CreateResourcePageParamArray(ResourceQuery pageParams)
+        private SqlParameter[] CreateResourcePageParamArray(ResourceQuery pageParams, Boolean forExport)
         {
             var parameterList = new List<SqlParameter>();
 
-            if (pageParams.Aggregation == TimeAggregation.Daily)
+            if (!forExport)
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Day"));
-            }
-            else if (pageParams.Aggregation == TimeAggregation.Monthly)
-            {
-                parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Month"));
-            }
-            else if (pageParams.Aggregation == TimeAggregation.Quarterly)
-            {
-                parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Quarter"));
-            }
-            else
-            {
-                parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Week"));
+                if (pageParams.Aggregation == TimeAggregation.Daily)
+                {
+                    parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Day"));
+                }
+                else if (pageParams.Aggregation == TimeAggregation.Monthly)
+                {
+                    parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Month"));
+                }
+                else if (pageParams.Aggregation == TimeAggregation.Quarterly)
+                {
+                    parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Quarter"));
+                }
+                else if (pageParams.Aggregation == TimeAggregation.Weekly)
+                {
+                    parameterList.Add(AdoUtility.CreateSqlParameter("TimeScaleParam", 20, SqlDbType.VarChar, "Week"));
+                }
+                parameterList.Add(AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString()));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString()));
+                parameterList.Add(AdoUtility.CreateSqlParameter("PageNum", SqlDbType.Int, pageParams.PageNum));
+                parameterList.Add(AdoUtility.CreateSqlParameter("PageSize", SqlDbType.Int, pageParams.PageSize));
             }
 
             parameterList.Add(AdoUtility.CreateSqlParameter("StartDateParam", SqlDbType.Date, pageParams.StartDate));
             parameterList.Add(AdoUtility.CreateSqlParameter("EndDateParam", SqlDbType.Date, pageParams.EndDate));
-            parameterList.Add(AdoUtility.CreateSqlParameter("SortOrderParam", 20, SqlDbType.VarChar, pageParams.Sort.ToString()));
-            parameterList.Add(AdoUtility.CreateSqlParameter("SortDirectionParam", 20, SqlDbType.VarChar, pageParams.SortDirection.ToString()));
-            parameterList.Add(AdoUtility.CreateSqlParameter("PageNum", SqlDbType.Int, pageParams.PageNum));
-            parameterList.Add(AdoUtility.CreateSqlParameter("PageSize", SqlDbType.Int, pageParams.PageSize));
             parameterList.Add(AdoUtility.CreateSqlParameter("login", 100, SqlDbType.VarChar, pageParams.Login));
 
             if (pageParams.Cities != "")
