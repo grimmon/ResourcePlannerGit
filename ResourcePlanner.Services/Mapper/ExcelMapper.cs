@@ -143,7 +143,13 @@ namespace ResourcePlanner.Services.Mapper
                 SetCell(reader, "ResourceManagerLastName", "ResourceManagerFirstName");
                 SetCell(reader, "ProjectName");
                 SetCellDouble(reader, "Totalhours");
-                SetCellDouble(reader, "HoursPerDay");
+                SetCellDouble(reader, "SundayHours");
+                SetCellDouble(reader, "MondayHours");
+                SetCellDouble(reader, "TuesdayHours");
+                SetCellDouble(reader, "WednesdayHours");
+                SetCellDouble(reader, "ThursdayHours");
+                SetCellDouble(reader, "FridayHours");
+                SetCellDouble(reader, "SaturdayHours");
                 SetCellDate(reader, "StartDate");
                 SetCellDate(reader, "EndDate");
                 SetCell(reader, "Customer");
