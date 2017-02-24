@@ -162,9 +162,9 @@ namespace ResourcePlanner.Services.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
-        [Route("update")]
+        [Route("get")]
         public async Task<IHttpActionResult> Update(
            int resourceId,
            int projectMasterId,
@@ -188,7 +188,7 @@ namespace ResourcePlanner.Services.Controllers
                 throw;
             }
 
-            return Ok();
+            return Ok(result);
         }
     }
 }
