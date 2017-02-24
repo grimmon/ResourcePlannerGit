@@ -66,6 +66,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     close() {
         this.messageService.modalToggle(this.visible = false);
+        this.gridConfig.selectedIds = [];
     }
 
     save() {
