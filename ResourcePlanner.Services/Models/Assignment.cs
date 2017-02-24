@@ -18,11 +18,16 @@ namespace ResourcePlanner.Services.Models
     {
         public int[] ResourceIds { get; set; }
         public int ProjectMasterId { get; set; }
-        public double? HoursPerDay { get; set; }
         public double? TotalHours { get; set; }
+        public double? SundayHours { get; set; }
+        public double? MondayHours { get; set; }
+        public double? TuesdayHours { get; set; }
+        public double? WednesdayHours { get; set; }
+        public double? ThursdayHours { get; set; }
+        public double? FridayHours { get; set; }
+        public double? SaturdayHours { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int DaysOfWeek { get; set; }
     }
 
     public class UpdateAssignment
@@ -30,9 +35,29 @@ namespace ResourcePlanner.Services.Models
         public int ResourceId { get; set; }
         public int ProjectMasterId { get; set; }
         public double? TotalHours { get;  set;}
-        public double? HoursPerDay { get; set; }
+        public double? SundayHours { get; set; }
+        public double? MondayHours { get; set; }
+        public double? TuesdayHours { get; set; }
+        public double? WednesdayHours { get; set; }
+        public double? ThursdayHours { get; set; }
+        public double? FridayHours { get; set; }
+        public double? SaturdayHours { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int DaysOfWeek { get; set; }
+    }
+
+    public class GetAssignment
+    {
+        public double? TotalHours { get; set; }
+        public double? SundayHours { get; set; }
+        public double? MondayHours { get; set; }
+        public double? TuesdayHours { get; set; }
+        public double? WednesdayHours { get; set; }
+        public double? ThursdayHours { get; set; }
+        public double? FridayHours { get; set; }
+        public double? SaturdayHours { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string DateName { get; set; }
     }
 }

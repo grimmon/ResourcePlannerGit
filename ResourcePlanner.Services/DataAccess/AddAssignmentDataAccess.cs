@@ -43,6 +43,21 @@ namespace ResourcePlanner.Services.DataAccess
                 UpdateAssignmentParameters(asgn));
 
         }
+        public GetAssignment GetAssignment(int resourceId, int projectMasterId, DateTime date)
+        {
+
+            return AdoUtility.ExecuteQuery(reader => EntityMapper.MapToGetAssignment(reader),
+                _connectionString,
+                @"rpdb.InternalAssignmentGet",
+                CommandType.StoredProcedure,
+                _timeout,
+                new SqlParameter[] { AdoUtility.CreateSqlParameter("ResourceId",SqlDbType.Int, resourceId),
+                                     AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, projectMasterId),
+                                     AdoUtility.CreateSqlParameter("Date", SqlDbType.Date, date) }
+                );
+
+        }
+
         public List<IdNameGeneric> GetProjects(string searchTerm)
         {
 
@@ -112,8 +127,15 @@ namespace ResourcePlanner.Services.DataAccess
             }
             else
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.HoursPerDay.Value));
-                parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SundayHours", SqlDbType.Float, asgn.SundayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("MondayHours", SqlDbType.Float, asgn.MondayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("TuesdayHours", SqlDbType.Float, asgn.TuesdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("WednesdayHours", SqlDbType.Float, asgn.WednesdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("ThursdayHours", SqlDbType.Float, asgn.ThursdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("FridayHours", SqlDbType.Float, asgn.FridayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SaturdayHours", SqlDbType.Float, asgn.SaturdayHours.Value));
+
+
             }   
 
             return parameterList.ToArray();
@@ -125,17 +147,25 @@ namespace ResourcePlanner.Services.DataAccess
 
             parameterList.Add(AdoUtility.CreateSqlParameter("ResourceId", SqlDbType.Int, asgn.ResourceId));
             parameterList.Add(AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId));
-            parameterList.Add(AdoUtility.CreateSqlParameter("StartDate", 20, SqlDbType.Date, asgn.StartDate));
-            parameterList.Add(AdoUtility.CreateSqlParameter("EndDate", 20, SqlDbType.Date, asgn.EndDate));
+            parameterList.Add(AdoUtility.CreateSqlParameter("Date", 20, SqlDbType.Date, asgn.StartDate));
+
             if (asgn.TotalHours.HasValue)
             {
                 parameterList.Add(AdoUtility.CreateSqlParameter("TotalHours", SqlDbType.Float, asgn.TotalHours));
             }
             else
             {
-                parameterList.Add(AdoUtility.CreateSqlParameter("HoursPerDay", SqlDbType.Float, asgn.HoursPerDay.Value));
-                parameterList.Add(AdoUtility.CreateSqlParameter("DaysOfWeek", SqlDbType.Int, asgn.DaysOfWeek));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SundayHours", SqlDbType.Float, asgn.SundayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("MondayHours", SqlDbType.Float, asgn.MondayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("TuesdayHours", SqlDbType.Float, asgn.TuesdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("WednesdayHours", SqlDbType.Float, asgn.WednesdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("ThursdayHours", SqlDbType.Float, asgn.ThursdayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("FridayHours", SqlDbType.Float, asgn.FridayHours.Value));
+                parameterList.Add(AdoUtility.CreateSqlParameter("SaturdayHours", SqlDbType.Float, asgn.SaturdayHours.Value));
+
+
             }
+
             return parameterList.ToArray();
         }
     }

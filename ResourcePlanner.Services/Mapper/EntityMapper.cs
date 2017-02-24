@@ -85,7 +85,28 @@ namespace ResourcePlanner.Services.Mapper
             return resourcePage;
         }
 
-        internal static ProjectPage MapToProjectPage(SqlDataReader reader)
+        public static GetAssignment MapToGetAssignment(SqlDataReader reader)
+        {
+            var asgn = new GetAssignment();
+
+            reader.Read();
+
+            asgn.SundayHours    = reader.GetDouble("SundayHours");
+            asgn.MondayHours    = reader.GetDouble("MondayHours");
+            asgn.TuesdayHours   = reader.GetDouble("TuesdayHours");
+            asgn.WednesdayHours = reader.GetDouble("WednesdayHours");
+            asgn.ThursdayHours  = reader.GetDouble("ThursdayHours");
+            asgn.FridayHours    = reader.GetDouble("FridayHours");
+            asgn.SaturdayHours  = reader.GetDouble("SaturdayHours");
+            asgn.StartDate      = reader.GetDateTime("StartDate");
+            asgn.EndDate        = reader.GetDateTime("EndDate");
+            asgn.DateName       = reader.GetNullableString("DateName");
+
+            return asgn;
+               
+        }
+
+        public static ProjectPage MapToProjectPage(SqlDataReader reader)
         {
             var projectInfo = new ProjectInfo();
             var resources = new Dictionary<int, ProjectResource>();

@@ -27,8 +27,15 @@ namespace ResourcePlanner.Services.Controllers
             DateTime startdate, 
             DateTime enddate, 
             double? hoursPerWeek = null, 
-            double? hoursPerDay = null, 
-            string daysOfWeek = "")
+            double? sunHours = null,
+            double? monHours = null,
+            double? tueHours = null,
+            double? wedHours = null,
+            double? thuHours = null,
+            double? friHours = null,
+            double? satHours = null
+
+            )
         {
 #if Mock
             return Ok();
@@ -60,22 +67,23 @@ namespace ResourcePlanner.Services.Controllers
             if (hoursPerWeek.HasValue)
             {
                 asgn.TotalHours = hoursPerWeek.Value;
-                asgn.HoursPerDay = null;
+                asgn.SundayHours = null;
+                asgn.MondayHours = null;
+                asgn.TuesdayHours = null;
+                asgn.WednesdayHours = null;
+                asgn.ThursdayHours = null;
+                asgn.FridayHours = null;
+                asgn.SaturdayHours = null;
             }
-            else if (hoursPerDay.HasValue)
+            else
             {
-                int days = 0;
-
-                var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
-
-                if (daysOfWeekEnum.Length > 0)
-                {
-                    days = getDaysAsInt(daysOfWeekEnum);
-                }
-
-                asgn.HoursPerDay = hoursPerDay.Value;
-                asgn.DaysOfWeek = days;
-                asgn.TotalHours = null;
+                asgn.SundayHours = sunHours;
+                asgn.MondayHours = monHours;
+                asgn.TuesdayHours = tueHours;
+                asgn.WednesdayHours = wedHours;
+                asgn.ThursdayHours = thuHours;
+                asgn.FridayHours = friHours;
+                asgn.SaturdayHours = satHours;
             }
 
             try
@@ -96,11 +104,15 @@ namespace ResourcePlanner.Services.Controllers
         public async Task<IHttpActionResult> Update(
             int resourceId, 
             int projectMasterId, 
-            DateTime startdate, 
-            DateTime enddate, 
-            double? hoursPerWeek = null, 
-            double? hoursPerDay = null, 
-            string daysOfWeek = "")
+            DateTime startdate,
+            double? hoursPerWeek = null,
+            double? sunHours = null,
+            double? monHours = null,
+            double? tueHours = null,
+            double? wedHours = null,
+            double? thuHours = null,
+            double? friHours = null,
+            double? satHours = null)
         {
 #if Mock
             return Ok();
@@ -114,34 +126,29 @@ namespace ResourcePlanner.Services.Controllers
                 ResourceId = resourceId,
                 ProjectMasterId = projectMasterId,
                 StartDate = startdate,
-                EndDate = enddate,
             };
 
             if (hoursPerWeek.HasValue)
             {
                 asgn.TotalHours = hoursPerWeek.Value;
-                asgn.HoursPerDay = null;
-            }
-            else if (hoursPerDay.HasValue)
-            {
-                int days = 0;
-
-                var daysOfWeekEnum = daysOfWeek.Split(',').Select(Int32.Parse).Select(i => (Enums.Enums.DayOfWeek)i).ToArray();
-
-                if (daysOfWeekEnum.Length > 0)
-                {
-                    days = getDaysAsInt(daysOfWeekEnum);
-                }
-
-                asgn.HoursPerDay = hoursPerDay.Value;
-                asgn.DaysOfWeek = days;
-                asgn.TotalHours = null;
+                asgn.SundayHours = null;
+                asgn.MondayHours = null;
+                asgn.TuesdayHours = null;
+                asgn.WednesdayHours = null;
+                asgn.ThursdayHours = null;
+                asgn.FridayHours = null;
+                asgn.SaturdayHours = null;
             }
             else
             {
-                throw new Exception("No hours provided");
+                asgn.SundayHours = sunHours;
+                asgn.MondayHours = monHours;
+                asgn.TuesdayHours = tueHours;
+                asgn.WednesdayHours = wedHours;
+                asgn.ThursdayHours = thuHours;
+                asgn.FridayHours = friHours;
+                asgn.SaturdayHours = satHours;
             }
-
             try
             {
                 access.UpdateAssignment(asgn);
@@ -154,38 +161,34 @@ namespace ResourcePlanner.Services.Controllers
             return Ok();
         }
 
-        private int getDaysAsInt(Enums.Enums.DayOfWeek[] days)
+        [Authorize]
+        [HttpPost]
+        //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
+        [Route("update")]
+        public async Task<IHttpActionResult> Update(
+           int resourceId,
+           int projectMasterId,
+           DateTime date
+        )
         {
-            int result = 0;
-            if (days.Contains(Enums.Enums.DayOfWeek.Sunday))
+#if Mock
+            return Ok();
+#endif
+
+            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                                Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+            var result = new GetAssignment();
+
+            try
             {
-                result += 1;
+                result = access.GetAssignment(resourceId, projectMasterId, date);
             }
-            if (days.Contains(Enums.Enums.DayOfWeek.Monday))
+            catch (Exception ex)
             {
-                result += 2;
+                throw;
             }
-            if (days.Contains(Enums.Enums.DayOfWeek.Tuesday))
-            {
-                result += 4;
-            }
-            if (days.Contains(Enums.Enums.DayOfWeek.Wednesday))
-            {
-                result += 8;
-            }
-            if (days.Contains(Enums.Enums.DayOfWeek.Thursday))
-            {
-                result += 16;
-            }
-            if (days.Contains(Enums.Enums.DayOfWeek.Friday))
-            {
-                result += 32;
-            }
-            if (days.Contains(Enums.Enums.DayOfWeek.Saturday))
-            {
-                result += 64;
-            }
-            return result;
-        } 
+
+            return Ok();
+        }
     }
 }
