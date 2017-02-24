@@ -48,7 +48,7 @@ namespace ResourcePlanner.Services.DataAccess
 
             return AdoUtility.ExecuteQuery(reader => EntityMapper.MapToGetAssignment(reader),
                 _connectionString,
-                @"rpdb.InternalAssignmentGet",
+                @"rpdb.InternalAssignmentSelect",
                 CommandType.StoredProcedure,
                 _timeout,
                 new SqlParameter[] { AdoUtility.CreateSqlParameter("ResourceId",SqlDbType.Int, resourceId),
