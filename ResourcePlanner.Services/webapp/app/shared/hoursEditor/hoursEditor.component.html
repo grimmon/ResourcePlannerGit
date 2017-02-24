@@ -1,16 +1,14 @@
 <div class="hoursEditor" [style.display]="visible ? 'block' : 'none'">
     <div>
-        <h3>Editor</h3>
+        <h3>Hours Per Day Editor</h3>
         <div class="controls">
-            <div>
-                <select class="assignment-editor-dayofweek" multiple="multiple"></select>
-            </div>
-            <p></p>
-            <div class="hoursLabel">
-                <label>Hours per day:</label>
-            </div>
-            <div>
-                <input type="number" class="form-control" ng-required="required" min="0" max="24" [(ngModel)]="assignment.hoursPerDay">
+            <div *ngFor="let day of [0,1,2,3,4,5,6]">
+                <div class="hoursLabel">
+                    <label>{{dayNames[day]}}:</label>
+                </div>
+                <div class="hoursPerDay">
+                    <input type="number" class="form-control" ng-required="required" min="0" max="24" [(ngModel)]="hoursPerDay[day]">
+                </div>
             </div>
         </div>
         <div class="buttons">

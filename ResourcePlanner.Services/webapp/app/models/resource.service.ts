@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CONFIG, ServerService } from '../core';
 import { Resource, ResourcePage, DetailPage, ResourceRequest, ResourceBreakdown } from './resource.model';
-import { AddAssignments, UpdateAssignment } from './assignment.model';
+import { GetAssignments, AddAssignments, UpdateAssignment } from './assignment.model';
 
 @Injectable()
 export class ResourceService {
@@ -52,6 +52,11 @@ export class ResourceService {
 
     updateAssignment(assignment: UpdateAssignment) {
         return this.serverService.postQuery<UpdateAssignment>(CONFIG.urls.assignmentUpdate, assignment);
+    }
+
+    getAssignment(assignment: UpdateAssignment) {
+        var query = `?resourceId=${assignment.resourceId}&projectMasterId=${assignment.projectMasterId}&date=${assignment.startDate}`;
+        return this.serverService.get<GetAssignments>(CONFIG.urls.assignmentGet + query);
     }
 
     export(query: string, callback: any) {

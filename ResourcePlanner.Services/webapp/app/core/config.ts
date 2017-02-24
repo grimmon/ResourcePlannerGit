@@ -6,6 +6,7 @@ export let CONFIG = {
         resourceBreakdown: 'api/resourcebreakdown',
         resourceExport: 'api/resource/excelexport',
         requestResource: 'api/email',
+        assignmentGet: 'api/assignment/get',
         assignmentAdd: 'api/assignment/add',
         assignmentUpdate: 'api/assignment/update',
         projects: 'api/project/all',

@@ -7,50 +7,32 @@ export class Assignment {
     SoftResourceHours: number;
 }
 
-export class AddAssignments {
-    resourceIds: number[];
-    projectMasterId: number;
-    hoursPerDay: number;
-    hoursPerWeek: number;
-    startDate: string;
-    endDate: string;
-    daysOfWeek: string[];
-
-    public constructor(
-        fields?: {
-            resourceIds?: number[],
-            projectMasterId?: number,
-            hoursPerDay?: number,
-            hoursPerWeek?: number,
-            startDate?: string,
-            endDate?: string,
-            daysOfWeek?: string[],
-        }) {
-        if (fields) Object.assign(this, fields);
-    }
-
+export class GetAssignments {
+    TotalHours: number;
+    SundayHours: number;
+    MondayHours: number;
+    TuesdayHours: number;
+    WednesdayHours: number;
+    ThursdayHours: number;
+    FridayHours: number;
+    SaturdayHours: number;
+    StartDate: string;
+    EndDate: string;
+    DateName: string;
 }
 
-export class UpdateAssignment {
-    resourceId: number;
+export class AddAssignments extends GetAssignments {
+    resourceIds: number[];
     projectMasterId: number;
-    hoursPerDay: number;
     hoursPerWeek: number;
     startDate: string;
     endDate: string;
-    daysOfWeek: string[];
+}
 
-    public constructor(
-        fields?: {
-            resourceId?: number,
-            projectMasterId?: number,
-            hoursPerDay?: number,
-            hoursPerWeek?: number,
-            startDate?: string,
-            endDate?: string,
-            daysOfWeek?: string[],
-        }) {
-        if (fields) Object.assign(this, fields);
-    }
-
+export class UpdateAssignment extends GetAssignments {
+    resourceId: number;
+    projectMasterId: number;
+    hoursPerWeek: number;
+    startDate: string;
+    endDate: string;
 }

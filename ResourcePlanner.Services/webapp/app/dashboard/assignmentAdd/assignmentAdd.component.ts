@@ -36,6 +36,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
     _showTrigger = 0;
 
+    action: any;
+
     visible: boolean = false;
 
     saving: boolean = false;
@@ -66,6 +68,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
     close() {
         this.messageService.modalToggle(this.visible = false);
+        this.action = "deselectAll";
     }
 
     save() {

@@ -27,15 +27,13 @@ namespace ResourcePlanner.Services.Controllers
             DateTime startdate, 
             DateTime enddate, 
             double? hoursPerWeek = null, 
-            double? sunHours = null,
-            double? monHours = null,
-            double? tueHours = null,
-            double? wedHours = null,
-            double? thuHours = null,
-            double? friHours = null,
-            double? satHours = null
-
-            )
+            double? sundayHours = null,
+            double? mondayHours = null,
+            double? tuesdayHours = null,
+            double? wednesdayHours = null,
+            double? thursdayHours = null,
+            double? fridayHours = null,
+            double? saturdayHours = null)
         {
 #if Mock
             return Ok();
@@ -77,13 +75,13 @@ namespace ResourcePlanner.Services.Controllers
             }
             else
             {
-                asgn.SundayHours = sunHours;
-                asgn.MondayHours = monHours;
-                asgn.TuesdayHours = tueHours;
-                asgn.WednesdayHours = wedHours;
-                asgn.ThursdayHours = thuHours;
-                asgn.FridayHours = friHours;
-                asgn.SaturdayHours = satHours;
+                asgn.SundayHours = sundayHours;
+                asgn.MondayHours = mondayHours;
+                asgn.TuesdayHours = tuesdayHours;
+                asgn.WednesdayHours = wednesdayHours;
+                asgn.ThursdayHours = thursdayHours;
+                asgn.FridayHours = fridayHours;
+                asgn.SaturdayHours = saturdayHours;
             }
 
             try
@@ -106,13 +104,13 @@ namespace ResourcePlanner.Services.Controllers
             int projectMasterId, 
             DateTime startdate,
             double? hoursPerWeek = null,
-            double? sunHours = null,
-            double? monHours = null,
-            double? tueHours = null,
-            double? wedHours = null,
-            double? thuHours = null,
-            double? friHours = null,
-            double? satHours = null)
+            double? sundayHours = null,
+            double? mondayHours = null,
+            double? tuesdayHours = null,
+            double? wednesdayHours = null,
+            double? thursdayHours = null,
+            double? fridayHours = null,
+            double? saturdayHours = null)
         {
 #if Mock
             return Ok();
@@ -141,13 +139,13 @@ namespace ResourcePlanner.Services.Controllers
             }
             else
             {
-                asgn.SundayHours = sunHours;
-                asgn.MondayHours = monHours;
-                asgn.TuesdayHours = tueHours;
-                asgn.WednesdayHours = wedHours;
-                asgn.ThursdayHours = thuHours;
-                asgn.FridayHours = friHours;
-                asgn.SaturdayHours = satHours;
+                asgn.SundayHours = sundayHours;
+                asgn.MondayHours = mondayHours;
+                asgn.TuesdayHours = tuesdayHours;
+                asgn.WednesdayHours = wednesdayHours;
+                asgn.ThursdayHours = thursdayHours;
+                asgn.FridayHours = fridayHours;
+                asgn.SaturdayHours = saturdayHours;
             }
             try
             {
@@ -165,7 +163,7 @@ namespace ResourcePlanner.Services.Controllers
         [HttpGet]
         //[AuthorizationAttribute(new Permission[] { Permission.AssignResources })]
         [Route("get")]
-        public async Task<IHttpActionResult> Update(
+        public async Task<IHttpActionResult> Get(
            int resourceId,
            int projectMasterId,
            DateTime date
