@@ -26,7 +26,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     set showTrigger(v: any) {
         this._showTrigger = v;
         if (this._showTrigger) {
-            this.daysOfWeekSelector.set(CONFIG.defaultDaysOfWeek)
             this.messageService.modalToggle(this.visible = true);
             this.saving = false;
             setTimeout(() => {
@@ -77,10 +76,13 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
             this.addAssignments.resourceIds = this.gridConfig.selectedIds;
             if (this.hoursPerDayVisible) {
                 this.addAssignments.hoursPerWeek = null;
-            }
-            else {
-                this.addAssignments.hoursPerDay = null;
-                this.addAssignments.daysOfWeek = null;
+                this.addAssignments.SundayHours = this.hoursPerDay[0];
+                this.addAssignments.MondayHours = this.hoursPerDay[1];
+                this.addAssignments.TuesdayHours = this.hoursPerDay[2];
+                this.addAssignments.WednesdayHours = this.hoursPerDay[3];
+                this.addAssignments.ThursdayHours = this.hoursPerDay[4];
+                this.addAssignments.FridayHours = this.hoursPerDay[5];
+                this.addAssignments.SaturdayHours = this.hoursPerDay[6];
             }
             this.saving = true;
             this.resourceService
@@ -129,7 +131,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     task: number = -1;
     tasksVisible = false;
 
-    private daysOfWeekSelector: any;
+    dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    hoursPerDay: number[] = [0, 0, 0, 0, 0, 0, 0];
 
     hoursPerDayVisible = false;
 
@@ -147,14 +150,11 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
 
         this.currentDate = this.dateService.format(new Date());
 
-        this.addAssignments = new AddAssignments({
-            resourceIds: [],
-            projectMasterId: 0,
-            startDate: this.currentDate,
-            endDate: this.currentDate,
-            daysOfWeek: CONFIG.defaultDaysOfWeek,
-            hoursPerDay: CONFIG.defaultHoursPerDay
-        });
+        this.addAssignments = new AddAssignments();
+        this.addAssignments.resourceIds = [];
+        this.addAssignments.projectMasterId = 0;
+        this.addAssignments.startDate = this.currentDate;
+        this.addAssignments.endDate = this.currentDate;
 
         this.projectSource = this.optionService.setSource(CONFIG.urls.project);
         this.projectListFormatter = this.optionService.setListFormatter();
@@ -163,13 +163,6 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit() {
-        this.daysOfWeekSelector = this.optionService.initSelector(
-            ".dayofweek-selector",
-            CONFIG.daysOfWeek,
-            CONFIG.defaultDaysOfWeek,
-            value => {
-                this.addAssignments.daysOfWeek = value;
-            });
     }
 
     private validate() {
