@@ -12,6 +12,7 @@ import { TimeDataPage, TimeAggregation, AddAssignments, UpdateAssignment, Option
     templateUrl: 'timespanGrid.component.html',
     styleUrls: ['timespanGrid.component.css'],
     inputs: [
+        'action',
         'applyTrigger',
         'periodScrollTrigger',
         'queryConfig',
@@ -45,6 +46,14 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
         if (this.ready) {
             this.resetCurrentDate();
             this.refresh();
+        }
+    }
+
+    _action: any;
+    set action(v: any) {
+        this._action = v;
+        if (this.ready && v) {
+            this.doAction();
         }
     }
 
@@ -111,6 +120,14 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             query: this.getDateQuery(),
             newDate: this.queryConfig.currentDate
         });
+    }
+
+    private doAction() {
+        switch (this._action) {
+            case 'deselectAll':
+                this.gridOptions.api.deselectAll();
+                break;
+        } 
     }
 
     private resetCurrentDate() {
@@ -385,17 +402,18 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 var field = $event.colDef.field,
                     periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
                     periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
-                    periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
+                    periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6),
+                    assignment = new UpdateAssignment();
+                assignment.resourceId = 0;
+                assignment.projectMasterId = $event.data.Id;
+                assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
+                assignment.hoursPerWeek = newVal;
+                assignment.startDate = this.dateService.format(periodStart);
+                assignment.endDate = this.dateService.format(periodEnd);
+                assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
                 this.gridConfig.saveEditedCell({
                     context: this.gridConfig.context,
-                    assignment: new UpdateAssignment({
-                        resourceId: 0,
-                        projectMasterId: $event.data.Id,
-                        hoursPerWeek: newVal,
-                        startDate: this.dateService.format(periodStart),
-                        endDate: this.dateService.format(periodEnd)
-
-                    })
+                    assignment: assignment
                 });
             }
             else {
@@ -418,17 +436,18 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             var field = $event.colDef.field,
                 periodIndex = parseInt(field.substr(0, field.indexOf('-'), 10)),
                 periodStart = this.dateService.moveDate(this.queryConfig.startDate, TimeAggregation.Weekly, periodIndex),
-                periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6);
+                periodEnd = this.dateService.moveDate(periodStart, TimeAggregation.Daily, 6),
+                assignment =  new UpdateAssignment();
+            assignment.resourceId = 0;
+            assignment.projectMasterId = $event.data.Id;
+            assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
+            assignment.startDate = this.dateService.format(periodStart);
+            assignment.endDate = this.dateService.format(periodEnd);
+            assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
+
             this.dataCellEditorRequested.emit({
                 context: this.gridConfig.context,
-                assignment: new UpdateAssignment({
-                    resourceId: 0,
-                    projectMasterId: $event.data.Id,
-                    hoursPerDay: CONFIG.defaultHoursPerDay,
-                    startDate: this.dateService.format(periodStart),
-                    endDate: this.dateService.format(periodEnd),
-                    daysOfWeek: CONFIG.defaultDaysOfWeek,
-                })
+                assignment: assignment
             });
         }
     }

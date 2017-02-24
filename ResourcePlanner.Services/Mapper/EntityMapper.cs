@@ -89,19 +89,20 @@ namespace ResourcePlanner.Services.Mapper
         {
             var asgn = new GetAssignment();
 
-            reader.Read();
+            if (reader.Read())
+            {
 
-            asgn.SundayHours    = reader.GetDouble("SundayHours");
-            asgn.MondayHours    = reader.GetDouble("MondayHours");
-            asgn.TuesdayHours   = reader.GetDouble("TuesdayHours");
-            asgn.WednesdayHours = reader.GetDouble("WednesdayHours");
-            asgn.ThursdayHours  = reader.GetDouble("ThursdayHours");
-            asgn.FridayHours    = reader.GetDouble("FridayHours");
-            asgn.SaturdayHours  = reader.GetDouble("SaturdayHours");
-            asgn.StartDate      = reader.GetDateTime("StartDate");
-            asgn.EndDate        = reader.GetDateTime("EndDate");
-            asgn.DateName       = reader.GetNullableString("DateName");
-
+                asgn.SundayHours = reader.GetDouble("SundayHours");
+                asgn.MondayHours = reader.GetDouble("MondayHours");
+                asgn.TuesdayHours = reader.GetDouble("TuesdayHours");
+                asgn.WednesdayHours = reader.GetDouble("WednesdayHours");
+                asgn.ThursdayHours = reader.GetDouble("ThursdayHours");
+                asgn.FridayHours = reader.GetDouble("FridayHours");
+                asgn.SaturdayHours = reader.GetDouble("SaturdayHours");
+                asgn.StartDate = reader.GetDateTime("StartDate");
+                asgn.EndDate = reader.GetDateTime("EndDate");
+                asgn.DateName = reader.GetNullableString("WeekName");
+            }
             return asgn;
                
         }
