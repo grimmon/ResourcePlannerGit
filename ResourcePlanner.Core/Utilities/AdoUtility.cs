@@ -120,26 +120,25 @@ namespace ResourcePlanner.Core.Utilities
                 {
                     var queryText = SqlQueryToString(sqlStatement, parameters);
 #endif
-                conn.Open();
-                if (resultAction != null)
-                {
-                    using (var reader = cmd.ExecuteReader())
+                    conn.Open();
+                    if (resultAction != null)
                     {
-                        try
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            resultAction(reader);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new Exception("callback error", ex);
+                            try
+                            {
+                                resultAction(reader);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new Exception("callback error", ex);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    cmd.ExecuteNonQuery();
-                }
-#if DEBUG
+                    else
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -149,7 +148,6 @@ namespace ResourcePlanner.Core.Utilities
                 {
                     conn.Close();
                 }
-#endif
             }
         }
         public static void ExecuteQuery(Action<SqlDataReader> resultAction, SqlConnection connection, SqlTransaction transaction, string sqlStatement, CommandType type, int timeout, params SqlParameter[] parameters)

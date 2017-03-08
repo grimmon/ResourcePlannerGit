@@ -31,11 +31,11 @@ namespace ResourcePlanner.WebJob
             string destConnString = ConfigurationManager.ConnectionStrings["ResourcePlanner"].ConnectionString;
             int timeout = Int32.Parse(ConfigurationManager.AppSettings["timeout"]);
 
-            //FillStageTables(srcConnString, destConnString, timeout);
+            FillStageTables(srcConnString, destConnString, timeout);
             FillStafStageTables(stafConnString, destConnString, timeout);
             AddReferenceSets(destConnString, timeout);
             UpsertDB(destConnString, timeout);
-            //UpsertStafDB(destConnString, timeout);
+            UpsertStafDB(destConnString, timeout);
 
             
         }

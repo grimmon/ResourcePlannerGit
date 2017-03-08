@@ -155,7 +155,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
 
         }    
         checkArrowClick(-1, 'timePeriodBackwardButton', 'Icons_Back');
-        checkArrowClick(1, 'timePeriodBackwardButton', 'Icons_Forward');
+        checkArrowClick(1, 'timePeriodForwardButton', 'Icons_Forward');
      }
 
     private gridOptions: GridOptions;
@@ -406,11 +406,11 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                     assignment = new UpdateAssignment();
                 assignment.resourceId = 0;
                 assignment.projectMasterId = $event.data.Id;
-                assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
+                //assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
                 assignment.hoursPerWeek = newVal;
                 assignment.startDate = this.dateService.format(periodStart);
                 assignment.endDate = this.dateService.format(periodEnd);
-                assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
+                //assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
                 this.gridConfig.saveEditedCell({
                     context: this.gridConfig.context,
                     assignment: assignment
