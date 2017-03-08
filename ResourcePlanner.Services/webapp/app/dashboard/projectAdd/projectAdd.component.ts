@@ -75,7 +75,12 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
             return;
         }
 
-        this.addedProject.CustomerId = this.client.Id;
+        if (!this.client) {
+            this.addedProject.CustomerName = this.clientName;
+        }
+        else {
+            this.addedProject.CustomerId = this.client.Id;
+        }
         this.addedProject.ProjectManagerId = this.projectManager.Id;
         this.addedProject.OpportunityOwnerId = this.opportunityOwner.Id;
 
@@ -92,7 +97,7 @@ export class ProjectAddComponent implements OnDestroy, OnInit {
 
     private validate() {
         var errors: any[] = [];
-        if (!this.client) {
+        if (!(this.client || this.clientName.length > 0)) {
             errors.push('Client must be selected or added.');
         }
         if (!this.projectManager) {
