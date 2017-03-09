@@ -115,11 +115,10 @@ namespace ResourcePlanner.Core.Utilities
                 cmd.CommandText = sqlStatement;
                 cmd.CommandType = type;
                 parameters.ForEach(i => cmd.Parameters.Add(i));
-#if DEBUG
+
                 try
                 {
                     var queryText = SqlQueryToString(sqlStatement, parameters);
-#endif
                     conn.Open();
                     if (resultAction != null)
                     {
@@ -159,11 +158,10 @@ namespace ResourcePlanner.Core.Utilities
                 cmd.CommandType = type;
                 cmd.Transaction = transaction;
                 parameters.ForEach(i => cmd.Parameters.Add(i));
-#if DEBUG
                 try
                 {
                     var queryText = SqlQueryToString(sqlStatement, parameters);
-#endif
+
                 if (resultAction != null)
                 {
                     using (var reader = cmd.ExecuteReader())
@@ -182,13 +180,12 @@ namespace ResourcePlanner.Core.Utilities
                 {
                     cmd.ExecuteNonQuery();
                 }
-#if DEBUG
+
                 }
                 catch (Exception ex)
                 {
                     throw GenerateSqlError(sqlStatement, parameters, ex);
                 }
-#endif
             }
         }
         public static T ExecuteQuery<T>(Func<SqlDataReader, T> resultAction, string connectionString, string sqlStatement, CommandType type, int timeout, params SqlParameter[] parameters)
@@ -202,11 +199,11 @@ namespace ResourcePlanner.Core.Utilities
                 cmd.CommandType = type;
                 parameters.ForEach(i => cmd.Parameters.Add(i));
 
-#if DEBUG
+
                 try
                 {
                     var queryText = SqlQueryToString(sqlStatement, parameters);
-#endif
+
 
                     conn.Open();
                     using (var reader = cmd.ExecuteReader())
@@ -220,7 +217,6 @@ namespace ResourcePlanner.Core.Utilities
                             throw new Exception("callback error", ex);
                         }
                     }
-#if DEBUG
                 }
                 catch (Exception ex)
                 {
@@ -230,7 +226,6 @@ namespace ResourcePlanner.Core.Utilities
                 {
                     conn.Close();
                 }
-#endif
             }
             return returnValue;
         }
@@ -318,7 +313,5 @@ namespace ResourcePlanner.Core.Utilities
         }
 
     }
-
-
 
 }

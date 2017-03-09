@@ -14,7 +14,7 @@ export class ProjectService {
     }
 
     updateWBS(updateProject: UpdateProject) {
-        return this.serverService.postQuery<UpdateProject>(CONFIG.urls.projectUpdate, updateProject);
+        return this.serverService.postQuery<any>(CONFIG.urls.projectUpdate, updateProject);
     }
 
     getProjects(queryString: string) {

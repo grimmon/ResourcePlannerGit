@@ -15,6 +15,8 @@ import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService, OptionSer
 export class ProjectListViewComponent implements OnDestroy, OnInit {
     visible: boolean = false;
 
+    refreshOnClose: boolean = false;
+
     saving: boolean = false;
 
     editWBSVisible: boolean = false; 
@@ -74,6 +76,9 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
 
     close() {
         this.messageService.modalToggle(this.visible = false);
+        if (this.refreshOnClose) {
+            this.messageService.timespanGridRefreshRequest('resource-list');
+        }
     }
 
     editWbs() {
@@ -189,6 +194,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                 this.saving = false;
                 this.wbsProjectSelectorVisible = false;
                 this.editWBSVisible = false;
+                this.refreshOnClose = true;
             });
     }
     private validate() {
