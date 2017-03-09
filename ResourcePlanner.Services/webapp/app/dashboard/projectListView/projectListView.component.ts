@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,9 +13,10 @@ import { ProjectPage, ProjectInfo, ProjectResourceRow, ProjectService, OptionSer
     inputs: ['projectToView', 'showTrigger'],
 })
 export class ProjectListViewComponent implements OnDestroy, OnInit {
-    visible: boolean = false;
 
-    refreshOnClose: boolean = false;
+    @Output() projectResourceViewRequested: EventEmitter<any>;
+
+    visible: boolean = false;
 
     saving: boolean = false;
 
@@ -76,9 +77,6 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
 
     close() {
         this.messageService.modalToggle(this.visible = false);
-        if (this.refreshOnClose) {
-            this.messageService.timespanGridRefreshRequest('resource-list');
-        }
     }
 
     editWbs() {
@@ -114,6 +112,8 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
             OldWBSCode: '',
             NewProjectMasterId: 0
         });
+
+        this.projectResourceViewRequested = new EventEmitter<any>();
 
         this.wbsProjectSource = this.optionService.setSource(CONFIG.urls.wbsProjects);
         this.wbsProjectListFormatter = this.optionService.setListFormatter();
@@ -194,7 +194,23 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
                 this.saving = false;
                 this.wbsProjectSelectorVisible = false;
                 this.editWBSVisible = false;
-                this.refreshOnClose = true;
+                this.close();
+                var projectId = res.Id;
+                this.projectService.getProjects("?projectId=" + projectId).subscribe(projectPage => {
+                    console.log(projectPage);
+                    var projectInfo = projectPage.ProjectInfo,
+                       lastName = projectInfo.ProjectManagerLastName;
+                    this.projectResourceViewRequested.emit({
+                        Id: projectId,
+                        ProjectName: projectInfo.ProjectName,
+                        Client: projectInfo.Customer,
+                        Description: projectInfo.Description,
+                        WBSElement: projectInfo.WBSCode,
+                        ProjectManager: (lastName ? lastName + ", " : lastName) + projectInfo.ProjectManagerFirstName,
+                        ProjectMasterId: projectId,
+                    });
+                    this.messageService.timespanGridRefreshRequest('resource-list');
+                });
             });
     }
     private validate() {
@@ -203,9 +219,6 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
         if (!this.wbsProject) {
             errors.push('Project must be selected.');
         }
-        
-        
-        
         
         return errors.length ? errors : null;
     }

@@ -6,7 +6,7 @@
 
     <resource-details [resource]="resource" (projectResourceViewRequested)="projectResourceViewRequested($event)"></resource-details>
 
-    <project-list-view [showTrigger]="projectShow" [projectToView]="projectToView"></project-list-view>
+    <project-list-view [showTrigger]="projectShow" [projectToView]="projectToView" (projectResourceViewRequested)="projectResourceViewRequested($event)"></project-list-view>
 
     <assignment-add [showTrigger]="assignmentAddShow" (addProjectRequested)="addProjectRequested()"></assignment-add>
 
