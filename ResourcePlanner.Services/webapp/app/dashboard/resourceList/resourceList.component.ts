@@ -142,7 +142,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
                 width: 100,
                 suppressMenu: true,
                 pinned: 'left',
-                hide: this.optionService.getResourceColumnOption("City") || false
+                hide: this.optionService.getResourceColumnOption("Delivery City") || false
             },
             {
                 context:
