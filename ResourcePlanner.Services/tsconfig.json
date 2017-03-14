@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
-      "./webapp/node_modules/@types/"
+      "webapp/node_modules/@types/"
     ]
   },
   "compileOnSave": true,
