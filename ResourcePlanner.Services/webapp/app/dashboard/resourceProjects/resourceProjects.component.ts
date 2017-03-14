@@ -38,7 +38,7 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
 
     gridConfig: any = {
         context: "resource-projects",
-        refreshContexts: ["resource-projects", "resource-list"],
+        refreshContexts: ["resource-projects", "resource-list", "resource-add"],
         getItems: (page: DetailPage) => page.Projects,
         createRow: ProjectDetailRow,
         allowDataEdit: true,
