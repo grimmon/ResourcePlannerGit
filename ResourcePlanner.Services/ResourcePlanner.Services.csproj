@@ -191,6 +191,7 @@
     <Content Include="Images\loading.gif" />
     <Content Include="Images\tempxls.png" />
     <Content Include="index.html" />
+    <Content Include="Scripts\FileSaver.min.js" />
     <Content Include="webapp\app\admin\admin.component.css" />
     <Content Include="webapp\app\admin\admin.component.html" />
     <Content Include="webapp\app\admin\roles\roles.component.css" />
