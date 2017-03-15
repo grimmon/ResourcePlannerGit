@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
 import { Resource, ResourcePage, ResourceRow, ResourceService, TimeAggregation, OptionService } from '../../models';
+import {CONFIG} from "../../core/config";
 
 
 @Component({
@@ -72,7 +73,7 @@ export class ResourceListComponent implements OnDestroy, OnInit {
         };
         this.messageService.resourcePeriodScroll(event); 
     }
-    dateQuery: string = ''
+    dateQuery: string = '';
 
     rowSelected($event: any) {
         this.resourceSelected.emit($event.rowData)
@@ -186,7 +187,16 @@ export class ResourceListComponent implements OnDestroy, OnInit {
 
     }
 
+    private getDateQuery(): string {
+        var start = this.queryConfig.startDate = this.dateService.getStart(this.queryConfig.currentDate, this.queryConfig.aggregation, CONFIG.periodColumnsCount),
+            startFormatted = this.dateService.format(start),
+            end = this.queryConfig.endDate = this.dateService.getEnd(this.queryConfig.currentDate, this.queryConfig.aggregation, CONFIG.periodColumnsCount),
+            endFormatted = this.dateService.format(end);
+        return `&startDate=${startFormatted}&endDate=${endFormatted}`;
+    }
+
     private doExport(exportInfo: any) {
+        this.dateQuery = this.getDateQuery();
         this.resourceService.export(exportInfo.query + this.dateQuery, exportInfo.callback);
     }
 
