@@ -127,7 +127,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             case 'deselectAll':
                 this.gridOptions.api.deselectAll();
                 break;
-        } 
+        }
     }
 
     private resetCurrentDate() {

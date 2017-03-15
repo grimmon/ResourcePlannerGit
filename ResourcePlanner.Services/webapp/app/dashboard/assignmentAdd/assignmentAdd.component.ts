@@ -70,6 +70,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     close() {
         this.messageService.modalToggle(this.visible = false);
         this.action = "deselectAll";
+        let that = this;
+        setTimeout(function(){
+            that.action = "none";
+        });
     }
 
     save() {
@@ -221,6 +225,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
                     type: "resourceColumn",
                     index: 0
                 },
+                checkboxSelection: true,
                 headerName: "Resource",
                 field: "ResourceName",
                 width: 150,
