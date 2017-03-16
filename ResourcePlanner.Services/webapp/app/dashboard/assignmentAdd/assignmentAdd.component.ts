@@ -46,6 +46,8 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     applyFiltersTrigger = 0;
 
     gridConfig: any = {
+        context: "resource-add",
+        refreshContexts: ["resource-projects", "resource-list", "resource-add"],
         getItems: (page: ResourcePage) => page.Resources,
         createRow: ResourceRow,
         rowSelection: 'multiple',
@@ -68,6 +70,10 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
     close() {
         this.messageService.modalToggle(this.visible = false);
         this.action = "deselectAll";
+        let that = this;
+        setTimeout(function(){
+            that.action = "none";
+        });
     }
 
     save() {
@@ -225,6 +231,7 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
                 width: 150,
                 suppressMenu: true,
                 pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Resource Name") || false
             },
             {
                 context: { type: "resourceColumn", index: 1 },
@@ -232,8 +239,57 @@ export class AssignmentAddComponent implements OnDestroy, OnInit {
                 field: "Position",
                 width: 150,
                 suppressMenu: true,
-                pinned: 'left'
-            }
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Position") || false
+            },
+            {
+                context:
+                    { type: "resourceColumn", index: 2 },
+                headerName: "Delivery City",
+                field: "City",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Delivery City") || false
+            },
+            {
+                context:
+                    { type: "resourceColumn", index: 3 },
+                headerName: "Home City",
+                field: "HomeCity",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Home City") || false
+            },
+            {
+                context: { type: "resourceColumn", index: 4 },
+                headerName: "Practice",
+                field: "Practice",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Practice") || false
+            },
+
+            {
+                context: { type: "resourceColumn", index: 5 },
+                headerName: "Sub-Practice",
+                field: "SubPractice",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Sub-practice") || false
+            },
+            {
+                context: { type: "resourceColumn", index: 6 },
+                headerName: "Resource Mgr.",
+                field: "ResourceManager",
+                width: 100,
+                suppressMenu: true,
+                pinned: 'left',
+                hide: this.optionService.getResourceColumnOption("Resource Mgr") || false
+            },
         ];
     }
 

@@ -127,7 +127,7 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
             case 'deselectAll':
                 this.gridOptions.api.deselectAll();
                 break;
-        } 
+        }
     }
 
     private resetCurrentDate() {
@@ -440,10 +440,10 @@ export class TimespanGridComponent implements OnDestroy, OnInit {
                 assignment =  new UpdateAssignment();
             assignment.resourceId = 0;
             assignment.projectMasterId = $event.data.Id;
-            assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
+            //assignment.hoursPerDay = CONFIG.defaultHoursPerDay;
             assignment.startDate = this.dateService.format(periodStart);
             assignment.endDate = this.dateService.format(periodEnd);
-            assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
+            //assignment.daysOfWeek = CONFIG.defaultDaysOfWeek;
 
             this.dataCellEditorRequested.emit({
                 context: this.gridConfig.context,

@@ -238,7 +238,7 @@ export class OptionService {
             }),
             new ColumnOption({
                 FieldName: 'City',
-                ColumnName: 'City',
+                ColumnName: 'Delivery City',
                 Hidden: false
             }),
             new ColumnOption({
