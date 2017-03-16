@@ -30,8 +30,8 @@ export class NavComponent implements OnInit {
                 redirectUri: window.location.origin + '/',
                 postLogoutRedirectUri: window.location.origin + '/',
                 tenant: 'bluemetal.com',
-                clientId: '55324854-cfd5-4d16-bf63-556abddbdf83',  //for localhost testing
-                //clientId: 'e36e4a47-114e-41a6-abb0-160b8ead8098',
+                //clientId: 'a11dd272-7135-4d32-a588-e3604403a94c'   //for DEV
+                clientId: '5fb0ef9e-745a-4d68-8c16-14fd60d6eaae'     //for UAT
             });
 
         this.messageService.onModalToggled(on => {
