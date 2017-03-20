@@ -12,7 +12,7 @@
     "test-once": "tsc && karma start karma.conf.js --single-run",
     "tsc": "cd .. && tsc",
     "tsc:w": "cd .. && tsc -w",
-    "webdriver:update": "webdriver-manager update",
+    "webdriver:update": "webdriver-manager update"
   },
   "keywords": [],
   "author": "",
