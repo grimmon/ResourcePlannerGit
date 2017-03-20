@@ -46,7 +46,7 @@ export class ProjectListViewComponent implements OnDestroy, OnInit {
     };
 
     refreshed($event: any) {
-        if (this.projectInfo.WBSCode.indexOf("TEMP") >= 0) {
+        if (this.projectInfo && this.projectInfo.WBSCode && this.projectInfo.WBSCode.indexOf("TEMP") >= 0) {
             this.editWBSVisible = true;
         }
     }
