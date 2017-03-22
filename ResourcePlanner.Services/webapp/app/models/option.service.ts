@@ -182,7 +182,7 @@ export class OptionService {
             caseSensitive: false,
             readOnly: false,
             tagLimit: tagLimit || 3,
-            placeholderText: "Search by name/position",
+            placeholderText: "Search by name",
             afterTagAdded: function (event: any, ui: any) { this.placeholderText = null },
             onTagLimitExceeded: function (event: any, ui: any) {
                 this.readOnly = true;
