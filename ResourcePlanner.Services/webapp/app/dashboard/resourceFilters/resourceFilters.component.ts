@@ -229,6 +229,28 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
             },
             'previousSelectedPosition'
         );
+
+        //Load previous interval filter from localstorage
+
+        this.selectedAggregation = this.getPreviousAggFromStorage();
+    }
+
+    getPreviousAggFromStorage(){
+        let agg: TimeAggregation;
+        try{
+            let previousAggFromStorage = this.localStorageService.get("previousSelectedAgg");
+            if(previousAggFromStorage){
+                let previousAggAsInt = parseInt(previousAggFromStorage + "");
+                let previousAggEnum = TimeAggregation[previousAggAsInt];
+                agg =  TimeAggregation[previousAggEnum];
+            }else{
+                agg = TimeAggregation.Weekly;
+            }
+        }catch (e){
+            agg = TimeAggregation.Weekly;
+        }
+
+        return agg;
     }
 
     ngOnInit() {
@@ -301,7 +323,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.localStorageService.set("previousSelectedRegion", this.selectedRegion);
         this.localStorageService.set("previousSelectedPractice", this.selectedPractice);
         this.localStorageService.set("previousSelectedSubPractice", this.selectedSubPractice);
-        this.localStorageService.set("previousSelectedAgg", this.selectedAggregation);
+        this.localStorageService.set("previousSelectedAgg", parseInt(this.selectedAggregation + ""));
         this.localStorageService.set("previousSelectedResourceManager", this.selectedResourceManager);
         this.localStorageService.set("previousSelectedPosition", this.selectedPosition)
     }
@@ -315,6 +337,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedSubPractice = this.optionService.getInitialValues("previousSelectedSubPractice");
         this.selectedResourceManager = this.optionService.getInitialValues("previousSelectedResourceManager");
         this.selectedPosition = this.optionService.getInitialValues("previousSelectedPosition");
+        this.selectedAggregation = this.getPreviousAggFromStorage();
     }
 
     private callFiltered(operation: any) {
