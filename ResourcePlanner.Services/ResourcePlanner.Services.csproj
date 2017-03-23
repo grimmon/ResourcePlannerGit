@@ -1,556 +1,560 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProductVersion>
-        </ProductVersion>
-        <SchemaVersion>2.0</SchemaVersion>
-        <ProjectGuid>{601226F3-3CB6-4C85-AB77-DED45726637C}</ProjectGuid>
-        <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ResourcePlanner.Services</RootNamespace>
-        <AssemblyName>ResourcePlanner.Services</AssemblyName>
-        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-        <UseIISExpress>true</UseIISExpress>
-        <IISExpressSSLPort>44322</IISExpressSSLPort>
-        <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-        <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-        <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-        <UseGlobalApplicationHostFile />
-        <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
-        <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.CSharp" />
-        <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Owin.Security.ActiveDirectory, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.Security.ActiveDirectory.3.0.1\lib\net45\Microsoft.Owin.Security.ActiveDirectory.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Owin.Security.Jwt, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.Security.Jwt.3.0.1\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-            <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-            <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-            <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
-            <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-            <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System.Net.Http" />
-        <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System.Net.Http.WebRequest" />
-        <Reference Include="System.Web.DynamicData" />
-        <Reference Include="System.Web.Entity" />
-        <Reference Include="System.Web.ApplicationServices" />
-        <Reference Include="System.ComponentModel.DataAnnotations" />
-        <Reference Include="System" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data.DataSetExtensions" />
-        <Reference Include="System.Web.Extensions" />
-        <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="System.Drawing" />
-        <Reference Include="System.Web" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Configuration" />
-        <Reference Include="System.Web.Services" />
-        <Reference Include="System.EnterpriseServices" />
-        <Reference Include="WindowsBase">
-            <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include=".gitignore" />
-        <Content Include="Global.asax" />
-        <Content Include="Images\Columns-icon.png" />
-        <Content Include="Images\Email-icon.png" />
-        <Content Include="Images\IRMT_Icons_BackAWeek.png" />
-        <Content Include="Images\IRMT_Icons_CloseBtn.png" />
-        <Content Include="Images\IRMT_Icons_CloseSearchRefinePanel.png" />
-        <Content Include="Images\IRMT_Icons_CTACheckMark.png" />
-        <Content Include="Images\IRMT_Icons_CTAPlusSign.png" />
-        <Content Include="Images\IRMT_Icons_DateSelectorBtn.png" />
-        <Content Include="Images\IRMT_Icons_DeleteRefinerBubble.png" />
-        <Content Include="Images\IRMT_Icons_DeltaLabel.png" />
-        <Content Include="Images\IRMT_Icons_ForwardAWeek.png" />
-        <Content Include="Images\IRMT_Icons_GreenUpArrow.png" />
-        <Content Include="Images\IRMT_Icons_InsightLogo.png" />
-        <Content Include="Images\IRMT_Icons_LargeBackBtn.png" />
-        <Content Include="Images\IRMT_Icons_MagnifyingGlass.png" />
-        <Content Include="Images\IRMT_Icons_NewProjectBtn.png" />
-        <Content Include="Images\IRMT_Icons_RedDownArrow.png" />
-        <Content Include="Images\IRMT_Icons_RemoveResourceBtn.png" />
-        <Content Include="Images\IRMT_Icons_ResourceSelectedCheckMark.png" />
-        <Content Include="Images\IRMT_Icons_SortIcon.png" />
-        <Content Include="Images\IRMT_Icons_WrenchIcon.png" />
-        <Content Include="Images\IRMT_NavIcons_AssignNewResource.png" />
-        <Content Include="Images\IRMT_NavIcons_Notifications.png" />
-        <Content Include="Images\IRMT_NavIcons_Profile.png" />
-        <Content Include="Images\IRMT_NavIcons_SearchRefine-Active.png" />
-        <Content Include="Images\IRMT_NavIcons_SearchRefine.png" />
-        <Content Include="Images\loading.gif" />
-        <Content Include="Images\tempxls.png" />
-        <Content Include="index.html" />
-        <Content Include="Scripts\FileSaver.min.js" />
-        <Content Include="webapp\app\admin\admin-routing.module.js" />
-        <Content Include="webapp\app\admin\admin.component.css" />
-        <Content Include="webapp\app\admin\admin.component.html" />
-        <Content Include="webapp\app\admin\admin.component.js" />
-        <Content Include="webapp\app\admin\admin.module.js" />
-        <Content Include="webapp\app\admin\roles\roleList\roleList.component.css" />
-        <Content Include="webapp\app\admin\roles\roleList\roleList.component.html" />
-        <Content Include="webapp\app\admin\roles\roleList\roleList.component.js" />
-        <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.css" />
-        <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.html" />
-        <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.js" />
-        <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.css" />
-        <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.html" />
-        <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.js" />
-        <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.css" />
-        <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.html" />
-        <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.js" />
-        <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.css" />
-        <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.html" />
-        <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.js" />
-        <Content Include="webapp\app\admin\roles\roles.component.css" />
-        <Content Include="webapp\app\admin\roles\roles.component.html" />
-        <Content Include="webapp\app\admin\roles\roles.component.js" />
-        <Content Include="webapp\app\app-routing.module.js" />
-        <Content Include="webapp\app\app.component.css" />
-        <Content Include="webapp\app\app.component.html" />
-        <Content Include="webapp\app\app.component.js" />
-        <Content Include="webapp\app\app.module.js" />
-        <Content Include="webapp\app\core\adal.service.js" />
-        <Content Include="webapp\app\core\config.js" />
-        <Content Include="webapp\app\core\core.module.js" />
-        <Content Include="webapp\app\core\date.service.js" />
-        <Content Include="webapp\app\core\entity.service.js" />
-        <Content Include="webapp\app\core\exception.service.js" />
-        <Content Include="webapp\app\core\grid.model.js" />
-        <Content Include="webapp\app\core\index.js" />
-        <Content Include="webapp\app\core\message.service.js" />
-        <Content Include="webapp\app\core\rxjs-extensions.js" />
-        <Content Include="webapp\app\core\server.service.js" />
-        <Content Include="webapp\app\core\spinner\spinner.component.css" />
-        <Content Include="webapp\app\core\spinner\spinner.component.html" />
-        <Content Include="webapp\app\core\spinner\spinner.component.js" />
-        <Content Include="webapp\app\core\spinner\spinner.module.js" />
-        <Content Include="webapp\app\core\spinner\spinner.service.js" />
-        <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.css" />
-        <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.html" />
-        <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.js" />
-        <Content Include="webapp\app\dashboard\dashboard.component.css" />
-        <Content Include="webapp\app\dashboard\dashboard.component.html" />
-        <Content Include="webapp\app\dashboard\dashboard.component.js" />
-        <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.css" />
-        <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.html" />
-        <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.js" />
-        <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.css" />
-        <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.html" />
-        <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.js" />
-        <Content Include="webapp\app\dashboard\projectListView\projectListView.component.css" />
-        <Content Include="webapp\app\dashboard\projectListView\projectListView.component.html" />
-        <Content Include="webapp\app\dashboard\projectListView\projectListView.component.js" />
-        <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.css" />
-        <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.html" />
-        <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.js" />
-        <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.css" />
-        <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.html" />
-        <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.js" />
-        <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceList\resourceList.component.css" />
-        <Content Include="webapp\app\dashboard\resourceList\resourceList.component.html" />
-        <Content Include="webapp\app\dashboard\resourceList\resourceList.component.js" />
-        <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.css" />
-        <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.html" />
-        <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.js" />
-        <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.css" />
-        <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.html" />
-        <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.js" />
-        <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.css" />
-        <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.html" />
-        <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.js" />
-        <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.css" />
-        <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.html" />
-        <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.js" />
-        <Content Include="webapp\app\error\error.component.css" />
-        <Content Include="webapp\app\error\error.component.html" />
-        <Content Include="webapp\app\error\error.component.js" />
-        <Content Include="webapp\app\models\assignment.model.js" />
-        <Content Include="webapp\app\models\index.js" />
-        <Content Include="webapp\app\models\option.model.js" />
-        <Content Include="webapp\app\models\option.service.js" />
-        <Content Include="webapp\app\models\project.model.js" />
-        <Content Include="webapp\app\models\project.service.js" />
-        <Content Include="webapp\app\models\resource.model.js" />
-        <Content Include="webapp\app\models\resource.service.js" />
-        <Content Include="webapp\app\navigation\nav.component.css" />
-        <Content Include="webapp\app\navigation\nav.component.html" />
-        <Content Include="webapp\app\navigation\nav.component.js" />
-        <Content Include="webapp\app\page-not-found.component.js" />
-        <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.css" />
-        <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.html" />
-        <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.js" />
-        <Content Include="webapp\app\shared\numericCellEditor\numericCellEditor.js" />
-        <Content Include="webapp\app\shared\popup\popup.component.css" />
-        <Content Include="webapp\app\shared\popup\popup.component.html" />
-        <Content Include="webapp\app\shared\popup\popup.component.js" />
-        <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.css" />
-        <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.html" />
-        <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.js" />
-        <Content Include="webapp\assets\common.css" />
-        <Content Include="webapp\main.js" />
-        <Content Include="webapp\protractor.config.js" />
-        <Content Include="Scripts\ag-grid.js" />
-        <Content Include="Scripts\ai.0.22.9-build00167.js" />
-        <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
-        <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
-        <Content Include="Scripts\jquery.tagit.css" />
-        <Content Include="Scripts\moment.min.js" />
-        <Content Include="Scripts\select2.min.js" />
-        <Content Include="Scripts\tag-it.js" />
-        <Content Include="webapp\systemjs.config.js" />
-        <Content Include="Web.config">
-            <SubType>Designer</SubType>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="App_Start\WebApiConfig.cs" />
-        <Compile Include="Auth\AuthorizationAttribute.cs" />
-        <Compile Include="Controllers\AddAssignmentController.cs" />
-        <Compile Include="Controllers\AuthorizedController.cs" />
-        <Compile Include="Controllers\CustomerController.cs" />
-        <Compile Include="Controllers\DropdownController.cs" />
-        <Compile Include="Controllers\EmailController.cs" />
-        <Compile Include="Controllers\ManagerController.cs" />
-        <Compile Include="Controllers\PositionController.cs" />
-        <Compile Include="Controllers\ProjectController.cs" />
-        <Compile Include="Controllers\ProjectViewController.cs" />
-        <Compile Include="Controllers\ResourceBreakdownController.cs" />
-        <Compile Include="Controllers\ResourceController.cs" />
-        <Compile Include="Controllers\ResourceDetailController.cs" />
-        <Compile Include="Controllers\TaskController.cs" />
-        <Compile Include="DataAccess\AddAssignmentDataAccess.cs" />
-        <Compile Include="DataAccess\AddProjectDataAccess.cs" />
-        <Compile Include="DataAccess\AuthDataAccess.cs" />
-        <Compile Include="DataAccess\DropdownDataAccess.cs" />
-        <Compile Include="DataAccess\EmailDataAccess.cs" />
-        <Compile Include="DataAccess\MockDataAccess.cs" />
-        <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
-        <Compile Include="DataAccess\ProjectPageDataAccess.cs" />
-        <Compile Include="DataAccess\ResourceBreakdownDataAccess.cs" />
-        <Compile Include="DataAccess\ResourceDataAccess.cs" />
-        <Compile Include="DataAccess\ResourceDetailDataAccess.cs" />
-        <Compile Include="Enums\Enums.cs" />
-        <Compile Include="Excel\ExcelBuilder.cs" />
-        <Compile Include="Excel\ExcelConstants.cs" />
-        <Compile Include="Excel\ExceldocFactory.cs" />
-        <Compile Include="Excel\ExcelExample.cs" />
-        <Compile Include="Excel\ExcelNumberFormat.cs" />
-        <Compile Include="Excel\ExcelStyleFormat.cs" />
-        <Compile Include="Excel\ExcelUtility.cs" />
-        <Compile Include="Excel\IExcelBuilder.cs" />
-        <Compile Include="Global.asax.cs">
-            <DependentUpon>Global.asax</DependentUpon>
-        </Compile>
-        <Compile Include="Mapper\EntityMapper.cs" />
-        <Compile Include="Mapper\ExcelMapper.cs" />
-        <Compile Include="Models\Assignment.cs" />
-        <Compile Include="Models\Detail.cs" />
-        <Compile Include="Models\Dropdown.cs" />
-        <Compile Include="Models\Project.cs" />
-        <Compile Include="Models\Resource.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Services\ServiceParameters.cs" />
-        <Compile Include="Startup.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="packages.config" />
-        <Content Include="ApplicationInsights.config">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="webapp\package.json" />
-        <Content Include="Scripts\tagit.ui-zendesk.css" />
-        <Content Include="tsconfig.json" />
-        <Content Include="tslint.json" />
-        <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy %282%29.pubxml" />
-        <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy.pubxml" />
-        <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy.pubxml" />
-        <None Include="Properties\PublishProfiles\TSDeploymentTest - Web Deploy.pubxml" />
-        <None Include="Web.Debug.config">
-            <DependentUpon>Web.config</DependentUpon>
-        </None>
-        <None Include="Web.Release.config">
-            <DependentUpon>Web.config</DependentUpon>
-        </None>
-        <Content Include="webapp\app\admin\admin-routing.module.js.map" />
-        <Content Include="webapp\app\admin\admin.component.js.map" />
-        <Content Include="webapp\app\admin\admin.module.js.map" />
-        <Content Include="webapp\app\admin\roles\roleList\roleList.component.js.map" />
-        <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.js.map" />
-        <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.js.map" />
-        <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.js.map" />
-        <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.js.map" />
-        <Content Include="webapp\app\admin\roles\roles.component.js.map" />
-        <Content Include="webapp\app\app-routing.module.js.map" />
-        <Content Include="webapp\app\app.component.js.map" />
-        <Content Include="webapp\app\app.module.js.map" />
-        <Content Include="webapp\app\core\adal.service.js.map" />
-        <Content Include="webapp\app\core\config.js.map" />
-        <Content Include="webapp\app\core\core.module.js.map" />
-        <Content Include="webapp\app\core\date.service.js.map" />
-        <Content Include="webapp\app\core\entity.service.js.map" />
-        <Content Include="webapp\app\core\exception.service.js.map" />
-        <Content Include="webapp\app\core\grid.model.js.map" />
-        <Content Include="webapp\app\core\index.js.map" />
-        <Content Include="webapp\app\core\message.service.js.map" />
-        <Content Include="webapp\app\core\rxjs-extensions.js.map" />
-        <Content Include="webapp\app\core\server.service.js.map" />
-        <Content Include="webapp\app\core\spinner\spinner.component.js.map" />
-        <Content Include="webapp\app\core\spinner\spinner.module.js.map" />
-        <Content Include="webapp\app\core\spinner\spinner.service.js.map" />
-        <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.js.map" />
-        <Content Include="webapp\app\dashboard\dashboard.component.js.map" />
-        <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.js.map" />
-        <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.js.map" />
-        <Content Include="webapp\app\dashboard\projectListView\projectListView.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceList\resourceList.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.js.map" />
-        <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.js.map" />
-        <Content Include="webapp\app\error\error.component.js.map" />
-        <Content Include="webapp\app\models\assignment.model.js.map" />
-        <Content Include="webapp\app\models\index.js.map" />
-        <Content Include="webapp\app\models\option.model.js.map" />
-        <Content Include="webapp\app\models\option.service.js.map" />
-        <Content Include="webapp\app\models\project.model.js.map" />
-        <Content Include="webapp\app\models\project.service.js.map" />
-        <Content Include="webapp\app\models\resource.model.js.map" />
-        <Content Include="webapp\app\models\resource.service.js.map" />
-        <Content Include="webapp\app\navigation\nav.component.js.map" />
-        <Content Include="webapp\app\page-not-found.component.js.map" />
-        <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.js.map" />
-        <Content Include="webapp\app\shared\numericCellEditor\numericCellEditor.js.map" />
-        <Content Include="webapp\app\shared\popup\popup.component.js.map" />
-        <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.js.map" />
-        <Content Include="webapp\main.js.map" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="App_Data\" />
-        <Folder Include="webapp\app\core\errorModal\" />
-        <Folder Include="webapp\app\shared\resourceRemovalConfirmationDialog\" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\ResourcePlanner.Core\ResourcePlanner.Core.csproj">
-            <Project>{0cf03612-a333-4f8d-a3b3-d8bda0ed1659}</Project>
-            <Name>ResourcePlanner.Core</Name>
-        </ProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-        <TypeScriptCompile Include="webapp\app\admin\admin-routing.module.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\admin.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\admin.module.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\roleList\roleList.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\roleMembers\roleMembers.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.ts" />
-        <TypeScriptCompile Include="webapp\app\admin\roles\roles.component.ts" />
-        <TypeScriptCompile Include="webapp\app\app-routing.module.ts" />
-        <TypeScriptCompile Include="webapp\app\app.component.ts" />
-        <TypeScriptCompile Include="webapp\app\app.module.ts" />
-        <TypeScriptCompile Include="webapp\app\core\adal.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\config.ts" />
-        <TypeScriptCompile Include="webapp\app\core\core.module.ts" />
-        <TypeScriptCompile Include="webapp\app\core\date.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\entity.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\exception.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\grid.model.ts" />
-        <TypeScriptCompile Include="webapp\app\core\index.ts" />
-        <TypeScriptCompile Include="webapp\app\core\message.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\rxjs-extensions.ts" />
-        <TypeScriptCompile Include="webapp\app\core\server.service.ts" />
-        <TypeScriptCompile Include="webapp\app\core\spinner\spinner.component.ts" />
-        <TypeScriptCompile Include="webapp\app\core\spinner\spinner.module.ts" />
-        <TypeScriptCompile Include="webapp\app\core\spinner\spinner.service.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\dashboard.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\EditColumns\editColumns.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\projectAdd\projectAdd.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceList\resourceList.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.ts" />
-        <TypeScriptCompile Include="webapp\app\dashboard\resourceViews\resourceViews.component.ts" />
-        <TypeScriptCompile Include="webapp\app\error\error.component.ts" />
-        <TypeScriptCompile Include="webapp\app\models\assignment.model.ts" />
-        <TypeScriptCompile Include="webapp\app\models\index.ts" />
-        <TypeScriptCompile Include="webapp\app\models\option.model.ts" />
-        <TypeScriptCompile Include="webapp\app\models\option.service.ts" />
-        <TypeScriptCompile Include="webapp\app\models\project.model.ts" />
-        <TypeScriptCompile Include="webapp\app\models\project.service.ts" />
-        <TypeScriptCompile Include="webapp\app\models\resource.model.ts" />
-        <TypeScriptCompile Include="webapp\app\models\resource.service.ts" />
-        <TypeScriptCompile Include="webapp\app\navigation\nav.component.ts" />
-        <TypeScriptCompile Include="webapp\app\page-not-found.component.ts" />
-        <TypeScriptCompile Include="webapp\app\shared\hoursEditor\hoursEditor.component.ts" />
-        <TypeScriptCompile Include="webapp\app\shared\numericCellEditor\numericCellEditor.ts" />
-        <TypeScriptCompile Include="webapp\app\shared\popup\popup.component.ts" />
-        <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
-        <TypeScriptCompile Include="webapp\main.ts" />
-    </ItemGroup>
-    <ItemGroup>
-        <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-    </ItemGroup>
-    <PropertyGroup>
-        <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-        <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mock|AnyCPU'">
-        <OutputPath>bin\</OutputPath>
-        <DefineConstants>TRACE;DEBUG;Mock</DefineConstants>
-        <DebugType>full</DebugType>
-        <DebugSymbols>true</DebugSymbols>
-    </PropertyGroup>
-    <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
-    <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-    <ProjectExtensions>
-        <VisualStudio>
-            <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-                <WebProjectProperties>
-                    <UseIIS>True</UseIIS>
-                    <AutoAssignPort>True</AutoAssignPort>
-                    <DevelopmentServerPort>1620</DevelopmentServerPort>
-                    <DevelopmentServerVPath>/</DevelopmentServerVPath>
-                    <IISUrl>https://localhost:44322/</IISUrl>
-                    <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-                    <IISAppRootUrl>https://localhost:44322/</IISAppRootUrl>
-                    <NTLMAuthentication>False</NTLMAuthentication>
-                    <UseCustomServer>False</UseCustomServer>
-                    <CustomServerUrl>
-                    </CustomServerUrl>
-                    <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-                </WebProjectProperties>
-            </FlavorProperties>
-        </VisualStudio>
-    </ProjectExtensions>
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{601226F3-3CB6-4C85-AB77-DED45726637C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ResourcePlanner.Services</RootNamespace>
+    <AssemblyName>ResourcePlanner.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.ActiveDirectory, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.ActiveDirectory.3.0.1\lib\net45\Microsoft.Owin.Security.ActiveDirectory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Jwt, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.3.0.1\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\Columns-icon.png" />
+    <Content Include="Images\Email-icon.png" />
+    <Content Include="Images\IRMT_Icons_BackAWeek.png" />
+    <Content Include="Images\IRMT_Icons_CloseBtn.png" />
+    <Content Include="Images\IRMT_Icons_CloseSearchRefinePanel.png" />
+    <Content Include="Images\IRMT_Icons_CTACheckMark.png" />
+    <Content Include="Images\IRMT_Icons_CTAPlusSign.png" />
+    <Content Include="Images\IRMT_Icons_DateSelectorBtn.png" />
+    <Content Include="Images\IRMT_Icons_DeleteRefinerBubble.png" />
+    <Content Include="Images\IRMT_Icons_DeltaLabel.png" />
+    <Content Include="Images\IRMT_Icons_ForwardAWeek.png" />
+    <Content Include="Images\IRMT_Icons_GreenUpArrow.png" />
+    <Content Include="Images\IRMT_Icons_InsightLogo.png" />
+    <Content Include="Images\IRMT_Icons_LargeBackBtn.png" />
+    <Content Include="Images\IRMT_Icons_MagnifyingGlass.png" />
+    <Content Include="Images\IRMT_Icons_NewProjectBtn.png" />
+    <Content Include="Images\IRMT_Icons_RedDownArrow.png" />
+    <Content Include="Images\IRMT_Icons_RemoveResourceBtn.png" />
+    <Content Include="Images\IRMT_Icons_ResourceSelectedCheckMark.png" />
+    <Content Include="Images\IRMT_Icons_SortIcon.png" />
+    <Content Include="Images\IRMT_Icons_WrenchIcon.png" />
+    <Content Include="Images\IRMT_NavIcons_AssignNewResource.png" />
+    <Content Include="Images\IRMT_NavIcons_Notifications.png" />
+    <Content Include="Images\IRMT_NavIcons_Profile.png" />
+    <Content Include="Images\IRMT_NavIcons_SearchRefine-Active.png" />
+    <Content Include="Images\IRMT_NavIcons_SearchRefine.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\tempxls.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\FileSaver.min.js" />
+    <Content Include="webapp\app\admin\admin-routing.module.js" />
+    <Content Include="webapp\app\admin\admin.component.css" />
+    <Content Include="webapp\app\admin\admin.component.html" />
+    <Content Include="webapp\app\admin\admin.component.js" />
+    <Content Include="webapp\app\admin\admin.module.js" />
+    <Content Include="webapp\app\admin\roles\roleList\roleList.component.css" />
+    <Content Include="webapp\app\admin\roles\roleList\roleList.component.html" />
+    <Content Include="webapp\app\admin\roles\roleList\roleList.component.js" />
+    <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.css" />
+    <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.html" />
+    <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.js" />
+    <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.css" />
+    <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.html" />
+    <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.js" />
+    <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.css" />
+    <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.html" />
+    <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.js" />
+    <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.css" />
+    <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.html" />
+    <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.js" />
+    <Content Include="webapp\app\admin\roles\roles.component.css" />
+    <Content Include="webapp\app\admin\roles\roles.component.html" />
+    <Content Include="webapp\app\admin\roles\roles.component.js" />
+    <Content Include="webapp\app\app-routing.module.js" />
+    <Content Include="webapp\app\app.component.css" />
+    <Content Include="webapp\app\app.component.html" />
+    <Content Include="webapp\app\app.component.js" />
+    <Content Include="webapp\app\app.module.js" />
+    <Content Include="webapp\app\core\adal.service.js" />
+    <Content Include="webapp\app\core\config.js" />
+    <Content Include="webapp\app\core\core.module.js" />
+    <Content Include="webapp\app\core\date.service.js" />
+    <Content Include="webapp\app\core\entity.service.js" />
+    <Content Include="webapp\app\core\exception.service.js" />
+    <Content Include="webapp\app\core\grid.model.js" />
+    <Content Include="webapp\app\core\index.js" />
+    <Content Include="webapp\app\core\message.service.js" />
+    <Content Include="webapp\app\core\rxjs-extensions.js" />
+    <Content Include="webapp\app\core\server.service.js" />
+    <Content Include="webapp\app\core\spinner\spinner.component.css" />
+    <Content Include="webapp\app\core\spinner\spinner.component.html" />
+    <Content Include="webapp\app\core\spinner\spinner.component.js" />
+    <Content Include="webapp\app\core\spinner\spinner.module.js" />
+    <Content Include="webapp\app\core\spinner\spinner.service.js" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.css" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.html" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.js" />
+    <Content Include="webapp\app\dashboard\dashboard.component.css" />
+    <Content Include="webapp\app\dashboard\dashboard.component.html" />
+    <Content Include="webapp\app\dashboard\dashboard.component.js" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.css" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.html" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.js" />
+    <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.css" />
+    <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.html" />
+    <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.js" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.css" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.html" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.js" />
+    <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.css" />
+    <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.html" />
+    <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.js" />
+    <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.css" />
+    <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.html" />
+    <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.js" />
+    <Content Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceList\resourceList.component.css" />
+    <Content Include="webapp\app\dashboard\resourceList\resourceList.component.html" />
+    <Content Include="webapp\app\dashboard\resourceList\resourceList.component.js" />
+    <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.css" />
+    <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.html" />
+    <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.js" />
+    <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.css" />
+    <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.html" />
+    <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.js" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.css" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.html" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.js" />
+    <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.css" />
+    <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.html" />
+    <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.js" />
+    <Content Include="webapp\app\error\error.component.css" />
+    <Content Include="webapp\app\error\error.component.html" />
+    <Content Include="webapp\app\error\error.component.js" />
+    <Content Include="webapp\app\models\assignment.model.js" />
+    <Content Include="webapp\app\models\index.js" />
+    <Content Include="webapp\app\models\option.model.js" />
+    <Content Include="webapp\app\models\option.service.js" />
+    <Content Include="webapp\app\models\project.model.js" />
+    <Content Include="webapp\app\models\project.service.js" />
+    <Content Include="webapp\app\models\resource.model.js" />
+    <Content Include="webapp\app\models\resource.service.js" />
+    <Content Include="webapp\app\navigation\nav.component.css" />
+    <Content Include="webapp\app\navigation\nav.component.html" />
+    <Content Include="webapp\app\navigation\nav.component.js" />
+    <Content Include="webapp\app\page-not-found.component.js" />
+    <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.css" />
+    <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.html" />
+    <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.js" />
+    <Content Include="webapp\app\shared\numericCellEditor\numericCellEditor.js" />
+    <Content Include="webapp\app\shared\popup\popup.component.css" />
+    <Content Include="webapp\app\shared\popup\popup.component.html" />
+    <Content Include="webapp\app\shared\popup\popup.component.js" />
+    <Content Include="webapp\app\shared\resourceRemovalConfirmationDialog\resourceRemovalConfirmationDialog.component.css" />
+    <Content Include="webapp\app\shared\resourceRemovalConfirmationDialog\resourceRemovalConfirmationDialog.component.html" />
+    <Content Include="webapp\app\shared\resourceRemovalConfirmationDialog\resourceRemovalConfirmationDialog.component.js" />
+    <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.css" />
+    <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.html" />
+    <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.js" />
+    <Content Include="webapp\assets\common.css" />
+    <Content Include="webapp\main.js" />
+    <Content Include="webapp\protractor.config.js" />
+    <Content Include="Scripts\ag-grid.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\jquery.tagit.css" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\tag-it.js" />
+    <Content Include="webapp\systemjs.config.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Auth\AuthorizationAttribute.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
+    <Compile Include="Controllers\AuthorizedController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DropdownController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ProjectViewController.cs" />
+    <Compile Include="Controllers\ResourceBreakdownController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\ResourceDetailController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="DataAccess\AssignmentDataAccess.cs" />
+    <Compile Include="DataAccess\AddProjectDataAccess.cs" />
+    <Compile Include="DataAccess\AuthDataAccess.cs" />
+    <Compile Include="DataAccess\DropdownDataAccess.cs" />
+    <Compile Include="DataAccess\EmailDataAccess.cs" />
+    <Compile Include="DataAccess\MockDataAccess.cs" />
+    <Compile Include="DataAccess\MockDropdownDataAccess.cs" />
+    <Compile Include="DataAccess\ProjectPageDataAccess.cs" />
+    <Compile Include="DataAccess\ResourceBreakdownDataAccess.cs" />
+    <Compile Include="DataAccess\ResourceDataAccess.cs" />
+    <Compile Include="DataAccess\ResourceDetailDataAccess.cs" />
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Excel\ExcelBuilder.cs" />
+    <Compile Include="Excel\ExcelConstants.cs" />
+    <Compile Include="Excel\ExceldocFactory.cs" />
+    <Compile Include="Excel\ExcelExample.cs" />
+    <Compile Include="Excel\ExcelNumberFormat.cs" />
+    <Compile Include="Excel\ExcelStyleFormat.cs" />
+    <Compile Include="Excel\ExcelUtility.cs" />
+    <Compile Include="Excel\IExcelBuilder.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Mapper\EntityMapper.cs" />
+    <Compile Include="Mapper\ExcelMapper.cs" />
+    <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\Detail.cs" />
+    <Compile Include="Models\Dropdown.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Resource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServiceParameters.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="webapp\package.json" />
+    <Content Include="Scripts\tagit.ui-zendesk.css" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebDev - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ResourcePlannerWebUAT - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TSDeploymentTest - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="webapp\app\admin\admin-routing.module.js.map" />
+    <Content Include="webapp\app\admin\admin.component.js.map" />
+    <Content Include="webapp\app\admin\admin.module.js.map" />
+    <Content Include="webapp\app\admin\roles\roleList\roleList.component.js.map" />
+    <Content Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.js.map" />
+    <Content Include="webapp\app\admin\roles\roleMembers\roleMembers.component.js.map" />
+    <Content Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.js.map" />
+    <Content Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.js.map" />
+    <Content Include="webapp\app\admin\roles\roles.component.js.map" />
+    <Content Include="webapp\app\app-routing.module.js.map" />
+    <Content Include="webapp\app\app.component.js.map" />
+    <Content Include="webapp\app\app.module.js.map" />
+    <Content Include="webapp\app\core\adal.service.js.map" />
+    <Content Include="webapp\app\core\config.js.map" />
+    <Content Include="webapp\app\core\core.module.js.map" />
+    <Content Include="webapp\app\core\date.service.js.map" />
+    <Content Include="webapp\app\core\entity.service.js.map" />
+    <Content Include="webapp\app\core\exception.service.js.map" />
+    <Content Include="webapp\app\core\grid.model.js.map" />
+    <Content Include="webapp\app\core\index.js.map" />
+    <Content Include="webapp\app\core\message.service.js.map" />
+    <Content Include="webapp\app\core\rxjs-extensions.js.map" />
+    <Content Include="webapp\app\core\server.service.js.map" />
+    <Content Include="webapp\app\core\spinner\spinner.component.js.map" />
+    <Content Include="webapp\app\core\spinner\spinner.module.js.map" />
+    <Content Include="webapp\app\core\spinner\spinner.service.js.map" />
+    <Content Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.js.map" />
+    <Content Include="webapp\app\dashboard\dashboard.component.js.map" />
+    <Content Include="webapp\app\dashboard\EditColumns\editColumns.component.js.map" />
+    <Content Include="webapp\app\dashboard\projectAdd\projectAdd.component.js.map" />
+    <Content Include="webapp\app\dashboard\projectListView\projectListView.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceList\resourceList.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.js.map" />
+    <Content Include="webapp\app\dashboard\resourceViews\resourceViews.component.js.map" />
+    <Content Include="webapp\app\error\error.component.js.map" />
+    <Content Include="webapp\app\models\assignment.model.js.map" />
+    <Content Include="webapp\app\models\index.js.map" />
+    <Content Include="webapp\app\models\option.model.js.map" />
+    <Content Include="webapp\app\models\option.service.js.map" />
+    <Content Include="webapp\app\models\project.model.js.map" />
+    <Content Include="webapp\app\models\project.service.js.map" />
+    <Content Include="webapp\app\models\resource.model.js.map" />
+    <Content Include="webapp\app\models\resource.service.js.map" />
+    <Content Include="webapp\app\navigation\nav.component.js.map" />
+    <Content Include="webapp\app\page-not-found.component.js.map" />
+    <Content Include="webapp\app\shared\hoursEditor\hoursEditor.component.js.map" />
+    <Content Include="webapp\app\shared\numericCellEditor\numericCellEditor.js.map" />
+    <Content Include="webapp\app\shared\popup\popup.component.js.map" />
+    <Content Include="webapp\app\shared\timespanGrid\timespanGrid.component.js.map" />
+    <Content Include="webapp\main.js.map" />
+    <Content Include="webapp\app\shared\resourceRemovalConfirmationDialog\resourceRemovalConfirmationDialog.component.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="webapp\app\core\errorModal\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResourcePlanner.Core\ResourcePlanner.Core.csproj">
+      <Project>{0cf03612-a333-4f8d-a3b3-d8bda0ed1659}</Project>
+      <Name>ResourcePlanner.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="webapp\app\admin\admin-routing.module.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\admin.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\roleList\roleList.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\roleMemberAdd\roleMemberAdd.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\roleMembers\roleMembers.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\rolePermissionAdd\rolePermissionAdd.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\rolePermissions\rolePermissions.component.ts" />
+    <TypeScriptCompile Include="webapp\app\admin\roles\roles.component.ts" />
+    <TypeScriptCompile Include="webapp\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="webapp\app\app.component.ts" />
+    <TypeScriptCompile Include="webapp\app\app.module.ts" />
+    <TypeScriptCompile Include="webapp\app\core\adal.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\config.ts" />
+    <TypeScriptCompile Include="webapp\app\core\core.module.ts" />
+    <TypeScriptCompile Include="webapp\app\core\date.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\entity.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\exception.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\grid.model.ts" />
+    <TypeScriptCompile Include="webapp\app\core\index.ts" />
+    <TypeScriptCompile Include="webapp\app\core\message.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\rxjs-extensions.ts" />
+    <TypeScriptCompile Include="webapp\app\core\server.service.ts" />
+    <TypeScriptCompile Include="webapp\app\core\spinner\spinner.component.ts" />
+    <TypeScriptCompile Include="webapp\app\core\spinner\spinner.module.ts" />
+    <TypeScriptCompile Include="webapp\app\core\spinner\spinner.service.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\assignmentAdd\assignmentAdd.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\EditColumns\editColumns.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\projectAdd\projectAdd.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\projectListView\projectListView.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceDetails\resourceDetails.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceFilters\resourceFilters.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceList\resourceList.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceProfile\resourceProfile.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceProjects\resourceProjects.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceRequest\resourceRequest.component.ts" />
+    <TypeScriptCompile Include="webapp\app\dashboard\resourceViews\resourceViews.component.ts" />
+    <TypeScriptCompile Include="webapp\app\error\error.component.ts" />
+    <TypeScriptCompile Include="webapp\app\models\assignment.model.ts" />
+    <TypeScriptCompile Include="webapp\app\models\index.ts" />
+    <TypeScriptCompile Include="webapp\app\models\option.model.ts" />
+    <TypeScriptCompile Include="webapp\app\models\option.service.ts" />
+    <TypeScriptCompile Include="webapp\app\models\project.model.ts" />
+    <TypeScriptCompile Include="webapp\app\models\project.service.ts" />
+    <TypeScriptCompile Include="webapp\app\models\resource.model.ts" />
+    <TypeScriptCompile Include="webapp\app\models\resource.service.ts" />
+    <TypeScriptCompile Include="webapp\app\navigation\nav.component.ts" />
+    <TypeScriptCompile Include="webapp\app\page-not-found.component.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\hoursEditor\hoursEditor.component.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\numericCellEditor\numericCellEditor.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\popup\popup.component.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\resourceRemovalConfirmationDialog\resourceRemovalConfirmationDialog.component.ts" />
+    <TypeScriptCompile Include="webapp\app\shared\timespanGrid\timespanGrid.component.ts" />
+    <TypeScriptCompile Include="webapp\main.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mock|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Mock</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1620</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44322/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44322/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-    <Target Name="AddTsToContent" AfterTargets="CompileTypeScript" Condition="'$(BuildingProject)' != 'false'">
-        <ItemGroup>
-            <Content Include="@(TypeScriptCompile)" />
-        </ItemGroup>
-    </Target>
+  <Target Name="AddTsToContent" AfterTargets="CompileTypeScript" Condition="'$(BuildingProject)' != 'false'">
+    <ItemGroup>
+      <Content Include="@(TypeScriptCompile)" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -10,12 +10,12 @@ using System.Web;
 
 namespace ResourcePlanner.Services.DataAccess
 {
-    public class AddAssignmentDataAccess
+    public class AssignmentDataAccess
     {
         private readonly string _connectionString;
         private readonly int _timeout;
 
-        public AddAssignmentDataAccess(string connectionString, int timeout)
+        public AssignmentDataAccess(string connectionString, int timeout)
         {
             _connectionString = connectionString;
             _timeout = timeout;
@@ -56,6 +56,18 @@ namespace ResourcePlanner.Services.DataAccess
                                      AdoUtility.CreateSqlParameter("Date", SqlDbType.Date, date) }
                 );
 
+        }
+
+        public void DeleteAssignment(DeleteAssignment asgn)
+        {
+             AdoUtility.ExecuteQuery(null,
+               _connectionString,
+               @"rpdb.InternalAssignmentDelete",
+               CommandType.StoredProcedure,
+               _timeout,
+               new SqlParameter[] { AdoUtility.CreateSqlParameter("ResourceId",SqlDbType.Int, asgn.ResourceId),
+                                     AdoUtility.CreateSqlParameter("ProjectMasterId", SqlDbType.Int, asgn.ProjectMasterId) }
+               );
         }
 
         public List<IdNameGeneric> GetProjects(string searchTerm)

@@ -36,3 +36,12 @@ export class UpdateAssignment extends GetAssignments {
     startDate: string;
     endDate: string;
 }
+
+export class DeleteAssignment {
+    resourceId: number;
+    projectMasterId: number;
+    constructor(resourceId: number, projectMasterId: number){
+        this.resourceId = resourceId;
+        this.projectMasterId = projectMasterId;
+    }
+}

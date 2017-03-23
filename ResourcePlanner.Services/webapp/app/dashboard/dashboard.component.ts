@@ -61,6 +61,8 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
     assignmentInfo: any;
 
+    assignmentInfoForRemoval: any;
+
     popupConfig: any;
 
     constructor(
@@ -77,6 +79,10 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
         this.messageService.onAssignmentEditorRequested(assignmentInfo => {
             this.assignmentInfo = assignmentInfo;
+        });
+
+        this.messageService.onResourceRemovalRequested(assignmentInfoForRemoval => {
+            this.assignmentInfoForRemoval = assignmentInfoForRemoval;
         });
 
         this.messageService.onResourceRequestRequested(state => {

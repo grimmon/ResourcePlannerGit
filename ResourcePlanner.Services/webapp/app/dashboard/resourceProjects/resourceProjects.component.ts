@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { MessageService, DateService } from '../../core';
 import { DetailPage, ProjectDetailRow, ResourceService, AddAssignments, UpdateAssignment, TimeAggregation, OptionService } from '../../models';
+import {DeleteAssignment} from "../../models/assignment.model";
 
 @Component({
     moduleId: module.id,
@@ -76,6 +77,13 @@ export class ResourceProjectsComponent implements OnDestroy, OnInit {
     dataCellEditRequested($event: any) {
         var assignment: UpdateAssignment = $event.assignment
         assignment.resourceId = this.resourceId;
+    }
+
+    deleteAssignment($event: any){
+        console.log(this.resourceId);
+        console.log(this.gridConfig.selectedIds);
+        let assignment: DeleteAssignment = new DeleteAssignment(this.resourceId, this.gridConfig.selectedIds[0]);
+        this.messageService.resourceRemovalRequest(assignment);
     }
 
     constructor(

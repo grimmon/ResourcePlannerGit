@@ -9,6 +9,7 @@ export let CONFIG = {
         assignmentGet: 'api/assignment/get',
         assignmentAdd: 'api/assignment/add',
         assignmentUpdate: 'api/assignment/update',
+        assignmentDelete: 'api/assignment/delete',
         projects: 'api/project/all',
         wbsProjects: 'api/project/wbs',
         projectView: 'api/ProjectView',

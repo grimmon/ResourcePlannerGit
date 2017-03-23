@@ -139,6 +139,18 @@ export class MessageService {
         this.assignmentEditorRequested.next(assignmentInfo);
     }
 
+    // request to remove resource from project
+
+    private resourceRemovalRequested = new Subject<any>();
+
+    onResourceRemovalRequested(handler: (assignmentInfoForRemoval: any) => void) {
+        this.resourceRemovalRequested.subscribe(handler);
+    }
+
+    resourceRemovalRequest(assignmentInfoForRemoval: any) {
+        this.resourceRemovalRequested.next(assignmentInfoForRemoval);
+    }
+
     // project successfully added and needs to be added to the list
 
     private projectAdded = new Subject<any>();

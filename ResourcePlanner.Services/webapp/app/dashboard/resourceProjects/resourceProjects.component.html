@@ -1,4 +1,4 @@
-<article class="">
+<article class="resourceProjects">
     <timespan-grid id="resourceProjects"
                    [applyTrigger]="applyTrigger"
                    [periodScrollTrigger]="periodScrollTrigger"
@@ -10,4 +10,7 @@
                    (dataCellEditRequested)="dataCellEditRequested($event)"
                    >
     </timespan-grid>
+    <div class="buttons">
+        <button type="button" class="btn btn-primary" id="deleteButton" (click)="deleteAssignment()">Delete Entry</button>
+    </div>
 </article>

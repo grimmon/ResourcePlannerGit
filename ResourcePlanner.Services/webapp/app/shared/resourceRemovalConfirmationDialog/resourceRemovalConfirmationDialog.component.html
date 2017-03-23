@@ -1,0 +1,14 @@
+<div class="resourceRemovalConfirmationDialog" [style.display]="visible ? 'block' : 'none'">
+    <div>
+        <h3>Delete </h3>
+        <div>
+            The action you're about to perform cannot be undone and will delete all of this resource's assignments for this project. Do you wish to continue?
+        </div>
+        <div class="buttons">
+            <div>
+                <button type="button" class="btn btn-primary" (click)="close()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="save()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+.resourceRemovalConfirmationDialog {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.07);
+}
+.resourceRemovalConfirmationDialog > div {
+    position: absolute;
+    left: calc(50% - 250px);
+    top: 200px;
+    height: 150px;
+    width: 500px;
+    background-color: white;
+    border: solid 1px #333333;
+    border-radius: 5px;
+    padding-right: 25px;
+    padding-left: 25px;
+}
+.resourceRemovalConfirmationDialog h3 {
+    text-align: center;
+}
+.resourceRemovalConfirmationDialog .buttons {
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
+}
+.resourceRemovalConfirmationDialog .buttons > div {
+    height: 100%;
+    text-align: right;
+    margin-right: 20px;
+}
+.resourceRemovalConfirmationDialog button {
+    margin-right: 10px;
+}

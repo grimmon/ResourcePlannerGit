@@ -70,6 +70,18 @@ export class ServerService {
             .finally(() => this.showProcess(false));
     }
 
+    deleteQuery<T>(url: string, entity: T) {
+        let query = Object.getOwnPropertyNames(entity).map(key => key + "=" + entity[key]).join('&');
+        this.showProcess(true);
+        return <Observable<T>>this.http
+            .delete(`${url}?${query}`, {
+                headers: this.getAuth()
+            })
+            .map(res => this.extractData<T>(res))
+            .catch(this.exceptionService.catchBadResponse)
+            .finally(() => this.showProcess(false));
+    }
+
     delete<T>(url: string, id: any) {
         this.showProcess(true);
 

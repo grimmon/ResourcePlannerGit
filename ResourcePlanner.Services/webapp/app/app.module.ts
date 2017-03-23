@@ -19,6 +19,7 @@ import { ErrorComponent } from './error/error.component';
 import { TimespanGridComponent } from './shared/timespanGrid/timespanGrid.component';
 import { HoursEditorComponent } from './shared/hoursEditor/hoursEditor.component';
 import { PopupComponent } from './shared/popup/popup.component';
+import { ResourceRemovalConfirmationDialogComponent } from './shared/resourceRemovalConfirmationDialog/resourceRemovalConfirmationDialog.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResourceListComponent } from './dashboard/resourceList/resourceList.component';
@@ -62,6 +63,7 @@ import { OptionService, ResourceService, ProjectService } from '../app/models';
         TimespanGridComponent,
         HoursEditorComponent,
         PopupComponent,
+        ResourceRemovalConfirmationDialogComponent,
 
         ErrorComponent,
         NavComponent,

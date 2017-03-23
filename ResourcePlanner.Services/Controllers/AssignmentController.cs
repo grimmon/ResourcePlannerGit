@@ -15,7 +15,7 @@ using static ResourcePlanner.Services.Enums.Enums;
 namespace ResourcePlanner.Services.Controllers
 {
     [RoutePrefix("api/Assignment")]
-    public class AddAssignmentController : ApiController
+    public class AssignmentController : ApiController
     {
         [Authorize]
         [HttpPost]
@@ -51,7 +51,7 @@ namespace ResourcePlanner.Services.Controllers
             //    return Unauthorized();
             //}
              
-            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
             var asgn = new AddAssignments()
@@ -116,7 +116,7 @@ namespace ResourcePlanner.Services.Controllers
             return Ok();
 #endif
 
-            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
 
             var asgn = new UpdateAssignment()
@@ -173,7 +173,7 @@ namespace ResourcePlanner.Services.Controllers
             return Ok();
 #endif
 
-            var access = new AddAssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
                                                 Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
             var result = new GetAssignment();
 
@@ -187,6 +187,37 @@ namespace ResourcePlanner.Services.Controllers
             }
 
             return Ok(result);
+        }
+
+        //[Authorize]
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<IHttpActionResult> Delete(
+            int resourceId,
+            int projectMasterId
+        )
+        {
+#if Mock
+            return Ok()
+#endif
+            var access = new AssignmentDataAccess(ConfigurationManager.ConnectionStrings["RPDBConnectionString"].ConnectionString,
+                                              Int32.Parse(ConfigurationManager.AppSettings["DBTimeout"]));
+
+            var asgn = new DeleteAssignment()
+            {
+                ResourceId = resourceId,
+                ProjectMasterId = projectMasterId
+            };
+
+            try
+            {
+                access.DeleteAssignment(asgn);
+            }catch (Exception ex)
+            {
+                throw;
+            }
+
+            return Ok();
         }
     }
 }

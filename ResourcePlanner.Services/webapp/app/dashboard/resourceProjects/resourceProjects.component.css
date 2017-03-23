@@ -1,0 +1,12 @@
+.resourceProjects .buttons {
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+    height: 60px;
+    width: 200px;
+    text-align: right;
+    padding-top: 12px;
+}
+.resourceProjects .buttons button {
+    margin-right: 10px;
+}

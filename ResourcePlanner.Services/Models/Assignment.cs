@@ -60,4 +60,10 @@ namespace ResourcePlanner.Services.Models
         public DateTime EndDate { get; set; }
         public string DateName { get; set; }
     }
+
+    public class DeleteAssignment
+    {
+        public int ResourceId { get; set; }
+        public int ProjectMasterId { get; set; }
+    }
 }
