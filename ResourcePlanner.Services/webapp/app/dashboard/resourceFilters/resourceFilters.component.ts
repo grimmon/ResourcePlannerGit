@@ -232,7 +232,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
 
         //Load previous interval filter from localstorage
 
-        this.selectedAggregation = this.getPreviousAggFromStorage();
+        if(this.basicMode){
+            this.selectedAggregation = this.getPreviousAggFromStorage();
+        }
     }
 
     getPreviousAggFromStorage(){
@@ -243,6 +245,7 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
                 let previousAggAsInt = parseInt(previousAggFromStorage + "");
                 let previousAggEnum = TimeAggregation[previousAggAsInt];
                 agg =  TimeAggregation[previousAggEnum];
+                this.messageService.resourceFilterChange('aggregation', previousAggAsInt);
             }else{
                 agg = TimeAggregation.Weekly;
             }
@@ -337,7 +340,9 @@ export class ResourceFiltersComponent implements OnDestroy, OnInit {
         this.selectedSubPractice = this.optionService.getInitialValues("previousSelectedSubPractice");
         this.selectedResourceManager = this.optionService.getInitialValues("previousSelectedResourceManager");
         this.selectedPosition = this.optionService.getInitialValues("previousSelectedPosition");
-        this.selectedAggregation = this.getPreviousAggFromStorage();
+        if(this.basicMode){
+            this.selectedAggregation = this.getPreviousAggFromStorage();
+        }
     }
 
     private callFiltered(operation: any) {
