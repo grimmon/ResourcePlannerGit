@@ -33,11 +33,11 @@
             </div>
 
             <div>
-                <label>Start Date</label>
+                <label>Start Week</label>
                 <input type='date' class="form-control" [(ngModel)]="addAssignments.startDate" (input)="startDateChanged($event)" />
             </div>
             <div>
-                <label>End Date</label>
+                <label>End Week</label>
                 <input type='date' class="form-control" [(ngModel)]="addAssignments.endDate" (input)="endDateChanged($event)" />
             </div>
             <div>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-
+                This will amend any existing assignments for this user on this project for the weeks selected above.
             </div>
         </div>
         <div>
